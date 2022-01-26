@@ -1,0 +1,69 @@
+===================================================
+What are all the files about ?
+
+zdata files
+-----------
+
+There are 4 "zdata" files.
+Containing the specs of drivers, constructors, races and players.
+
+all zdata files can have blank lines in them. Blank lines are ignored.
+
+The zdata.drivers and zdata.constructors are 2 fields, a 3 character abbrieviation separated by a single "pipe" | character followed by the full name.
+
+The zdata.players and zdata.races are just single field, 1 entry per line.
+Blank lines are allowed, and are ignored.
+
+All the zdata files shouldn't really need to be changed during a season.
+Adding or deleting players or races would be about it
+
+
+prediction and result files.
+----------------------------
+The WDC predicitions are stored in files named like :
+
+wdc.leo
+wdc.bill
+
+the .leo , .bill file extension must match a player name in the zdata.players file.
+
+The results for the wdc are stored in a file called :
+wdc.results
+
+Thus you can never have a player with the name of "results".
+
+Blank lines will also be ignored in wdc.results or wdc.leo etc files.
+again 1 entry per line.
+
+
+WCC predictions are the same as WDC except stored in files named like
+
+wcc.results
+wcc.leo
+wcc.bill
+
+
+Race predictions are stored in files names like so :
+
+bahrain.results
+bahrain.leo
+bahrain.bill
+
+The results and prediction files must be in the order of prediction.
+i.e. first place at the top of the file, last place at the bottom of the file.
+
+====================================================
+
+running the program, from within the directory just run :
+
+./f1-predictor.pl --run (what you want to run it on)
+
+the what you want to run it on is one of the following :
+
+wdc
+wcc
+race-name  ( as it appears in the zdata.races )
+
+
+
+
