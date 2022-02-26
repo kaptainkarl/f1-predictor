@@ -160,8 +160,6 @@ if ( $o_tab_output && $o_html_output ){
     dierr("you can't define both [--tab-output --html-output] only one or the other");
 }
 
-
-
 process();
 
 #################################
