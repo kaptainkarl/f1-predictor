@@ -19,6 +19,20 @@ sub dierr {
     die "\n$msg\n";
 }
 
+# These are -1 out, so 0 is really P1 !!! :
+my $real_f1_pos_scores = {
+    0 => 25,
+    1 => 18,
+    2 => 15,
+    3 => 12,
+    4 => 10,
+    5 => 8,
+    6 => 6,
+    7 => 4,
+    8 => 2,
+    9 => 1,
+};
+
 sub usage {
     my ($msg) = @_;
 
@@ -166,6 +180,7 @@ process();
 # subs
 
 sub expected_count {
+    #return $o_run eq 'wcc' ?  $o_constructors_count : $o_drivers_count ;
     return $o_run eq 'wcc' ?  $o_constructors_count : $o_drivers_count ;
 }
 
@@ -216,6 +231,8 @@ sub process{
 
     my @skip_player_errs = ();
 
+    my $player_results_arr = [];
+
 PLYR:
     for my $plyr (sort keys %$z_players){
         print "Processing Player $plyr\n";
@@ -232,15 +249,19 @@ PLYR:
 
         print Dumper($plyr_data) if $o_debug;
 
-        if (scalar @$plyr_data != $exp_tot){
-            push @skip_player_errs,
-                "Skip [$plyr] because [".scalar @$plyr_data."] lines in file [$plyr_file] isn't [$exp_tot]";
-            next;
-        }
+#        if (scalar @$plyr_data != $exp_tot){
+#            push @skip_player_errs,
+#                "Skip [$plyr] because [".scalar @$plyr_data."] lines in file [$plyr_file] isn't [$exp_tot]";
+#            next;
+#        }
 
         # TODO here 
+        my $result_line =  "$plyr : ";
+        my $plyr_tot_score = 0;
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
+
+
             my $plyr_pred = uc($plyr_data->[$i]);
             if ( ! exists z_drivers_or_constructors()->{$plyr_pred} ){
                 push @skip_player_errs,
@@ -252,19 +273,54 @@ PLYR:
             # get the 3 char abbrieviation :
             $plyr_pred = z_drivers_or_constructors()->{$plyr_pred} ;
 
+            
+
+            my $add_result = sub {
+                my ($pred, $score) = @_;
+                $result_line .= "$pred ($score), ";
+                $plyr_tot_score += $score;
+            };
+
             if ( ! exists $results_lkup->{$plyr_pred}){
                 # This is a programming error.
-                die 'The lookup $results_lkup->{$plyr_pred} should work. Programmng error'."\n";
+                # die "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n";
+
+                print "$plyr : ".($i+1)." $plyr_pred  (0)\n" if $o_debug;
+                $add_result->($plyr_pred,0);
+
+                
+
+            } else {
+
+                my $error = abs($results_lkup->{$plyr_pred}-$i);
+
+                my $score = 0;
+                if ( $error <= 3){
+                    $score = 2 ** (3-$error) ;
+                }
+
+
+                $score = $score * $real_f1_pos_scores->{$i};
+
+                print "$plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
+                $add_result->($plyr_pred, $score);
             }
-
-
-
-
 
         }
 
+        $result_line =~ s/, $//g;
+        $result_line .= " : Tot = $plyr_tot_score\n";
+        print $result_line if $o_debug;
 
+        push @$player_results_arr , {score => $plyr_tot_score, output => $result_line};
     }
+
+    my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
+    for my $ln (@plyr_ordered_res){
+        print $ln->{output};
+    }
+
+
     print "Skipped players due to errors : \n  ".join("\n  ",@skip_player_errs)."\n"
         if @skip_player_errs;
 }
