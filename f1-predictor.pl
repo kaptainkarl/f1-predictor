@@ -33,6 +33,15 @@ my $real_f1_pos_scores = {
     9 => 1,
 };
 
+my $real_1990_f1_pos_scores = {
+    0 => 9,
+    1 => 6,
+    2 => 4,
+    3 => 3,
+    4 => 2,
+    5 => 1,
+};
+
 sub usage {
     my ($msg) = @_;
 
@@ -54,10 +63,36 @@ Options :
         i.e. --score-only-up-to-position  5
             would only score the top 5 places for where they are.
 
-    --score-sys  karl or difflow or diffhigh
-        defaults to difflow
-        i.e.  --score-sys karl 
+        since we are only doing first six positions then this defaults to 6 in the code.
+
+
+    --score-sys  karl-8, karl-32 , diffhigh 
+        defaults to karl-8
+        i.e.  --score-sys karl-8 
         would run the 8,4,2,1 scoring system.
+
+        --score-sys karl-32
+        would run the 32-16-8-4-2-1 Karl systems.
+
+        # difflow hasn't yet been written.
+            it will not really work if we only predict the top 6 positions.
+
+    --score-times-current  
+        This multiplies the score for
+            P1 prediction by 25
+            P2 prediction by 18
+            P3 prediction by 15
+            ... (you know these numbers !!)
+            P10 prediction by 1
+
+    --score-times-1990  (1990 ish scoring system)
+        This multiplies the score for 
+            P1 x 9 
+            P2 x 6
+            P3 x 4
+            P4 x 3
+            P5 x 2
+            P6 x 1
 
     --full-output
 
@@ -91,19 +126,27 @@ EOUSAGE
 use Getopt::Long;
 
 my $score_sys_lkup = {
-    karl     => 1,
-    difflow  => 1,
+    "karl-8"     => 1,
+    "karl-32"    => 1,
+#    difflow  => 1,
     diffhigh => 1,
 };
 
 my $o_drivers_count       = 20;
 my $o_constructors_count  = 10;
-my ($o_score_upto_pos, $o_score_sys);
+
+my $o_score_upto_pos = 6;
+
+my ( $o_score_sys, $o_score_times_pos, $o_score_times_1990_pos);
 my ($o_full_output, $o_tab_output, $o_html_output);
 my ($o_run, $o_help, $o_debug);
+my ($o_pad_results);
 
 GetOptions (
+    "pad-results"           => \$o_pad_results,
     "score-only-upto-pos=i" => \$o_score_upto_pos,
+    "score-times-current"   => \$o_score_times_pos,
+    "score-times-1990"      => \$o_score_times_1990_pos,
     "score-sys=s"           => \$o_score_sys,
     "full-output"           => \$o_full_output,
     "tab-output"            => \$o_tab_output,
@@ -157,7 +200,7 @@ if ( defined $o_score_upto_pos ){
 }
 print "score_upto_pos      = $o_score_upto_pos\n" if $o_debug;
 
-$o_score_sys = "difflow" if ! $o_score_sys;
+$o_score_sys = "karl-8" if ! $o_score_sys;
 if ( ! exists $score_sys_lkup->{$o_score_sys} ){
     dierr("[--score-sys $o_score_sys] isn't valid\n");
 }
@@ -255,8 +298,12 @@ PLYR:
 #            next;
 #        }
 
-        # TODO here 
-        my $result_line =  "$plyr : ";
+        my $result_line;
+        if ($o_pad_results) {
+            $result_line =  sprintf( "%8s : ", $plyr );
+        } else {
+            $result_line =  sprintf( "%s : ", $plyr );
+        }
         my $plyr_tot_score = 0;
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
@@ -273,11 +320,15 @@ PLYR:
             # get the 3 char abbrieviation :
             $plyr_pred = z_drivers_or_constructors()->{$plyr_pred} ;
 
-            
-
             my $add_result = sub {
                 my ($pred, $score) = @_;
-                $result_line .= "$pred ($score), ";
+
+                if ($o_pad_results) {
+                    $result_line .= sprintf("%s (%3s), ", $pred, $score);
+                }else{
+                    $result_line .= sprintf("%s (%s), ", $pred, $score);
+                }
+
                 $plyr_tot_score += $score;
             };
 
@@ -288,19 +339,32 @@ PLYR:
                 print "$plyr : ".($i+1)." $plyr_pred  (0)\n" if $o_debug;
                 $add_result->($plyr_pred,0);
 
-                
-
             } else {
 
                 my $error = abs($results_lkup->{$plyr_pred}-$i);
 
                 my $score = 0;
-                if ( $error <= 3){
-                    $score = 2 ** (3-$error) ;
+
+                if ( $o_score_sys eq "karl-8") {
+                    if ( $error <= 3){
+                        $score = 2 ** (3-$error) ;
+                    }
+                } elsif ( $o_score_sys eq "karl-32" ) {
+                    if ( $error <= 5){
+                        $score = 2 ** (5-$error) ;
+                    }
+                } elsif ( $o_score_sys eq "diffhigh" ) {
+                    #die "TODO write diffhigh scoring system";
+
+                    $score = $o_drivers_count-$error;
                 }
 
-
-                $score = $score * $real_f1_pos_scores->{$i};
+                if ($o_score_times_pos){
+                    $score = $score * $real_f1_pos_scores->{$i}
+                }
+                elsif ($o_score_times_1990_pos) {
+                    $score = $score * $real_1990_f1_pos_scores->{$i}
+                }
 
                 print "$plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
                 $add_result->($plyr_pred, $score);
@@ -309,7 +373,13 @@ PLYR:
         }
 
         $result_line =~ s/, $//g;
-        $result_line .= " : Tot = $plyr_tot_score\n";
+        if ($o_pad_results) {
+            $result_line .= sprintf( " : Tot = %4s\n", $plyr_tot_score );
+        } else {
+            $result_line .= sprintf( " : Tot = %s\n", $plyr_tot_score );
+        }
+
+
         print $result_line if $o_debug;
 
         push @$player_results_arr , {score => $plyr_tot_score, output => $result_line};
