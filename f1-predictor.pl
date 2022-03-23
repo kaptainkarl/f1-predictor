@@ -64,9 +64,9 @@ Options :
             would only score the top 5 places for where they are.
 
         since we are only doing first six positions then this defaults to 6 in the code.
+        and the player files with the lines of predictions must only have 6 lines.
 
-
-    --score-sys  karl-8, karl-32 , differential_scoring 
+    --score-sys  karl-8, karl-32 , differential_scoring
         defaults to karl-8
         i.e.  --score-sys karl-8 
         would run the 8,4,2,1 scoring system.
@@ -95,10 +95,10 @@ Options :
 
     --tab-output
         prints out nice at the command line.
-        This is the default output.
 
     --html-output
         generates html table output
+        (NOT YET WRITTEN)
 
     --run  wdc, wcc , race-name
 
@@ -266,7 +266,10 @@ else {
 }
 
 print "\nindividual rounds ...\n\n";
+my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
+
 for my $pr_run (@$run_arrs) {
+    my $p_pos = 1;
     for my $ln (@$pr_run){
         print $ln->{output};
 
@@ -277,6 +280,14 @@ for my $pr_run (@$run_arrs) {
         my $plyr = $ln->{player};
 
         $plyr_tots->{$plyr}{player} = $plyr;
+        if ($plyr ne "zzz" && $p_pos <= $max_p_pos){
+
+            $plyr_tots->{$plyr}{"p$p_pos"} = $plyr_tots->{$plyr}{"p$p_pos"} // 0;
+            $plyr_tots->{$plyr}{"p$p_pos"}++;
+
+            $p_pos ++;
+        }
+
         $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
         $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
 
@@ -300,11 +311,16 @@ for my $tpname ( keys %$plyr_tots ){
 
     $tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
 
+    for my $p_pos ( 1..$max_p_pos ){
+        # fill in the pNUM hash keys that are undef with 0;
+        $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
+    }
+
     push @$tots_arr, $tp;
 }
 
-#print Dumper $plyr_tots;
-#print Dumper $tots_arr;
+print Dumper $plyr_tots if $o_debug;
+print Dumper $tots_arr if $o_debug;
 
 # print "
     #my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
@@ -320,6 +336,24 @@ for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
     print "$tl->{player} : played = $tl->{played} : ave score = $tl->{ave_score}\n";
 }
 
+print "\n\nSo following table is for those who think P1 is the most important metric\n";
+print "This is sorted by the Position in the rounds P1->P6 and then the Average Score\n";
+print "i.e. The most P1s wins, if that's all level then P2s .... finally to ave-score as a tie break\n";
+print "So to get a P1 a player needed to win in the table calculated for the specific round (see above)\n";
+print   "--------------------\n";
+for my $tl (sort {
+            $b->{p1} <=> $a->{p1} ||
+            $b->{p2} <=> $a->{p2} ||
+            $b->{p3} <=> $a->{p3} ||
+            $b->{p4} <=> $a->{p4} ||
+            $b->{p5} <=> $a->{p5} ||
+            $b->{p6} <=> $a->{p6} ||
+            $b->{ave_score} <=> $a->{ave_score}
+
+        } @$tots_arr
+){
+    print "$tl->{player} : played = $tl->{played} : P1=$tl->{p1} : P2=$tl->{p2} : P3=$tl->{p3} : P4=$tl->{p4} : P5=$tl->{p5} : P6=$tl->{p6} : ave score = $tl->{ave_score}\n";
+}
 
 #################################
 #################################
