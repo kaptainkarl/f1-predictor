@@ -66,16 +66,13 @@ Options :
         since we are only doing first six positions then this defaults to 6 in the code.
 
 
-    --score-sys  karl-8, karl-32 , diffhigh 
+    --score-sys  karl-8, karl-32 , differential_scoring 
         defaults to karl-8
         i.e.  --score-sys karl-8 
         would run the 8,4,2,1 scoring system.
 
         --score-sys karl-32
         would run the 32-16-8-4-2-1 Karl systems.
-
-        # difflow hasn't yet been written.
-            it will not really work if we only predict the top 6 positions.
 
     --score-times-current  
         This multiplies the score for
@@ -129,7 +126,7 @@ my $score_sys_lkup = {
     "karl-8"     => 1,
     "karl-32"    => 1,
 #    difflow  => 1,
-    diffhigh => 1,
+    differential_scoring => 1,
 };
 
 my $o_drivers_count       = 20;
@@ -185,22 +182,7 @@ if (!$o_run) {
     dierr("You must define --run , with wcc , wdc or the race-name");
 }
 
-if ($o_run ne 'wcc' && $o_run ne 'wdc' && ! exists $z_races->{$o_run}){
-    dierr("[--run $o_run] is not valid. You must define --run , with wcc , wdc or a valid race-name");
-}
-
-if ( defined $o_score_upto_pos ){
-    my $cmp_tot = expected_count();
-
-    if ( $o_score_upto_pos < 1 or $o_score_upto_pos > $cmp_tot){
-        dierr("For [--run $o_run] you cannot define a [--score-only-upto-pos of $o_score_upto_pos], the max is $cmp_tot\n");
-    }
-} else {
-    $o_score_upto_pos = expected_count();
-}
-print "score_upto_pos      = $o_score_upto_pos\n" if $o_debug;
-
-$o_score_sys = "karl-8" if ! $o_score_sys;
+$o_score_sys = "differential_scoring" if ! $o_score_sys;
 if ( ! exists $score_sys_lkup->{$o_score_sys} ){
     dierr("[--score-sys $o_score_sys] isn't valid\n");
 }
@@ -217,108 +199,240 @@ if ( $o_tab_output && $o_html_output ){
     dierr("you can't define both [--tab-output --html-output] only one or the other");
 }
 
-process();
+my $plyr_tots = {};
+my $run_arrs = [];
 
+for my $s_run ( split /,/ , $o_run ){
+
+    $s_run =~ s/^\s*//g;
+    $s_run =~ s/\s*$//g;
+
+    if ($s_run ne 'wcc' && $s_run ne 'wdc' && ! exists $z_races->{$s_run}){
+        dierr("[--run $s_run] is not valid. You must define --run , with wcc , wdc or a valid race-name");
+    }
+
+    if ( defined $o_score_upto_pos ){
+        my $cmp_tot = expected_count($s_run);
+
+        if ( $o_score_upto_pos < 1 or $o_score_upto_pos > $cmp_tot){
+            dierr("For [--run $o_run] you cannot define a [--score-only-upto-pos of $o_score_upto_pos], the max is $cmp_tot\n");
+        }
+    } else {
+        $o_score_upto_pos = expected_count($s_run);
+    }
+    print "score_upto_pos      = $o_score_upto_pos\n" if $o_debug;
+
+    my $plyr_res = process($s_run);
+
+    push @$run_arrs, $plyr_res;
+
+    #for my $ln (@$plyr_res){
+    #    print "$s_run : ".$ln->{output};
+    #}
+
+}
+
+
+print "\n\n\n";
+print "##############################################################\n";
+print "OUTPUT Section\n";
+print "##############################################################\n";
+print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
+
+if ( $o_score_sys eq "karl-8") {
+    print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
+    print "Get the position exactly correct then 8 points\n";
+    print "Get the position 3 places out then 1 point\n";
+    print "More than 3 places out, then 0 points \n";
+}
+elsif ( $o_score_sys eq "karl-32" ) {
+    print "Not doing this scoring system . The 32,16,8,4,2,1\n";
+}
+elsif ( $o_score_sys eq "differential_scoring" ) {
+    print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
+    print " 20 - 0 = 20 points\n";
+    print " Get the position say 2 places out , then it is \n";
+    print " 20 - 2 = 18 points\n";
+}
+print "\n";
+if ($o_score_times_pos){
+    print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
+}
+elsif ($o_score_times_1990_pos) {
+    print "Scores are multiplied by 9,6,4,3,2,1  depending on the position\n";
+}
+else {
+    print "Scores are NOT multiplied depending on the position\n";
+}
+
+print "\nindividual rounds ...\n\n";
+for my $pr_run (@$run_arrs) {
+    for my $ln (@$pr_run){
+        print $ln->{output};
+
+#        $plyr_tots
+        # push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , output => $result_line};
+
+        die "unknown player . prog error \n" if ! $ln->{player};
+        my $plyr = $ln->{player};
+
+        $plyr_tots->{$plyr}{player} = $plyr;
+        $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
+        $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
+
+        $plyr_tots->{$plyr}{total} += $ln->{score};
+        $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
+
+    }
+    print "\n\n";
+}
+
+print "##############################################################\n";
+print "Tables run for ". join(", ", split (",", $o_run))."\n\n";
+print "Total Score table\n";
+print "-----------------\n";
+
+my $tots_arr = [];
+#  map { { player => $plyr_tots->{player} }  } ,  keys %$plyr_tots ];
+
+for my $tpname ( keys %$plyr_tots ){
+    my $tp = $plyr_tots->{$tpname};
+
+    $tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
+
+    push @$tots_arr, $tp;
+}
+
+#print Dumper $plyr_tots;
+#print Dumper $tots_arr;
+
+# print "
+    #my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
+
+for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
+    print "$tl->{player} : played = $tl->{played} : total score = $tl->{total}\n";
+}
+
+
+print "\nSo for players who might not have entered predictions for all rounds an Average Score table\n";
+print   "--------------------\n";
+for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
+    print "$tl->{player} : played = $tl->{played} : ave score = $tl->{ave_score}\n";
+}
+
+
+#################################
+#################################
+#################################
 #################################
 # subs
 
-sub expected_count {
-    #return $o_run eq 'wcc' ?  $o_constructors_count : $o_drivers_count ;
-    return $o_run eq 'wcc' ?  $o_constructors_count : $o_drivers_count ;
+sub expected_count ($) {
+    my ($s_run) = @_;
+    return $s_run eq 'wcc' ?  $o_constructors_count : $o_drivers_count ;
 }
 
-sub z_drivers_or_constructors {
-    return $o_run eq 'wcc' ?  $z_constructors : $z_drivers;
+sub z_drivers_or_constructors ($) {
+    my ($s_run) = @_;
+    return $s_run eq 'wcc' ?  $z_constructors : $z_drivers;
 }
 
-sub z_drivers_or_constructors_file {
-    return $o_run eq 'wcc' ?  $ZDATA_CONSTRUCTORS : $ZDATA_DRIVERS;
+sub z_drivers_or_constructors_file ($) {
+    my ($s_run) = @_;
+    return $s_run eq 'wcc' ?  $ZDATA_CONSTRUCTORS : $ZDATA_DRIVERS;
 }
 
-sub process{
+sub process ($) {
+
+    my ($s_run) = @_;
+
+    print "##################\n";
+    print "$s_run processing ...\n\n";
 
     # is it driver or constructor ?
     # races are only driver.
 
-    my $exp_tot = expected_count();
+    my $exp_tot = expected_count($s_run);
 
-    my $file_results = "$o_run.results";
+    my $file_results = "$s_run.results";
 
     my $results = run_file($file_results);
 
-    print "Results are ".Dumper($results) if $o_debug;
+    print "$s_run : Results are ".Dumper($results) if $o_debug;
 
     my $results_lkup = { } ;
     for (my $i=0; $i<$exp_tot; $i++){
         my $resname = uc($results->[$i]);
 
-        if ( ! exists z_drivers_or_constructors()->{$resname} ){
-            die "Can't find [$resname] from [$file_results] in file [".z_drivers_or_constructors_file()."]\n";
+        if ( ! exists z_drivers_or_constructors($s_run)->{$resname} ){
+            die "Can't find [$resname] from [$file_results] in file [".z_drivers_or_constructors_file($s_run)."]\n";
         }
 
-        $results_lkup->{z_drivers_or_constructors()->{$resname}}=$i;
+        $results_lkup->{z_drivers_or_constructors($s_run)->{$resname}}=$i;
 
     }
-    print "Results Lookup is ".Dumper($results_lkup) if $o_debug;
+    print "$s_run : Results Lookup is ".Dumper($results_lkup) if $o_debug;
 
     if (scalar @$results != $exp_tot){
         die "The results file [$file_results] has [".scalar @$results."] rows and not [$exp_tot]\n";
     }
 
-# Name => [
-#                {   
-#                },
-#
-#            ]
-    my $player_scores = {};
-
     my @skip_player_errs = ();
-
     my $player_results_arr = [];
 
 PLYR:
     for my $plyr (sort keys %$z_players){
-        print "Processing Player $plyr\n";
+        print "$s_run : Processing Player $plyr\n";
+        my $result_line;
+        if ($o_pad_results) {
+            $result_line =  sprintf( "%s : %8s : ", $s_run, $plyr );
+        } else {
+            $result_line =  sprintf( "%s : %s : ",  $s_run, $plyr );
+        }
+        my $plyr_tot_score = 0;
+
+        my $skip_result_line = sub {
+            my ($skip_reason) = @_;
+            $skip_reason //= "";
+
+            push @$player_results_arr ,
+                {score => 0, player=>$plyr , output => "${result_line}${skip_reason} : Tot = 0\n", skipped=>1};
+        };
 
         my $plyr_data;
-        my $plyr_file = "$o_run.$plyr";
+        my $plyr_file = "$s_run.$plyr";
         try {
             $plyr_data = run_file("$DATA_DIR/$plyr_file");
         } catch {
             push @skip_player_errs,
-                "Skip [$plyr] because can't load file [$plyr_file] [$!]";
+                "$s_run : Skip [$plyr] because can't load file [$plyr_file] [$!]";
+            $skip_result_line->("no data (1)");
+
         };
         next if ! $plyr_data;
 
-        print Dumper($plyr_data) if $o_debug;
+        print "$s_run : $plyr : ".Dumper($plyr_data) if $o_debug;
 
-#        if (scalar @$plyr_data != $exp_tot){
-#            push @skip_player_errs,
-#                "Skip [$plyr] because [".scalar @$plyr_data."] lines in file [$plyr_file] isn't [$exp_tot]";
-#            next;
-#        }
-
-        my $result_line;
-        if ($o_pad_results) {
-            $result_line =  sprintf( "%8s : ", $plyr );
-        } else {
-            $result_line =  sprintf( "%s : ", $plyr );
+        if (scalar @$plyr_data < $o_score_upto_pos){
+            push @skip_player_errs,
+                "$s_run : Skip [$plyr] because [".scalar @$plyr_data."] lines in file [$plyr_file] isn't [$o_score_upto_pos]";
+            $skip_result_line->("no data (2)");
+            next;
         }
-        my $plyr_tot_score = 0;
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
 
-
             my $plyr_pred = uc($plyr_data->[$i]);
-            if ( ! exists z_drivers_or_constructors()->{$plyr_pred} ){
+            if ( ! exists z_drivers_or_constructors($s_run)->{$plyr_pred} ){
                 push @skip_player_errs,
-                    "Skip [$plyr] because prediction [".
-                        ($i+1)."][$plyr_pred] in file [$plyr_file] not found in [".z_drivers_or_constructors_file()."]";
+                    "$s_run : Skip [$plyr] because prediction [".
+                        ($i+1)."][$plyr_pred] in file [$plyr_file] not found in [".z_drivers_or_constructors_file($s_run)."]";
 
+                $skip_result_line->("no data (3)");
                 next PLYR;
             }
             # get the 3 char abbrieviation :
-            $plyr_pred = z_drivers_or_constructors()->{$plyr_pred} ;
+            $plyr_pred = z_drivers_or_constructors($s_run)->{$plyr_pred} ;
 
             my $add_result = sub {
                 my ($pred, $score) = @_;
@@ -336,7 +450,7 @@ PLYR:
                 # This is a programming error.
                 # die "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n";
 
-                print "$plyr : ".($i+1)." $plyr_pred  (0)\n" if $o_debug;
+                print "$s_run : $plyr : ".($i+1)." $plyr_pred  (0)\n" if $o_debug;
                 $add_result->($plyr_pred,0);
 
             } else {
@@ -353,9 +467,7 @@ PLYR:
                     if ( $error <= 5){
                         $score = 2 ** (5-$error) ;
                     }
-                } elsif ( $o_score_sys eq "diffhigh" ) {
-                    #die "TODO write diffhigh scoring system";
-
+                } elsif ( $o_score_sys eq "differential_scoring" ) {
                     $score = $o_drivers_count-$error;
                 }
 
@@ -366,10 +478,9 @@ PLYR:
                     $score = $score * $real_1990_f1_pos_scores->{$i}
                 }
 
-                print "$plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
+                print "$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
                 $add_result->($plyr_pred, $score);
             }
-
         }
 
         $result_line =~ s/, $//g;
@@ -379,20 +490,20 @@ PLYR:
             $result_line .= sprintf( " : Tot = %s\n", $plyr_tot_score );
         }
 
+        print "$s_run : $result_line" if $o_debug;
 
-        print $result_line if $o_debug;
-
-        push @$player_results_arr , {score => $plyr_tot_score, output => $result_line};
+        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , output => $result_line};
     }
 
     my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
-    for my $ln (@plyr_ordered_res){
-        print $ln->{output};
-    }
+    #for my $ln (@plyr_ordered_res){
+    #    print "$s_run : $ln->{output}";
+    #}
 
-
-    print "Skipped players due to errors : \n  ".join("\n  ",@skip_player_errs)."\n"
+    print "$s_run : Skipped players due to errors : \n  ".join("\n  ",@skip_player_errs)."\n"
         if @skip_player_errs;
+
+    return \@plyr_ordered_res;
 }
 
 sub z_data_pipe_split {
