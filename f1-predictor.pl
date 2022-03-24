@@ -182,7 +182,7 @@ if (!$o_run) {
     dierr("You must define --run , with wcc , wdc or the race-name");
 }
 
-$o_score_sys = "differential_scoring" if ! $o_score_sys;
+$o_score_sys = "differential_scoring" if ! $o_score_sys || $o_score_sys eq "diff";
 if ( ! exists $score_sys_lkup->{$o_score_sys} ){
     dierr("[--score-sys $o_score_sys] isn't valid\n");
 }
@@ -271,7 +271,7 @@ my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
 for my $pr_run (@$run_arrs) {
     my $p_pos = 1;
     for my $ln (@$pr_run){
-        print $ln->{output};
+        print pp($p_pos).$ln->{output};
 
 #        $plyr_tots
         # push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , output => $result_line};
@@ -281,12 +281,10 @@ for my $pr_run (@$run_arrs) {
 
         $plyr_tots->{$plyr}{player} = $plyr;
         if ($plyr ne "zzz" && $p_pos <= $max_p_pos){
-
             $plyr_tots->{$plyr}{"p$p_pos"} = $plyr_tots->{$plyr}{"p$p_pos"} // 0;
             $plyr_tots->{$plyr}{"p$p_pos"}++;
-
-            $p_pos ++;
         }
+        $p_pos++ if $plyr ne "zzz";
 
         $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
         $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
@@ -324,16 +322,18 @@ print Dumper $tots_arr if $o_debug;
 
 # print "
     #my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
-
+my $pp = 1;
 for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
-    print "$tl->{player} : played = $tl->{played} : total score = $tl->{total}\n";
+    print pp($pp)."$tl->{player} : played = $tl->{played} : total score = $tl->{total}\n";
+    $pp++;
 }
-
 
 print "\nSo for players who might not have entered predictions for all rounds an Average Score table\n";
 print   "--------------------\n";
+$pp = 1;
 for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
-    print "$tl->{player} : played = $tl->{played} : ave score = $tl->{ave_score}\n";
+    print pp($pp)."$tl->{player} : played = $tl->{played} : ave score = $tl->{ave_score}\n";
+    $pp++;
 }
 
 print "\n\nSo following table is for those who think P1 is the most important metric\n";
@@ -341,6 +341,7 @@ print "This is sorted by the Position in the rounds P1->P6 and then the Average 
 print "i.e. The most P1s wins, if that's all level then P2s .... finally to ave-score as a tie break\n";
 print "So to get a P1 a player needed to win in the table calculated for the specific round (see above)\n";
 print   "--------------------\n";
+$pp = 1;
 for my $tl (sort {
             $b->{p1} <=> $a->{p1} ||
             $b->{p2} <=> $a->{p2} ||
@@ -352,7 +353,8 @@ for my $tl (sort {
 
         } @$tots_arr
 ){
-    print "$tl->{player} : played = $tl->{played} : P1=$tl->{p1} : P2=$tl->{p2} : P3=$tl->{p3} : P4=$tl->{p4} : P5=$tl->{p5} : P6=$tl->{p6} : ave score = $tl->{ave_score}\n";
+    print pp($pp)."$tl->{player} : played = $tl->{played} : P1=$tl->{p1} : P2=$tl->{p2} : P3=$tl->{p3} : P4=$tl->{p4} : P5=$tl->{p5} : P6=$tl->{p6} : ave score = $tl->{ave_score}\n";
+    $pp++;
 }
 
 #################################
@@ -360,6 +362,11 @@ for my $tl (sort {
 #################################
 #################################
 # subs
+
+sub pp ($) {
+    my ($p) = @_;
+    return sprintf("P%-2s : ", $p);
+}
 
 sub expected_count ($) {
     my ($s_run) = @_;
