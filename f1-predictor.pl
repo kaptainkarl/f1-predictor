@@ -33,6 +33,7 @@ my $real_f1_pos_scores = {
     9 => 1,
 };
 
+# These are -1 out, so 0 is really P1 !!! :
 my $real_1990_f1_pos_scores = {
     0 => 9,
     1 => 6,
@@ -53,7 +54,6 @@ $msg
 
 ################################################
 Options :
-
     
     --score-only-up-to-pos  with integer from 1 to 20 for drivers
         or 1 to 10 for constructors.
@@ -225,13 +225,7 @@ for my $s_run ( split /,/ , $o_run ){
     my $plyr_res = process($s_run);
 
     push @$run_arrs, $plyr_res;
-
-    #for my $ln (@$plyr_res){
-    #    print "$s_run : ".$ln->{output};
-    #}
-
 }
-
 
 print "\n\n\n";
 print "##############################################################\n";
@@ -273,9 +267,6 @@ for my $pr_run (@$run_arrs) {
     for my $ln (@$pr_run){
         print pp($p_pos).$ln->{output};
 
-#        $plyr_tots
-        # push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , output => $result_line};
-
         die "unknown player . prog error \n" if ! $ln->{player};
         my $plyr = $ln->{player};
 
@@ -302,7 +293,6 @@ print "Total Score table\n";
 print "-----------------\n";
 
 my $tots_arr = [];
-#  map { { player => $plyr_tots->{player} }  } ,  keys %$plyr_tots ];
 
 for my $tpname ( keys %$plyr_tots ){
     my $tp = $plyr_tots->{$tpname};
@@ -320,11 +310,9 @@ for my $tpname ( keys %$plyr_tots ){
 print Dumper $plyr_tots if $o_debug;
 print Dumper $tots_arr if $o_debug;
 
-# print "
-    #my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
 my $pp = 1;
 for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
-    print pp($pp)."$tl->{player} : played = $tl->{played} : total score = $tl->{total}\n";
+    totals_pad($pp, $tl, "total", false);
     $pp++;
 }
 
@@ -332,7 +320,7 @@ print "\nSo for players who might not have entered predictions for all rounds an
 print   "--------------------\n";
 $pp = 1;
 for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
-    print pp($pp)."$tl->{player} : played = $tl->{played} : ave score = $tl->{ave_score}\n";
+    totals_pad($pp, $tl, "ave_score", false);
     $pp++;
 }
 
@@ -353,7 +341,7 @@ for my $tl (sort {
 
         } @$tots_arr
 ){
-    print pp($pp)."$tl->{player} : played = $tl->{played} : P1=$tl->{p1} : P2=$tl->{p2} : P3=$tl->{p3} : P4=$tl->{p4} : P5=$tl->{p5} : P6=$tl->{p6} : ave score = $tl->{ave_score}\n";
+    totals_pad($pp, $tl, "ave_score", true);
     $pp++;
 }
 
@@ -362,6 +350,23 @@ for my $tl (sort {
 #################################
 #################################
 # subs
+
+sub totals_pad {
+    my ($p, $tl, $score_key, $add_ppos) = @_;
+
+    my $ppos_parts = "";
+
+    $ppos_parts = ": P1=$tl->{p1} : P2=$tl->{p2} : P3=$tl->{p3} : P4=$tl->{p4} : P5=$tl->{p5} : P6=$tl->{p6}"
+        if $add_ppos;
+
+    my $score_text = $score_key;
+
+    if ($o_pad_results) {
+        printf( "P%-2s : %-10s : played=%-2s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, $tl->{$score_key} );
+    } else {
+        printf( "P%s : %s : played=%s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, $tl->{$score_key} );
+    }
+}
 
 sub pp ($) {
     my ($p) = @_;
@@ -426,7 +431,7 @@ PLYR:
         print "$s_run : Processing Player $plyr\n";
         my $result_line;
         if ($o_pad_results) {
-            $result_line =  sprintf( "%s : %8s : ", $s_run, $plyr );
+            $result_line =  sprintf( "%s : %-10s : ", $s_run, $plyr );
         } else {
             $result_line =  sprintf( "%s : %s : ",  $s_run, $plyr );
         }
