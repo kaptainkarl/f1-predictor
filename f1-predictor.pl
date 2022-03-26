@@ -267,19 +267,16 @@ sub main {
     my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
 
     for my $pr_run (@$run_arrs) {
-        my $p_pos = 1;
         for my $ln (@$pr_run){
-            print pp($p_pos).$ln->{output};
+            my $pos = $ln->{pos};
+            print pp($pos).$ln->{output};
 
             die "unknown player . prog error \n" if ! $ln->{player};
             my $plyr = $ln->{player};
 
             $plyr_tots->{$plyr}{player} = $plyr;
-            if ($plyr ne "zzz" && $p_pos <= $max_p_pos){
-                $plyr_tots->{$plyr}{"p$p_pos"} = $plyr_tots->{$plyr}{"p$p_pos"} // 0;
-                $plyr_tots->{$plyr}{"p$p_pos"}++;
-            }
-            $p_pos++ if $plyr ne "zzz";
+
+            $plyr_tots->{$plyr}{"p$pos"}++;
 
             $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
             $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
@@ -552,6 +549,31 @@ PLYR:
     }
 
     my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
+
+    my $last_diff_score;
+    my $last_diff_score_highest_pos;
+
+    for ( my $i=0; $i < scalar @plyr_ordered_res; $i++ ){
+        my $plyr_rh = $plyr_ordered_res[$i];
+        if ( $i == 0 ){
+
+            $plyr_rh->{pos} = $i+1;
+            $last_diff_score = $plyr_rh->{score};
+            $last_diff_score_highest_pos = $i;
+            next;
+        }
+        elsif ( $plyr_rh->{score} == $last_diff_score ){
+            $plyr_rh->{pos} = $last_diff_score_highest_pos+1;
+        }
+        else {
+            $plyr_rh->{pos} = $i+1;
+            $last_diff_score = $plyr_rh->{score};
+            $last_diff_score_highest_pos = $i;
+        }
+    }
+
+
+
     #for my $ln (@plyr_ordered_res){
     #    print "$s_run : $ln->{output}";
     #}
