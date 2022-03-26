@@ -166,17 +166,11 @@ print "Dump of races = ".Dumper($z_races) if $o_debug;
 my $z_players = z_data_single($ZDATA_PLAYERS);
 print "Dump of players = ".Dumper($z_players) if $o_debug;
 
-my ( $z_drivers, $drivers_can_use_partnames ) =
-    z_data_pipe_split($ZDATA_DRIVERS);
+my $z_drivers = z_data_pipe_split($ZDATA_DRIVERS);
 print "Dump of drivers = ".Dumper($z_drivers) if $o_debug;
-print "drivers can use part names = ".
-    ($drivers_can_use_partnames ? "YES" : "NO" )."\n" if $o_debug;
 
-my ( $z_constructors, $constructors_can_use_partnames ) =
-    z_data_pipe_split($ZDATA_CONSTRUCTORS);
+my $z_constructors = z_data_pipe_split($ZDATA_CONSTRUCTORS);
 print "Dump of constructors = ".Dumper($z_constructors) if $o_debug;
-print "constructors can use part names = ".
-    ($constructors_can_use_partnames ? "YES" : "NO" )."\n" if $o_debug;
 
 print "constructors count  = $o_constructors_count\n" if $o_debug;
 print "drivers count       = $o_drivers_count\n" if $o_debug;
@@ -286,6 +280,11 @@ sub main {
 
         }
         print "\n\n";
+    }
+
+    if (@$run_arrs <2){
+        print "\nonly run for one round, not showing totals\n";
+        return;
     }
 
     print "##############################################################\n";
@@ -611,7 +610,17 @@ sub z_data_pipe_split {
 
         die "In file [$file], line :\n$ln\ndoesn't split into only 2 parts via a pipe\n" if scalar @sp != 2;
 
-        $cfg->{trim($sp[0])} = trim($sp[1]);
+        my $dref = trim($sp[0]);
+        if (length $dref != 3){
+            die "Unique 3-char ref for [$dref] isn't 3 characters long\n";
+        }
+
+        my $names = [];
+        for my $comma_split (split /,/, trim($sp[1])){
+            push @$names, trim($comma_split);
+        }
+
+        $cfg->{$dref} = $names;
     }
 
     # dedup in the case of Hamilton
@@ -624,42 +633,42 @@ sub z_data_pipe_split {
     my $dedup = {};
     my $dedup_part_names = {};
 
-    my $can_use_partnames = true;
-
     for my $dref ( keys %$cfg ){
-
-        if (length $dref != 3){
-            die "Unique 3-char ref for [$dref] isn't 3 characters long\n";
-        }
-
-        my $fullname = uc($cfg->{$dref});
-
         if ( exists $dedup->{$dref} ){
             die "Unique 3 char ref [$dref] is duplicated\n";
         }
         $dedup->{$dref} = $dref;
 
-        if ( exists $dedup->{$fullname} ){
-            die "fullname of [$fullname] is duplicated\n";
-        }
-        $dedup->{$fullname} = $dref;
+        for my $fullname (@{$cfg->{$dref}}){
+            my $fullname = uc($fullname);
 
-        my @splitname = split /\s+/, $fullname;
-        for my $npart ( @splitname ){
-            if ( exists $dedup->{$npart} || exists $dedup_part_names->{$npart} ){
-                $can_use_partnames = false;
+
+            if ( exists $dedup->{$fullname} && $dedup->{$fullname} ne $dref ){
+                die "fullname of [$fullname] is duplicated\n";
             }
-            $dedup_part_names->{$npart} = $dref;
+            $dedup->{$fullname} = $dref;
+
+            my @splitname = split /\s+/, $fullname;
+            for my $npart ( @splitname ){
+
+                if (  exists $dedup->{$npart} && $dedup->{$npart} ne $dref ){
+                    die "part name of [$fullname] is duplicated over different drivers\n";
+                }
+
+                if ( exists $dedup_part_names->{$npart} && $dedup_part_names->{$npart} ne $dref) {
+                    die "part name of [$fullname] is duplicated over different drivers\n";
+                }
+
+                $dedup_part_names->{$npart} = $dref;
+            }
         }
     }
 
-    if ($can_use_partnames) {
-        for my $pr (keys %$dedup_part_names) {
-            $dedup->{$pr} = $dedup_part_names->{$pr};
-        }
+    for my $pr (keys %$dedup_part_names) {
+        $dedup->{$pr} = $dedup_part_names->{$pr};
     }
 
-    return ($dedup, $can_use_partnames );
+    return $dedup;
 }
 
 sub slurp {
@@ -732,10 +741,15 @@ sub get_all_players_data($) {
 
         if ( my ($plyr, $preds) = $ln =~ m{(.*?):(.*)} ){
 
-            $plyr = trim($plyr);
+            $plyr = lc(trim($plyr));
 
             if ( ! exists $z_players->{$plyr} ){
-                die "Can't find player [$plyr] in $all_player_filename\n";
+                die "Can't find player [$plyr] in [$all_player_filename]\n";
+            }
+
+            if ( exists $plyr_data->{$plyr} ){
+                die "Player [$plyr] has duplicate entries in [$all_player_filename]\n";
+
             }
 
             my $p_preds_arr = [
@@ -743,12 +757,22 @@ sub get_all_players_data($) {
                 split ("," ,$preds )
             ];
 
+
+            my $dup_preds = {};
+
             for my $pr ( @$p_preds_arr ){
                 if ( ! exists z_drivers_or_constructors($s_run)->{$pr} ){
                     die "The prediction [$pr] for player [$plyr] ".
                         " in the file $all_player_filename can't be found\n";
                 }
+
                 $pr = z_drivers_or_constructors($s_run)->{$pr};
+
+                if ( exists $dup_preds->{$pr}){
+                    die "The prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename is duplicated\n";
+                }
+                $dup_preds->{$pr} = 1;
             }
 
             $plyr_data->{$plyr} = $p_preds_arr;
