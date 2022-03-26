@@ -66,13 +66,17 @@ Options :
         since we are only doing first six positions then this defaults to 6 in the code.
         and the player files with the lines of predictions must only have 6 lines.
 
-    --score-sys  karl-8, karl-32 , differential_scoring
-        defaults to karl-8
-        i.e.  --score-sys karl-8 
-        would run the 8,4,2,1 scoring system.
+    --score-sys  karl-8, karl-32 , differential_scoring, diff
+        defaults to differential_scoring
+
+        diff and differential_scoring are the same thing.
+
+        i.e.
+        --score-sys karl-8 
+            would run the 8,4,2,1 scoring system.
 
         --score-sys karl-32
-        would run the 32-16-8-4-2-1 Karl systems.
+            would run the 32-16-8-4-2-1 Karl systems.
 
     --score-times-current  
         This multiplies the score for
@@ -125,7 +129,6 @@ use Getopt::Long;
 my $score_sys_lkup = {
     "karl-8"     => 1,
     "karl-32"    => 1,
-#    difflow  => 1,
     differential_scoring => 1,
 };
 
@@ -199,152 +202,158 @@ if ( $o_tab_output && $o_html_output ){
     dierr("you can't define both [--tab-output --html-output] only one or the other");
 }
 
-my $plyr_tots = {};
-my $run_arrs = [];
+sub main {
+    my $plyr_tots = {};
+    my $run_arrs = [];
 
-for my $s_run ( split /,/ , $o_run ){
+    for my $s_run ( split /,/ , $o_run ){
 
-    $s_run =~ s/^\s*//g;
-    $s_run =~ s/\s*$//g;
+        $s_run =~ s/^\s*//g;
+        $s_run =~ s/\s*$//g;
 
-    if ($s_run ne 'wcc' && $s_run ne 'wdc' && ! exists $z_races->{$s_run}){
-        dierr("[--run $s_run] is not valid. You must define --run , with wcc , wdc or a valid race-name");
-    }
-
-    if ( defined $o_score_upto_pos ){
-        my $cmp_tot = expected_count($s_run);
-
-        if ( $o_score_upto_pos < 1 or $o_score_upto_pos > $cmp_tot){
-            dierr("For [--run $o_run] you cannot define a [--score-only-upto-pos of $o_score_upto_pos], the max is $cmp_tot\n");
+        if ($s_run ne 'wcc' && $s_run ne 'wdc' && ! exists $z_races->{$s_run}){
+            dierr("[--run $s_run] is not valid. You must define --run , with wcc , wdc or a valid race-name");
         }
-    } else {
-        $o_score_upto_pos = expected_count($s_run);
-    }
-    print "score_upto_pos      = $o_score_upto_pos\n" if $o_debug;
 
-    my $plyr_res = process($s_run);
+        if ( defined $o_score_upto_pos ){
+            my $cmp_tot = expected_count($s_run);
 
-    push @$run_arrs, $plyr_res;
-}
-
-print "\n\n\n";
-print "##############################################################\n";
-print "OUTPUT Section\n";
-print "##############################################################\n";
-print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
-
-if ( $o_score_sys eq "karl-8") {
-    print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
-    print "Get the position exactly correct then 8 points\n";
-    print "Get the position 3 places out then 1 point\n";
-    print "More than 3 places out, then 0 points \n";
-}
-elsif ( $o_score_sys eq "karl-32" ) {
-    print "Not doing this scoring system . The 32,16,8,4,2,1\n";
-}
-elsif ( $o_score_sys eq "differential_scoring" ) {
-    print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
-    print " 20 - 0 = 20 points\n";
-    print " Get the position say 2 places out , then it is \n";
-    print " 20 - 2 = 18 points\n";
-}
-print "\n";
-if ($o_score_times_pos){
-    print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
-}
-elsif ($o_score_times_1990_pos) {
-    print "Scores are multiplied by 9,6,4,3,2,1  depending on the position\n";
-}
-else {
-    print "Scores are NOT multiplied depending on the position\n";
-}
-
-print "\nindividual rounds ...\n\n";
-my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
-
-for my $pr_run (@$run_arrs) {
-    my $p_pos = 1;
-    for my $ln (@$pr_run){
-        print pp($p_pos).$ln->{output};
-
-        die "unknown player . prog error \n" if ! $ln->{player};
-        my $plyr = $ln->{player};
-
-        $plyr_tots->{$plyr}{player} = $plyr;
-        if ($plyr ne "zzz" && $p_pos <= $max_p_pos){
-            $plyr_tots->{$plyr}{"p$p_pos"} = $plyr_tots->{$plyr}{"p$p_pos"} // 0;
-            $plyr_tots->{$plyr}{"p$p_pos"}++;
+            if ( $o_score_upto_pos < 1 or $o_score_upto_pos > $cmp_tot){
+                dierr("For [--run $o_run] you cannot define a [--score-only-upto-pos of $o_score_upto_pos], the max is $cmp_tot\n");
+            }
+        } else {
+            $o_score_upto_pos = expected_count($s_run);
         }
-        $p_pos++ if $plyr ne "zzz";
+        print "score_upto_pos      = $o_score_upto_pos\n" if $o_debug;
 
-        $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
-        $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
+        my $plyr_res = process($s_run);
 
-        $plyr_tots->{$plyr}{total} += $ln->{score};
-        $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
-
-    }
-    print "\n\n";
-}
-
-print "##############################################################\n";
-print "Tables run for ". join(", ", split (",", $o_run))."\n\n";
-print "Total Score table\n";
-print "-----------------\n";
-
-my $tots_arr = [];
-
-for my $tpname ( keys %$plyr_tots ){
-    my $tp = $plyr_tots->{$tpname};
-
-    $tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
-
-    for my $p_pos ( 1..$max_p_pos ){
-        # fill in the pNUM hash keys that are undef with 0;
-        $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
+        push @$run_arrs, $plyr_res;
     }
 
-    push @$tots_arr, $tp;
+    print "\n\n\n";
+    print "##############################################################\n";
+    print "OUTPUT Section\n";
+    print "##############################################################\n";
+    print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
+
+    if ( $o_score_sys eq "karl-8") {
+        print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
+        print "Get the position exactly correct then 8 points\n";
+        print "Get the position 3 places out then 1 point\n";
+        print "More than 3 places out, then 0 points \n";
+    }
+    elsif ( $o_score_sys eq "karl-32" ) {
+        print "Not doing this scoring system . The 32,16,8,4,2,1\n";
+    }
+    elsif ( $o_score_sys eq "differential_scoring" ) {
+        print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
+        print " 20 - 0 = 20 points\n";
+        print " Get the position say 2 places out , then it is \n";
+        print " 20 - 2 = 18 points\n";
+    }
+    print "\n";
+    if ($o_score_times_pos){
+        print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
+    }
+    elsif ($o_score_times_1990_pos) {
+        print "Scores are multiplied by 9,6,4,3,2,1  depending on the position\n";
+    }
+    else {
+        print "Scores are NOT multiplied depending on the position\n";
+    }
+
+    print "\nindividual rounds ...\n\n";
+    my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
+
+    for my $pr_run (@$run_arrs) {
+        my $p_pos = 1;
+        for my $ln (@$pr_run){
+            print pp($p_pos).$ln->{output};
+
+            die "unknown player . prog error \n" if ! $ln->{player};
+            my $plyr = $ln->{player};
+
+            $plyr_tots->{$plyr}{player} = $plyr;
+            if ($plyr ne "zzz" && $p_pos <= $max_p_pos){
+                $plyr_tots->{$plyr}{"p$p_pos"} = $plyr_tots->{$plyr}{"p$p_pos"} // 0;
+                $plyr_tots->{$plyr}{"p$p_pos"}++;
+            }
+            $p_pos++ if $plyr ne "zzz";
+
+            $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
+            $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
+
+            $plyr_tots->{$plyr}{total} += $ln->{score};
+            $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
+
+        }
+        print "\n\n";
+    }
+
+    print "##############################################################\n";
+    print "Tables run for ". join(", ", split (",", $o_run))."\n\n";
+    print "Total Score table\n";
+    print "-----------------\n";
+
+    my $tots_arr = [];
+
+    for my $tpname ( keys %$plyr_tots ){
+        my $tp = $plyr_tots->{$tpname};
+
+        if ( $tp->{played}){
+            $tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
+        } else {
+            $tp->{ave_score} = 0;
+        }
+
+        for my $p_pos ( 1..$max_p_pos ){
+            # fill in the pNUM hash keys that are undef with 0;
+            $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
+        }
+
+        push @$tots_arr, $tp;
+    }
+
+    print Dumper $plyr_tots if $o_debug;
+    print Dumper $tots_arr if $o_debug;
+
+    my $pp = 1;
+    for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
+        totals_pad($pp, $tl, "total", false);
+        $pp++;
+    }
+
+    print "\nSo for players who might not have entered predictions for all rounds an Average Score table\n";
+    print   "--------------------\n";
+    $pp = 1;
+    for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
+        totals_pad($pp, $tl, "ave_score", false);
+        $pp++;
+    }
+
+    print "\n\nSo following table is for those who think P1 is the most important metric\n";
+    print "This is sorted by the Position in the rounds P1->P6 and then the Average Score\n";
+    print "i.e. The most P1s wins, if that's all level then P2s .... finally to ave-score as a tie break\n";
+    print "So to get a P1 a player needed to win in the table calculated for the specific round (see above)\n";
+    print   "--------------------\n";
+    $pp = 1;
+    for my $tl (sort {
+                $b->{p1} <=> $a->{p1} ||
+                $b->{p2} <=> $a->{p2} ||
+                $b->{p3} <=> $a->{p3} ||
+                $b->{p4} <=> $a->{p4} ||
+                $b->{p5} <=> $a->{p5} ||
+                $b->{p6} <=> $a->{p6} ||
+                $b->{ave_score} <=> $a->{ave_score}
+
+            } @$tots_arr
+    ){
+        totals_pad($pp, $tl, "ave_score", true);
+        $pp++;
+    }
+
 }
-
-print Dumper $plyr_tots if $o_debug;
-print Dumper $tots_arr if $o_debug;
-
-my $pp = 1;
-for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
-    totals_pad($pp, $tl, "total", false);
-    $pp++;
-}
-
-print "\nSo for players who might not have entered predictions for all rounds an Average Score table\n";
-print   "--------------------\n";
-$pp = 1;
-for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
-    totals_pad($pp, $tl, "ave_score", false);
-    $pp++;
-}
-
-print "\n\nSo following table is for those who think P1 is the most important metric\n";
-print "This is sorted by the Position in the rounds P1->P6 and then the Average Score\n";
-print "i.e. The most P1s wins, if that's all level then P2s .... finally to ave-score as a tie break\n";
-print "So to get a P1 a player needed to win in the table calculated for the specific round (see above)\n";
-print   "--------------------\n";
-$pp = 1;
-for my $tl (sort {
-            $b->{p1} <=> $a->{p1} ||
-            $b->{p2} <=> $a->{p2} ||
-            $b->{p3} <=> $a->{p3} ||
-            $b->{p4} <=> $a->{p4} ||
-            $b->{p5} <=> $a->{p5} ||
-            $b->{p6} <=> $a->{p6} ||
-            $b->{ave_score} <=> $a->{ave_score}
-
-        } @$tots_arr
-){
-    totals_pad($pp, $tl, "ave_score", true);
-    $pp++;
-}
-
 #################################
 #################################
 #################################
@@ -426,6 +435,8 @@ sub process ($) {
     my @skip_player_errs = ();
     my $player_results_arr = [];
 
+    my $all_players_data = get_all_players_data($s_run);
+
 PLYR:
     for my $plyr (sort keys %$z_players){
         print "$s_run : Processing Player $plyr\n";
@@ -445,24 +456,23 @@ PLYR:
                 {score => 0, player=>$plyr , output => "${result_line}${skip_reason} : Tot = 0\n", skipped=>1};
         };
 
-        my $plyr_data;
-        my $plyr_file = "$s_run.$plyr";
-        try {
-            $plyr_data = run_file("$DATA_DIR/$plyr_file");
-        } catch {
-            push @skip_player_errs,
-                "$s_run : Skip [$plyr] because can't load file [$plyr_file] [$!]";
-            $skip_result_line->("no data (1)");
 
-        };
-        next if ! $plyr_data;
+        if ( ! exists $all_players_data->{$plyr} ){
+            push @skip_player_errs,
+                "$s_run : Skip [$plyr] no data in $s_run.all-players file";
+            $skip_result_line->("no data (A)");
+            next ;
+        }
+
+        my $plyr_data = $all_players_data->{$plyr};
+
 
         print "$s_run : $plyr : ".Dumper($plyr_data) if $o_debug;
 
         if (scalar @$plyr_data < $o_score_upto_pos){
             push @skip_player_errs,
-                "$s_run : Skip [$plyr] because [".scalar @$plyr_data."] lines in file [$plyr_file] isn't [$o_score_upto_pos]";
-            $skip_result_line->("no data (2)");
+                "$s_run : Skip [$plyr] because [".scalar @$plyr_data."] lines in file [".all_player_file($s_run)."] isn't [$o_score_upto_pos]";
+            $skip_result_line->("no data (B)");
             next;
         }
 
@@ -472,9 +482,9 @@ PLYR:
             if ( ! exists z_drivers_or_constructors($s_run)->{$plyr_pred} ){
                 push @skip_player_errs,
                     "$s_run : Skip [$plyr] because prediction [".
-                        ($i+1)."][$plyr_pred] in file [$plyr_file] not found in [".z_drivers_or_constructors_file($s_run)."]";
+                        ($i+1)."][$plyr_pred] in file [".all_player_file($s_run)."] not found in [".z_drivers_or_constructors_file($s_run)."]";
 
-                $skip_result_line->("no data (3)");
+                $skip_result_line->("no data (C)");
                 next PLYR;
             }
             # get the 3 char abbrieviation :
@@ -686,3 +696,50 @@ sub trim {
     return $txt;
 }
 
+sub get_all_players_data($) {
+    my ($s_run) = @_;
+
+    my $all_player_filename =all_player_file($s_run);
+    my $filedata = slurp($all_player_filename);
+
+    my $plyr_data = {};
+
+    for my $ln (split /\n/, $filedata){
+        $ln =  trim($ln);
+        next if ! $ln;
+
+        if ( my ($plyr, $preds) = $ln =~ m{(.*?):(.*)} ){
+
+            $plyr = trim($plyr);
+
+            if ( ! exists $z_players->{$plyr} ){
+                die "Can't find player [$plyr] in $all_player_filename\n";
+            }
+
+            my $p_preds_arr = [
+                map { uc(trim ($_)) }
+                split ("," ,$preds )
+            ];
+
+            for my $pr ( @$p_preds_arr ){
+                if ( ! exists z_drivers_or_constructors($s_run)->{$pr} ){
+                    die "The prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename can't be found\n";
+                }
+                $pr = z_drivers_or_constructors($s_run)->{$pr};
+            }
+
+            $plyr_data->{$plyr} = $p_preds_arr;
+        } else {
+            die "Can't split line [$ln] in $all_player_filename\n";
+        }
+    }
+
+    print "Dump of player data from  $all_player_filename\n : ".Dumper ( $plyr_data ) if $o_debug;
+
+    return $plyr_data;
+}
+
+sub all_player_file ($) { return "$_[0].all-players" }
+
+main();
