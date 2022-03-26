@@ -116,6 +116,9 @@ Options :
         so you shouldn't have to set it.
         unless the numbers of constructors on the grid changes.
 
+    --pad-results
+        puts spaces in to line up the results.
+
     See README file for full explanation of files in the directory.
 
     Questions to answer.
