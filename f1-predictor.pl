@@ -2,6 +2,7 @@
 use strict; use warnings;
 use Data::Dumper;
 use Try::Tiny;
+use Scalar::Util qw(looks_like_number);
 
 sub true {1}
 sub false {0}
@@ -54,10 +55,10 @@ $msg
 
 ################################################
 Options :
-    
+
     --score-only-up-to-pos  with integer from 1 to 20 for drivers
         or 1 to 10 for constructors.
-        (will take account of the --drivers-count, and 
+        (will take account of the --drivers-count, and
             --constructors-count params)
 
         i.e. --score-only-up-to-position  5
@@ -72,13 +73,13 @@ Options :
         diff and differential_scoring are the same thing.
 
         i.e.
-        --score-sys karl-8 
+        --score-sys karl-8
             would run the 8,4,2,1 scoring system.
 
         --score-sys karl-32
             would run the 32-16-8-4-2-1 Karl systems.
 
-    --score-times-current  
+    --score-times-current
         This multiplies the score for
             P1 prediction by 25
             P2 prediction by 18
@@ -86,9 +87,44 @@ Options :
             ... (you know these numbers !!)
             P10 prediction by 1
 
+    --minus-points.
+        So for a JOKE. If there's a driver or constructor who's deemed to be
+        "annoying" , their names can be put on this option in a comma
+        separated list.
+        The full lookup names should work, although joke names with a \$ 
+        will need quoting or they will not work via the command line.
+
+        i.e. --minus-points STR,HAM,MAG,VER,LEC
+
+        if any player has those predictions, they get MINUS points :-D
+
+        (TO BE IMPLEMENTED)
+
+    --multi-points.
+        So for a JOKE. If there's a driver or constructor who's deemed to be
+        "awesome" , their names can be put on this option in a comma
+        separated list.
+        The full lookup names should work, although joke names with a \$ 
+        will need quoting or they will not work via the command line.
+
+        i.e. --multi-points STR,HAM,MAG,VER,LEC
+
+        if any player has those predictions, they get points multiplied :-D
+
+        They will be multiplied by the --multi-point-factor, which defaults to 2.
+
+        although I guess you could multiply by 0.1 or -3 and use this option
+        to reduce scores for certain driver predictions.
+
+        (TO BE IMPLEMENTED)
+
+    --multi-points-factor 2 , 3 , 2.5 , whatever you like !
+        This is used in conjunction with the --multi-points JOKE option.
+
+
     --score-times-1990  (1990 ish scoring system)
-        This multiplies the score for 
-            P1 x 9 
+        This multiplies the score for
+            P1 x 9
             P2 x 6
             P3 x 4
             P4 x 3
@@ -96,6 +132,7 @@ Options :
             P6 x 1
 
     --full-output
+        don't know what I put this is for !
 
     --tab-output
         prints out nice at the command line.
@@ -110,7 +147,7 @@ Options :
         the current amount on the 2022 grid.
         so you shouldn't have to set it.
         unless the numbers of drivers on the grid changes.
-        
+
     --constructors-count . This defaults to 10
         the current amount on the 2022 grid.
         so you shouldn't have to set it.
@@ -144,12 +181,17 @@ my ( $o_score_sys, $o_score_times_pos, $o_score_times_1990_pos);
 my ($o_full_output, $o_tab_output, $o_html_output);
 my ($o_run, $o_help, $o_debug);
 my ($o_pad_results);
+my ($o_minus_points, $o_multi_points);
+my $o_multi_points_factor = 2;
 
 GetOptions (
     "pad-results"           => \$o_pad_results,
     "score-only-upto-pos=i" => \$o_score_upto_pos,
     "score-times-current"   => \$o_score_times_pos,
     "score-times-1990"      => \$o_score_times_1990_pos,
+    "minus-points=s"        => \$o_minus_points,
+    "multi-points=s"        => \$o_multi_points,
+    "multi-points-factor=s" => \$o_multi_points_factor,
     "score-sys=s"           => \$o_score_sys,
     "full-output"           => \$o_full_output,
     "tab-output"            => \$o_tab_output,
@@ -163,6 +205,10 @@ GetOptions (
 
 usage() if $o_help;
 
+if ( ! looks_like_number $o_multi_points_factor ){
+    die "--multi-points-factor $o_multi_points_factor does not look like a number\n";
+}
+
 my $z_races   = z_data_single($ZDATA_RACES);
 print "Dump of races = ".Dumper($z_races) if $o_debug;
 
@@ -171,6 +217,39 @@ print "Dump of players = ".Dumper($z_players) if $o_debug;
 
 my $z_drivers = z_data_pipe_split($ZDATA_DRIVERS);
 print "Dump of drivers = ".Dumper($z_drivers) if $o_debug;
+
+# Only works on drivers. Doesn't seem much point on WCC
+my $z_minus_points = {};
+if ($o_minus_points){
+
+    for my $mpdrv ( split /,/,$o_minus_points){
+        $mpdrv = uc(trim($mpdrv));
+
+        if ( ! exists $z_drivers->{$mpdrv} ){
+            die "The --minus-points driver name of [$mpdrv] can't be found\n";
+        }
+
+        $z_minus_points->{$z_drivers->{$mpdrv}} = 1;
+    }
+    print "Dump of minus_points_driver lookup \n".Dumper($z_minus_points)
+        if $o_debug;
+}
+
+# Only works on drivers. Doesn't seem much point on WCC
+my $z_multi_points = {};
+if ($o_multi_points){
+    for my $mpdrv ( split /,/,$o_multi_points){
+        $mpdrv = uc(trim($mpdrv));
+
+        if ( ! exists $z_drivers->{$mpdrv} ){
+            die "The --multi-points driver name of [$mpdrv] can't be found\n";
+        }
+
+        $z_multi_points->{$z_drivers->{$mpdrv}} = 1;
+    }
+    print "Dump of multi_points_driver lookup \n".Dumper($z_multi_points)
+        if $o_debug;
+}
 
 my $z_constructors = z_data_pipe_split($ZDATA_CONSTRUCTORS);
 print "Dump of constructors = ".Dumper($z_constructors) if $o_debug;
@@ -232,6 +311,22 @@ sub main {
     print "##############################################################\n";
     print "OUTPUT Section\n";
     print "##############################################################\n";
+
+    if ($o_minus_points || $o_multi_points  ) {
+        print "This is a JOKE table, with silly factors applied to certain driver predictions\n";
+
+        if ($o_minus_points) {
+            print "The predictions for driver(s) ".join(", ", keys %$z_minus_points)." score negative points\n";
+        }
+
+        if ($o_multi_points) {
+            print "The predictions for driver(s) ".join(", ", keys %$z_multi_points)." have score multiplied by $o_multi_points_factor\n";
+        }
+
+
+    }
+
+
     print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
 
     if ( $o_score_sys eq "karl-8") {
@@ -241,7 +336,8 @@ sub main {
         print "More than 3 places out, then 0 points \n";
     }
     elsif ( $o_score_sys eq "karl-32" ) {
-        print "Not doing this scoring system . The 32,16,8,4,2,1\n";
+        print "\nKarl-32,16,8,4,2,1 scoring . i.e Postion exactly correct 32 points.\n";
+        print " if 5 places out then 1 point\n";
     }
     elsif ( $o_score_sys eq "differential_scoring" ) {
         print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
@@ -388,6 +484,13 @@ sub expected_count ($) {
 
 sub z_drivers_or_constructors ($) {
     my ($s_run) = @_;
+
+    if (($o_minus_points || $o_multi_points )
+         && $s_run eq 'wcc'
+    ){
+        die "the options --minus-points or --multi-points can't be used with --run wcc\n";
+    }
+
     return $s_run eq 'wcc' ?  $z_constructors : $z_drivers;
 }
 
@@ -531,6 +634,14 @@ PLYR:
                 }
                 elsif ($o_score_times_1990_pos) {
                     $score = $score * $real_1990_f1_pos_scores->{$i}
+                }
+
+                if (exists $z_minus_points->{$plyr_pred}){
+                    $score = -$score;
+                }
+
+                if (exists $z_multi_points->{$plyr_pred}){
+                    $score = $score * $o_multi_points_factor ;
                 }
 
                 print "$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
