@@ -313,7 +313,7 @@ sub main {
     print "##############################################################\n";
 
     if ($o_minus_points || $o_multi_points  ) {
-        print "This is a JOKE table, with silly factors applied to certain driver predictions\n";
+        print "This is a JOKE table, with silly factors applied to certain driver predictions\n\n";
 
         if ($o_minus_points) {
             print "The predictions for driver(s) ".join(", ", keys %$z_minus_points)." score negative points\n";
@@ -323,8 +323,13 @@ sub main {
             print "The predictions for driver(s) ".join(", ", keys %$z_multi_points)." have score multiplied by $o_multi_points_factor\n";
         }
 
+        print "\n";
 
+    } else {
+        print "This is a REAL table (no Karl fiddle factors applied)\n\n";
     }
+
+    print "Code and data is pushed to https://github.com/kaptainkarl/f1-predictor for those that want to check that kind of thing !\n";
 
 
     print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
@@ -342,8 +347,6 @@ sub main {
     elsif ( $o_score_sys eq "differential_scoring" ) {
         print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
         print " 20 - 0 = 20 points\n";
-        print " Get the position say 2 places out , then it is \n";
-        print " 20 - 2 = 18 points\n";
     }
     print "\n";
     if ($o_score_times_pos){
