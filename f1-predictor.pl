@@ -3,6 +3,8 @@ use strict; use warnings;
 use Data::Dumper;
 use Try::Tiny;
 use Scalar::Util qw(looks_like_number);
+use Math::BigInt;
+use Number::Format;
 
 sub true {1}
 sub false {0}
@@ -41,6 +43,22 @@ my $real_1990_f1_pos_scores = {
     2 => 4,
     3 => 3,
     4 => 2,
+    5 => 1,
+};
+
+
+# These are -1 out, so 0 is really P1 !!! :
+# This is basically 100^(pos-6)
+# I guess I could just do it in a sum.
+# But a hash map keeps it to the first 6 places.
+# We're only doing P1 -> P6 predictions.
+my $power_hundred_score_multiplier = {
+#   0 => 1,00,00,00,00,00,
+    0 => 10000000000,
+    1 => 100000000,
+    2 => 1000000,
+    3 => 10000,
+    4 => 100,
     5 => 1,
 };
 
@@ -87,11 +105,28 @@ Options :
             ... (you know these numbers !!)
             P10 prediction by 1
 
+    --score-times-1990  (1990 ish scoring system)
+        This multiplies the score for
+            P1 x 9
+            P2 x 6
+            P3 x 4
+            P4 x 3
+            P5 x 2
+            P6 x 1
+
+    --score-times-power-of-100
+            basically for the top 6 postions
+            (This script is kind of becoming a top-6-only-predictor)
+            it is :
+            Pos - 6 ^ 100
+            Where Pos is the Position of the Prediction. So for P1 prediction
+            ( 6-1 ) ^ 100
+
     --minus-points.
         So for a JOKE. If there's a driver or constructor who's deemed to be
         "annoying" , their names can be put on this option in a comma
         separated list.
-        The full lookup names should work, although joke names with a \$ 
+        The full lookup names should work, although joke names with a \$
         will need quoting or they will not work via the command line.
 
         i.e. --minus-points STR,HAM,MAG,VER,LEC
@@ -104,7 +139,7 @@ Options :
         So for a JOKE. If there's a driver or constructor who's deemed to be
         "awesome" , their names can be put on this option in a comma
         separated list.
-        The full lookup names should work, although joke names with a \$ 
+        The full lookup names should work, although joke names with a \$
         will need quoting or they will not work via the command line.
 
         i.e. --multi-points STR,HAM,MAG,VER,LEC
@@ -121,15 +156,6 @@ Options :
     --multi-points-factor 2 , 3 , 2.5 , whatever you like !
         This is used in conjunction with the --multi-points JOKE option.
 
-
-    --score-times-1990  (1990 ish scoring system)
-        This multiplies the score for
-            P1 x 9
-            P2 x 6
-            P3 x 4
-            P4 x 3
-            P5 x 2
-            P6 x 1
 
     --full-output
         don't know what I put this is for !
@@ -178,6 +204,7 @@ my $o_constructors_count  = 10;
 my $o_score_upto_pos = 6;
 
 my ( $o_score_sys, $o_score_times_pos, $o_score_times_1990_pos);
+my ( $o_score_times_power_hundred );
 my ($o_full_output, $o_tab_output, $o_html_output);
 my ($o_run, $o_help, $o_debug);
 my ($o_pad_results);
@@ -189,6 +216,7 @@ GetOptions (
     "score-only-upto-pos=i" => \$o_score_upto_pos,
     "score-times-current"   => \$o_score_times_pos,
     "score-times-1990"      => \$o_score_times_1990_pos,
+    "score-times-power-100" => \$o_score_times_power_hundred,
     "minus-points=s"        => \$o_minus_points,
     "multi-points=s"        => \$o_multi_points,
     "multi-points-factor=s" => \$o_multi_points_factor,
@@ -349,7 +377,22 @@ sub main {
         print " 20 - 0 = 20 points\n";
     }
     print "\n";
-    if ($o_score_times_pos){
+    if ($o_score_times_power_hundred){
+        print "Positional Scores are multiplied by HUGE numbers ...\n";
+        print "P1 is multiplied by 10000000000\n";
+        print "then 100 times less for each position. until ...\n";
+        print "P5 is times 100 and P6 is times 1\n";
+        print "Basically, P1 accuracy trumps P2->P6 accuracy\n";
+        print "and P2 accuracy trumps P3->P6 accuracy, etc ...\n";
+        print "In the individual rounds the Positional score in the table shows\n";
+        print "the score BEFORE the multiplier\n";
+        print "The 'Total' has a comma to separate HUNDREDs (and not the usual Thousands)\n";
+        print "Thus you can easily see the Positional scores in the Total\n";
+        print "The most accurate P1 wins, ALWAYS\n\n";
+        print "In the Totals table you just see the HUGE Numbers\n";
+        print "I hope this makes sense, even my eyes are GLAZING over !\n";
+    }
+    elsif ($o_score_times_pos) {
         print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
     }
     elsif ($o_score_times_1990_pos) {
@@ -457,6 +500,28 @@ sub main {
 #################################
 #################################
 # subs
+sub thousands ($){
+    my ($sc) = @_;
+
+    return $sc if ! $o_score_times_power_hundred ;
+
+    my $b = reverse int($sc);
+    my @c = unpack("(A3)*", $b);
+    my $d = join ',', @c;
+    my $e = reverse $d;
+    return $e;
+}
+sub hundreds ($){
+    my ($sc) = @_;
+
+    return $sc if ! $o_score_times_power_hundred ;
+
+    my $b = reverse $sc;
+    my @c = unpack("(A2)*", $b);
+    my $d = join ',', @c;
+    my $e = reverse $d;
+    return $e;
+}
 
 sub totals_pad {
     my ($p, $tl, $score_key, $add_ppos) = @_;
@@ -469,9 +534,9 @@ sub totals_pad {
     my $score_text = $score_key;
 
     if ($o_pad_results) {
-        printf( "P%-2s : %-10s : played=%-2s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, $tl->{$score_key} );
+        printf( "P%-2s : %-10s : played=%-2s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, thousands($tl->{$score_key}) );
     } else {
-        printf( "P%s : %s : played=%s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, $tl->{$score_key} );
+        printf( "P%s : %s : played=%s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, thousands($tl->{$score_key}) );
     }
 }
 
@@ -551,7 +616,7 @@ PLYR:
         } else {
             $result_line =  sprintf( "%s : %s : ",  $s_run, $plyr );
         }
-        my $plyr_tot_score = 0;
+        my $plyr_tot_score = Math::BigInt->bzero();
 
         my $skip_result_line = sub {
             my ($skip_reason) = @_;
@@ -595,8 +660,12 @@ PLYR:
             # get the 3 char abbrieviation :
             $plyr_pred = z_drivers_or_constructors($s_run)->{$plyr_pred} ;
 
-            my $add_result = sub {
-                my ($pred, $score) = @_;
+            my $add_result = sub ($$$){
+                my ($pred, $real_score, $disp_hundred_score) = @_;
+
+                $plyr_tot_score += $real_score;
+
+                my $score = $o_score_times_power_hundred ? $disp_hundred_score : $real_score;
 
                 if ($o_pad_results) {
                     $result_line .= sprintf("%s (%3s), ", $pred, $score);
@@ -604,7 +673,6 @@ PLYR:
                     $result_line .= sprintf("%s (%s), ", $pred, $score);
                 }
 
-                $plyr_tot_score += $score;
             };
 
             if ( ! exists $results_lkup->{$plyr_pred}){
@@ -618,7 +686,7 @@ PLYR:
 
                 my $error = abs($results_lkup->{$plyr_pred}-$i);
 
-                my $score = 0;
+                my $score = Math::BigInt->bzero();;
 
                 if ( $o_score_sys eq "karl-8") {
                     if ( $error <= 3){
@@ -632,13 +700,6 @@ PLYR:
                     $score = $o_drivers_count-$error;
                 }
 
-                if ($o_score_times_pos){
-                    $score = $score * $real_f1_pos_scores->{$i}
-                }
-                elsif ($o_score_times_1990_pos) {
-                    $score = $score * $real_1990_f1_pos_scores->{$i}
-                }
-
                 if (exists $z_minus_points->{$plyr_pred}){
                     $score = -$score;
                 }
@@ -647,16 +708,29 @@ PLYR:
                     $score = $score * $o_multi_points_factor ;
                 }
 
-                print "$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score $score\n" if $o_debug;
-                $add_result->($plyr_pred, $score);
+
+                my $display_hundreds_score = $score;
+                if ($o_score_times_power_hundred){
+                    $score = $score * $power_hundred_score_multiplier->{$i}
+                } elsif ($o_score_times_pos){
+                    $score = $score * $real_f1_pos_scores->{$i}
+                }
+                elsif ($o_score_times_1990_pos) {
+                    $score = $score * $real_1990_f1_pos_scores->{$i}
+                }
+
+
+                print "$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score ".int($score)."\n" if $o_debug;
+                $add_result->($plyr_pred, $score, $display_hundreds_score);
             }
         }
 
         $result_line =~ s/, $//g;
+
         if ($o_pad_results) {
-            $result_line .= sprintf( " : Tot = %4s\n", $plyr_tot_score );
+            $result_line .= sprintf( " : Tot = %4s\n", hundreds($plyr_tot_score) );
         } else {
-            $result_line .= sprintf( " : Tot = %s\n", $plyr_tot_score );
+            $result_line .= sprintf( " : Tot = %s\n", hundreds($plyr_tot_score) );
         }
 
         print "$s_run : $result_line" if $o_debug;
@@ -687,8 +761,6 @@ PLYR:
             $last_diff_score_highest_pos = $i;
         }
     }
-
-
 
     #for my $ln (@plyr_ordered_res){
     #    print "$s_run : $ln->{output}";
