@@ -85,6 +85,18 @@ Options :
         since we are only doing first six positions then this defaults to 6 in the code.
         and the player files with the lines of predictions must only have 6 lines.
 
+    --leo
+        this is a set of scoring CLI options short cut.
+        
+        It sets the --score-sys to differential_scoring
+        and --score-times-power-of-100
+
+        it undefs --score-times-current
+                  --score-times-1990
+
+        Basically it is a short cut to how I think Leo
+        wants the predictions rated.
+
     --score-sys  karl-8, karl-32 , differential_scoring, diff
         defaults to differential_scoring
 
@@ -157,6 +169,28 @@ Options :
         This is used in conjunction with the --multi-points JOKE option.
 
 
+    --player-fia-score
+        Instead of adding up the underlying alogithm ranking score for sorting the
+        positions , the positions of the players is mapped against proper F1 scoring in 2022
+        i.e. P1 player get 25 points and so on .
+
+    --player-rating-score
+        Displays the rating score in individual rounds and 
+        the totals table.
+
+        The average score table is a special case.
+        that only makes sense with the underlying rating
+        scoring. So it always does this option.
+
+    if neither --player-fia-score or --player-rating-score are specified
+    script defaults to --player-fia-score
+
+
+    --suppress-detail-score
+        suppresses the position player scores of the round.
+
+    --suppress-average-table
+
     --full-output
         don't know what I put this is for !
 
@@ -179,8 +213,10 @@ Options :
         so you shouldn't have to set it.
         unless the numbers of constructors on the grid changes.
 
-    --pad-results
-        puts spaces in to line up the results.
+    --debug .
+        Defaults to 0
+        --debug 1 shows minimal debug.
+             2,3 a bit more ...
 
     See README file for full explanation of files in the directory.
 
@@ -206,14 +242,19 @@ my $o_score_upto_pos = 6;
 my ( $o_score_sys, $o_score_times_pos, $o_score_times_1990_pos);
 my ( $o_score_times_power_hundred );
 my ($o_full_output, $o_tab_output, $o_html_output);
-my ($o_run, $o_help, $o_debug);
-my ($o_pad_results);
+my ($o_run, $o_help);
+my $o_debug =0;
+my $o_suppress_detail_score;
 my ($o_minus_points, $o_multi_points);
 my $o_multi_points_factor = 2;
+my $o_player_fia_score;
+my $o_player_rating_score;
+my $o_suppress_average_table;
+my $o_score_leo;
 
 GetOptions (
-    "pad-results"           => \$o_pad_results,
     "score-only-upto-pos=i" => \$o_score_upto_pos,
+    "leo"                   => \$o_score_leo,
     "score-times-current"   => \$o_score_times_pos,
     "score-times-1990"      => \$o_score_times_1990_pos,
     "score-times-power-100" => \$o_score_times_power_hundred,
@@ -224,12 +265,19 @@ GetOptions (
     "full-output"           => \$o_full_output,
     "tab-output"            => \$o_tab_output,
     "html-output"           => \$o_html_output,
+    "score|rating|player-rating-score"
+                            => \$o_player_rating_score,
+    "fia|player-fia-score"      => \$o_player_fia_score,
+    "no-detail|suppress-detail-score"
+                            => \$o_suppress_detail_score,
+    "no-ave|suppress-average-table"
+                            => \$o_suppress_average_table,
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
     "run=s"                 => \$o_run,
     "h|help"                => \$o_help,
-    "debug"                 => \$o_debug,
-) or usage();
+    "debug=i"               => \$o_debug,
+) or die "Option errors\n";
 
 usage() if $o_help;
 
@@ -237,14 +285,25 @@ if ( ! looks_like_number $o_multi_points_factor ){
     die "--multi-points-factor $o_multi_points_factor does not look like a number\n";
 }
 
+if ($o_score_leo){
+    $o_score_sys = "differential_scoring";
+    $o_score_times_pos = undef;
+    $o_score_times_1990_pos = undef;
+    $o_score_times_power_hundred= 1;
+}
+
+if (!$o_player_rating_score && !$o_player_fia_score){
+    $o_player_fia_score = 1;
+}
+
 my $z_races   = z_data_single($ZDATA_RACES);
-print "Dump of races = ".Dumper($z_races) if $o_debug;
+print "Dump of races = ".Dumper($z_races) if $o_debug > 2;
 
 my $z_players = z_data_single($ZDATA_PLAYERS);
-print "Dump of players = ".Dumper($z_players) if $o_debug;
+print "Dump of players = ".Dumper($z_players) if $o_debug > 2;
 
 my $z_drivers = z_data_pipe_split($ZDATA_DRIVERS);
-print "Dump of drivers = ".Dumper($z_drivers) if $o_debug;
+print "Dump of drivers = ".Dumper($z_drivers) if $o_debug > 2;
 
 # Only works on drivers. Doesn't seem much point on WCC
 my $z_minus_points = {};
@@ -260,7 +319,7 @@ if ($o_minus_points){
         $z_minus_points->{$z_drivers->{$mpdrv}} = 1;
     }
     print "Dump of minus_points_driver lookup \n".Dumper($z_minus_points)
-        if $o_debug;
+        if $o_debug > 2;
 }
 
 # Only works on drivers. Doesn't seem much point on WCC
@@ -276,14 +335,14 @@ if ($o_multi_points){
         $z_multi_points->{$z_drivers->{$mpdrv}} = 1;
     }
     print "Dump of multi_points_driver lookup \n".Dumper($z_multi_points)
-        if $o_debug;
+        if $o_debug > 2;
 }
 
 my $z_constructors = z_data_pipe_split($ZDATA_CONSTRUCTORS);
-print "Dump of constructors = ".Dumper($z_constructors) if $o_debug;
+print "Dump of constructors = ".Dumper($z_constructors) if $o_debug > 2;
 
-print "constructors count  = $o_constructors_count\n" if $o_debug;
-print "drivers count       = $o_drivers_count\n" if $o_debug;
+print "constructors count  = $o_constructors_count\n" if $o_debug > 2;
+print "drivers count       = $o_drivers_count\n" if $o_debug > 2;
 
 if (!$o_run) {
     dierr("You must define --run , with wcc , wdc or the race-name");
@@ -310,6 +369,7 @@ sub main {
     my $plyr_tots = {};
     my $run_arrs = [];
 
+    # get all the --run data 
     for my $s_run ( split /,/ , $o_run ){
 
         $s_run =~ s/^\s*//g;
@@ -340,6 +400,8 @@ sub main {
     print "OUTPUT Section\n";
     print "##############################################################\n";
 
+    print "\n\n<pre><code>\n\n";
+
     if ($o_minus_points || $o_multi_points  ) {
         print "This is a JOKE table, with silly factors applied to certain driver predictions\n\n";
 
@@ -354,73 +416,140 @@ sub main {
         print "\n";
 
     } else {
-        print "This is a REAL table (no Karl fiddle factors applied)\n\n";
+        print "This is a REAL table (no joke fiddle factors applied)\n\n";
     }
 
-    print "Code and data is pushed to https://github.com/kaptainkarl/f1-predictor for those that want to check that kind of thing !\n";
+    # print "Code and data is pushed to https://github.com/kaptainkarl/f1-predictor for those that want to check that kind of thing !\n";
 
 
-    print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
+#    print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
+#
+#    if ( $o_score_sys eq "karl-8") {
+#        print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
+#        print "Get the position exactly correct then 8 points\n";
+#        print "Get the position 3 places out then 1 point\n";
+#        print "More than 3 places out, then 0 points \n";
+#    }
+#    elsif ( $o_score_sys eq "karl-32" ) {
+#        print "\nKarl-32,16,8,4,2,1 scoring . i.e Postion exactly correct 32 points.\n";
+#        print " if 5 places out then 1 point\n";
+#    }
+#    elsif ( $o_score_sys eq "differential_scoring" ) {
+#        print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
+#        print " 20 - 0 = 20 points\n";
+#    }
+#    print "\n";
+#    if ($o_score_times_power_hundred){
+#        print "Positional Scores are multiplied by HUGE numbers ...\n";
+#        print "P1 is multiplied by 10000000000\n";
+#        print "then 100 times less for each position. until ...\n";
+#        print "P5 is times 100 and P6 is times 1\n";
+#        print "Basically, P1 accuracy trumps P2->P6 accuracy\n";
+#        print "and P2 accuracy trumps P3->P6 accuracy, etc ...\n";
+#        print "In the individual rounds the Positional score in the table shows\n";
+#        print "the score BEFORE the multiplier\n";
+#        print "The 'Total' has a comma to separate HUNDREDs (and not the usual Thousands)\n";
+#        print "Thus you can easily see the Positional scores in the Total\n";
+#        print "The most accurate P1 wins, ALWAYS\n\n";
+#        print "In the Totals table you just see the HUGE Numbers\n";
+#        print "I hope this makes sense, even my eyes are GLAZING over !\n";
+#    }
+#    elsif ($o_score_times_pos) {
+#        print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
+#    }
+#    elsif ($o_score_times_1990_pos) {
+#        print "Scores are multiplied by 9,6,4,3,2,1  depending on the position\n";
+#    }
+#    else {
+#        print "Scores are NOT multiplied depending on the position\n";
+#    }
 
-    if ( $o_score_sys eq "karl-8") {
-        print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
-        print "Get the position exactly correct then 8 points\n";
-        print "Get the position 3 places out then 1 point\n";
-        print "More than 3 places out, then 0 points \n";
-    }
-    elsif ( $o_score_sys eq "karl-32" ) {
-        print "\nKarl-32,16,8,4,2,1 scoring . i.e Postion exactly correct 32 points.\n";
-        print " if 5 places out then 1 point\n";
-    }
-    elsif ( $o_score_sys eq "differential_scoring" ) {
-        print "Differential scoring . i.e. Get a prediction exactly correct then it is \n";
-        print " 20 - 0 = 20 points\n";
-    }
-    print "\n";
-    if ($o_score_times_power_hundred){
-        print "Positional Scores are multiplied by HUGE numbers ...\n";
-        print "P1 is multiplied by 10000000000\n";
-        print "then 100 times less for each position. until ...\n";
-        print "P5 is times 100 and P6 is times 1\n";
-        print "Basically, P1 accuracy trumps P2->P6 accuracy\n";
-        print "and P2 accuracy trumps P3->P6 accuracy, etc ...\n";
-        print "In the individual rounds the Positional score in the table shows\n";
-        print "the score BEFORE the multiplier\n";
-        print "The 'Total' has a comma to separate HUNDREDs (and not the usual Thousands)\n";
-        print "Thus you can easily see the Positional scores in the Total\n";
-        print "The most accurate P1 wins, ALWAYS\n\n";
-        print "In the Totals table you just see the HUGE Numbers\n";
-        print "I hope this makes sense, even my eyes are GLAZING over !\n";
-    }
-    elsif ($o_score_times_pos) {
-        print "Scores are multiplied by 25,18,15,12 ... depending on the position\n";
-    }
-    elsif ($o_score_times_1990_pos) {
-        print "Scores are multiplied by 9,6,4,3,2,1  depending on the position\n";
-    }
-    else {
-        print "Scores are NOT multiplied depending on the position\n";
-    }
+    print "\nindividual rounds ...\n\n" if @$run_arrs >1;
 
-    print "\nindividual rounds ...\n\n";
     my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
 
     for my $pr_run (@$run_arrs) {
+
+        print "---------------\n";
+
+        print $pr_run->[0]{round}." : ";
+
+        print get_scoring_type_out();
+
+        print "\n\n";
+
+        # Header row 
+        my $underline = "-" x 17;
+        print "|P  |Player     |";
+
+        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
+        printf ("$fmt","Details");
+
+        $underline .= ("-" x length($pr_run->[0]{output}));
+
+        if ($o_player_fia_score) {
+            printf("|%4s   ",'FIA');
+            $underline .= "-" x 8;
+        }
+
+        if ($o_player_rating_score){
+            if ($o_score_times_power_hundred){
+                printf( "|%18s", "score ") ;
+                $underline .= "-" x 19;
+            }
+            else {
+                printf( "|%7s", "score " );
+                $underline .= "-" x 8;
+            }
+        }
+
+        print "|\n";
+        print "$underline\n";
+
+        # Body rows :
         for my $ln (@$pr_run){
             my $pos = $ln->{pos};
-            print pp($pos).$ln->{output};
+            my $plyr = $ln->{player};
+
+            if ($ln->{skipped}){
+                printf("|   |%-10s ",$plyr);
+                print $ln->{output}."\n";
+                next;
+            }
+
+            printf("|P%-2s|%-10s ",$pos, $plyr);
+
+            print $ln->{output};
+
+            if ($o_player_fia_score) {
+                my $fia_s = sprintf("%.2f",$ln->{fia_score});
+                $fia_s =~ s/.00$/   /g;
+                printf("|%6s ",$fia_s);
+            }
+
+            if ($o_player_rating_score){
+                if ($o_score_times_power_hundred){
+                    printf( "|%18s", hundreds($ln->{score}) );
+                }
+                else {
+                    printf( "|%7s", $ln->{score} );
+                }
+            }
+
+            print "|\n";
 
             die "unknown player . prog error \n" if ! $ln->{player};
-            my $plyr = $ln->{player};
 
             $plyr_tots->{$plyr}{player} = $plyr;
 
             $plyr_tots->{$plyr}{"p$pos"}++;
 
-            $plyr_tots->{$plyr}{total} = $plyr_tots->{$plyr}{total}   // 0;
-            $plyr_tots->{$plyr}{played} = $plyr_tots->{$plyr}{played} // 0;
+            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
+            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
+            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
 
-            $plyr_tots->{$plyr}{total} += $ln->{score};
+            $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
+            $plyr_tots->{$plyr}{total}     += $ln->{score};
             $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
 
         }
@@ -428,14 +557,13 @@ sub main {
     }
 
     if (@$run_arrs <2){
+        print "</pre></code>\n\n";
         print "\nonly run for one round, not showing totals\n";
         return;
     }
 
-    print "##############################################################\n";
+    print "----------------------\n";
     print "Tables run for ". join(", ", split (",", $o_run))."\n\n";
-    print "Total Score table\n";
-    print "-----------------\n";
 
     my $tots_arr = [];
 
@@ -456,27 +584,46 @@ sub main {
         push @$tots_arr, $tp;
     }
 
-    print Dumper $plyr_tots if $o_debug;
-    print Dumper $tots_arr if $o_debug;
+    print Dumper $plyr_tots if $o_debug > 1;
+    print Dumper $tots_arr  if $o_debug > 1;
 
-    my $pp = 1;
-    for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
-        totals_pad($pp, $tl, "total", false);
-        $pp++;
+
+    # TODO if fia scoring is display this will need to sort by "fia_total";
+    # Or maybe just generate another table.
+
+    my $pp;
+    if ($o_player_rating_score){
+        print "\nTotal Score table\n";
+        print "-----------------\n";
+        $pp = 1;
+        for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
+            totals_pad($pp, $tl, "total", false);
+            $pp++;
+        }
     }
 
-    print "\nSo for players who might not have entered predictions for all rounds an Average Score table\n";
-    print   "--------------------\n";
-    $pp = 1;
-    for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
-        totals_pad($pp, $tl, "ave_score", false);
-        $pp++;
+    if ( $o_player_fia_score ){
+        print "\nTotal FIA Score table\n";
+        print "---------------------\n";
+        $pp = 1;
+        for my $tl (sort { $b->{fia_total} <=> $a->{fia_total} } @$tots_arr ){
+            totals_pad($pp, $tl, "fia_total", false);
+            $pp++;
+        }
     }
 
-    print "\n\nSo following table is for those who think P1 is the most important metric\n";
-    print "This is sorted by the Position in the rounds P1->P6 and then the Average Score\n";
-    print "i.e. The most P1s wins, if that's all level then P2s .... finally to ave-score as a tie break\n";
-    print "So to get a P1 a player needed to win in the table calculated for the specific round (see above)\n";
+    if ( !$o_suppress_average_table ){
+        print "\nAverage score\n";
+        print "For players who have not entered all rounds\n";
+        print   "--------------------\n";
+        $pp = 1;
+        for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
+            totals_pad($pp, $tl, "ave_score", false);
+            $pp++;
+        }
+    }
+
+    print "\n\nP1->P6 then Ave score Sort\n";
     print   "--------------------\n";
     $pp = 1;
     for my $tl (sort {
@@ -493,6 +640,7 @@ sub main {
         totals_pad($pp, $tl, "ave_score", true);
         $pp++;
     }
+    print "</pre></code>\n";
 
 }
 #################################
@@ -523,6 +671,44 @@ sub hundreds ($){
     return $e;
 }
 
+
+sub get_scoring_type_out() {
+
+    my $type;
+
+    if ( $o_score_sys eq "karl-8") {
+        $type="karl-8,4,3,2,1";
+    }
+    elsif ( $o_score_sys eq "karl-32" ) {
+        $type="karl-32,16,8,4,3,2,1";
+    }
+    elsif ( $o_score_sys eq "differential_scoring" ) {
+        $type="diff";
+    }
+
+    if ($o_score_times_power_hundred){
+        $type .= " and positions-times-power-one-hundred";
+    }
+    elsif ($o_score_times_pos) {
+        $type .= " and positions-times-25-18-15-12-10-8";
+    }
+    elsif ($o_score_times_1990_pos) {
+        $type .= " and positions-times-9-6-4-3-2-1";
+    }
+    else {
+        $type .= " and no-multiplier";
+    }
+
+    # Special case
+    if ( defined $o_score_sys
+        && $o_score_sys eq "differential_scoring"
+        && $o_score_times_power_hundred
+    ) {
+        $type = "Leo-sort (kind of)";
+    }
+    return $type
+}
+
 sub totals_pad {
     my ($p, $tl, $score_key, $add_ppos) = @_;
 
@@ -533,16 +719,7 @@ sub totals_pad {
 
     my $score_text = $score_key;
 
-    if ($o_pad_results) {
-        printf( "P%-2s : %-10s : played=%-2s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, thousands($tl->{$score_key}) );
-    } else {
-        printf( "P%s : %s : played=%s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, thousands($tl->{$score_key}) );
-    }
-}
-
-sub pp ($) {
-    my ($p) = @_;
-    return sprintf("P%-2s : ", $p);
+    printf( "P%-2s : %-10s : played=%-2s %s : %s = %s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $score_text, thousands($tl->{$score_key}) );
 }
 
 sub expected_count ($) {
@@ -583,7 +760,7 @@ sub process ($) {
 
     my $results = run_file($file_results);
 
-    print "$s_run : Results are ".Dumper($results) if $o_debug;
+    print ("$s_run : Results are ".Dumper($results)) if $o_debug > 1;
 
     my $results_lkup = { } ;
     for (my $i=0; $i<$exp_tot; $i++){
@@ -596,7 +773,7 @@ sub process ($) {
         $results_lkup->{z_drivers_or_constructors($s_run)->{$resname}}=$i;
 
     }
-    print "$s_run : Results Lookup is ".Dumper($results_lkup) if $o_debug;
+    print "$s_run : Results Lookup is ".Dumper($results_lkup) if $o_debug > 1;
 
     if (scalar @$results != $exp_tot){
         die "The results file [$file_results] has [".scalar @$results."] rows and not [$exp_tot]\n";
@@ -609,13 +786,8 @@ sub process ($) {
 
 PLYR:
     for my $plyr (sort keys %$z_players){
-        print "$s_run : Processing Player $plyr\n";
-        my $result_line;
-        if ($o_pad_results) {
-            $result_line =  sprintf( "%s : %-10s : ", $s_run, $plyr );
-        } else {
-            $result_line =  sprintf( "%s : %s : ",  $s_run, $plyr );
-        }
+        print "$s_run : Processing Player $plyr\n" if $o_debug;
+        my $result_line = "";
         my $plyr_tot_score = Math::BigInt->bzero();
 
         my $skip_result_line = sub {
@@ -623,14 +795,16 @@ PLYR:
             $skip_reason //= "";
 
             push @$player_results_arr ,
-                {score => 0, player=>$plyr , output => "${result_line}${skip_reason} : Tot = 0\n", skipped=>1};
+                {score => 0, player=>$plyr , round=> $s_run,
+                 output => "${result_line}${skip_reason}", skipped=>1};
         };
 
 
         if ( ! exists $all_players_data->{$plyr} ){
             push @skip_player_errs,
                 "$s_run : Skip [$plyr] no data in $s_run.all-players file";
-            $skip_result_line->("no data (A)");
+            $skip_result_line->("|no data (A)");
+            print "  no data (A)\n" if $o_debug;
             next ;
         }
 
@@ -642,7 +816,8 @@ PLYR:
         if (scalar @$plyr_data < $o_score_upto_pos){
             push @skip_player_errs,
                 "$s_run : Skip [$plyr] because [".scalar @$plyr_data."] lines in file [".all_player_file($s_run)."] isn't [$o_score_upto_pos]";
-            $skip_result_line->("no data (B)");
+            $skip_result_line->("|no data (B)");
+            print "  no data (B)\n" if $o_debug;
             next;
         }
 
@@ -654,7 +829,8 @@ PLYR:
                     "$s_run : Skip [$plyr] because prediction [".
                         ($i+1)."][$plyr_pred] in file [".all_player_file($s_run)."] not found in [".z_drivers_or_constructors_file($s_run)."]";
 
-                $skip_result_line->("no data (C)");
+                $skip_result_line->("|no data (C)");
+                print "  no data (C)\n" if $o_debug;
                 next PLYR;
             }
             # get the 3 char abbrieviation :
@@ -667,12 +843,11 @@ PLYR:
 
                 my $score = $o_score_times_power_hundred ? $disp_hundred_score : $real_score;
 
-                if ($o_pad_results) {
-                    $result_line .= sprintf("%s (%3s), ", $pred, $score);
-                }else{
-                    $result_line .= sprintf("%s (%s), ", $pred, $score);
+                if ($o_suppress_detail_score) {
+                    $result_line .= sprintf("|%s", $pred);
+                } else {
+                    $result_line .= sprintf("|%s %4s", $pred, $score);
                 }
-
             };
 
             if ( ! exists $results_lkup->{$plyr_pred}){
@@ -680,7 +855,7 @@ PLYR:
                 # die "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n";
 
                 print "$s_run : $plyr : ".($i+1)." $plyr_pred  (0)\n" if $o_debug;
-                $add_result->($plyr_pred,0);
+                $add_result->($plyr_pred,0,0);
 
             } else {
 
@@ -719,7 +894,6 @@ PLYR:
                     $score = $score * $real_1990_f1_pos_scores->{$i}
                 }
 
-
                 print "$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score ".int($score)."\n" if $o_debug;
                 $add_result->($plyr_pred, $score, $display_hundreds_score);
             }
@@ -727,21 +901,36 @@ PLYR:
 
         $result_line =~ s/, $//g;
 
-        if ($o_pad_results) {
-            $result_line .= sprintf( " : Tot = %4s\n", hundreds($plyr_tot_score) );
-        } else {
-            $result_line .= sprintf( " : Tot = %s\n", hundreds($plyr_tot_score) );
-        }
 
         print "$s_run : $result_line" if $o_debug;
 
-        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , output => $result_line};
+        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr ,
+                                     round=> $s_run, output => $result_line};
     }
+
+    # Post processing 
 
     my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
 
     my $last_diff_score;
     my $last_diff_score_highest_pos;
+
+    my $real_fia_score_sharing = {};
+
+    # Part of calculating the fia_scoring for shared / non-shared positions.
+    my $add_2_real_fia_score_sharing = sub {
+        my ($has_p, $P) = @_;
+        # So $P position has an array of Ps.
+        # This is so say 3 players were equal P2,
+        # This mean the 3 players should all get (18+15+12)/3 points.
+
+        $real_fia_score_sharing->{$P}{pos} = []
+                if ! exists $real_fia_score_sharing->{$P}{pos};
+
+
+        push @{$real_fia_score_sharing->{$P}{pos}}, $has_p;
+
+    };
 
     for ( my $i=0; $i < scalar @plyr_ordered_res; $i++ ){
         my $plyr_rh = $plyr_ordered_res[$i];
@@ -750,17 +939,60 @@ PLYR:
             $plyr_rh->{pos} = $i+1;
             $last_diff_score = $plyr_rh->{score};
             $last_diff_score_highest_pos = $i;
+
+            $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
+
             next;
         }
         elsif ( $plyr_rh->{score} == $last_diff_score ){
             $plyr_rh->{pos} = $last_diff_score_highest_pos+1;
+            $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
         }
         else {
             $plyr_rh->{pos} = $i+1;
             $last_diff_score = $plyr_rh->{score};
             $last_diff_score_highest_pos = $i;
+            $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
         }
     }
+
+    # calculate the fia_scoring for shared / non-shared positions.
+    for my $rfp ( keys %$real_f1_pos_scores ){
+        if (exists $real_fia_score_sharing->{$rfp}){
+            my $tot   = 0;
+            my $count = 0;
+
+            for my $has_p (@{$real_fia_score_sharing->{$rfp}{pos}}){
+                $count ++;
+                $tot += $real_f1_pos_scores->{$has_p} // 0;
+            }
+            $real_fia_score_sharing->{$rfp}{score_each} = $tot/$count;
+        }
+    }
+
+    for ( my $i=0; $i < scalar @plyr_ordered_res; $i++ ){
+        my $plyr_rh = $plyr_ordered_res[$i];
+        my $pos = $plyr_rh->{pos} - 1;
+
+        if ( $plyr_rh->{skipped} ){
+            $plyr_rh->{fia_score} = 0;
+            next;
+        }
+
+        if(exists $real_fia_score_sharing->{$pos}{score_each}){
+            $plyr_rh->{fia_score} =
+                    $real_fia_score_sharing->{$pos}{score_each};
+        }
+        else {
+            $plyr_rh->{fia_score} = 0;
+        }
+    }
+
+    print "$s_run real_fia_score_sharing ".Dumper($real_fia_score_sharing)
+        if $o_debug > 1;
+
+    print "$s_run plyr_ordered_res ".Dumper(\@plyr_ordered_res)
+        if $o_debug > 1;
 
     #for my $ln (@plyr_ordered_res){
     #    print "$s_run : $ln->{output}";
@@ -970,7 +1202,7 @@ sub get_all_players_data($) {
         }
     }
 
-    print "Dump of player data from  $all_player_filename\n : ".Dumper ( $plyr_data ) if $o_debug;
+    print "Dump of player data from  $all_player_filename\n : ".Dumper ( $plyr_data ) if $o_debug > 2;
 
     return $plyr_data;
 }
