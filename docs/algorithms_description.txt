@@ -1,44 +1,235 @@
-This Doc describes how all the different combinations of algorithms work.
+This Doc describes how all the different combinations of algorithms work,
+and the scoring works.
+
+It also describes the Totals Tables.
 
 OVERVIEW
 --------
 
 Some algorithms and scoring work well for say 10 to 30 players
 Other algorithms work for many more players.
+Some of the algorithms only work when predicting the top 6 positions.
 
 
 
+The calculation of scores / ratings is done with 2 distinct parts.
 
-Main Algorithms for working out who won
+First there is a score for the accuracy of the prediction.
 
+Second, depending on the position of the prediction it is multiplied or not by a number.
 
-
-
-Table of Contents
-
-Different Scoring Systems
--------------------------
-
-    Differential - Highest P1 wins (times pos scores by huge numbers)
-
-    Differential - times scores by 9,6,4,3,2,1
+That gives a player their score or rating on which a round of the competion is sorted on.
 
 
+There is third part for JOKE tables , where fiddle factors can be applied to certain drivers. These are not used for serious competition tables.
+
+
+--------------
+ACCURACY part.
+--------------
+There are currently 4 different "accuracy" calculations called :
+
+1) diff  or differential
+2) karl-8
+3) karl-32
+4) exact
+
+
+diff or differential accuracy
+-----------------------------
+
+in F1 their are currently 20 drivers on the grid.
+
+differential accuracy scores points by
+
+20 - error-of-prediction = score
+
+So if you go the position exactly correct then :
+
+20 - 0 = 20 points.
+
+if you got it 19 places out then :
+
+20 - 1 = 19 points.
+
+Sometimes drivers might be predicted who don't even make first practice.
+If they are in a players prediction they will not be found in the results.
+Then the player's score for that prediction will be 0 points.
+
+
+Karl-8 accuracy
+---------------
+
+karl-8 also known as karl-8-4-2-1 scores points by
+
+if prediction is exactly correct then 8 points
+if prediction is 1 place out 4 points
+if prediction is 2 place out 2 points
+if prediction is 3 place out 1 points
+
+Again drivers predicted who don't even make first practice, they've not
+even entered the race and don't end up on the official results, well 0 points.
+
+
+Karl-32 accuracy
+----------------
+
+karl-32 also known as karl-32-16-8-4-2-1 scores points by
+
+if prediction is exactly correct then 32 points
+if prediction is 1 place out 16 points
+if prediction is 2 place out 8 points
+if prediction is 3 place out 4 points
+if prediction is 4 place out 2 points
+if prediction is 5 place out 1 points
+
+Again drivers predicted who don't even make first practice, they've not
+even entered the race and don't end up on the official results, well 0 points.
+
+
+Exact accuracy
+--------------
+
+The prediction has to be spot on to score 1 point.
+everything else 0 points.
+
+This is used in "Winner Takes All" tables.
+
+
+----------------------
+POSTIONAL MULTIPLIERS.
+----------------------
+
+position-times-power-one-hundred multiplier.
+--------------------------------------------
+
+Here the score from the ACCURACY part is multiplied by a number depending on the position of the prediction.
+
+So the :
+
+P1 prediction is multiplied by 10,000,000,000
+P2 prediction is multiplied by    100,000,000
+P3 prediction is multiplied by      1,000,000
+P4 prediction is multiplied by         10,000
+P5 prediction is multiplied by            100
+P6 prediction is multiplied by              1
+
+
+Most of the ACCURACY scores, well when not doing "fiddle factors" should be less than 100.
+So what this multiplication achieves is a more accurate P1 score will trump everything else.
+and a more accurate P2 score will trump the P3 -> P6
+
+if you do have fiddle factors that can multiple the ACCURACY part above 100, then P1 accuracy might not trump all.
+
+if you are doing more than 6 predictions, currently there isn't much point in using this multiplier.
+It needs the code changing.
+
+
+This multiplier is used in "Winner Takes All" calculations.
+If fiddle factors have been applied then the "Winner Takes All" could and is likely to break. It will not really be "Winner Takes All".
 
 
 
+positions-times-25-8 (25,18,15,12,10,8,6,4,2,1)
+--------------------------------------------------
+
+The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 10 positions.
+
+So here the ACCURACY part is multiplied by :
+
+P1  prediction is multiplied by 25
+P2  prediction is multiplied by 18
+P3  prediction is multiplied by 15
+P4  prediction is multiplied by 12
+P5  prediction is multiplied by 10
+P6  prediction is multiplied by  8
+P7  prediction is multiplied by  6
+P8  prediction is multiplied by  4
+P9  prediction is multiplied by  2
+P10 prediction is multiplied by  1
 
 
+positions-times-9-to-1 (9,6,4,3,2,1)
+------------------------------------
+
+The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 6 positions.
+
+So here the ACCURACY part is multiplied by :
+
+P1  prediction is multiplied by 9
+P2  prediction is multiplied by 6
+P3  prediction is multiplied by 4
+P4  prediction is multiplied by 3
+P5  prediction is multiplied by 2
+P6  prediction is multiplied by 1
 
 
+positions-no-multiplier
+-----------------------
+
+The accuracy score isn't multiplied.
+This will work up to the full 20 positions.
 
 
+---------------------------------
+FIDDLE FACTORS (Joke calculations
+---------------------------------
+
+The f1-predictor.pl script has a few options that can :
+
+1) Multiply specific driver prediction by a number.
+2) make a driver prediction score negative points.
+
+The reasons you might use these are many.
+
+Maybe you have a rule that if a driver causes a red flag, and it's their fault,
+anyone who predicted that will have their score for that driver multiplied by a negative number.
 
 
+Maybe a driver who has done an outstanding qualifying might have a positive fiddle factor applied to their score.
 
 
-bahrain.output
+-----------
+FIA Scoring
+-----------
 
+If you have a limited number of players, (say up to 20 to 30 )
+you can choose to use FIA points on each round of the competition.
+
+If you have a mass of players, it's probably best not to use this.
+
+So a round of the championship will have the players results calculated by
+the Accuracy x Multiplier part, the results will then be sorted.
+
+The P1 winner will get 25 points , all the way to P10 with one point.
+
+
+-------------
+TOTALS tables
+-------------
+
+There are 4 types of totals table that sort the player order.
+These are calculated when the f1-predictor.pl script is given more than 1 round to porocess.
+
+
+1) Total of the scores worked out by Accuracy X Position-Multiplier
+
+
+2) Total up the FIA round scores
+
+
+3) Average the Total scores over the rounds played by the player.
+    This is for those players who might not have entered every round,
+    and are thus at a disadvantage on the total scores table.
+
+
+4) Round Position P1->P6 then average score
+    A player gets Positional ratings for each round.
+    The P1 -> P6s are counted.
+    The table is then sorted in the order of the most P1 , then P2s etc.
+    It is finally sorted by average score
+    (though thinking about that it should probably be total score,
+     this might change)
 
 
 
