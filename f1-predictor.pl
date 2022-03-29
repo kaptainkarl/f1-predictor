@@ -9,6 +9,11 @@ use Number::Format;
 sub true {1}
 sub false {0}
 
+# Temporary hack before it ends up in config
+
+my $this_season_dir="./data/2022/";
+chdir $this_season_dir or die "Can't chdir to $this_season_dir \n";
+
 # FIXED constants.
 my $DATA_DIR = "./";
 my $ZDATA_DRIVERS       = 'zdata.drivers';
@@ -88,7 +93,7 @@ Options :
     --leo
         this is a set of scoring CLI options short cut.
         
-        It sets the --score-sys to differential_scoring
+        It sets the --score-sys to 'exact'
         and --score-times-power-of-100
 
         it undefs --score-times-current
@@ -97,7 +102,7 @@ Options :
         Basically it is a short cut to how I think Leo
         wants the predictions rated.
 
-    --score-sys  karl-8, karl-32 , differential_scoring, diff
+    --score-sys  karl-8, karl-32 , differential_scoring, diff, exact
         defaults to differential_scoring
 
         diff and differential_scoring are the same thing.
@@ -108,6 +113,11 @@ Options :
 
         --score-sys karl-32
             would run the 32-16-8-4-2-1 Karl systems.
+
+        --score-sys exact
+            a single point is only awarded to an exactly
+            correction prediction.
+
 
     --score-times-current
         This multiplies the score for
@@ -145,8 +155,6 @@ Options :
 
         if any player has those predictions, they get MINUS points :-D
 
-        (TO BE IMPLEMENTED)
-
     --multi-points.
         So for a JOKE. If there's a driver or constructor who's deemed to be
         "awesome" , their names can be put on this option in a comma
@@ -162,8 +170,6 @@ Options :
 
         although I guess you could multiply by 0.1 or -3 and use this option
         to reduce scores for certain driver predictions.
-
-        (TO BE IMPLEMENTED)
 
     --multi-points-factor 2 , 3 , 2.5 , whatever you like !
         This is used in conjunction with the --multi-points JOKE option.
@@ -185,6 +191,9 @@ Options :
     if neither --player-fia-score or --player-rating-score are specified
     script defaults to --player-fia-score
 
+    --no-pre-code
+        This suppresses the </pre></code>
+        that is useful for disqus formating of tables.
 
     --suppress-detail-score
         suppresses the position player scores of the round.
@@ -232,6 +241,7 @@ my $score_sys_lkup = {
     "karl-8"     => 1,
     "karl-32"    => 1,
     differential_scoring => 1,
+    exact => 1,
 };
 
 my $o_drivers_count       = 20;
@@ -251,9 +261,12 @@ my $o_player_fia_score;
 my $o_player_rating_score;
 my $o_suppress_average_table;
 my $o_score_leo;
+my $o_disp_plyrs_upto_pos = 99999999;
+my $o_suppress_totals_tables;
+my $o_no_pre_code;
 
 GetOptions (
-    "score-only-upto-pos=i" => \$o_score_upto_pos,
+    "score-only-upto-pos=i"  => \$o_score_upto_pos,
     "leo"                   => \$o_score_leo,
     "score-times-current"   => \$o_score_times_pos,
     "score-times-1990"      => \$o_score_times_1990_pos,
@@ -265,13 +278,27 @@ GetOptions (
     "full-output"           => \$o_full_output,
     "tab-output"            => \$o_tab_output,
     "html-output"           => \$o_html_output,
+
+    # display type options >>
+
     "score|rating|player-rating-score"
                             => \$o_player_rating_score,
     "fia|player-fia-score"      => \$o_player_fia_score,
+
+    "disp_players|display-players-upto=i" => \$o_disp_plyrs_upto_pos,
+
     "no-detail|suppress-detail-score"
                             => \$o_suppress_detail_score,
     "no-ave|suppress-average-table"
                             => \$o_suppress_average_table,
+
+    "no-totals|suppress-totals"
+                            => \$o_suppress_totals_tables,
+    "no-pre-code"
+                            => \$o_no_pre_code,
+
+    #### << display type options
+
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
     "run=s"                 => \$o_run,
@@ -286,14 +313,10 @@ if ( ! looks_like_number $o_multi_points_factor ){
 }
 
 if ($o_score_leo){
-    $o_score_sys = "differential_scoring";
+    $o_score_sys = "exact";
     $o_score_times_pos = undef;
     $o_score_times_1990_pos = undef;
     $o_score_times_power_hundred= 1;
-}
-
-if (!$o_player_rating_score && !$o_player_fia_score){
-    $o_player_fia_score = 1;
 }
 
 my $z_races   = z_data_single($ZDATA_RACES);
@@ -400,7 +423,7 @@ sub main {
     print "OUTPUT Section\n";
     print "##############################################################\n";
 
-    print "\n\n<pre><code>\n\n";
+    print "\n\n<pre><code>\n\n" if ! $o_no_pre_code;
 
     if ($o_minus_points || $o_multi_points  ) {
         print "This is a JOKE table, with silly factors applied to certain driver predictions\n\n";
@@ -424,6 +447,8 @@ sub main {
 
 #    print "'zzz' is an imaginary player who got a perfect score , so who's really winning is the line after 'zzz'\n\n" if exists $z_players->{zzz};
 #
+
+#   this commented out code is missing "exact" , if it ever gets used again 
 #    if ( $o_score_sys eq "karl-8") {
 #        print "Scoring is Karl's crazy 8, 4, 2, 1 \n";
 #        print "Get the position exactly correct then 8 points\n";
@@ -507,10 +532,33 @@ sub main {
         print "$underline\n";
 
         # Body rows :
+
+        my $printf_upto = sub {
+            my ($out, $curr_p) = @_;
+
+        };
+
         for my $ln (@$pr_run){
+
             my $pos = $ln->{pos};
             my $plyr = $ln->{player};
+            die "unknown player . prog error \n" if ! $ln->{player};
 
+            $plyr_tots->{$plyr}{player} = $plyr;
+
+            $plyr_tots->{$plyr}{"p$pos"}++;
+
+            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
+            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
+            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
+
+            $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
+            $plyr_tots->{$plyr}{total}     += $ln->{score};
+            $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
+
+            next if $pos > $o_disp_plyrs_upto_pos;
+
+            # Output section :
             if ($ln->{skipped}){
                 printf("|   |%-10s ",$plyr);
                 print $ln->{output}."\n";
@@ -538,27 +586,20 @@ sub main {
 
             print "|\n";
 
-            die "unknown player . prog error \n" if ! $ln->{player};
-
-            $plyr_tots->{$plyr}{player} = $plyr;
-
-            $plyr_tots->{$plyr}{"p$pos"}++;
-
-            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
-            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
-            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
-
-            $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
-            $plyr_tots->{$plyr}{total}     += $ln->{score};
-            $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
 
         }
         print "\n\n";
     }
 
     if (@$run_arrs <2){
-        print "</pre></code>\n\n";
+        print "</pre></code>\n\n" if ! $o_no_pre_code;
         print "\nonly run for one round, not showing totals\n";
+        return;
+    }
+
+    if ($o_suppress_totals_tables){
+        print "</pre></code>\n\n" if ! $o_no_pre_code;
+        print "\ntotals have been suppress by CLI option\n";
         return;
     }
 
@@ -640,7 +681,7 @@ sub main {
         totals_pad($pp, $tl, "ave_score", true);
         $pp++;
     }
-    print "</pre></code>\n";
+    print "</pre></code>\n" if ! $o_no_pre_code;
 
 }
 #################################
@@ -685,6 +726,10 @@ sub get_scoring_type_out() {
     elsif ( $o_score_sys eq "differential_scoring" ) {
         $type="diff";
     }
+    elsif ( $o_score_sys eq "exact" ) {
+        $type="exact";
+    }
+
 
     if ($o_score_times_power_hundred){
         $type .= " and positions-times-power-one-hundred";
@@ -701,10 +746,10 @@ sub get_scoring_type_out() {
 
     # Special case
     if ( defined $o_score_sys
-        && $o_score_sys eq "differential_scoring"
+        && $o_score_sys eq "exact"
         && $o_score_times_power_hundred
     ) {
-        $type = "Leo-sort (kind of)";
+        $type = "Leo-sort ";
     }
     return $type
 }
@@ -867,12 +912,20 @@ PLYR:
                     if ( $error <= 3){
                         $score = 2 ** (3-$error) ;
                     }
-                } elsif ( $o_score_sys eq "karl-32" ) {
+                }
+                elsif ( $o_score_sys eq "karl-32" ) {
                     if ( $error <= 5){
                         $score = 2 ** (5-$error) ;
                     }
-                } elsif ( $o_score_sys eq "differential_scoring" ) {
+                }
+                elsif ( $o_score_sys eq "differential_scoring" ) {
                     $score = $o_drivers_count-$error;
+                }
+                elsif ( $o_score_sys eq "exact" ) {
+                    $score = $error ? 0 : 1;
+                }
+                else {
+                    die "score-sys [$o_score_sys] invalid. Programming error\n";
                 }
 
                 if (exists $z_minus_points->{$plyr_pred}){
@@ -905,12 +958,15 @@ PLYR:
         print "$s_run : $result_line" if $o_debug;
 
         push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr ,
-                                     round=> $s_run, output => $result_line};
+                                     round=> $s_run, output => $result_line, skipped=>false};
     }
 
     # Post processing 
 
-    my @plyr_ordered_res =  sort { $b->{score} <=> $a->{score} } @$player_results_arr;
+    my @plyr_ordered_res =  sort {
+                                 $b->{score} <=> $a->{score}
+                              || $a->{skipped} <=> $b->{skipped}
+                            } @$player_results_arr;
 
     my $last_diff_score;
     my $last_diff_score_highest_pos;
