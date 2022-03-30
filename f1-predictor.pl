@@ -796,13 +796,14 @@ sub get_scoring_type_out_filename_root() {
         $type .= "-and-positions-no-multiplier";
     }
 
-    # Special case
-    if ( defined $o_score_sys
-        && $o_score_sys eq "exact"
-        && $o_score_times_power_hundred
-    ) {
-        $type = "winner-takes-all-detailed";
-    }
+#    # Special case
+#    if ( defined $o_score_sys
+#        && $o_score_sys eq "exact"
+#        && $o_score_times_power_hundred
+#    ) {
+#        $type = "winner-takes-all-detailed";
+#    }
+
     return $type;
 }
 
