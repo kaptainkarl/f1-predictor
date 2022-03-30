@@ -11,7 +11,6 @@ Other algorithms work for many more players.
 Some of the algorithms only work when predicting the top 6 positions.
 
 
-
 The calculation of scores / ratings is done with 2 distinct parts.
 
 First there is a score for the accuracy of the prediction.
@@ -63,9 +62,9 @@ Karl-8 accuracy
 karl-8 also known as karl-8-4-2-1 scores points by
 
 if prediction is exactly correct then 8 points
-if prediction is 1 place out 4 points
-if prediction is 2 place out 2 points
-if prediction is 3 place out 1 points
+if prediction is 1 place  out 4 points
+if prediction is 2 places out 2 points
+if prediction is 3 places out 1 points
 
 Again drivers predicted who don't even make first practice, they've not
 even entered the race and don't end up on the official results, well 0 points.
@@ -77,11 +76,11 @@ Karl-32 accuracy
 karl-32 also known as karl-32-16-8-4-2-1 scores points by
 
 if prediction is exactly correct then 32 points
-if prediction is 1 place out 16 points
-if prediction is 2 place out 8 points
-if prediction is 3 place out 4 points
-if prediction is 4 place out 2 points
-if prediction is 5 place out 1 points
+if prediction is 1 place  out 16 points
+if prediction is 2 places out 8 points
+if prediction is 3 places out 4 points
+if prediction is 4 places out 2 points
+if prediction is 5 places out 1 points
 
 Again drivers predicted who don't even make first practice, they've not
 even entered the race and don't end up on the official results, well 0 points.
@@ -93,7 +92,7 @@ Exact accuracy
 The prediction has to be spot on to score 1 point.
 everything else 0 points.
 
-This is used in "Winner Takes All" tables.
+This is used in "Winner Takes All" all calculations.
 
 
 ----------------------
@@ -137,7 +136,8 @@ the detail next to the driver position only usually shows 2 digits.
 Say this excerpt from  ./output/2022/karl-32-and-positions-times-power-one-hundred-RACES
 
 It can be seen that Ray has LEC with 32 points. In reality the score for this prediction is really 320,000,000,000
-The score total at the end is split with commas on the hundreds instead of thousands, so the individual scores can be seen.
+The score total at the end is split with commas on the hundreds instead of thousands,
+so the individual scores for the positions can be seen.
 
 bahrain-race
 
@@ -152,7 +152,7 @@ P2  pylade     |SAI   16|VER    0|GAS    0|LEC    4|RUS   16|ALO    4| 18    | 1
 positions-times-25-8 (25,18,15,12,10,8,6,4,2,1)
 --------------------------------------------------
 
-The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 10 positions.
+The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 10 prediction positions.
 
 So here the ACCURACY part is multiplied by :
 
@@ -171,7 +171,7 @@ P10 prediction is multiplied by  1
 positions-times-9-to-1 (9,6,4,3,2,1)
 ------------------------------------
 
-The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 6 positions.
+The 25-8 name comes from using on P1 -> P6 predictions. It can work up to 6 prediction positions.
 
 So here the ACCURACY part is multiplied by :
 
