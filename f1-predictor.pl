@@ -5,19 +5,21 @@ use Try::Tiny;
 use Scalar::Util qw(looks_like_number);
 use Math::BigInt;
 use Number::Format;
-
+use Cwd;
 sub true {1}
 sub false {0}
 
 # Temporary hack before it ends up in config
-
+my $cwd = getcwd();
 my $season = 2022;
-my $this_output_dir="./output/$season/";
+my $this_output_dir="$cwd/output/$season/";
 if ( ! -d $this_output_dir) {
-    die "Can't find output dir $this_output_dir\n";
+    dierr( "Can't find output dir $this_output_dir\n");
 }
 my $this_season_dir="./data/$season/";
-chdir $this_season_dir or die "Can't chdir to $this_season_dir \n";
+chdir $this_season_dir or dierr( "Can't chdir to $this_season_dir \n");
+
+
 
 # FIXED constants.
 my $DATA_DIR = "./";
@@ -26,8 +28,12 @@ my $ZDATA_CONSTRUCTORS  = 'zdata.constructors';
 my $ZDATA_RACES         = 'zdata.races';
 my $ZDATA_PLAYERS       = 'zdata.players';
 
+my $out_fh;
 sub dierr {
     my ($msg) = @_;
+
+    close $out_fh if $out_fh;
+
     $msg = "ERROR $msg" ;
     die "\n$msg\n";
 }
@@ -35,11 +41,16 @@ sub dierr {
 my $o_suppress_rounds_tables;
 sub printoutrnd ($){
     return if $o_suppress_rounds_tables;
-    print $_[0];
+    printout( $_[0] );
 }
 
+#$o_out_file_suffix
 sub printout ($){
-    print $_[0];
+    my ($txt) = @_;
+    if ($out_fh){
+        print $out_fh ($txt);
+    }
+    #print $txt;
 }
 
 my $o_debug = 0;
@@ -243,15 +254,19 @@ Options :
         so you shouldn't have to set it.
         unless the numbers of constructors on the grid changes.
 
-    --debug .
-        Defaults to 0
-        --debug 1 shows minimal debug.
-             2,3 a bit more ...
+    --out-file-suffix
+        if the script is to write an output file it needs a suffix
+        So this option is doing 2 things.
+        tell the script to write to a file,
+        and say what the suffix is.
+
+        Currently the script is dumping to a hard coded directory
+
+    --debug 
+        Defaults to 0 . No debug.
+        --debug 1 shows minimal debug,  2 and 3 a bit more ...
 
     See README file for full explanation of files in the directory.
-
-    Questions to answer.
-        substitute drivers ? just ignore them ?
 
 EOUSAGE
 }
@@ -284,6 +299,7 @@ my $o_score_leo;
 my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_no_pre_code;
+my $o_out_file_suffix;
 
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
@@ -319,6 +335,9 @@ GetOptions (
 
     #### << display type options
 
+
+    "out-file-suffix=s"     => \$o_out_file_suffix,
+
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
     "run=s"                 => \$o_run,
@@ -328,8 +347,10 @@ GetOptions (
 
 usage() if $o_help;
 
+
+
 if ( ! looks_like_number $o_multi_points_factor ){
-    die "--multi-points-factor $o_multi_points_factor does not look like a number\n";
+    dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
 if ($o_score_leo){
@@ -356,7 +377,7 @@ if ($o_minus_points){
         $mpdrv = uc(trim($mpdrv));
 
         if ( ! exists $z_drivers->{$mpdrv} ){
-            die "The --minus-points driver name of [$mpdrv] can't be found\n";
+            dierr( "The --minus-points driver name of [$mpdrv] can't be found\n");
         }
 
         $z_minus_points->{$z_drivers->{$mpdrv}} = 1;
@@ -371,7 +392,7 @@ if ($o_multi_points){
         $mpdrv = uc(trim($mpdrv));
 
         if ( ! exists $z_drivers->{$mpdrv} ){
-            die "The --multi-points driver name of [$mpdrv] can't be found\n";
+            dierr( "The --multi-points driver name of [$mpdrv] can't be found\n");
         }
 
         $z_multi_points->{$z_drivers->{$mpdrv}} = 1;
@@ -400,6 +421,11 @@ if ($o_drivers_count < 2){
 
 if ($o_constructors_count < 2){
     dierr("[--constructors-count $o_constructors_count] needs to be more than 2!");
+}
+
+if ( $o_out_file_suffix ) {
+    my $file_name = get_out_file();
+    open( $out_fh, ">" , $file_name ) || die "Can't create $file_name $!" ;
 }
 
 sub main {
@@ -500,7 +526,7 @@ sub main {
 
             my $pos = $ln->{pos};
             my $plyr = $ln->{player};
-            die "unknown player . prog error \n" if ! $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
 
             $plyr_tots->{$plyr}{player} = $plyr;
 
@@ -663,7 +689,8 @@ sub main {
     }
     pre_code_close();
 
-    print $this_output_dir.get_scoring_type_out_filename_root() ."\n";
+    # deliberately not printout() :
+    print get_out_file()."\n";
 }
 #################################
 #################################
@@ -691,7 +718,8 @@ sub hundreds ($){
 }
 
 sub pre_code_open{
-    printout ( "\n<pre><code>\n" ) if ! $o_no_pre_code;
+    printout ("\n");
+    printout ( "<pre><code>\n" ) if ! $o_no_pre_code;
 }
 sub pre_code_close{
     printout ( "\n</pre></code>\n" ) if ! $o_no_pre_code;
@@ -829,7 +857,7 @@ sub totals_row($$$$$) {
         $scr_str =  thousands($intg).".$deci";
         $scr_str =~ s/\.00$/   /g;
     } else {
-        die "Prog error . Can't split number in totals_row\n";
+        dierr( "Prog error . Can't split number in totals_row\n");
     }
 
     printout(sprintf( "P%-2s %-10s|%5s %s|%${sc_wide}s\n", $p, $tl->{player}, $tl->{played} , $ppos_parts, $scr_str));
@@ -846,7 +874,7 @@ sub z_drivers_or_constructors ($) {
     if (($o_minus_points || $o_multi_points )
          && $s_run eq 'wcc'
     ){
-        die "the options --minus-points or --multi-points can't be used with --run wcc\n";
+        dierr( "the options --minus-points or --multi-points can't be used with --run wcc\n");
     }
 
     return $s_run eq 'wcc' ?  $z_constructors : $z_drivers;
@@ -880,7 +908,7 @@ sub process ($) {
         my $resname = uc($results->[$i]);
 
         if ( ! exists z_drivers_or_constructors($s_run)->{$resname} ){
-            die "Can't find [$resname] from [$file_results] in file [".z_drivers_or_constructors_file($s_run)."]\n";
+            dierr( "Can't find [$resname] from [$file_results] in file [".z_drivers_or_constructors_file($s_run)."]\n");
         }
 
         $results_lkup->{z_drivers_or_constructors($s_run)->{$resname}}=$i;
@@ -889,7 +917,7 @@ sub process ($) {
     prdebug("$s_run : Results Lookup is ".Dumper($results_lkup), 1);
 
     if (scalar @$results != $exp_tot){
-        die "The results file [$file_results] has [".scalar @$results."] rows and not [$exp_tot]\n";
+        dierr( "The results file [$file_results] has [".scalar @$results."] rows and not [$exp_tot]\n");
     }
 
     my @skip_player_errs = ();
@@ -966,7 +994,7 @@ PLYR:
 
             if ( ! exists $results_lkup->{$plyr_pred}){
                 # This is a programming error.
-                # die "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n";
+                # dierr( "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n");
 
                 prdebug("$s_run : $plyr : ".($i+1)." $plyr_pred  (0)\n",0);
                 $add_result->($plyr_pred,0,0);
@@ -995,7 +1023,7 @@ PLYR:
                     $score = $error ? 0 : 1;
                 }
                 else {
-                    die "score-sys [$o_score_sys] invalid. Programming error\n";
+                    dierr( "score-sys [$o_score_sys] invalid. Programming error\n");
                 }
 
                 if (exists $z_minus_points->{$plyr_pred}){
@@ -1157,11 +1185,11 @@ sub z_data_pipe_split {
 
         my @sp = split /\|/, $ln;
 
-        die "In file [$file], line :\n$ln\ndoesn't split into only 2 parts via a pipe\n" if scalar @sp != 2;
+        dierr( "In file [$file], line :\n$ln\ndoesn't split into only 2 parts via a pipe\n") if scalar @sp != 2;
 
         my $dref = trim($sp[0]);
         if (length $dref != 3){
-            die "Unique 3-char ref for [$dref] isn't 3 characters long\n";
+            dierr( "Unique 3-char ref for [$dref] isn't 3 characters long\n");
         }
 
         my $names = [];
@@ -1184,7 +1212,7 @@ sub z_data_pipe_split {
 
     for my $dref ( keys %$cfg ){
         if ( exists $dedup->{$dref} ){
-            die "Unique 3 char ref [$dref] is duplicated\n";
+            dierr( "Unique 3 char ref [$dref] is duplicated\n");
         }
         $dedup->{$dref} = $dref;
 
@@ -1193,7 +1221,7 @@ sub z_data_pipe_split {
 
 
             if ( exists $dedup->{$fullname} && $dedup->{$fullname} ne $dref ){
-                die "fullname of [$fullname] is duplicated\n";
+                dierr( "fullname of [$fullname] is duplicated\n");
             }
             $dedup->{$fullname} = $dref;
 
@@ -1201,11 +1229,11 @@ sub z_data_pipe_split {
             for my $npart ( @splitname ){
 
                 if (  exists $dedup->{$npart} && $dedup->{$npart} ne $dref ){
-                    die "part name of [$fullname] is duplicated over different drivers\n";
+                    dierr( "part name of [$fullname] is duplicated over different drivers\n");
                 }
 
                 if ( exists $dedup_part_names->{$npart} && $dedup_part_names->{$npart} ne $dref) {
-                    die "part name of [$fullname] is duplicated over different drivers\n";
+                    dierr( "part name of [$fullname] is duplicated over different drivers\n");
                 }
 
                 $dedup_part_names->{$npart} = $dref;
@@ -1222,15 +1250,9 @@ sub z_data_pipe_split {
 
 sub slurp {
     my ( $file ) = @_;
-    open( my $fh, $file ) or die "Can't open file $file $!\n";
+    open( my $fh, $file ) or dierr( "Can't open file $file $!\n");
     my $text = do { local( $/ ) ; <$fh> } ;
     return $text;
-}
-
-sub burp {
-    my( $file_name ) = shift ;
-    open( my $fh, ">" , $file_name ) || die "Can't create $file_name $!" ;
-    print $fh @_ ;
 }
 
 sub z_data_single {
@@ -1245,7 +1267,7 @@ sub z_data_single {
         next if ! $ln;
 
         if ($ln !~ /^[a-z0-9_-]+$/){
-            die  "$ln in file $file doesn't match a-z (lowercase only), 0-9 , hyphen, underscore only format\n";
+            dierr(  "$ln in file $file doesn't match a-z (lowercase only), 0-9 , hyphen, underscore only format\n");
         }
 
         $ret->{$ln} = 1;
@@ -1293,11 +1315,11 @@ sub get_all_players_data($) {
             $plyr = lc(trim($plyr));
 
             if ( ! exists $z_players->{$plyr} ){
-                die "Can't find player [$plyr] in [$all_player_filename]\n";
+                dierr( "Can't find player [$plyr] in [$all_player_filename]\n");
             }
 
             if ( exists $plyr_data->{$plyr} ){
-                die "Player [$plyr] has duplicate entries in [$all_player_filename]\n";
+                dierr( "Player [$plyr] has duplicate entries in [$all_player_filename]\n");
 
             }
 
@@ -1311,22 +1333,22 @@ sub get_all_players_data($) {
 
             for my $pr ( @$p_preds_arr ){
                 if ( ! exists z_drivers_or_constructors($s_run)->{$pr} ){
-                    die "The prediction [$pr] for player [$plyr] ".
-                        " in the file $all_player_filename can't be found\n";
+                    dierr( "The prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename can't be found\n");
                 }
 
                 $pr = z_drivers_or_constructors($s_run)->{$pr};
 
                 if ( exists $dup_preds->{$pr}){
-                    die "The prediction [$pr] for player [$plyr] ".
-                        " in the file $all_player_filename is duplicated\n";
+                    dierr( "The prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename is duplicated\n");
                 }
                 $dup_preds->{$pr} = 1;
             }
 
             $plyr_data->{$plyr} = $p_preds_arr;
         } else {
-            die "Can't split line [$ln] in $all_player_filename\n";
+            dierr( "Can't split line [$ln] in $all_player_filename\n");
         }
     }
 
@@ -1336,5 +1358,7 @@ sub get_all_players_data($) {
 }
 
 sub all_player_file ($) { return "$_[0].all-players" }
-
+sub get_out_file {
+    return $this_output_dir.get_scoring_type_out_filename_root()."-$o_out_file_suffix";
+}
 main();
