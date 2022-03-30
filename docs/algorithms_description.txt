@@ -129,6 +129,25 @@ This multiplier is used in "Winner Takes All" calculations.
 If fiddle factors have been applied then the "Winner Takes All" could and is likely to break. It will not really be "Winner Takes All".
 
 
+About the tables output ...
+---------------------------
+When the tables are generated for the Power 100 type of multiplier, because it is 100 times bigger each column
+the detail next to the driver position only usually shows 2 digits.
+
+Say this excerpt from  ./output/2022/karl-32-and-positions-times-power-one-hundred-RACES
+
+It can be seen that Ray has LEC with 32 points. In reality the score for this prediction is really 320,000,000,000
+The score total at the end is split with commas on the hundreds instead of thousands, so the individual scores can be seen.
+
+bahrain-race
+
+P   Player     |Details                                              | FIA   |            score
+------------------------------------------------------------------------------------------------
+P1  ray        |LEC   32|VER    0|SAI   16|PER    0|RUS   16|HAM    4| 25    | 32,00,16,00,16,04
+P2  pylade     |SAI   16|VER    0|GAS    0|LEC    4|RUS   16|ALO    4| 18    | 16,00,00,04,16,04
+
+
+
 
 positions-times-25-8 (25,18,15,12,10,8,6,4,2,1)
 --------------------------------------------------
@@ -228,4 +247,5 @@ These are calculated when the f1-predictor.pl script is given more than 1 round 
     The P1 -> P6s are counted.
     The table is then sorted in the order of the most P1 , then P2s etc.
     It is finally sorted by total score
+
 
