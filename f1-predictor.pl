@@ -11,14 +11,20 @@ sub false {0}
 
 # Temporary hack before it ends up in config
 my $cwd = getcwd();
-my $season = 2022;
+my $season = 2022;  # TODO it could work this out from the current time right now()
+    # season also needs an $o_season CLI option.
 my $this_output_dir="$cwd/output/$season/";
 if ( ! -d $this_output_dir) {
     dierr( "Can't find output dir $this_output_dir\n");
 }
+
+my $this_processed_results_dir = "$cwd/data/$season/processed-results";
+if ( ! -d $this_processed_results_dir ) {
+    dierr( "Can't find processed-results dir $this_processed_results_dir\n");
+}
+
 my $this_season_dir="./data/$season/";
 chdir $this_season_dir or dierr( "Can't chdir to $this_season_dir \n");
-
 
 
 # FIXED constants.
@@ -49,8 +55,12 @@ sub printout ($){
     my ($txt) = @_;
     if ($out_fh){
         print $out_fh ($txt);
+
+        #print $txt;
     }
-    #print $txt;
+    else {
+        print $txt;
+    }
 }
 
 my $o_debug = 0;
@@ -149,6 +159,16 @@ Options :
             a single point is only awarded to an exactly
             correction prediction.
 
+    --show-test-plyr --show-test-player
+        a "test-plyr" needs adding to the zdata.players file for this to work
+        in normal outputs the test-plyr will be ignored.
+        This option will runs the calcs with the test player.
+
+    --show-only-test-plyr --show-only-test-player
+        a "test-plyr" needs adding to the zdata.players file for this to work
+        in normal outputs the test-plyr will be ignored.
+        This option will runs the calcs with the test player.
+        It also doesn't calculate non "test-plyr" scores
 
     --score-times-current
         This multiplies the score for
@@ -300,6 +320,8 @@ my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_no_pre_code;
 my $o_out_file_suffix;
+my $o_show_test_player;
+my $o_show_only_test_player;
 
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
@@ -333,6 +355,10 @@ GetOptions (
     "no-pre-code"
                             => \$o_no_pre_code,
 
+    "show-test-plyr|show-test-player"
+                            => \$o_show_test_player,
+    "show-only-test-plyr|show-only-test-player"
+                            => \$o_show_only_test_player,
     #### << display type options
 
 
@@ -928,6 +954,17 @@ sub process ($) {
 
 PLYR:
     for my $plyr (sort keys %$z_players){
+
+        if ( $o_show_only_test_player ) {
+
+            next if ($plyr ne "test-plyr" );
+
+#            next if ( ! $o_show_test_player && $plyr eq "test-plyr");
+
+        } else {
+            next if ( ! $o_show_test_player && $plyr eq "test-plyr");
+        }
+
         prdebug("$s_run : Processing Player $plyr\n",0);
         my $result_line = "";
         #my $plyr_tot_score = Math::BigInt->bzero();

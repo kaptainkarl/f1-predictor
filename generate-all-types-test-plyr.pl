@@ -4,11 +4,11 @@ use strict;use warnings;
 # for running all the races and putting the output in the output dir.
 
 my $runs = {
-    RACES => "bahrain-race,jeddah-race",
-    QUAL  => "bahrain-qual,jeddah-qual",
-    ALL   => "bahrain-qual,bahrain-race,jeddah-qual,jeddah-race",
+    RACES => "jeddah-race",
+#    RACES => "bahrain-race,jeddah-race",
+#    QUAL  => "bahrain-qual,jeddah-qual",
+#    ALL   => "bahrain-qual,bahrain-race,jeddah-qual,jeddah-race",
 };
-
 
 my $score_sys = [
     "karl-8",
@@ -31,11 +31,10 @@ for my $sc ( @$score_sys ) {
         for my $r (keys %$runs){
             my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
 
-            $cmd .= " --score-sys $sc $ml --out-file $r --run $runs->{$r}\n";
+            #$cmd .= " --score-sys $sc $ml --out-file $r --run $runs->{$r}\n";
+            $cmd .= " --score-sys $sc $ml --run $runs->{$r} --show-only-test --no-pre-code\n";
 
             system( $cmd ) ;
-
-
 
         }
     }

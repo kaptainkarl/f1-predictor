@@ -248,4 +248,176 @@ These are calculated when the f1-predictor.pl script is given more than 1 round 
     The table is then sorted in the order of the most P1 , then P2s etc.
     It is finally sorted by total score
 
+------------------------------------------
+Perfect Scores of the Accuracy x Multipler
+------------------------------------------
+
+There are 4 different Accuracies and 4 different Multipliers. So 16 different combination.
+So assuming only P1 -> P6 predictions, these are the perfect scores for 1 round of each combination.
+
+diff-and-positions-no-multiplier                                120
+diff-and-positions-times-25-8                                  1760
+diff-and-positions-times-9-to-1                                 500
+diff-and-positions-times-power-one-hundred        20,20,20,20,20,20  (202,020,202,020)
+
+exact-and-positions-no-multiplier                                 6
+exact-and-positions-times-25-8                                   88
+exact-and-positions-times-9-to-1                                 25
+exact-and-positions-times-power-one-hundred        1,01,01,01,01,01   (10,101,010,101)
+
+karl-32-and-positions-no-multiplier                             192
+karl-32-and-positions-times-25-8                               2816
+karl-32-and-positions-times-9-to-1                              800
+karl-32-and-positions-times-power-one-hundred     32,32,32,32,32,32  (323,232,323,232)
+
+karl-8-and-positions-no-multiplier                               48
+karl-8-and-positions-times-25-8                                 704
+karl-8-and-positions-times-9-to-1                               200
+karl-8-and-positions-times-power-one-hundred       8,08,08,08,08,08   (80,808,080,808)
+
+
+Here are what a Perfect Score would look like in the tables for "test-plyr" on Jeddah 2022 Race :
+
+Scoring is 'karl-8 and positions-times-25-to-8'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER  200|LEC  144|SAI  120|PER   96|RUS   80|OCO   64| 25    |    704
+
+
+Scoring is 'karl-8 and positions-times-9-to-1'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER   72|LEC   48|SAI   32|PER   24|RUS   16|OCO    8| 25    |    200
+
+
+Scoring is 'karl-8 and positions-times-power-one-hundred'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   |            score
+------------------------------------------------------------------------------------------------
+P1  test-plyr  |VER    8|LEC    8|SAI    8|PER    8|RUS    8|OCO    8| 25    |  8,08,08,08,08,08
+
+
+Scoring is 'karl-8 and no-multiplier'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER    8|LEC    8|SAI    8|PER    8|RUS    8|OCO    8| 25    |     48
+
+
+Scoring is 'karl-32 and positions-times-25-to-8'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER  800|LEC  576|SAI  480|PER  384|RUS  320|OCO  256| 25    |   2816
+
+
+Scoring is 'karl-32 and positions-times-9-to-1'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER  288|LEC  192|SAI  128|PER   96|RUS   64|OCO   32| 25    |    800
+
+
+Scoring is 'karl-32 and positions-times-power-one-hundred'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   |            score
+------------------------------------------------------------------------------------------------
+P1  test-plyr  |VER   32|LEC   32|SAI   32|PER   32|RUS   32|OCO   32| 25    | 32,32,32,32,32,32
+
+
+Scoring is 'karl-32 and no-multiplier'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER   32|LEC   32|SAI   32|PER   32|RUS   32|OCO   32| 25    |    192
+
+
+Scoring is 'diff and positions-times-25-to-8'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER  500|LEC  360|SAI  300|PER  240|RUS  200|OCO  160| 25    |   1760
+
+
+Scoring is 'diff and positions-times-9-to-1'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER  180|LEC  120|SAI   80|PER   60|RUS   40|OCO   20| 25    |    500
+
+
+Scoring is 'diff and positions-times-power-one-hundred'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   |            score
+------------------------------------------------------------------------------------------------
+P1  test-plyr  |VER   20|LEC   20|SAI   20|PER   20|RUS   20|OCO   20| 25    | 20,20,20,20,20,20
+
+
+Scoring is 'diff and no-multiplier'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER   20|LEC   20|SAI   20|PER   20|RUS   20|OCO   20| 25    |    120
+
+
+Scoring is 'exact and positions-times-25-to-8'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER   25|LEC   18|SAI   15|PER   12|RUS   10|OCO    8| 25    |     88
+
+
+Scoring is 'exact and positions-times-9-to-1'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER    9|LEC    6|SAI    4|PER    3|RUS    2|OCO    1| 25    |     25
+
+
+Scoring is 'exact and positions-times-power-one-hundred'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   |            score
+------------------------------------------------------------------------------------------------
+P1  test-plyr  |VER    1|LEC    1|SAI    1|PER    1|RUS    1|OCO    1| 25    |  1,01,01,01,01,01
+
+
+Scoring is 'exact and no-multiplier'
+---------------
+jeddah-race
+
+P   Player     |Details                                              | FIA   | score
+-------------------------------------------------------------------------------------
+P1  test-plyr  |VER    1|LEC    1|SAI    1|PER    1|RUS    1|OCO    1| 25    |      6
 
