@@ -2,6 +2,10 @@
 use strict; use warnings;
 use Data::Dumper;
 use Try::Tiny;
+use JSON;
+use Text::CSV qw( csv );
+use DateTime;
+
 use Scalar::Util qw(looks_like_number);
 use Math::BigInt;
 use Number::Format;
@@ -9,27 +13,35 @@ use Cwd;
 sub true {1}
 sub false {0}
 
-sub fav_dir{"favourites/"}
-sub all_alg_dir{"all-algorithms/"}
+my $dt_now = DateTime->now();
+my $season = $dt_now->year();
+# season also needs an $o_season CLI option.
 
-# Temporary hack before it ends up in config
 my $cwd = getcwd();
-my $season = 2022;  # TODO it could work this out from the current time right now()
-    # season also needs an $o_season CLI option.
-my $this_output_dir="$cwd/output/$season/";
-check_dir($this_output_dir);
-check_dir($this_output_dir.fav_dir());
-check_dir($this_output_dir.all_alg_dir());
 
-my $this_processed_results_dir = "$cwd/data/$season/processed-results/";
-check_dir($this_processed_results_dir);
+die "not running from correct directory" if ! -f "f1-predictor.pl";
 
-my $this_season_dir="./data/$season/";
-check_dir($this_season_dir);
-chdir $this_season_dir or dierr( "Can't chdir to $this_season_dir \n");
+sub output_dir        {check_dir("$cwd/output/$season/")}
+sub output_all_alg_dir{check_dir(output_dir()."all-algorithms/")}
+sub output_json_dir   {check_dir(output_dir()."json/")}
+sub output_csv_dir    {check_dir(output_dir()."csv/")}
+sub data_dir          {check_dir("$cwd/data/$season/")}
+
+sub output_sub_dir {
+    my ($sdir) = @_;
+    return check_dir(output_dir().$sdir);
+}
+
+sub check_all_dirs{
+    output_dir();
+    output_all_alg_dir();
+    output_json_dir();
+    output_csv_dir();
+    data_dir();
+}
+check_all_dirs();
 
 # FIXED constants.
-my $DATA_DIR = "./";
 my $ZDATA_DRIVERS       = 'zdata.drivers';
 my $ZDATA_CONSTRUCTORS  = 'zdata.constructors';
 my $ZDATA_RACES         = 'zdata.races';
@@ -258,6 +270,8 @@ Options :
     --suppress-rounds
         suppresses the rounds output tables
 
+    --suppress-position-column
+        suppresses the position column
 
     --html-output
         generates html table output
@@ -283,12 +297,17 @@ Options :
 
         Currently the script is dumping to a hard coded directory
 
-    --out-favourites
+    --out-sub-dir
         if this is not specified, output will go to the "all-algorithms"
         directory.
         if it is specified, output will go to the "favourites" directory.
+        ( in the "output" directory )
+        for 2022 the directories are :
+        ./output/2022/favourites
+        ./output/2022/all-algorithms
+        ./output/2022/tlb
 
-    --debug 
+    --debug
         Defaults to 0 . No debug.
         --debug 1 shows minimal debug,  2 and 3 a bit more ...
 
@@ -326,9 +345,10 @@ my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_no_pre_code;
 my $o_out_file_suffix;
-my $o_out_favourites;
+my $o_out_sub_dir;
 my $o_show_test_player;
 my $o_show_only_test_player;
+my $o_suppress_position_column;
 
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
@@ -359,6 +379,8 @@ GetOptions (
                             => \$o_suppress_totals_tables,
     "no-rounds|suppress-rounds"
                             => \$o_suppress_rounds_tables,
+    "no-pos-col|suppress-position-column"
+                            => \$o_suppress_position_column,
     "no-pre-code"
                             => \$o_no_pre_code,
 
@@ -368,9 +390,8 @@ GetOptions (
                             => \$o_show_only_test_player,
     #### << display type options
 
-
     "out-file-suffix=s"     => \$o_out_file_suffix,
-    "out-favourites"        => \$o_out_favourites,
+    "out-sub-dir=s"         => \$o_out_sub_dir,
 
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
@@ -394,13 +415,13 @@ if ($o_score_leo){
     $o_score_times_power_hundred= 1;
 }
 
-my $z_races   = z_data_single($ZDATA_RACES);
+my $z_races   = z_data_single(data_dir().$ZDATA_RACES);
 prdebug( "Dump of races = ".Dumper($z_races), 2 );
 
-my $z_players = z_data_single($ZDATA_PLAYERS);
+my $z_players = z_data_single(data_dir().$ZDATA_PLAYERS);
 prdebug( "Dump of players = ".Dumper($z_players),2 );
 
-my $z_drivers = z_data_pipe_split($ZDATA_DRIVERS);
+my $z_drivers = z_data_pipe_split(data_dir().$ZDATA_DRIVERS);
 prdebug( "Dump of drivers = ".Dumper($z_drivers), 2 );
 
 # Only works on drivers. Doesn't seem much point on WCC
@@ -434,7 +455,7 @@ if ($o_multi_points){
     prdebug( "Dump of multi_points_driver lookup \n".Dumper($z_multi_points),2);
 }
 
-my $z_constructors = z_data_pipe_split($ZDATA_CONSTRUCTORS);
+my $z_constructors = z_data_pipe_split(data_dir().$ZDATA_CONSTRUCTORS);
 prdebug ( "Dump of constructors = ".Dumper($z_constructors),2);
 
 prdebug("constructors count  = $o_constructors_count\n", 2 );
@@ -515,8 +536,22 @@ sub main {
 
     ##############################
     # Output the Individual Rounds
+    if ( ! $o_no_pre_code ) {
+        printout ( "The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.\n");
+        printout ( "The Tags will format a lined up table\n\n" );
 
-    printoutrnd( "\nIndividual rounds ...\n\n") if @$run_arrs >1 ;
+        printout ( "Please note you will see some colour highlighting because disqus thinks it is computer code.\n" );
+
+        printout ( "See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation\n\n" );
+
+    }
+
+
+    if ( @$run_arrs >1 ){
+        printoutrnd( "\n-----------------\n");
+          printoutrnd( "Individual rounds\n");
+          printoutrnd( "-----------------\n");
+    }
 
     print("Rounds have been suppressed by CLI option\n") if $o_suppress_rounds_tables;
 
@@ -619,13 +654,11 @@ sub main {
     }
 
     if (@$run_arrs <2){
-        printout ( "</pre></code>\n\n" ) if ! $o_no_pre_code;
         printout ("\nonly run for one round, not showing totals\n");
         return;
     }
 
     if ($o_suppress_totals_tables){
-        printout ( "</pre></code>\n\n" ) if ! $o_no_pre_code;
         print ("\nTotals have been suppress by CLI option\n");
         return;
     }
@@ -963,7 +996,7 @@ sub process ($) {
 
     my $file_results = "$s_run.results";
 
-    my $results = run_file($file_results);
+    my $results = run_file(data_dir().$file_results);
 
     prdebug("$s_run : Results are ".Dumper($results), 1);
 
@@ -1444,16 +1477,16 @@ sub get_all_players_data($) {
     return $plyr_data;
 }
 
-sub all_player_file ($) { return "$_[0].all-players" }
+sub all_player_file ($) { return data_dir()."$_[0].all-players" }
 
 sub get_out_file {
     my $suf = $o_out_file_suffix ? "-$o_out_file_suffix" : "";
 
-    if ( $o_out_favourites ) {
-        return $this_output_dir.fav_dir().get_scoring_type_out_filename_root()."$suf";
+    if ( $o_out_sub_dir ) {
+        return output_sub_dir("$o_out_sub_dir/").get_scoring_type_out_filename_root()."$suf";
     }
 
-    return $this_output_dir.all_alg_dir().get_scoring_type_out_filename_root()."$suf";
+    return output_all_alg_dir().get_scoring_type_out_filename_root()."$suf";
 }
 
 sub check_dir {
@@ -1465,6 +1498,20 @@ sub check_dir {
     if ( $dir !~ m{/$} ) {
         dierr( "directory $dir doesn't have trailing slash\n");
     }
+    return $dir;
+}
+
+sub json_out_dump {
+    output_json_dir();
+
+
+}
+
+sub csv_out_dump {
+    output_csv_dir();
+
+
+
 }
 
 main();
