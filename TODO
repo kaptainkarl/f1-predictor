@@ -1,17 +1,9 @@
 TODO things here.
 
 
-Move Columns around 
-P Player Score Details
-
 
 change the options for the score-position-mulitplier to be one CLI option.
 Add a new power-of-ten score-multiplier.
-
-Have a "favourites" directory , where the favoured methods of algorithms are stored.
-options to write the output to the "favourites" or "all-algorithms" directory. (under the "output/2022") dir.
-
-All of the rest of the algorithms can go in a different directory for those masochistic enough to look at them.
 
 
 wcc and wdc probably need testing again. Might have bugs.
@@ -23,14 +15,12 @@ Some of the multipliers break badly if more predictions are done.
 Script needs to die if one of these multipliers is selected, and there are more than P1 -> P6 predictions.
 
 
+
 make the score-times-power-hundred NOT use the lookup hash.
 do it with ** to-the-power-of operator.
 The number of predictions will need to be limited because if there is ever a case where all 20 positions
 are predicted the numbers would be so huge they'd almost certainly break perl integer number size limits.
 
-
-On the individual rounds results it needs a header line showing the actual result.
-Next to the Race or Quali name.
 
 
 substitute drivers ? Should they be ignored, ?
