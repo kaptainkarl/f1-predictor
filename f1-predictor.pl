@@ -9,23 +9,24 @@ use Cwd;
 sub true {1}
 sub false {0}
 
+sub fav_dir{"favourites/"}
+sub all_alg_dir{"all-algorithms/"}
+
 # Temporary hack before it ends up in config
 my $cwd = getcwd();
 my $season = 2022;  # TODO it could work this out from the current time right now()
     # season also needs an $o_season CLI option.
 my $this_output_dir="$cwd/output/$season/";
-if ( ! -d $this_output_dir) {
-    dierr( "Can't find output dir $this_output_dir\n");
-}
+check_dir($this_output_dir);
+check_dir($this_output_dir.fav_dir());
+check_dir($this_output_dir.all_alg_dir());
 
-my $this_processed_results_dir = "$cwd/data/$season/processed-results";
-if ( ! -d $this_processed_results_dir ) {
-    dierr( "Can't find processed-results dir $this_processed_results_dir\n");
-}
+my $this_processed_results_dir = "$cwd/data/$season/processed-results/";
+check_dir($this_processed_results_dir);
 
 my $this_season_dir="./data/$season/";
+check_dir($this_season_dir);
 chdir $this_season_dir or dierr( "Can't chdir to $this_season_dir \n");
-
 
 # FIXED constants.
 my $DATA_DIR = "./";
@@ -282,6 +283,11 @@ Options :
 
         Currently the script is dumping to a hard coded directory
 
+    --out-favourites
+        if this is not specified, output will go to the "all-algorithms"
+        directory.
+        if it is specified, output will go to the "favourites" directory.
+
     --debug 
         Defaults to 0 . No debug.
         --debug 1 shows minimal debug,  2 and 3 a bit more ...
@@ -320,6 +326,7 @@ my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_no_pre_code;
 my $o_out_file_suffix;
+my $o_out_favourites;
 my $o_show_test_player;
 my $o_show_only_test_player;
 
@@ -363,6 +370,7 @@ GetOptions (
 
 
     "out-file-suffix=s"     => \$o_out_file_suffix,
+    "out-favourites"        => \$o_out_favourites,
 
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
@@ -1437,8 +1445,26 @@ sub get_all_players_data($) {
 }
 
 sub all_player_file ($) { return "$_[0].all-players" }
+
 sub get_out_file {
     my $suf = $o_out_file_suffix ? "-$o_out_file_suffix" : "";
-    return $this_output_dir.get_scoring_type_out_filename_root()."$suf";
+
+    if ( $o_out_favourites ) {
+        return $this_output_dir.fav_dir().get_scoring_type_out_filename_root()."$suf";
+    }
+
+    return $this_output_dir.all_alg_dir().get_scoring_type_out_filename_root()."$suf";
 }
+
+sub check_dir {
+    my ($dir) = @_;
+    if ( ! -d $dir) {
+        dierr( "Can't find directory $dir\n");
+    }
+
+    if ( $dir !~ m{/$} ) {
+        dierr( "directory $dir doesn't have trailing slash\n");
+    }
+}
+
 main();
