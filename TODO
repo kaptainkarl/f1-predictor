@@ -1,14 +1,42 @@
-todo things here.
+TODO things here.
+
+
+Move Columns around 
+P Player Score Details
+
 
 wcc and wdc probably need testing again. Might have bugs.
-(lot of code change since last testing. Plus main script has been tweaked to run on 6 predictions from players)
+(lot of code change since last testing. Plus main script has been tweaked to really run on just 6 predictions from players)
+
+
+Script is heavily tweaked for P1 -> P6 predictions only.
+Some of the multipliers break badly if more predictions are done.
+Script needs to die if one of these multipliers is selected, and there are more than P1 -> P6 predictions.
 
 
 make the score-times-power-hundred NOT use the lookup hash.
 do it with ** to-the-power-of operator.
+The number of predictions will need to be limited because if there is ever a case where all 20 positions
+are predicted the numbers would be so huge they'd almost certainly break perl integer number size limits.
 
-On the individual rounds results it needs a header line showing the 
-actual result.
+
+On the individual rounds results it needs a header line showing the actual result.
+Next to the Race or Quali name.
 
 
 substitute drivers ? Should they be ignored, ?
+If someone picks a driver who then goes off sick (probably with covid) should the players
+prediction of say VET at Bahrain just be substituted for HUL ?
+
+Average Score table only calculated on players that have entered at least 50% of the rounds.
+
+
+Output the individual races and totals tables in :
+1) CSV
+2) JSON
+put this is a separate directory, otherwise there will be an explosion of files in one place (with all the different algorithms)
+
+
+Have a "favourites" directory , where the favoured methods of algorithms are stored.
+All of the rest of the algorithms can go in a different directory for those masochistic enough to look at them.
+
