@@ -15,21 +15,25 @@ sub false {0}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
-# season also needs an $o_season CLI option.
+# TODO season also needs an $o_season CLI option.
 
 my $cwd = getcwd();
 
 die "not running from correct directory" if ! -f "f1-predictor.pl";
 
-sub output_dir        {check_dir("$cwd/output/$season/")}
-sub output_all_alg_dir{check_dir(output_dir()."all-algorithms/")}
-sub output_json_dir   {check_dir(output_dir()."json/")}
-sub output_csv_dir    {check_dir(output_dir()."csv/")}
+# dirs where the script will die if they don't already exist :
 sub data_dir          {check_dir("$cwd/data/$season/")}
+sub output_dir        {check_dir("$cwd/output/$season/")}
+
+# dirs that will get "made" :
+sub output_all_alg_dir{check_dir(output_dir()."all-algorithms/", true)}
+sub output_json_dir   {check_dir(output_dir()."json/", true)}
+sub output_csv_dir    {check_dir(output_dir()."csv/", true)}
 
 sub output_sub_dir {
     my ($sdir) = @_;
-    return check_dir(output_dir().$sdir);
+    # just make it if it doesn't exist :
+    return check_dir(output_dir().$sdir, true);
 }
 
 sub check_all_dirs{
@@ -1596,14 +1600,20 @@ sub get_out_file {
 }
 
 sub check_dir {
-    my ($dir) = @_;
-    if ( ! -d $dir) {
-        dierr( "Can't find directory $dir\n");
-    }
+    my ($dir, $mkdir) = @_;
 
     if ( $dir !~ m{/$} ) {
         dierr( "directory $dir doesn't have trailing slash\n");
     }
+
+    if ($mkdir && ! -d $dir) {
+        system("mkdir -p $dir") and dierr("Couldn't mkdir $dir\n");
+    }
+
+    if ( ! -d $dir) {
+        dierr( "Can't find directory $dir\n");
+    }
+
     return $dir;
 }
 
