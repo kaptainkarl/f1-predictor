@@ -1,0 +1,243 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-9-to-1'
+---------------
+bahrain-qual
+
+P   Player      score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
+-------------------------------------------------------------------------------------------------
+1   ggp1          126 | 25    | VER   36 | LEC   24 | SAI   32 | PER   24 | BOT    8 | ALO    2 |
+2   hobbes        118 | 18    | VER   36 | LEC   24 | SAI   32 | PER   24 | RUS    0 | ALO    2 |
+3   tlb           106 | 15    | VER   36 | LEC   24 | SAI   32 | HAM   12 | RUS    0 | PER    2 |
+4   f1ung         102 | 12    | VER   36 | LEC   24 | SAI   32 | RUS    0 | PER    8 | ALO    2 |
+5   karl          101 |  9    | VER   36 | LEC   24 | SAI   32 | GAS    0 | PER    8 | RUS    1 |
+5   winston       101 |  9    | VER   36 | LEC   24 | SAI   32 | GAS    0 | PER    8 | RUS    1 |
+7   iceman         94 |  6    | VER   36 | LEC   24 | SAI   32 | RUS    0 | ALO    2 | MSC    0 |
+8   leo            86 |  4    | VER   36 | SAI   24 | RUS    0 | PER   24 | LEC    0 | ALO    2 |
+9   bware          72 |  2    | VER   36 | LEC   24 | NOR    0 | HAM   12 | RUS    0 | GAS    0 |
+10  bill           67 |  1    | VER   36 | HAM    6 | RUS    0 | PER   24 | LEC    0 | SAI    1 |
+11  ray            32 |  0    | HAM    0 | LEC   24 | OCO    0 | BOT    6 | VER    2 | NOR    0 |
+    joe        no data (A)
+    nl         no data (A)
+    pylade     no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-9-to-1'
+---------------
+bahrain-race
+
+P   Player      score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
+-------------------------------------------------------------------------------------------------
+1   ray            97 | 25    | LEC   72 | VER    0 | SAI   16 | PER    0 | RUS    8 | HAM    1 |
+2   hobbes         72 | 18    | VER    0 | SAI   48 | NOR    0 | RUS   24 | LEC    0 | PER    0 |
+3   iceman         60 | 13.50 | VER    0 | LEC   24 | SAI   16 | HAM   12 | RUS    8 | PER    0 |
+3   tlb            60 | 13.50 | VER    0 | LEC   24 | SAI   16 | HAM   12 | RUS    8 | NOR    0 |
+5   ggp1           53 | 10    | VER    0 | SAI   48 | PER    0 | LEC    3 | GAS    0 | RUS    2 |
+6   bware          50 |  8    | VER    0 | HAM   24 | PER    0 | RUS   24 | SAI    2 | LEC    0 |
+7   karl           49 |  6    | VER    0 | LEC   24 | SAI   16 | PER    0 | RUS    8 | ALO    1 |
+8   pylade         48 |  4    | SAI   36 | VER    0 | GAS    0 | LEC    3 | RUS    8 | ALO    1 |
+9   leo            28 |  2    | VER    0 | PER    0 | SAI   16 | LEC    3 | RUS    8 | ALO    1 |
+10  bill           11 |  1    | VER    0 | PER    0 | GAS    0 | LEC    3 | RUS    8 | SAI    0 |
+11  joe             2 |  0    | VER    0 | RIC    0 | ALO    0 | VET    0 | GAS    0 | RUS    2 |
+    f1ung      no data (A)
+    nl         no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-9-to-1'
+---------------
+jeddah-qual
+
+P   Player      score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
+-------------------------------------------------------------------------------------------------
+1   iceman        100 | 21.50 | VER    9 | LEC   48 | SAI   32 | PER    3 | RUS    8 | HAM    0 |
+1   pylade        100 | 21.50 | VER    9 | LEC   48 | SAI   32 | PER    3 | HAM    0 | RUS    8 |
+3   ggp1           95 | 15    | VER    9 | LEC   48 | SAI   32 | PER    3 | BOT    2 | GAS    1 |
+4   bill           94 | 11    | VER    9 | LEC   48 | SAI   32 | PER    3 | HAM    0 | BOT    2 |
+4   bware          94 | 11    | VER    9 | LEC   48 | SAI   32 | PER    3 | BOT    2 | MAG    0 |
+6   tlb            91 |  8    | LEC   36 | VER   12 | SAI   32 | PER    3 | HAM    0 | RUS    8 |
+7   f1ung          85 |  4    | LEC   36 | VER   12 | SAI   32 | PER    3 | HAM    0 | BOT    2 |
+7   karl           85 |  4    | VER    9 | LEC   48 | PER    8 | SAI   12 | RUS    8 | HAM    0 |
+7   nl             85 |  4    | VER    9 | LEC   48 | PER    8 | SAI   12 | HAM    0 | RUS    8 |
+10  joe            79 |  1    | LEC   36 | SAI   24 | VER   16 | PER    3 | GAS    0 | MAG    0 |
+11  hobbes         60 |  0    | VER    9 | SAI   24 | LEC   16 | PER    3 | RUS    8 | HAM    0 |
+12  leo            56 |  0    | SAI   18 | VER   12 | LEC   16 | RUS    6 | PER    0 | ALO    4 |
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-9-to-1'
+---------------
+jeddah-race
+
+P   Player      score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
+-------------------------------------------------------------------------------------------------
+1   karl          164 | 25    | VER   72 | LEC   48 | PER   16 | SAI   12 | RUS   16 | HAM    0 |
+2   bill          152 | 16.50 | VER   72 | LEC   48 | PER   16 | SAI   12 | HAM    0 | RUS    4 |
+2   hobbes        152 | 16.50 | VER   72 | LEC   48 | PER   16 | SAI   12 | HAM    0 | RUS    4 |
+4   f1ung         148 | 12    | VER   72 | LEC   48 | PER   16 | SAI   12 | BOT    0 | HAM    0 |
+5   bware         140 | 10    | VER   72 | SAI   24 | LEC   16 | PER   24 | HAM    0 | RUS    4 |
+6   leo           132 |  8    | VER   72 | SAI   24 | LEC   16 | RUS   12 | PER    8 | ALO    0 |
+7   iceman        129 |  6    | VER   72 | SAI   24 | LEC   16 | HAM    0 | RUS   16 | MAG    1 |
+8   tlb           120 |  4    | LEC   36 | VER   24 | SAI   32 | PER   24 | HAM    0 | RUS    4 |
+9   ggp1          116 |  2    | VER   72 | SAI   24 | PER   16 | HAM    0 | BOT    0 | RUS    4 |
+10  pylade        109 |  1    | LEC   36 | SAI   24 | VER    8 | PER   24 | RUS   16 | MAG    1 |
+11  nl            108 |  0    | VER   72 | SAI   24 | HAM    0 | RUS   12 | BOT    0 | ZHO    0 |
+    joe        no data (A)
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+
+----------------------
+Totals Tables run for bahrain-qual, bahrain-race, jeddah-qual, jeddah-race
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'karl-8 and positions-times-9-to-1'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    hobbes            402   |    4 
+    karl              399   |    4 
+    ggp1              390   |    4 
+    iceman            383   |    4 
+    tlb               377   |    4 
+    bware             356   |    4 
+    f1ung             335   |    3 
+    bill              324   |    4 
+    leo               302   |    4 
+    pylade            257   |    3 
+    nl                193   |    2 
+    ray               129   |    2 
+    winston           101   |    1 
+    joe                81   |    2 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'karl-8 and positions-times-9-to-1'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player          Total   |Played
+---------------------------------------
+    joe                81   |    2 
+    winston           101   |    1 
+    ray               129   |    2 
+    nl                193   |    2 
+    pylade            257   |    3 
+    leo               302   |    4 
+    bill              324   |    4 
+    f1ung             335   |    3 
+    bware             356   |    4 
+    tlb               377   |    4 
+    iceman            383   |    4 
+    ggp1              390   |    4 
+    karl              399   |    4 
+    hobbes            402   |    4 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'karl-8 and positions-times-9-to-1'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    hobbes        52.50|    4 
+    ggp1          52   |    4 
+    iceman        47   |    4 
+    karl          44   |    4 
+    tlb           40.50|    4 
+    bware         31   |    4 
+    bill          29.50|    4 
+    f1ung         28   |    3 
+    pylade        26.50|    3 
+    ray           25   |    2 
+    leo           14   |    4 
+    winston        9   |    1 
+    nl             4   |    2 
+    joe            1   |    2 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'karl-8 and positions-times-9-to-1'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    f1ung             111.67|    3 
+    winston           101   |    1 
+    hobbes            100.50|    4 
+    karl               99.75|    4 
+    ggp1               97.50|    4 
+    nl                 96.50|    2 
+    iceman             95.75|    4 
+    tlb                94.25|    4 
+    bware              89   |    4 
+    pylade             85.67|    3 
+    bill               81   |    4 
+    leo                75.50|    4 
+    ray                64.50|    2 
+    joe                40.50|    2 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'karl-8 and positions-times-9-to-1'
+
+P1->P6 then Total Score 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------
+    ggp1              390   |    4 |  1 |    |  1 |    |  1 |    
+    iceman            383   |    4 |  1 |    |  1 |    |    |    
+    karl              399   |    4 |  1 |    |    |    |  1 |    
+    pylade            257   |    3 |  1 |    |    |    |    |    
+    ray               129   |    2 |  1 |    |    |    |    |    
+    hobbes            402   |    4 |    |  3 |    |    |    |    
+    bill              324   |    4 |    |  1 |    |  1 |    |    
+    tlb               377   |    4 |    |    |  2 |    |    |  1 
+    f1ung             335   |    3 |    |    |    |  2 |    |    
+    bware             356   |    4 |    |    |    |  1 |  1 |  1 
+    winston           101   |    1 |    |    |    |    |  1 |    
+    leo               302   |    4 |    |    |    |    |    |  1 
+    nl                193   |    2 |    |    |    |    |    |    
+    joe                81   |    2 |    |    |    |    |    |    
+---------------------------------------------------------------------
+</pre></code>

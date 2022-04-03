@@ -1,0 +1,143 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+
+
+----------------------
+Totals Tables run for bahrain-race, jeddah-race
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'diff and positions-times-power-one-hundred'
+
+Total Score table
+-----------------
+P   Player                Total   |Played
+---------------------------------------------
+    pylade      382,221,373,934   |    2 
+    hobbes      224,027,393,127   |    2 
+    karl        223,938,253,933   |    2 
+    ggp1        223,924,311,537   |    2 
+    iceman      223,838,333,925   |    2 
+    bware       223,824,403,234   |    2 
+    bill        222,422,363,435   |    2 
+    leo         222,338,363,827   |    2 
+    tlb         213,839,393,430   |    2 
+    f1ung       202,019,191,016   |    1 
+    nl          201,913,191,015   |    1 
+    ray         200,319,061,917   |    1 
+    joe          20,814,000,518   |    1 
+    winston                   0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'diff and positions-times-power-one-hundred'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player                Total   |Played
+---------------------------------------------
+    winston                   0   |    0 
+    joe          20,814,000,518   |    1 
+    ray         200,319,061,917   |    1 
+    nl          201,913,191,015   |    1 
+    f1ung       202,019,191,016   |    1 
+    tlb         213,839,393,430   |    2 
+    leo         222,338,363,827   |    2 
+    bill        222,422,363,435   |    2 
+    bware       223,824,403,234   |    2 
+    iceman      223,838,333,925   |    2 
+    ggp1        223,924,311,537   |    2 
+    karl        223,938,253,933   |    2 
+    hobbes      224,027,393,127   |    2 
+    pylade      382,221,373,934   |    2 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'diff and positions-times-power-one-hundred'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    hobbes        31.50|    2 
+    karl          31   |    2 
+    ray           25   |    1 
+    pylade        18   |    2 
+    bill          16.50|    2 
+    ggp1          16   |    2 
+    iceman        14   |    2 
+    bware         14   |    2 
+    f1ung         12   |    1 
+    tlb           11   |    2 
+    leo            9   |    2 
+    nl             2   |    1 
+    joe            2   |    1 
+    winston        0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'diff and positions-times-power-one-hundred'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player            Ave Score   |Played
+---------------------------------------------
+    f1ung       202,019,191,016   |    1 
+    nl          201,913,191,015   |    1 
+    ray         200,319,061,917   |    1 
+    pylade      191,110,686,967   |    2 
+    hobbes      112,013,696,563.50|    2 
+    karl        111,969,126,966.50|    2 
+    ggp1        111,962,155,768.50|    2 
+    iceman      111,919,166,962.50|    2 
+    bware       111,912,201,617   |    2 
+    bill        111,211,181,717.50|    2 
+    leo         111,169,181,913.50|    2 
+    tlb         106,919,696,715   |    2 
+    joe          20,814,000,518   |    1 
+    winston                   0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'diff and positions-times-power-one-hundred'
+
+P1->P6 then Total Score 
+------------------------
+P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------------
+    karl        223,938,253,933   |    2 |  1 |    |    |    |    |    
+    ray         200,319,061,917   |    1 |  1 |    |    |    |    |    
+    hobbes      224,027,393,127   |    2 |    |  1 |  1 |    |    |    
+    pylade      382,221,373,934   |    2 |    |  1 |    |    |    |    
+    bill        222,422,363,435   |    2 |    |  1 |    |    |    |    
+    ggp1        223,924,311,537   |    2 |    |    |    |  1 |    |    
+    f1ung       202,019,191,016   |    1 |    |    |    |  1 |    |    
+    bware       223,824,403,234   |    2 |    |    |    |    |  1 |    
+    tlb         213,839,393,430   |    2 |    |    |    |    |  1 |    
+    iceman      223,838,333,925   |    2 |    |    |    |    |    |  1 
+    leo         222,338,363,827   |    2 |    |    |    |    |    |  1 
+    nl          201,913,191,015   |    1 |    |    |    |    |    |    
+    joe          20,814,000,518   |    1 |    |    |    |    |    |    
+    winston                   0   |    0 |    |    |    |    |    |    
+---------------------------------------------------------------------------
+</pre></code>

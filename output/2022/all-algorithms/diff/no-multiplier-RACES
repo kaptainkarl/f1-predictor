@@ -1,0 +1,195 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'diff and no-multiplier'
+---------------
+bahrain-race
+
+P   Player      score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
+-------------------------------------------------------------------------------------------------
+1   tlb            89 | 25    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | NOR   11 |
+2   iceman         86 | 18    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | PER    8 |
+3   ray            84 | 15    | LEC   20 | VER    3 | SAI   19 | PER    6 | RUS   19 | HAM   17 |
+4   karl           82 | 12    | VER    2 | LEC   19 | SAI   19 | PER    6 | RUS   19 | ALO   17 |
+5   bware          78 |  8    | VER    2 | HAM   19 | PER    5 | RUS   20 | SAI   17 | LEC   15 |
+5   leo            78 |  8    | VER    2 | PER    4 | SAI   19 | LEC   17 | RUS   19 | ALO   17 |
+5   pylade         78 |  8    | SAI   19 | VER    3 | GAS    3 | LEC   17 | RUS   19 | ALO   17 |
+8   hobbes         74 |  4    | VER    2 | SAI   20 | NOR    8 | RUS   20 | LEC   16 | PER    8 |
+9   ggp1           67 |  2    | VER    2 | SAI   20 | PER    5 | LEC   17 | GAS    5 | RUS   18 |
+10  bill           61 |  1    | VER    2 | PER    4 | GAS    3 | LEC   17 | RUS   19 | SAI   16 |
+11  joe            47 |  0    | VER    2 | RIC    8 | ALO   14 | VET    0 | GAS    5 | RUS   18 |
+    f1ung      no data (A)
+    nl         no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'diff and no-multiplier'
+---------------
+jeddah-race
+
+P   Player      score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
+-------------------------------------------------------------------------------------------------
+1   karl          114 | 25    | VER   20 | LEC   20 | PER   19 | SAI   19 | RUS   20 | HAM   16 |
+2   pylade        113 | 18    | LEC   19 | SAI   19 | VER   18 | PER   20 | RUS   20 | MAG   17 |
+3   bill          112 | 11.25 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
+3   bware         112 | 11.25 | VER   20 | SAI   19 | LEC   19 | PER   20 | HAM   15 | RUS   19 |
+3   hobbes        112 | 11.25 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
+3   tlb           112 | 11.25 | LEC   19 | VER   19 | SAI   20 | PER   20 | HAM   15 | RUS   19 |
+7   iceman        109 |  6    | VER   20 | SAI   19 | LEC   19 | HAM   14 | RUS   20 | MAG   17 |
+8   leo           106 |  4    | VER   20 | SAI   19 | LEC   19 | RUS   19 | PER   19 | ALO   10 |
+9   f1ung         104 |  2    | VER   20 | LEC   20 | PER   19 | SAI   19 | BOT   10 | HAM   16 |
+10  ggp1          101 |  1    | VER   20 | SAI   19 | PER   19 | HAM   14 | BOT   10 | RUS   19 |
+11  nl             96 |  0    | VER   20 | SAI   19 | HAM   13 | RUS   19 | BOT   10 | ZHO   15 |
+    joe        no data (A)
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+
+----------------------
+Totals Tables run for bahrain-race, jeddah-race
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'diff and no-multiplier'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    tlb               201   |    2 
+    karl              196   |    2 
+    iceman            195   |    2 
+    pylade            191   |    2 
+    bware             190   |    2 
+    hobbes            186   |    2 
+    leo               184   |    2 
+    bill              173   |    2 
+    ggp1              168   |    2 
+    f1ung             104   |    1 
+    nl                 96   |    1 
+    ray                84   |    1 
+    joe                47   |    1 
+    winston             0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'diff and no-multiplier'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player          Total   |Played
+---------------------------------------
+    winston             0   |    0 
+    joe                47   |    1 
+    ray                84   |    1 
+    nl                 96   |    1 
+    f1ung             104   |    1 
+    ggp1              168   |    2 
+    bill              173   |    2 
+    leo               184   |    2 
+    hobbes            186   |    2 
+    bware             190   |    2 
+    pylade            191   |    2 
+    iceman            195   |    2 
+    karl              196   |    2 
+    tlb               201   |    2 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'diff and no-multiplier'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    karl          37   |    2 
+    tlb           36.25|    2 
+    pylade        26   |    2 
+    iceman        24   |    2 
+    bware         19.25|    2 
+    hobbes        15.25|    2 
+    ray           15   |    1 
+    bill          12.25|    2 
+    leo           12   |    2 
+    ggp1           3   |    2 
+    f1ung          2   |    1 
+    winston        0   |    0 
+    nl             0   |    1 
+    joe            0   |    1 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'diff and no-multiplier'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    f1ung             104   |    1 
+    tlb               100.50|    2 
+    karl               98   |    2 
+    iceman             97.50|    2 
+    nl                 96   |    1 
+    pylade             95.50|    2 
+    bware              95   |    2 
+    hobbes             93   |    2 
+    leo                92   |    2 
+    bill               86.50|    2 
+    ray                84   |    1 
+    ggp1               84   |    2 
+    joe                47   |    1 
+    winston             0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'diff and no-multiplier'
+
+P1->P6 then Total Score 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------
+    tlb               201   |    2 |  1 |    |  1 |    |    |    
+    karl              196   |    2 |  1 |    |    |  1 |    |    
+    pylade            191   |    2 |    |  1 |    |    |  1 |    
+    iceman            195   |    2 |    |  1 |    |    |    |    
+    bware             190   |    2 |    |    |  1 |    |  1 |    
+    hobbes            186   |    2 |    |    |  1 |    |    |    
+    bill              173   |    2 |    |    |  1 |    |    |    
+    ray                84   |    1 |    |    |  1 |    |    |    
+    leo               184   |    2 |    |    |    |    |  1 |    
+    ggp1              168   |    2 |    |    |    |    |    |    
+    f1ung             104   |    1 |    |    |    |    |    |    
+    nl                 96   |    1 |    |    |    |    |    |    
+    joe                47   |    1 |    |    |    |    |    |    
+    winston             0   |    0 |    |    |    |    |    |    
+---------------------------------------------------------------------
+</pre></code>

@@ -1,0 +1,195 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+---------------
+bahrain-race
+
+P   Player                 score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
+------------------------------------------------------------------------------------------------------------
+1   ray        96,00,16,00,16,04 | 25    | LEC   96 | VER    0 | SAI   16 | PER    0 | RUS   16 | HAM    4 |
+2   pylade     16,00,00,04,16,04 | 18    | SAI   16 | VER    0 | GAS    0 | LEC    4 | RUS   16 | ALO    4 |
+3   hobbes        96,00,96,02,00 | 15    | VER    0 | SAI   96 | NOR    0 | RUS   96 | LEC    2 | PER    0 |
+4   ggp1          96,00,04,00,08 | 12    | VER    0 | SAI   96 | PER    0 | LEC    4 | GAS    0 | RUS    8 |
+5   iceman        16,16,16,16,00 |  9    | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | PER    0 |
+5   tlb           16,16,16,16,00 |  9    | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | NOR    0 |
+7   karl          16,16,00,16,04 |  6    | VER    0 | LEC   16 | SAI   16 | PER    0 | RUS   16 | ALO    4 |
+8   bware         16,00,96,04,01 |  4    | VER    0 | HAM   16 | PER    0 | RUS   96 | SAI    4 | LEC    1 |
+9   leo              16,04,16,04 |  2    | VER    0 | PER    0 | SAI   16 | LEC    4 | RUS   16 | ALO    4 |
+10  bill                 4,16,02 |  1    | VER    0 | PER    0 | GAS    0 | LEC    4 | RUS   16 | SAI    2 |
+11  joe                        8 |  0    | VER    0 | RIC    0 | ALO    0 | VET    0 | GAS    0 | RUS    8 |
+    f1ung      no data (A)
+    nl         no data (A)
+    winston    no data (A)
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+---------------
+jeddah-race
+
+P   Player                 score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
+------------------------------------------------------------------------------------------------------------
+1   karl       96,96,16,16,96,02 | 25    | VER   96 | LEC   96 | PER   16 | SAI   16 | RUS   96 | HAM    2 |
+2   bill       96,96,16,16,01,16 | 16.50 | VER   96 | LEC   96 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
+2   hobbes     96,96,16,16,01,16 | 16.50 | VER   96 | LEC   96 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
+4   f1ung      96,96,16,16,00,02 | 12    | VER   96 | LEC   96 | PER   16 | SAI   16 | BOT    0 | HAM    2 |
+5   bware      96,16,16,96,01,16 | 10    | VER   96 | SAI   16 | LEC   16 | PER   96 | HAM    1 | RUS   16 |
+6   leo        96,16,16,16,16,00 |  8    | VER   96 | SAI   16 | LEC   16 | RUS   16 | PER   16 | ALO    0 |
+7   iceman     96,16,16,00,96,04 |  6    | VER   96 | SAI   16 | LEC   16 | HAM    0 | RUS   96 | MAG    4 |
+8   ggp1       96,16,16,00,00,16 |  4    | VER   96 | SAI   16 | PER   16 | HAM    0 | BOT    0 | RUS   16 |
+9   nl         96,16,00,16,00,01 |  2    | VER   96 | SAI   16 | HAM    0 | RUS   16 | BOT    0 | ZHO    1 |
+10  tlb        16,16,96,96,01,16 |  1    | LEC   16 | VER   16 | SAI   96 | PER   96 | HAM    1 | RUS   16 |
+11  pylade     16,16,08,96,96,04 |  0    | LEC   16 | SAI   16 | VER    8 | PER   96 | RUS   96 | MAG    4 |
+    joe        no data (A)
+    ray        no data (A)
+    winston    no data (A)
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+
+----------------------
+Totals Tables run for bahrain-race, jeddah-race
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+
+Total Score table
+-----------------
+P   Player                Total   |Played
+---------------------------------------------
+    hobbes      979,217,120,316   |    2 
+    karl        971,232,171,206   |    2 
+    ggp1        971,216,040,024   |    2 
+    bill        969,616,201,718   |    2 
+    f1ung       969,616,160,002   |    1 
+    iceman      963,232,171,204   |    2 
+    bware       963,217,920,517   |    2 
+    leo         961,632,203,204   |    2 
+    nl          961,600,160,001   |    1 
+    ray         960,016,001,604   |    1 
+    pylade      321,609,011,208   |    2 
+    tlb         163,313,121,716   |    2 
+    joe                       8   |    1 
+    winston                   0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player                Total   |Played
+---------------------------------------------
+    winston                   0   |    0 
+    joe                       8   |    1 
+    tlb         163,313,121,716   |    2 
+    pylade      321,609,011,208   |    2 
+    ray         960,016,001,604   |    1 
+    nl          961,600,160,001   |    1 
+    leo         961,632,203,204   |    2 
+    bware       963,217,920,517   |    2 
+    iceman      963,232,171,204   |    2 
+    f1ung       969,616,160,002   |    1 
+    bill        969,616,201,718   |    2 
+    ggp1        971,216,040,024   |    2 
+    karl        971,232,171,206   |    2 
+    hobbes      979,217,120,316   |    2 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    hobbes        31.50|    2 
+    karl          31   |    2 
+    ray           25   |    1 
+    pylade        18   |    2 
+    bill          17.50|    2 
+    ggp1          16   |    2 
+    iceman        15   |    2 
+    bware         14   |    2 
+    f1ung         12   |    1 
+    tlb           10   |    2 
+    leo           10   |    2 
+    nl             2   |    1 
+    winston        0   |    0 
+    joe            0   |    1 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player            Ave Score   |Played
+---------------------------------------------
+    f1ung       969,616,160,002   |    1 
+    nl          961,600,160,001   |    1 
+    ray         960,016,001,604   |    1 
+    hobbes      489,608,560,158   |    2 
+    karl        485,616,085,603   |    2 
+    ggp1        485,608,020,012   |    2 
+    bill        484,808,100,859   |    2 
+    iceman      481,616,085,602   |    2 
+    bware       481,608,960,258.50|    2 
+    leo         480,816,101,602   |    2 
+    pylade      160,804,505,604   |    2 
+    tlb          81,656,560,858   |    2 
+    joe                       8   |    1 
+    winston                   0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'karl-96-16 and positions-times-power-one-hundred'
+
+P1->P6 then Total Score 
+------------------------
+P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------------
+    karl        971,232,171,206   |    2 |  1 |    |    |    |    |    
+    ray         960,016,001,604   |    1 |  1 |    |    |    |    |    
+    hobbes      979,217,120,316   |    2 |    |  1 |  1 |    |    |    
+    bill        969,616,201,718   |    2 |    |  1 |    |    |    |    
+    pylade      321,609,011,208   |    2 |    |  1 |    |    |    |    
+    ggp1        971,216,040,024   |    2 |    |    |    |  1 |    |    
+    f1ung       969,616,160,002   |    1 |    |    |    |  1 |    |    
+    iceman      963,232,171,204   |    2 |    |    |    |    |  1 |    
+    bware       963,217,920,517   |    2 |    |    |    |    |  1 |    
+    tlb         163,313,121,716   |    2 |    |    |    |    |  1 |    
+    leo         961,632,203,204   |    2 |    |    |    |    |    |  1 
+    nl          961,600,160,001   |    1 |    |    |    |    |    |    
+    joe                       8   |    1 |    |    |    |    |    |    
+    winston                   0   |    0 |    |    |    |    |    |    
+---------------------------------------------------------------------------
+</pre></code>

@@ -1,0 +1,195 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+---------------
+bahrain-qual
+
+P   Player      score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
+-------------------------------------------------------------------------------------------------
+1   ggp1          888 | 25    | VER   16 | LEC   32 | SAI  288 | PER  384 | BOT   96 | ALO   72 |
+2   hobbes        804 | 18    | VER   16 | LEC   32 | SAI  288 | PER  384 | RUS   12 | ALO   72 |
+3   leo           516 | 15    | VER   16 | SAI   32 | RUS    0 | PER  384 | LEC   12 | ALO   72 |
+4   f1ung         508 | 12    | VER   16 | LEC   32 | SAI  288 | RUS    4 | PER   96 | ALO   72 |
+5   tlb           484 | 10    | VER   16 | LEC   32 | SAI  288 | HAM   64 | RUS   12 | PER   72 |
+6   karl          468 |  7    | VER   16 | LEC   32 | SAI  288 | GAS    0 | PER   96 | RUS   36 |
+6   winston       468 |  7    | VER   16 | LEC   32 | SAI  288 | GAS    0 | PER   96 | RUS   36 |
+8   bill          456 |  4    | VER   16 | HAM    8 | RUS    0 | PER  384 | LEC   12 | SAI   36 |
+9   iceman        364 |  2    | VER   16 | LEC   32 | SAI  288 | RUS    4 | ALO   24 | MSC    0 |
+10  bware         142 |  1    | VER   16 | LEC   32 | NOR    0 | HAM   64 | RUS   12 | GAS   18 |
+11  ray            90 |  0    | HAM    2 | LEC   32 | OCO    0 | BOT   32 | VER   24 | NOR    0 |
+    joe        no data (A)
+    nl         no data (A)
+    pylade     no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+---------------
+jeddah-qual
+
+P   Player      score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
+-------------------------------------------------------------------------------------------------
+1   pylade       1364 | 25    | VER    4 | LEC  192 | SAI  288 | PER   16 | HAM    0 | RUS  864 |
+2   tlb          1200 | 18    | LEC   16 | VER   16 | SAI  288 | PER   16 | HAM    0 | RUS  864 |
+3   nl           1148 | 15    | VER    4 | LEC  192 | PER   24 | SAI   64 | HAM    0 | RUS  864 |
+4   iceman        596 | 12    | VER    4 | LEC  192 | SAI  288 | PER   16 | RUS   96 | HAM    0 |
+5   bill          572 | 10    | VER    4 | LEC  192 | SAI  288 | PER   16 | HAM    0 | BOT   72 |
+6   ggp1          560 |  8    | VER    4 | LEC  192 | SAI  288 | PER   16 | BOT   24 | GAS   36 |
+7   bware         542 |  6    | VER    4 | LEC  192 | SAI  288 | PER   16 | BOT   24 | MAG   18 |
+8   f1ung         408 |  4    | LEC   16 | VER   16 | SAI  288 | PER   16 | HAM    0 | BOT   72 |
+9   karl          380 |  2    | VER    4 | LEC  192 | PER   24 | SAI   64 | RUS   96 | HAM    0 |
+10  leo           260 |  1    | SAI    8 | VER   16 | LEC   48 | RUS   32 | PER   12 | ALO  144 |
+11  hobbes        196 |  0    | VER    4 | SAI   32 | LEC   48 | PER   16 | RUS   96 | HAM    0 |
+12  joe           142 |  0    | LEC   16 | SAI   32 | VER   48 | PER   16 | GAS   12 | MAG   18 |
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+
+----------------------
+Totals Tables run for bahrain-qual, jeddah-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    tlb             1,684   |    2 
+    ggp1            1,448   |    2 
+    pylade          1,364   |    1 
+    nl              1,148   |    1 
+    bill            1,028   |    2 
+    hobbes          1,000   |    2 
+    iceman            960   |    2 
+    f1ung             916   |    2 
+    karl              848   |    2 
+    leo               776   |    2 
+    bware             684   |    2 
+    winston           468   |    1 
+    joe               142   |    1 
+    ray                90   |    1 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player          Total   |Played
+---------------------------------------
+    ray                90   |    1 
+    joe               142   |    1 
+    winston           468   |    1 
+    bware             684   |    2 
+    leo               776   |    2 
+    karl              848   |    2 
+    f1ung             916   |    2 
+    iceman            960   |    2 
+    hobbes          1,000   |    2 
+    bill            1,028   |    2 
+    nl              1,148   |    1 
+    pylade          1,364   |    1 
+    ggp1            1,448   |    2 
+    tlb             1,684   |    2 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    ggp1          33   |    2 
+    tlb           28   |    2 
+    pylade        25   |    1 
+    hobbes        18   |    2 
+    leo           16   |    2 
+    f1ung         16   |    2 
+    nl            15   |    1 
+    iceman        14   |    2 
+    bill          14   |    2 
+    karl           9   |    2 
+    winston        7   |    1 
+    bware          7   |    2 
+    ray            0   |    1 
+    joe            0   |    1 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    pylade          1,364   |    1 
+    nl              1,148   |    1 
+    tlb               842   |    2 
+    ggp1              724   |    2 
+    bill              514   |    2 
+    hobbes            500   |    2 
+    iceman            480   |    2 
+    winston           468   |    1 
+    f1ung             458   |    2 
+    karl              424   |    2 
+    leo               388   |    2 
+    bware             342   |    2 
+    joe               142   |    1 
+    ray                90   |    1 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'karl-96-16 and positions-times-1-to-9'
+
+P1->P6 then Total Score 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------
+    ggp1            1,448   |    2 |  1 |    |    |    |    |  1 
+    pylade          1,364   |    1 |  1 |    |    |    |    |    
+    tlb             1,684   |    2 |    |  1 |    |    |  1 |    
+    hobbes          1,000   |    2 |    |  1 |    |    |    |    
+    nl              1,148   |    1 |    |    |  1 |    |    |    
+    leo               776   |    2 |    |    |  1 |    |    |    
+    iceman            960   |    2 |    |    |    |  1 |    |    
+    f1ung             916   |    2 |    |    |    |  1 |    |    
+    bill            1,028   |    2 |    |    |    |    |  1 |    
+    karl              848   |    2 |    |    |    |    |    |  1 
+    winston           468   |    1 |    |    |    |    |    |  1 
+    bware             684   |    2 |    |    |    |    |    |    
+    joe               142   |    1 |    |    |    |    |    |    
+    ray                90   |    1 |    |    |    |    |    |    
+---------------------------------------------------------------------
+</pre></code>

@@ -1,0 +1,195 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
+ The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-96-16 and no-multiplier'
+---------------
+bahrain-qual
+
+P   Player      score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
+-------------------------------------------------------------------------------------------------
+1   ggp1          248 | 25    | VER   16 | LEC   16 | SAI   96 | PER   96 | BOT   16 | ALO    8 |
+2   hobbes        234 | 18    | VER   16 | LEC   16 | SAI   96 | PER   96 | RUS    2 | ALO    8 |
+3   tlb           154 | 15    | VER   16 | LEC   16 | SAI   96 | HAM   16 | RUS    2 | PER    8 |
+4   f1ung         153 | 12    | VER   16 | LEC   16 | SAI   96 | RUS    1 | PER   16 | ALO    8 |
+5   karl          148 |  9    | VER   16 | LEC   16 | SAI   96 | GAS    0 | PER   16 | RUS    4 |
+5   winston       148 |  9    | VER   16 | LEC   16 | SAI   96 | GAS    0 | PER   16 | RUS    4 |
+7   leo           138 |  6    | VER   16 | SAI   16 | RUS    0 | PER   96 | LEC    2 | ALO    8 |
+8   iceman        133 |  4    | VER   16 | LEC   16 | SAI   96 | RUS    1 | ALO    4 | MSC    0 |
+9   bill          122 |  2    | VER   16 | HAM    4 | RUS    0 | PER   96 | LEC    2 | SAI    4 |
+10  bware          52 |  1    | VER   16 | LEC   16 | NOR    0 | HAM   16 | RUS    2 | GAS    2 |
+11  ray            30 |  0    | HAM    2 | LEC   16 | OCO    0 | BOT    8 | VER    4 | NOR    0 |
+    joe        no data (A)
+    nl         no data (A)
+    pylade     no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-96-16 and no-multiplier'
+---------------
+jeddah-qual
+
+P   Player      score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
+-------------------------------------------------------------------------------------------------
+1   pylade        296 | 25    | VER    4 | LEC   96 | SAI   96 | PER    4 | HAM    0 | RUS   96 |
+2   nl            220 | 16.50 | VER    4 | LEC   96 | PER    8 | SAI   16 | HAM    0 | RUS   96 |
+2   tlb           220 | 16.50 | LEC   16 | VER    8 | SAI   96 | PER    4 | HAM    0 | RUS   96 |
+4   iceman        216 | 12    | VER    4 | LEC   96 | SAI   96 | PER    4 | RUS   16 | HAM    0 |
+5   bill          208 |  9    | VER    4 | LEC   96 | SAI   96 | PER    4 | HAM    0 | BOT    8 |
+5   ggp1          208 |  9    | VER    4 | LEC   96 | SAI   96 | PER    4 | BOT    4 | GAS    4 |
+7   bware         206 |  6    | VER    4 | LEC   96 | SAI   96 | PER    4 | BOT    4 | MAG    2 |
+8   karl          140 |  4    | VER    4 | LEC   96 | PER    8 | SAI   16 | RUS   16 | HAM    0 |
+9   f1ung         132 |  2    | LEC   16 | VER    8 | SAI   96 | PER    4 | HAM    0 | BOT    8 |
+10  leo            58 |  1    | SAI    8 | VER    8 | LEC   16 | RUS    8 | PER    2 | ALO   16 |
+11  hobbes         56 |  0    | VER    4 | SAI   16 | LEC   16 | PER    4 | RUS   16 | HAM    0 |
+11  joe            56 |  0    | LEC   16 | SAI   16 | VER   16 | PER    4 | GAS    2 | MAG    2 |
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+
+----------------------
+Totals Tables run for bahrain-qual, jeddah-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+
+<pre><code>
+-----------------
+Scoring is 'karl-96-16 and no-multiplier'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    ggp1              456   |    2 
+    tlb               374   |    2 
+    iceman            349   |    2 
+    bill              330   |    2 
+    pylade            296   |    1 
+    hobbes            290   |    2 
+    karl              288   |    2 
+    f1ung             285   |    2 
+    bware             258   |    2 
+    nl                220   |    1 
+    leo               196   |    2 
+    winston           148   |    1 
+    joe                56   |    1 
+    ray                30   |    1 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+--------------------------------
+Scoring is 'karl-96-16 and no-multiplier'
+
+Total Score table. Reverse Order
+--------------------------------
+P   Player          Total   |Played
+---------------------------------------
+    ray                30   |    1 
+    joe                56   |    1 
+    winston           148   |    1 
+    leo               196   |    2 
+    nl                220   |    1 
+    bware             258   |    2 
+    f1ung             285   |    2 
+    karl              288   |    2 
+    hobbes            290   |    2 
+    pylade            296   |    1 
+    bill              330   |    2 
+    iceman            349   |    2 
+    tlb               374   |    2 
+    ggp1              456   |    2 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+---------------------
+Scoring is 'karl-96-16 and no-multiplier'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    ggp1          34   |    2 
+    tlb           31.50|    2 
+    pylade        25   |    1 
+    hobbes        18   |    2 
+    nl            16.50|    1 
+    iceman        16   |    2 
+    f1ung         14   |    2 
+    karl          13   |    2 
+    bill          11   |    2 
+    winston        9   |    1 
+    leo            7   |    2 
+    bware          7   |    2 
+    ray            0   |    1 
+    joe            0   |    1 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Scoring is 'karl-96-16 and no-multiplier'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    pylade            296   |    1 
+    ggp1              228   |    2 
+    nl                220   |    1 
+    tlb               187   |    2 
+    iceman            174.50|    2 
+    bill              165   |    2 
+    winston           148   |    1 
+    hobbes            145   |    2 
+    karl              144   |    2 
+    f1ung             142.50|    2 
+    bware             129   |    2 
+    leo                98   |    2 
+    joe                56   |    1 
+    ray                30   |    1 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Scoring is 'karl-96-16 and no-multiplier'
+
+P1->P6 then Total Score 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
+---------------------------------------------------------------------
+    ggp1              456   |    2 |  1 |    |    |    |  1 |    
+    pylade            296   |    1 |  1 |    |    |    |    |    
+    tlb               374   |    2 |    |  1 |  1 |    |    |    
+    hobbes            290   |    2 |    |  1 |    |    |    |    
+    nl                220   |    1 |    |  1 |    |    |    |    
+    iceman            349   |    2 |    |    |    |  1 |    |    
+    f1ung             285   |    2 |    |    |    |  1 |    |    
+    bill              330   |    2 |    |    |    |    |  1 |    
+    karl              288   |    2 |    |    |    |    |  1 |    
+    winston           148   |    1 |    |    |    |    |  1 |    
+    bware             258   |    2 |    |    |    |    |    |    
+    leo               196   |    2 |    |    |    |    |    |    
+    joe                56   |    1 |    |    |    |    |    |    
+    ray                30   |    1 |    |    |    |    |    |    
+---------------------------------------------------------------------
+</pre></code>
