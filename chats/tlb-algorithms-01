@@ -1,0 +1,145 @@
+So on disqus chats I said all this :
+
+So looking at the file :
+
+output/2022/all-algorithms/karl-32-and-positions-times-power-one-hundred-ALL
+(lines removed to make the below example shorter)
+
+<pre><code>
+Scoring is 'karl-32 and positions-times-power-one-hundred'
+---------------
+bahrain-qual
+      
+P   Player                 score | FIA   |
+------------------------------------------------------------------------------------------------------------
+1   ggp1       16,16,32,32,16,08 | 25    | VER   16 | LEC   16 | SAI   32 | PER   32 | BOT   16 | ALO    8 |
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+Say the above table , had it's number comma separator split on the thousands, then we'd see this :
+
+<pre><code>
+bahrain-qual
+      
+P   Player               score | FIA   |
+------------------------------------------------------------------------------------------------------------
+1   ggp1       161,632,321,608 | 25    | VER   16 | LEC   16 | SAI   32 | PER   32 | BOT   16 | ALO    8 |
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+Now if we split say ggp1's number out and added together we'd get :
+
+161 + 632 + 321 + 608 = 1722
+
+but that is kind of splitting the scores from the different 1->6 predictions, mid way through the individual P scores.
+
+So the 161 is the VER 16 with the Tens part of LECs 16 . So 161.
+
+Then the 6 units-part of LECs gets added onto to the front of SAI 32, and we get 632
+
+then PER, BOT and ALO get mangled together.
+
+I dunno, I can do it , but it's kind of random numbers !
+
+
+------------------------------
+
+
+
+So I ponder about this . Now one that could make sense on an individual round score ( I think it would break on the totals), split after every 4 digits  , then add together the the separate parts.
+
+
+<pre><code>
+Scoring is 'karl-32 and positions-times-power-one-hundred'
+---------------
+bahrain-qual
+      
+P   Player                 score | FIA   |
+------------------------------------------------------------------------------------------------------------
+1   ggp1       16,16,32,32,16,08 | 25    | VER   16 | LEC   16 | SAI   32 | PER   32 | BOT   16 | ALO    8 |
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+
+So that'd become 
+1616 + 3232 + 1608 = 6456
+
+It's not splitting out the individual predictions  on the Tens-part and Units-Part and then doing the adding as shown above.
+
+It's also effectively just multiplying the scores by :
+P1  times 100
+P2  times   1
+P3  times 100
+P4  times   1
+p5  times 100
+P6  times   1
+
+That could be done with Yet another multiplier 
+
+It's the "odd position 100 multiplier" !!!!
+
+
+Which then got me to thinking of other multipliers.
+
+"1-to-9" 
+
+i.e. 
+
+P1  times  1
+P2  times  2 
+P3  times  3
+P4  times  4 
+p5  times  6 
+P6  times  9 
+
+So those that manage to correct P6 and P5 more correctly will get higher scores.
+
+This I think could be really interesting , because for 2022 we kind of now know that P1 -> P4 are going to be filled with 2 Ferraris and 2 Red Bulls. So most players are just going to do different combinations of those. But who is in P5 and P6 ?
+
+I do think it could be good if we could have P7 and P8 predictions , and a suitable positional-multiplier . Then we could get more differentiation between all our scores.
+If we did this then for the first few rounds already played we need to add P7 and P8 predictions to all our scores of drivers who didn't compete, so say MAZ and VET  would be added on to all players for P7 and P8 for Bahrain and Jeddah. Those would shore zero points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
