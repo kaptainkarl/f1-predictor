@@ -613,6 +613,8 @@ sub main {
 
     }
 
+    printout (" The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n");
+
 
     if ( @$run_arrs >1 ){
         printoutrnd( "\n-----------------\n");
