@@ -146,29 +146,26 @@ Options :
 
     --leo
         this is a set of scoring CLI options short cut.
-        
-        It sets the --score-sys to 'exact'
-        and --score-times-power-of-100
 
-        it undefs --score-times-current
-                  --score-times-1990
+        It sets the --score-accuracy-sys to 'exact'
+        and --score-times-sys to power-100
 
         Basically it is a short cut to how I think Leo
         wants the predictions rated.
 
-    --score-sys  karl-8, karl-32 , differential_scoring, diff, exact
+    --score-accuracy-sys  karl-8, karl-32 , differential_scoring, diff, exact
         defaults to differential_scoring
 
         diff and differential_scoring are the same thing.
 
         i.e.
-        --score-sys karl-8
+        --score-accuracy-sys karl-8
             would run the 8,4,2,1 scoring system.
 
-        --score-sys karl-32
+        --score-accuracy-sys karl-32
             would run the 32-16-8-4-2-1 Karl systems.
 
-        --score-sys exact
+        --score-accuracy-sys exact
             a single point is only awarded to an exactly
             correction prediction.
 
@@ -183,28 +180,37 @@ Options :
         This option will runs the calcs with the test player.
         It also doesn't calculate non "test-plyr" scores
 
-    --score-times-current
-        This multiplies the score for
-            P1 prediction by 25
-            P2 prediction by 18
-            P3 prediction by 15
-            ... (you know these numbers !!)
-            P10 prediction by 1
+    --score-times-sys  none , 9-to-1 , 25-to-8, power-100
 
-    --score-times-1990  (1990 ish scoring system)
-        This multiplies the score for
-            P1 x 9
-            P2 x 6
-            P3 x 4
-            P4 x 3
-            P5 x 2
-            P6 x 1
+        none ( this is the default ) :
+            no multiplier applied to the positional predictions.
 
-    --score-times-power-of-100
-            basically for the top 6 postions
+        25-to-8 :
+            This multiplies the score for
+                P1 prediction by 25
+                P2 prediction by 18
+                P3 prediction by 15
+                ... (you know these numbers !!)
+                P6 prediction by 8
+                ...
+                P10 prediction by 1
+
+                25-to-8 name comes from refering to P1 -> P6 predictions only
+
+        9-to-1 (1990 ish scoring system) :
+            This multiplies the score for
+                P1 x 9
+                P2 x 6
+                P3 x 4
+                P4 x 3
+                P5 x 2
+                P6 x 1
+
+        power-100 :
+            Currently for the top 6 postions only
             (This script is kind of becoming a top-6-only-predictor)
             it is :
-            Pos - 6 ^ 100
+            ( Pos - 6 ) ^ 100
             Where Pos is the Position of the Prediction. So for P1 prediction
             ( 6-1 ) ^ 100
 
@@ -318,22 +324,42 @@ EOUSAGE
 
 use Getopt::Long;
 
-my $score_sys_lkup = {
+my $score_accuracy_sys_lkup = {
     "karl-8"     => 1,
     "karl-32"    => 1,
-    differential_scoring => 1,
-    exact => 1,
+    "differential_scoring" => 1,
+    "exact" => 1,
 };
+
+my $score_times_sys_lkup = {
+    "none"       => 1,
+    "9-to-1"     => 1,
+    "25-to-8"    => 1,
+    "power-100"  => 1,
+};
+
+my $o_score_accuracy_sys;
+my $o_score_times_sys;
+
+sub is_score_times_power_100 {
+    return $o_score_times_sys eq 'power-100' ? true : false;
+}
+sub is_score_times_none {
+    return $o_score_times_sys eq 'none' ? true : false;
+}
+sub is_score_times_9_to_1 {
+    return $o_score_times_sys eq '9-to-1' ? true : false;
+}
+sub is_score_times_25_to_8 {
+    return $o_score_times_sys eq '25-to-8' ? true : false;
+}
 
 my $o_drivers_count       = 20;
 my $o_constructors_count  = 10;
-
 my $o_score_upto_pos = 6;
-
-my ( $o_score_sys, $o_score_times_pos, $o_score_times_1990_pos);
-my ( $o_score_times_power_hundred );
-my ($o_html_output);
 my ($o_run, $o_help);
+
+my $o_html_output;
 my $o_suppress_detail_score;
 my ($o_minus_points, $o_multi_points);
 my $o_multi_points_factor = 2;
@@ -353,13 +379,11 @@ my $o_suppress_position_column;
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
     "leo"                   => \$o_score_leo,
-    "score-times-current"   => \$o_score_times_pos,
-    "score-times-1990"      => \$o_score_times_1990_pos,
-    "score-times-power-100" => \$o_score_times_power_hundred,
+    "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
+    "score-times-sys=s"     => \$o_score_times_sys,
     "minus-points=s"        => \$o_minus_points,
     "multi-points=s"        => \$o_multi_points,
     "multi-points-factor=s" => \$o_multi_points_factor,
-    "score-sys=s"           => \$o_score_sys,
     "html-output"           => \$o_html_output,
 
     # display type options >>
@@ -409,10 +433,8 @@ if ( ! looks_like_number $o_multi_points_factor ){
 }
 
 if ($o_score_leo){
-    $o_score_sys = "exact";
-    $o_score_times_pos = undef;
-    $o_score_times_1990_pos = undef;
-    $o_score_times_power_hundred= 1;
+    $o_score_accuracy_sys = "exact";
+    $o_score_times_sys    = "power-100";
 }
 
 my $z_races   = z_data_single(data_dir().$ZDATA_RACES);
@@ -465,9 +487,16 @@ if (!$o_run) {
     dierr("You must define --run , with wcc , wdc or the race-name");
 }
 
-$o_score_sys = "differential_scoring" if ! $o_score_sys || $o_score_sys eq "diff";
-if ( ! exists $score_sys_lkup->{$o_score_sys} ){
-    dierr("[--score-sys $o_score_sys] isn't valid\n");
+$o_score_accuracy_sys = "differential_scoring"
+    if ! $o_score_accuracy_sys || $o_score_accuracy_sys eq "diff";
+
+if ( ! exists $score_accuracy_sys_lkup->{$o_score_accuracy_sys} ){
+    dierr("[--score-sys $o_score_accuracy_sys] isn't valid\n");
+}
+
+$o_score_times_sys //= "none";
+if ( ! exists $score_times_sys_lkup->{$o_score_times_sys} ){
+    dierr("[--score-sys $o_score_times_sys] isn't valid\n");
 }
 
 if ($o_drivers_count < 2){
@@ -573,7 +602,7 @@ sub main {
 
 
         if ($o_player_rating_score){
-            if ($o_score_times_power_hundred){
+            if (is_score_times_power_100()){
                 printoutrnd(sprintf( "%18s|", "score ")) ;
                 $underline .= "-" x 19;
             }
@@ -629,7 +658,7 @@ sub main {
             printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr));
 
             if ($o_player_rating_score){
-                if ($o_score_times_power_hundred){
+                if (is_score_times_power_100()){
                     my $sc_str = hundreds($ln->{score});
                     printoutrnd(sprintf( "%18s|", "$sc_str "));
                 }
@@ -805,7 +834,7 @@ sub thousands ($){
 sub hundreds ($){
     my ($sc) = @_;
 
-    return $sc if ! $o_score_times_power_hundred ;
+    return $sc if ! is_score_times_power_100() ;
 
     my $b = reverse $sc;
     my @c = unpack("(A2)*", $b);
@@ -826,36 +855,39 @@ sub get_scoring_type_out() {
 
     my $type;
 
-    if ( $o_score_sys eq "karl-8") {
+    if ( $o_score_accuracy_sys eq "karl-8") {
         $type="karl-8";
     }
-    elsif ( $o_score_sys eq "karl-32" ) {
+    elsif ( $o_score_accuracy_sys eq "karl-32" ) {
         $type="karl-32";
     }
-    elsif ( $o_score_sys eq "differential_scoring" ) {
+    elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
         $type="diff";
     }
-    elsif ( $o_score_sys eq "exact" ) {
+    elsif ( $o_score_accuracy_sys eq "exact" ) {
         $type="exact";
     }
 
-    if ($o_score_times_power_hundred){
+    if ( is_score_times_power_100() ){
         $type .= " and positions-times-power-one-hundred";
     }
-    elsif ($o_score_times_pos) {
+    elsif ( is_score_times_25_to_8() ){
         $type .= " and positions-times-25-to-8";
     }
-    elsif ($o_score_times_1990_pos) {
+    elsif ( is_score_times_9_to_1() ) {
         $type .= " and positions-times-9-to-1";
     }
-    else {
+    elsif ( is_score_times_none() ) {
         $type .= " and no-multiplier";
+    }
+    else {
+        dierr("prog. error in score_times_sys getting scoring type out");
     }
 
 #    # Special case
-#    if ( defined $o_score_sys
-#        && $o_score_sys eq "exact"
-#        && $o_score_times_power_hundred
+#    if ( defined $o_score_accuracy_sys
+#        && $o_score_accuracy_sys eq "exact"
+#        && is_score_times_power_100()
 #    ) {
 #        $type = "Leo-sort ";
 #    }
@@ -867,36 +899,39 @@ sub get_scoring_type_out_filename_root() {
 
     my $type;
 
-    if ( $o_score_sys eq "karl-8") {
+    if ( $o_score_accuracy_sys eq "karl-8") {
         $type="karl-8";
     }
-    elsif ( $o_score_sys eq "karl-32" ) {
+    elsif ( $o_score_accuracy_sys eq "karl-32" ) {
         $type="karl-32";
     }
-    elsif ( $o_score_sys eq "differential_scoring" ) {
+    elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
         $type="diff";
     }
-    elsif ( $o_score_sys eq "exact" ) {
+    elsif ( $o_score_accuracy_sys eq "exact" ) {
         $type="exact";
     }
 
-    if ($o_score_times_power_hundred){
+    if ( is_score_times_power_100() ){
         $type .= "-and-positions-times-power-one-hundred";
     }
-    elsif ($o_score_times_pos) {
-        $type .= "-and-positions-times-25-8";
+    elsif ( is_score_times_25_to_8() ){
+        $type .= "-and-positions-times-25-to-8";
     }
-    elsif ($o_score_times_1990_pos) {
+    elsif ( is_score_times_9_to_1() ) {
         $type .= "-and-positions-times-9-to-1";
     }
-    else {
+    elsif ( is_score_times_none() ) {
         $type .= "-and-positions-no-multiplier";
+    }
+    else {
+        dierr("prog. error in score_times_sys name calc");
     }
 
 #    # Special case
-#    if ( defined $o_score_sys
-#        && $o_score_sys eq "exact"
-#        && $o_score_times_power_hundred
+#    if ( defined $o_score_accuracy_sys
+#        && $o_score_accuracy_sys eq "exact"
+#        && is_score_times_power_100()
 #    ) {
 #        $type = "winner-takes-all-detailed";
 #    }
@@ -918,7 +953,7 @@ sub totals_header {
     if ( $is_fia ) {
         $sc_wide = 9;
     }
-    elsif ( $o_score_times_power_hundred ){
+    elsif ( is_score_times_power_100() ){
         $sc_wide = 20;
     };
 
@@ -947,7 +982,7 @@ sub totals_row($$$$$) {
     if ( $is_fia ) {
         $sc_wide = 9;
     }
-    elsif ( $o_score_times_power_hundred ){
+    elsif ( is_score_times_power_100() ){
         $sc_wide = 20;
     };
 
@@ -1104,7 +1139,7 @@ PLYR:
 
                 $plyr_tot_score += $real_score;
 
-                my $score = $o_score_times_power_hundred ? $disp_hundred_score : $real_score;
+                my $score = is_score_times_power_100() ? $disp_hundred_score : $real_score;
 
                 if ($o_suppress_detail_score) {
                     $result_line .= sprintf(" %s |", $pred);
@@ -1114,6 +1149,7 @@ PLYR:
             };
 
             if ( ! exists $results_lkup->{$plyr_pred}){
+                # TODO have a look at this.
                 # This is a programming error.
                 # dierr( "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n");
 
@@ -1127,24 +1163,24 @@ PLYR:
                 #my $score = Math::BigInt->bzero();;
                 my $score = 0;
 
-                if ( $o_score_sys eq "karl-8") {
+                if ( $o_score_accuracy_sys eq "karl-8") {
                     if ( $error <= 3){
                         $score = 2 ** (3-$error) ;
                     }
                 }
-                elsif ( $o_score_sys eq "karl-32" ) {
+                elsif ( $o_score_accuracy_sys eq "karl-32" ) {
                     if ( $error <= 5){
                         $score = 2 ** (5-$error) ;
                     }
                 }
-                elsif ( $o_score_sys eq "differential_scoring" ) {
+                elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
                     $score = $o_drivers_count-$error;
                 }
-                elsif ( $o_score_sys eq "exact" ) {
+                elsif ( $o_score_accuracy_sys eq "exact" ) {
                     $score = $error ? 0 : 1;
                 }
                 else {
-                    dierr( "score-sys [$o_score_sys] invalid. Programming error\n");
+                    dierr( "score-sys [$o_score_accuracy_sys] invalid. Programming error\n");
                 }
 
                 if (exists $z_minus_points->{$plyr_pred}){
@@ -1155,15 +1191,22 @@ PLYR:
                     $score = $score * $o_multi_points_factor ;
                 }
 
-
                 my $display_hundreds_score = $score;
-                if ($o_score_times_power_hundred){
-                    $score = $score * $power_hundred_score_multiplier->{$i}
-                } elsif ($o_score_times_pos){
-                    $score = $score * $real_f1_pos_scores->{$i}
+                if ( is_score_times_power_100() ){
+                    $score = $score * $power_hundred_score_multiplier->{$i};
                 }
-                elsif ($o_score_times_1990_pos) {
-                    $score = $score * $real_1990_f1_pos_scores->{$i}
+                elsif ( is_score_times_25_to_8() ){
+                    $score = $score * $real_f1_pos_scores->{$i};
+                }
+                elsif ( is_score_times_9_to_1() ) {
+                    $score = $score * $real_1990_f1_pos_scores->{$i};
+                }
+                elsif ( is_score_times_none() ) {
+                    # do nothing. effectively :
+                    # $score = $score * 1;
+                }
+                else {
+                    dierr("prog. error in score_times_sys process calc");
                 }
 
                 prdebug("$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score ".int($score)."\n",0);
