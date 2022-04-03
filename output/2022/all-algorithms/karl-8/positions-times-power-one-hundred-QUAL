@@ -4,60 +4,8 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
- The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
 
-
------------------
-Individual rounds
------------------
-
-<pre><code>
-Scoring is 'karl-8 and positions-times-power-one-hundred'
----------------
-bahrain-qual
-
-P   Player                 score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
-------------------------------------------------------------------------------------------------------------
-1   ggp1        4,04,08,08,04,02 | 25    | VER    4 | LEC    4 | SAI    8 | PER    8 | BOT    4 | ALO    2 |
-2   hobbes      4,04,08,08,00,02 | 18    | VER    4 | LEC    4 | SAI    8 | PER    8 | RUS    0 | ALO    2 |
-3   tlb         4,04,08,04,00,02 | 15    | VER    4 | LEC    4 | SAI    8 | HAM    4 | RUS    0 | PER    2 |
-4   f1ung       4,04,08,00,04,02 | 12    | VER    4 | LEC    4 | SAI    8 | RUS    0 | PER    4 | ALO    2 |
-5   karl        4,04,08,00,04,01 |  9    | VER    4 | LEC    4 | SAI    8 | GAS    0 | PER    4 | RUS    1 |
-5   winston     4,04,08,00,04,01 |  9    | VER    4 | LEC    4 | SAI    8 | GAS    0 | PER    4 | RUS    1 |
-7   iceman      4,04,08,00,01,00 |  6    | VER    4 | LEC    4 | SAI    8 | RUS    0 | ALO    1 | MSC    0 |
-8   leo         4,04,00,08,00,02 |  4    | VER    4 | SAI    4 | RUS    0 | PER    8 | LEC    0 | ALO    2 |
-9   bware       4,04,00,04,00,00 |  2    | VER    4 | LEC    4 | NOR    0 | HAM    4 | RUS    0 | GAS    0 |
-10  bill        4,01,00,08,00,01 |  1    | VER    4 | HAM    1 | RUS    0 | PER    8 | LEC    0 | SAI    1 |
-11  ray            4,00,02,01,00 |  0    | HAM    0 | LEC    4 | OCO    0 | BOT    2 | VER    1 | NOR    0 |
-    joe        no data (A)
-    nl         no data (A)
-    pylade     no data (A)
-------------------------------------------------------------------------------------------------------------
-</pre></code>
-
-<pre><code>
-Scoring is 'karl-8 and positions-times-power-one-hundred'
----------------
-jeddah-qual
-
-P   Player                 score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
-------------------------------------------------------------------------------------------------------------
-1   joe         4,04,04,01,00,00 | 25    | LEC    4 | SAI    4 | VER    4 | PER    1 | GAS    0 | MAG    0 |
-2   tlb         4,02,08,01,00,08 | 18    | LEC    4 | VER    2 | SAI    8 | PER    1 | HAM    0 | RUS    8 |
-3   f1ung       4,02,08,01,00,02 | 15    | LEC    4 | VER    2 | SAI    8 | PER    1 | HAM    0 | BOT    2 |
-4   leo         2,02,04,02,00,04 | 12    | SAI    2 | VER    2 | LEC    4 | RUS    2 | PER    0 | ALO    4 |
-5   iceman      1,08,08,01,04,00 | 10    | VER    1 | LEC    8 | SAI    8 | PER    1 | RUS    4 | HAM    0 |
-6   ggp1        1,08,08,01,01,01 |  8    | VER    1 | LEC    8 | SAI    8 | PER    1 | BOT    1 | GAS    1 |
-7   bware       1,08,08,01,01,00 |  6    | VER    1 | LEC    8 | SAI    8 | PER    1 | BOT    1 | MAG    0 |
-8   pylade      1,08,08,01,00,08 |  4    | VER    1 | LEC    8 | SAI    8 | PER    1 | HAM    0 | RUS    8 |
-9   bill        1,08,08,01,00,02 |  2    | VER    1 | LEC    8 | SAI    8 | PER    1 | HAM    0 | BOT    2 |
-10  karl        1,08,02,04,04,00 |  1    | VER    1 | LEC    8 | PER    2 | SAI    4 | RUS    4 | HAM    0 |
-11  nl          1,08,02,04,00,08 |  0    | VER    1 | LEC    8 | PER    2 | SAI    4 | HAM    0 | RUS    8 |
-12  hobbes      1,04,04,01,04,00 |  0    | VER    1 | SAI    4 | LEC    4 | PER    1 | RUS    4 | HAM    0 |
-    ray        no data (A)
-    winston    no data (A)
-------------------------------------------------------------------------------------------------------------
-</pre></code>
 
 
 
@@ -192,4 +140,56 @@ P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6
     nl           10,802,040,008   |    1 |    |    |    |    |    |    
     ray             400,020,100   |    1 |    |    |    |    |    |    
 ---------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-power-one-hundred'
+---------------
+Bahrain Qual
+
+P   Player                 score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
+------------------------------------------------------------------------------------------------------------
+1   ggp1        4,04,08,08,04,02 | 25    | VER    4 | LEC    4 | SAI    8 | PER    8 | BOT    4 | ALO    2 |
+2   hobbes      4,04,08,08,00,02 | 18    | VER    4 | LEC    4 | SAI    8 | PER    8 | RUS    0 | ALO    2 |
+3   tlb         4,04,08,04,00,02 | 15    | VER    4 | LEC    4 | SAI    8 | HAM    4 | RUS    0 | PER    2 |
+4   f1ung       4,04,08,00,04,02 | 12    | VER    4 | LEC    4 | SAI    8 | RUS    0 | PER    4 | ALO    2 |
+5   karl        4,04,08,00,04,01 |  9    | VER    4 | LEC    4 | SAI    8 | GAS    0 | PER    4 | RUS    1 |
+5   winston     4,04,08,00,04,01 |  9    | VER    4 | LEC    4 | SAI    8 | GAS    0 | PER    4 | RUS    1 |
+7   iceman      4,04,08,00,01,00 |  6    | VER    4 | LEC    4 | SAI    8 | RUS    0 | ALO    1 | MSC    0 |
+8   leo         4,04,00,08,00,02 |  4    | VER    4 | SAI    4 | RUS    0 | PER    8 | LEC    0 | ALO    2 |
+9   bware       4,04,00,04,00,00 |  2    | VER    4 | LEC    4 | NOR    0 | HAM    4 | RUS    0 | GAS    0 |
+10  bill        4,01,00,08,00,01 |  1    | VER    4 | HAM    1 | RUS    0 | PER    8 | LEC    0 | SAI    1 |
+11  ray            4,00,02,01,00 |  0    | HAM    0 | LEC    4 | OCO    0 | BOT    2 | VER    1 | NOR    0 |
+    joe        no data (A)
+    nl         no data (A)
+    pylade     no data (A)
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-8 and positions-times-power-one-hundred'
+---------------
+Jeddah Qual
+
+P   Player                 score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
+------------------------------------------------------------------------------------------------------------
+1   joe         4,04,04,01,00,00 | 25    | LEC    4 | SAI    4 | VER    4 | PER    1 | GAS    0 | MAG    0 |
+2   tlb         4,02,08,01,00,08 | 18    | LEC    4 | VER    2 | SAI    8 | PER    1 | HAM    0 | RUS    8 |
+3   f1ung       4,02,08,01,00,02 | 15    | LEC    4 | VER    2 | SAI    8 | PER    1 | HAM    0 | BOT    2 |
+4   leo         2,02,04,02,00,04 | 12    | SAI    2 | VER    2 | LEC    4 | RUS    2 | PER    0 | ALO    4 |
+5   iceman      1,08,08,01,04,00 | 10    | VER    1 | LEC    8 | SAI    8 | PER    1 | RUS    4 | HAM    0 |
+6   ggp1        1,08,08,01,01,01 |  8    | VER    1 | LEC    8 | SAI    8 | PER    1 | BOT    1 | GAS    1 |
+7   bware       1,08,08,01,01,00 |  6    | VER    1 | LEC    8 | SAI    8 | PER    1 | BOT    1 | MAG    0 |
+8   pylade      1,08,08,01,00,08 |  4    | VER    1 | LEC    8 | SAI    8 | PER    1 | HAM    0 | RUS    8 |
+9   bill        1,08,08,01,00,02 |  2    | VER    1 | LEC    8 | SAI    8 | PER    1 | HAM    0 | BOT    2 |
+10  karl        1,08,02,04,04,00 |  1    | VER    1 | LEC    8 | PER    2 | SAI    4 | RUS    4 | HAM    0 |
+11  nl          1,08,02,04,00,08 |  0    | VER    1 | LEC    8 | PER    2 | SAI    4 | HAM    0 | RUS    8 |
+12  hobbes      1,04,04,01,04,00 |  0    | VER    1 | SAI    4 | LEC    4 | PER    1 | RUS    4 | HAM    0 |
+    ray        no data (A)
+    winston    no data (A)
+------------------------------------------------------------------------------------------------------------
 </pre></code>

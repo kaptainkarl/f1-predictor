@@ -4,60 +4,8 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
- The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
 
-
------------------
-Individual rounds
------------------
-
-<pre><code>
-Scoring is 'diff and positions-times-power-one-hundred'
----------------
-bahrain-race
-
-P   Player                 score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
-------------------------------------------------------------------------------------------------------------
-1   ray        20,03,19,06,19,17 | 25    | LEC   20 | VER    3 | SAI   19 | PER    6 | RUS   19 | HAM   17 |
-2   pylade     19,03,03,17,19,17 | 18    | SAI   19 | VER    3 | GAS    3 | LEC   17 | RUS   19 | ALO   17 |
-3   hobbes      2,20,08,20,16,08 | 15    | VER    2 | SAI   20 | NOR    8 | RUS   20 | LEC   16 | PER    8 |
-4   ggp1        2,20,05,17,05,18 | 12    | VER    2 | SAI   20 | PER    5 | LEC   17 | GAS    5 | RUS   18 |
-5   tlb         2,19,19,19,19,11 | 10    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | NOR   11 |
-6   iceman      2,19,19,19,19,08 |  8    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | PER    8 |
-7   karl        2,19,19,06,19,17 |  6    | VER    2 | LEC   19 | SAI   19 | PER    6 | RUS   19 | ALO   17 |
-8   bware       2,19,05,20,17,15 |  4    | VER    2 | HAM   19 | PER    5 | RUS   20 | SAI   17 | LEC   15 |
-9   joe         2,08,14,00,05,18 |  2    | VER    2 | RIC    8 | ALO   14 | VET    0 | GAS    5 | RUS   18 |
-10  leo         2,04,19,17,19,17 |  1    | VER    2 | PER    4 | SAI   19 | LEC   17 | RUS   19 | ALO   17 |
-11  bill        2,04,03,17,19,16 |  0    | VER    2 | PER    4 | GAS    3 | LEC   17 | RUS   19 | SAI   16 |
-    f1ung      no data (A)
-    nl         no data (A)
-    winston    no data (A)
-------------------------------------------------------------------------------------------------------------
-</pre></code>
-
-<pre><code>
-Scoring is 'diff and positions-times-power-one-hundred'
----------------
-jeddah-race
-
-P   Player                 score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
-------------------------------------------------------------------------------------------------------------
-1   karl       20,20,19,19,20,16 | 25    | VER   20 | LEC   20 | PER   19 | SAI   19 | RUS   20 | HAM   16 |
-2   bill       20,20,19,19,15,19 | 16.50 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
-2   hobbes     20,20,19,19,15,19 | 16.50 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
-4   f1ung      20,20,19,19,10,16 | 12    | VER   20 | LEC   20 | PER   19 | SAI   19 | BOT   10 | HAM   16 |
-5   bware      20,19,19,20,15,19 | 10    | VER   20 | SAI   19 | LEC   19 | PER   20 | HAM   15 | RUS   19 |
-6   leo        20,19,19,19,19,10 |  8    | VER   20 | SAI   19 | LEC   19 | RUS   19 | PER   19 | ALO   10 |
-7   iceman     20,19,19,14,20,17 |  6    | VER   20 | SAI   19 | LEC   19 | HAM   14 | RUS   20 | MAG   17 |
-8   ggp1       20,19,19,14,10,19 |  4    | VER   20 | SAI   19 | PER   19 | HAM   14 | BOT   10 | RUS   19 |
-9   nl         20,19,13,19,10,15 |  2    | VER   20 | SAI   19 | HAM   13 | RUS   19 | BOT   10 | ZHO   15 |
-10  tlb        19,19,20,20,15,19 |  1    | LEC   19 | VER   19 | SAI   20 | PER   20 | HAM   15 | RUS   19 |
-11  pylade     19,19,18,20,20,17 |  0    | LEC   19 | SAI   19 | VER   18 | PER   20 | RUS   20 | MAG   17 |
-    joe        no data (A)
-    ray        no data (A)
-    winston    no data (A)
-------------------------------------------------------------------------------------------------------------
-</pre></code>
 
 
 
@@ -192,4 +140,56 @@ P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6
     joe          20,814,000,518   |    1 |    |    |    |    |    |    
     winston                   0   |    0 |    |    |    |    |    |    
 ---------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'diff and positions-times-power-one-hundred'
+---------------
+Bahrain Race
+
+P   Player                 score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
+------------------------------------------------------------------------------------------------------------
+1   ray        20,03,19,06,19,17 | 25    | LEC   20 | VER    3 | SAI   19 | PER    6 | RUS   19 | HAM   17 |
+2   pylade     19,03,03,17,19,17 | 18    | SAI   19 | VER    3 | GAS    3 | LEC   17 | RUS   19 | ALO   17 |
+3   hobbes      2,20,08,20,16,08 | 15    | VER    2 | SAI   20 | NOR    8 | RUS   20 | LEC   16 | PER    8 |
+4   ggp1        2,20,05,17,05,18 | 12    | VER    2 | SAI   20 | PER    5 | LEC   17 | GAS    5 | RUS   18 |
+5   tlb         2,19,19,19,19,11 | 10    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | NOR   11 |
+6   iceman      2,19,19,19,19,08 |  8    | VER    2 | LEC   19 | SAI   19 | HAM   19 | RUS   19 | PER    8 |
+7   karl        2,19,19,06,19,17 |  6    | VER    2 | LEC   19 | SAI   19 | PER    6 | RUS   19 | ALO   17 |
+8   bware       2,19,05,20,17,15 |  4    | VER    2 | HAM   19 | PER    5 | RUS   20 | SAI   17 | LEC   15 |
+9   joe         2,08,14,00,05,18 |  2    | VER    2 | RIC    8 | ALO   14 | VET    0 | GAS    5 | RUS   18 |
+10  leo         2,04,19,17,19,17 |  1    | VER    2 | PER    4 | SAI   19 | LEC   17 | RUS   19 | ALO   17 |
+11  bill        2,04,03,17,19,16 |  0    | VER    2 | PER    4 | GAS    3 | LEC   17 | RUS   19 | SAI   16 |
+    f1ung      no data (A)
+    nl         no data (A)
+    winston    no data (A)
+------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'diff and positions-times-power-one-hundred'
+---------------
+Jeddah Race
+
+P   Player                 score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
+------------------------------------------------------------------------------------------------------------
+1   karl       20,20,19,19,20,16 | 25    | VER   20 | LEC   20 | PER   19 | SAI   19 | RUS   20 | HAM   16 |
+2   bill       20,20,19,19,15,19 | 16.50 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
+2   hobbes     20,20,19,19,15,19 | 16.50 | VER   20 | LEC   20 | PER   19 | SAI   19 | HAM   15 | RUS   19 |
+4   f1ung      20,20,19,19,10,16 | 12    | VER   20 | LEC   20 | PER   19 | SAI   19 | BOT   10 | HAM   16 |
+5   bware      20,19,19,20,15,19 | 10    | VER   20 | SAI   19 | LEC   19 | PER   20 | HAM   15 | RUS   19 |
+6   leo        20,19,19,19,19,10 |  8    | VER   20 | SAI   19 | LEC   19 | RUS   19 | PER   19 | ALO   10 |
+7   iceman     20,19,19,14,20,17 |  6    | VER   20 | SAI   19 | LEC   19 | HAM   14 | RUS   20 | MAG   17 |
+8   ggp1       20,19,19,14,10,19 |  4    | VER   20 | SAI   19 | PER   19 | HAM   14 | BOT   10 | RUS   19 |
+9   nl         20,19,13,19,10,15 |  2    | VER   20 | SAI   19 | HAM   13 | RUS   19 | BOT   10 | ZHO   15 |
+10  tlb        19,19,20,20,15,19 |  1    | LEC   19 | VER   19 | SAI   20 | PER   20 | HAM   15 | RUS   19 |
+11  pylade     19,19,18,20,20,17 |  0    | LEC   19 | SAI   19 | VER   18 | PER   20 | RUS   20 | MAG   17 |
+    joe        no data (A)
+    ray        no data (A)
+    winston    no data (A)
+------------------------------------------------------------------------------------------------------------
 </pre></code>

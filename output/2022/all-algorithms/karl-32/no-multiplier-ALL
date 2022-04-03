@@ -4,108 +4,8 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
- The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
+The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
 
-
------------------
-Individual rounds
------------------
-
-<pre><code>
-Scoring is 'karl-32 and no-multiplier'
----------------
-bahrain-qual
-
-P   Player      score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
--------------------------------------------------------------------------------------------------
-1   ggp1          120 | 25    | VER   16 | LEC   16 | SAI   32 | PER   32 | BOT   16 | ALO    8 |
-2   hobbes        106 | 18    | VER   16 | LEC   16 | SAI   32 | PER   32 | RUS    2 | ALO    8 |
-3   tlb            90 | 15    | VER   16 | LEC   16 | SAI   32 | HAM   16 | RUS    2 | PER    8 |
-4   f1ung          89 | 12    | VER   16 | LEC   16 | SAI   32 | RUS    1 | PER   16 | ALO    8 |
-5   karl           84 |  9    | VER   16 | LEC   16 | SAI   32 | GAS    0 | PER   16 | RUS    4 |
-5   winston        84 |  9    | VER   16 | LEC   16 | SAI   32 | GAS    0 | PER   16 | RUS    4 |
-7   leo            74 |  6    | VER   16 | SAI   16 | RUS    0 | PER   32 | LEC    2 | ALO    8 |
-8   iceman         69 |  4    | VER   16 | LEC   16 | SAI   32 | RUS    1 | ALO    4 | MSC    0 |
-9   bill           58 |  2    | VER   16 | HAM    4 | RUS    0 | PER   32 | LEC    2 | SAI    4 |
-10  bware          52 |  1    | VER   16 | LEC   16 | NOR    0 | HAM   16 | RUS    2 | GAS    2 |
-11  ray            30 |  0    | HAM    2 | LEC   16 | OCO    0 | BOT    8 | VER    4 | NOR    0 |
-    joe        no data (A)
-    nl         no data (A)
-    pylade     no data (A)
--------------------------------------------------------------------------------------------------
-</pre></code>
-
-<pre><code>
-Scoring is 'karl-32 and no-multiplier'
----------------
-bahrain-race
-
-P   Player      score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
--------------------------------------------------------------------------------------------------
-1   ray            68 | 25    | LEC   32 | VER    0 | SAI   16 | PER    0 | RUS   16 | HAM    4 |
-2   hobbes         66 | 18    | VER    0 | SAI   32 | NOR    0 | RUS   32 | LEC    2 | PER    0 |
-3   iceman         64 | 13.50 | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | PER    0 |
-3   tlb            64 | 13.50 | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | NOR    0 |
-5   bware          53 | 10    | VER    0 | HAM   16 | PER    0 | RUS   32 | SAI    4 | LEC    1 |
-6   karl           52 |  8    | VER    0 | LEC   16 | SAI   16 | PER    0 | RUS   16 | ALO    4 |
-7   ggp1           44 |  6    | VER    0 | SAI   32 | PER    0 | LEC    4 | GAS    0 | RUS    8 |
-8   leo            40 |  3    | VER    0 | PER    0 | SAI   16 | LEC    4 | RUS   16 | ALO    4 |
-8   pylade         40 |  3    | SAI   16 | VER    0 | GAS    0 | LEC    4 | RUS   16 | ALO    4 |
-10  bill           22 |  1    | VER    0 | PER    0 | GAS    0 | LEC    4 | RUS   16 | SAI    2 |
-11  joe             8 |  0    | VER    0 | RIC    0 | ALO    0 | VET    0 | GAS    0 | RUS    8 |
-    f1ung      no data (A)
-    nl         no data (A)
-    winston    no data (A)
--------------------------------------------------------------------------------------------------
-</pre></code>
-
-<pre><code>
-Scoring is 'karl-32 and no-multiplier'
----------------
-jeddah-qual
-
-P   Player      score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
--------------------------------------------------------------------------------------------------
-1   pylade        104 | 25    | VER    4 | LEC   32 | SAI   32 | PER    4 | HAM    0 | RUS   32 |
-2   nl             92 | 16.50 | VER    4 | LEC   32 | PER    8 | SAI   16 | HAM    0 | RUS   32 |
-2   tlb            92 | 16.50 | LEC   16 | VER    8 | SAI   32 | PER    4 | HAM    0 | RUS   32 |
-4   iceman         88 | 12    | VER    4 | LEC   32 | SAI   32 | PER    4 | RUS   16 | HAM    0 |
-5   bill           80 |  9    | VER    4 | LEC   32 | SAI   32 | PER    4 | HAM    0 | BOT    8 |
-5   ggp1           80 |  9    | VER    4 | LEC   32 | SAI   32 | PER    4 | BOT    4 | GAS    4 |
-7   bware          78 |  6    | VER    4 | LEC   32 | SAI   32 | PER    4 | BOT    4 | MAG    2 |
-8   karl           76 |  4    | VER    4 | LEC   32 | PER    8 | SAI   16 | RUS   16 | HAM    0 |
-9   f1ung          68 |  2    | LEC   16 | VER    8 | SAI   32 | PER    4 | HAM    0 | BOT    8 |
-10  leo            58 |  1    | SAI    8 | VER    8 | LEC   16 | RUS    8 | PER    2 | ALO   16 |
-11  hobbes         56 |  0    | VER    4 | SAI   16 | LEC   16 | PER    4 | RUS   16 | HAM    0 |
-11  joe            56 |  0    | LEC   16 | SAI   16 | VER   16 | PER    4 | GAS    2 | MAG    2 |
-    ray        no data (A)
-    winston    no data (A)
--------------------------------------------------------------------------------------------------
-</pre></code>
-
-<pre><code>
-Scoring is 'karl-32 and no-multiplier'
----------------
-jeddah-race
-
-P   Player      score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
--------------------------------------------------------------------------------------------------
-1   karl          130 | 25    | VER   32 | LEC   32 | PER   16 | SAI   16 | RUS   32 | HAM    2 |
-2   bill          113 | 13.75 | VER   32 | LEC   32 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
-2   bware         113 | 13.75 | VER   32 | SAI   16 | LEC   16 | PER   32 | HAM    1 | RUS   16 |
-2   hobbes        113 | 13.75 | VER   32 | LEC   32 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
-2   tlb           113 | 13.75 | LEC   16 | VER   16 | SAI   32 | PER   32 | HAM    1 | RUS   16 |
-6   pylade        108 |  8    | LEC   16 | SAI   16 | VER    8 | PER   32 | RUS   32 | MAG    4 |
-7   iceman        100 |  6    | VER   32 | SAI   16 | LEC   16 | HAM    0 | RUS   32 | MAG    4 |
-8   f1ung          98 |  4    | VER   32 | LEC   32 | PER   16 | SAI   16 | BOT    0 | HAM    2 |
-9   leo            96 |  2    | VER   32 | SAI   16 | LEC   16 | RUS   16 | PER   16 | ALO    0 |
-10  ggp1           80 |  1    | VER   32 | SAI   16 | PER   16 | HAM    0 | BOT    0 | RUS   16 |
-11  nl             65 |  0    | VER   32 | SAI   16 | HAM    0 | RUS   16 | BOT    0 | ZHO    1 |
-    joe        no data (A)
-    ray        no data (A)
-    winston    no data (A)
--------------------------------------------------------------------------------------------------
-</pre></code>
 
 
 
@@ -240,4 +140,104 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6
     leo               268   |    4 |    |    |    |    |    |    
     joe                64   |    2 |    |    |    |    |    |    
 ---------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Scoring is 'karl-32 and no-multiplier'
+---------------
+Bahrain Qual
+
+P   Player      score | FIA   | LEC        VER        SAI        PER        HAM        BOT       
+-------------------------------------------------------------------------------------------------
+1   ggp1          120 | 25    | VER   16 | LEC   16 | SAI   32 | PER   32 | BOT   16 | ALO    8 |
+2   hobbes        106 | 18    | VER   16 | LEC   16 | SAI   32 | PER   32 | RUS    2 | ALO    8 |
+3   tlb            90 | 15    | VER   16 | LEC   16 | SAI   32 | HAM   16 | RUS    2 | PER    8 |
+4   f1ung          89 | 12    | VER   16 | LEC   16 | SAI   32 | RUS    1 | PER   16 | ALO    8 |
+5   karl           84 |  9    | VER   16 | LEC   16 | SAI   32 | GAS    0 | PER   16 | RUS    4 |
+5   winston        84 |  9    | VER   16 | LEC   16 | SAI   32 | GAS    0 | PER   16 | RUS    4 |
+7   leo            74 |  6    | VER   16 | SAI   16 | RUS    0 | PER   32 | LEC    2 | ALO    8 |
+8   iceman         69 |  4    | VER   16 | LEC   16 | SAI   32 | RUS    1 | ALO    4 | MSC    0 |
+9   bill           58 |  2    | VER   16 | HAM    4 | RUS    0 | PER   32 | LEC    2 | SAI    4 |
+10  bware          52 |  1    | VER   16 | LEC   16 | NOR    0 | HAM   16 | RUS    2 | GAS    2 |
+11  ray            30 |  0    | HAM    2 | LEC   16 | OCO    0 | BOT    8 | VER    4 | NOR    0 |
+    joe        no data (A)
+    nl         no data (A)
+    pylade     no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-32 and no-multiplier'
+---------------
+Bahrain Race
+
+P   Player      score | FIA   | LEC        SAI        HAM        RUS        MAG        BOT       
+-------------------------------------------------------------------------------------------------
+1   ray            68 | 25    | LEC   32 | VER    0 | SAI   16 | PER    0 | RUS   16 | HAM    4 |
+2   hobbes         66 | 18    | VER    0 | SAI   32 | NOR    0 | RUS   32 | LEC    2 | PER    0 |
+3   iceman         64 | 13.50 | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | PER    0 |
+3   tlb            64 | 13.50 | VER    0 | LEC   16 | SAI   16 | HAM   16 | RUS   16 | NOR    0 |
+5   bware          53 | 10    | VER    0 | HAM   16 | PER    0 | RUS   32 | SAI    4 | LEC    1 |
+6   karl           52 |  8    | VER    0 | LEC   16 | SAI   16 | PER    0 | RUS   16 | ALO    4 |
+7   ggp1           44 |  6    | VER    0 | SAI   32 | PER    0 | LEC    4 | GAS    0 | RUS    8 |
+8   leo            40 |  3    | VER    0 | PER    0 | SAI   16 | LEC    4 | RUS   16 | ALO    4 |
+8   pylade         40 |  3    | SAI   16 | VER    0 | GAS    0 | LEC    4 | RUS   16 | ALO    4 |
+10  bill           22 |  1    | VER    0 | PER    0 | GAS    0 | LEC    4 | RUS   16 | SAI    2 |
+11  joe             8 |  0    | VER    0 | RIC    0 | ALO    0 | VET    0 | GAS    0 | RUS    8 |
+    f1ung      no data (A)
+    nl         no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-32 and no-multiplier'
+---------------
+Jeddah Qual
+
+P   Player      score | FIA   | PER        LEC        SAI        VER        OCO        RUS       
+-------------------------------------------------------------------------------------------------
+1   pylade        104 | 25    | VER    4 | LEC   32 | SAI   32 | PER    4 | HAM    0 | RUS   32 |
+2   nl             92 | 16.50 | VER    4 | LEC   32 | PER    8 | SAI   16 | HAM    0 | RUS   32 |
+2   tlb            92 | 16.50 | LEC   16 | VER    8 | SAI   32 | PER    4 | HAM    0 | RUS   32 |
+4   iceman         88 | 12    | VER    4 | LEC   32 | SAI   32 | PER    4 | RUS   16 | HAM    0 |
+5   bill           80 |  9    | VER    4 | LEC   32 | SAI   32 | PER    4 | HAM    0 | BOT    8 |
+5   ggp1           80 |  9    | VER    4 | LEC   32 | SAI   32 | PER    4 | BOT    4 | GAS    4 |
+7   bware          78 |  6    | VER    4 | LEC   32 | SAI   32 | PER    4 | BOT    4 | MAG    2 |
+8   karl           76 |  4    | VER    4 | LEC   32 | PER    8 | SAI   16 | RUS   16 | HAM    0 |
+9   f1ung          68 |  2    | LEC   16 | VER    8 | SAI   32 | PER    4 | HAM    0 | BOT    8 |
+10  leo            58 |  1    | SAI    8 | VER    8 | LEC   16 | RUS    8 | PER    2 | ALO   16 |
+11  hobbes         56 |  0    | VER    4 | SAI   16 | LEC   16 | PER    4 | RUS   16 | HAM    0 |
+11  joe            56 |  0    | LEC   16 | SAI   16 | VER   16 | PER    4 | GAS    2 | MAG    2 |
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Scoring is 'karl-32 and no-multiplier'
+---------------
+Jeddah Race
+
+P   Player      score | FIA   | VER        LEC        SAI        PER        RUS        OCO       
+-------------------------------------------------------------------------------------------------
+1   karl          130 | 25    | VER   32 | LEC   32 | PER   16 | SAI   16 | RUS   32 | HAM    2 |
+2   bill          113 | 13.75 | VER   32 | LEC   32 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
+2   bware         113 | 13.75 | VER   32 | SAI   16 | LEC   16 | PER   32 | HAM    1 | RUS   16 |
+2   hobbes        113 | 13.75 | VER   32 | LEC   32 | PER   16 | SAI   16 | HAM    1 | RUS   16 |
+2   tlb           113 | 13.75 | LEC   16 | VER   16 | SAI   32 | PER   32 | HAM    1 | RUS   16 |
+6   pylade        108 |  8    | LEC   16 | SAI   16 | VER    8 | PER   32 | RUS   32 | MAG    4 |
+7   iceman        100 |  6    | VER   32 | SAI   16 | LEC   16 | HAM    0 | RUS   32 | MAG    4 |
+8   f1ung          98 |  4    | VER   32 | LEC   32 | PER   16 | SAI   16 | BOT    0 | HAM    2 |
+9   leo            96 |  2    | VER   32 | SAI   16 | LEC   16 | RUS   16 | PER   16 | ALO    0 |
+10  ggp1           80 |  1    | VER   32 | SAI   16 | PER   16 | HAM    0 | BOT    0 | RUS   16 |
+11  nl             65 |  0    | VER   32 | SAI   16 | HAM    0 | RUS   16 | BOT    0 | ZHO    1 |
+    joe        no data (A)
+    ray        no data (A)
+    winston    no data (A)
+-------------------------------------------------------------------------------------------------
 </pre></code>
