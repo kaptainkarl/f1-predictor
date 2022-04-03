@@ -53,7 +53,7 @@ I dunno, I can do it , but it's kind of random numbers !
 
 
 
-So I ponder about this . Now one that could make sense on an individual round score ( I think it would break on the totals), split after every 4 digits  , then add together the the separate parts.
+So I pondered about this . Now one that could make sense on an individual round score ( I think it would break on the totals), split after every 4 digits  , then add together the the separate parts.
 
 
 <pre><code>
@@ -83,7 +83,7 @@ P6  times   1
 
 That could be done with Yet another multiplier 
 
-It's the "odd position 100 multiplier" !!!!
+It would be the "odd position 100 multiplier" !!!!
 
 
 Which then got me to thinking of other multipliers.
@@ -103,8 +103,28 @@ So those that manage to correct P6 and P5 more correctly will get higher scores.
 
 This I think could be really interesting , because for 2022 we kind of now know that P1 -> P4 are going to be filled with 2 Ferraris and 2 Red Bulls. So most players are just going to do different combinations of those. But who is in P5 and P6 ?
 
+
 I do think it could be good if we could have P7 and P8 predictions , and a suitable positional-multiplier . Then we could get more differentiation between all our scores.
 If we did this then for the first few rounds already played we need to add P7 and P8 predictions to all our scores of drivers who didn't compete, so say MAZ and VET  would be added on to all players for P7 and P8 for Bahrain and Jeddah. Those would shore zero points.
+
+
+Since after 2 races we know Ferrari and RB are going to be in the top 4 for most of the season (at least the first half), then a more complicated multiplier rule that says :
+
+If ( player-prediction-is-a-top-4-pred and players-car-prediction-is-ferrari-or-red-bull ) {
+
+    no multiplier multiplier applied
+
+}
+else {
+
+    apply multiplier
+
+}
+
+
+
+
+
 
 
 
