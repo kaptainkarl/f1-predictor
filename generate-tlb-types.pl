@@ -17,10 +17,10 @@ my $score_sys = [
 ];
 
 my $multipliers = [
-    " --score-times-current ",
-    " --score-times-1990 ",
-    " --score-times-power-100 ",
-    "", # no multiplier
+    "none",
+    "9-to-1",
+    "25-to-8",
+    "power-100",
 ];
 
 #./f1-predictor.pl --run bahrain-qual,jeddah-qual   --no-pre-code --out-file "blah"
@@ -32,7 +32,7 @@ for my $sc ( @$score_sys ) {
 
             $cmd .= " --out-sub-dir tlb ";
 
-            $cmd .= " --score-sys $sc $ml --out-file $r --run $runs->{$r}\n";
+            $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r --run $runs->{$r}\n";
 
             system( $cmd ) ;
         }

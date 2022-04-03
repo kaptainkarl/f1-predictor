@@ -10,8 +10,8 @@ my $runs = {
 };
 
 my $favs = [
-    " --score-sys=exact --score-times-power-100 ",
-    " --score-sys=diff  --score-times-1990 ",
+    " --score-accuracy=exact --score-times power-100 ",
+    " --score-accuracy=diff  --score-times 9-to-1 ",
 ];
 
 for my $fv ( @$favs ){
