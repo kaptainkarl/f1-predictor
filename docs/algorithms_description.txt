@@ -262,22 +262,26 @@ The P1 winner will get 25 points , all the way to P10 with one point.
 TOTALS tables
 -------------
 
-There are 4 types of totals table that sort the player order.
+There are 5 types of totals table that sort the player order.
 These are calculated when the f1-predictor.pl script is given more than 1 round to process.
 
 
 1) Total of the scores worked out by Accuracy X Position-Multiplier
 
 
-2) Total up the FIA round scores
+2) Total of the scores worked out by Accuracy X Position-Multiplier
+    this is in reverse order.
 
 
-3) Average the Total scores over the rounds played by the player.
+3) Total up the FIA round scores
+
+
+4) Average the Total scores over the rounds played by the player.
     This is for those players who might not have entered every round,
     and are thus at a disadvantage on the total scores table.
 
 
-4) Round Position P1 -> P6 then Total score
+5) Round Position P1 -> P6 then Total score
     A player gets Positional ratings for each round.
     The P1 -> P6s are counted.
     The table is then sorted in the order of the most P1 , then P2s etc.
