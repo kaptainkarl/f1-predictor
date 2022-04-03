@@ -107,12 +107,21 @@ my $real_1990_f1_pos_scores = {
 };
 
 # These are -1 out, so 0 is really P1 !!! :
+my $real_1990_f1_pos_scores_reverse = {
+    0 => 1,
+    1 => 2,
+    2 => 3,
+    3 => 4,
+    4 => 6,
+    5 => 9,
+};
+
+# These are -1 out, so 0 is really P1 !!! :
 # This is basically 100^(pos-6)
 # I guess I could just do it in a sum.
 # But a hash map keeps it to the first 6 places.
 # We're only doing P1 -> P6 predictions.
 my $power_hundred_score_multiplier = {
-#   0 => 1,00,00,00,00,00,
     0 => 10000000000,
     1 => 100000000,
     2 => 1000000,
@@ -153,7 +162,7 @@ Options :
         Basically it is a short cut to how I think Leo
         wants the predictions rated.
 
-    --score-accuracy-sys  karl-8, karl-32 , differential_scoring, diff, exact
+    --score-accuracy-sys  karl-8, karl-32 , karl-96-16 , differential_scoring , diff , exact
         defaults to differential_scoring
 
         diff and differential_scoring are the same thing.
@@ -327,6 +336,7 @@ use Getopt::Long;
 my $score_accuracy_sys_lkup = {
     "karl-8"     => 1,
     "karl-32"    => 1,
+    "karl-96-16" => 1,
     "differential_scoring" => 1,
     "exact" => 1,
 };
@@ -334,6 +344,7 @@ my $score_accuracy_sys_lkup = {
 my $score_times_sys_lkup = {
     "none"       => 1,
     "9-to-1"     => 1,
+    "1-to-9"     => 1,
     "25-to-8"    => 1,
     "power-100"  => 1,
 };
@@ -349,6 +360,9 @@ sub is_score_times_none {
 }
 sub is_score_times_9_to_1 {
     return $o_score_times_sys eq '9-to-1' ? true : false;
+}
+sub is_score_times_1_to_9 {
+    return $o_score_times_sys eq '1-to-9' ? true : false;
 }
 sub is_score_times_25_to_8 {
     return $o_score_times_sys eq '25-to-8' ? true : false;
@@ -878,6 +892,9 @@ sub get_scoring_type_out() {
     elsif ( $o_score_accuracy_sys eq "karl-32" ) {
         $type="karl-32";
     }
+    elsif ( $o_score_accuracy_sys eq "karl-96-16" ) {
+        $type="karl-96-16";
+    }
     elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
         $type="diff";
     }
@@ -893,6 +910,9 @@ sub get_scoring_type_out() {
     }
     elsif ( is_score_times_9_to_1() ) {
         $type .= " and positions-times-9-to-1";
+    }
+    elsif ( is_score_times_1_to_9() ) {
+        $type .= " and positions-times-1-to-9";
     }
     elsif ( is_score_times_none() ) {
         $type .= " and no-multiplier";
@@ -922,6 +942,9 @@ sub get_scoring_type_out_filename_root() {
     elsif ( $o_score_accuracy_sys eq "karl-32" ) {
         $type="karl-32";
     }
+    elsif ( $o_score_accuracy_sys eq "karl-96-16" ) {
+        $type="karl-96-16";
+    }
     elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
         $type="diff";
     }
@@ -937,6 +960,9 @@ sub get_scoring_type_out_filename_root() {
     }
     elsif ( is_score_times_9_to_1() ) {
         $type .= "-and-positions-times-9-to-1";
+    }
+    elsif ( is_score_times_1_to_9() ) {
+        $type .= "-and-positions-times-1-to-9";
     }
     elsif ( is_score_times_none() ) {
         $type .= "-and-positions-no-multiplier";
@@ -1195,6 +1221,18 @@ PLYR:
                         $score = 2 ** (5-$error) ;
                     }
                 }
+                elsif ( $o_score_accuracy_sys eq "karl-96-16" ) {
+                    if ( $error <= 5){
+                        $score = 2 ** (5-$error) ;
+                    }
+
+                    if ($error == 0){
+                        # this is an exact prediction
+                        # score has already been multiplied by 32 from the above
+                        # So thus 3 x 32 = 96 
+                        $score = $score * 3 ;
+                    }
+                }
                 elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
                     $score = $o_drivers_count-$error;
                 }
@@ -1222,6 +1260,9 @@ PLYR:
                 }
                 elsif ( is_score_times_9_to_1() ) {
                     $score = $score * $real_1990_f1_pos_scores->{$i};
+                }
+                elsif ( is_score_times_1_to_9() ) {
+                    $score = $score * $real_1990_f1_pos_scores_reverse->{$i};
                 }
                 elsif ( is_score_times_none() ) {
                     # do nothing. effectively :

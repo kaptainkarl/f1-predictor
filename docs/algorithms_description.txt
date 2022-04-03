@@ -86,6 +86,23 @@ Again drivers predicted who don't even make first practice, they've not
 even entered the race and don't end up on the official results, well 0 points.
 
 
+Karl-96-16 accuracy
+----------------
+
+karl-96-16 also known as karl-96-16-8-4-2-1 scores points by
+
+if prediction is exactly correct then 96 points
+if prediction is 1 place  out 16 points
+if prediction is 2 places out 8 points
+if prediction is 3 places out 4 points
+if prediction is 4 places out 2 points
+if prediction is 5 places out 1 points
+
+This very heavily weights exact predictions, thus the player who does most of those should win.
+
+Again drivers predicted who don't even make first practice, they've not
+even entered the race and don't end up on the official results, well 0 points.
+
 Exact accuracy
 --------------
 
@@ -183,6 +200,23 @@ P5  prediction is multiplied by 2
 P6  prediction is multiplied by 1
 
 
+positions-times-1-to-9 (1,2,3,4,6,9)
+------------------------------------
+
+A reverse of 9-to-1. Who get's P5 and P6 more accurate more often ?
+
+This multiplier can work up to 6 prediction positions.
+
+So here the ACCURACY part is multiplied by :
+
+P1  prediction is multiplied by 1
+P2  prediction is multiplied by 2
+P3  prediction is multiplied by 3
+P4  prediction is multiplied by 4
+P5  prediction is multiplied by 6
+P6  prediction is multiplied by 9
+
+
 positions-no-multiplier
 -----------------------
 
@@ -252,6 +286,8 @@ These are calculated when the f1-predictor.pl script is given more than 1 round 
 Perfect Scores of the Accuracy x Multipler
 ------------------------------------------
 
+TODO : This needs updating with the new algorithm bits of "Karl-96-16" and "1-to-9" multiplier.
+
 There are 4 different Accuracies and 4 different Multipliers. So 16 different combination.
 So assuming only P1 -> P6 predictions, these are the perfect scores for 1 round of each combination.
 
@@ -274,6 +310,10 @@ karl-8-and-positions-no-multiplier                               48
 karl-8-and-positions-times-25-8                                 704
 karl-8-and-positions-times-9-to-1                               200
 karl-8-and-positions-times-power-one-hundred       8,08,08,08,08,08   (80,808,080,808)
+
+
+TODO
+karl-96-16-and- ......
 
 
 Here are what a Perfect Score would look like in the tables for "test-plyr" on Jeddah 2022 Race :

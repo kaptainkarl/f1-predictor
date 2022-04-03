@@ -13,6 +13,7 @@ my $runs = {
 my $score_sys = [
     "karl-8",
     "karl-32",
+    "karl-96-16",
     "diff",
     "exact",
 ];
@@ -20,6 +21,7 @@ my $score_sys = [
 my $multipliers = [
     "none",
     "9-to-1",
+    "1-to-9",
     "25-to-8",
     "power-100",
 ];
