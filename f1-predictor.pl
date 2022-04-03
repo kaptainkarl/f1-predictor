@@ -590,7 +590,8 @@ sub main {
 
         my $pr_run = $pr_hsh->{plydata};
 
-        pre_code_open();
+        pre_code_open() if ! $o_suppress_rounds_tables;
+
         printoutrnd( "Scoring is '". get_scoring_type_out()."'\n");
         printoutrnd( "---------------\n");
 
@@ -679,7 +680,8 @@ sub main {
         }
         printoutrnd ("$underline\n");
 
-        pre_code_close();
+        pre_code_close() if ! $o_suppress_rounds_tables;
+
     }
 
     if (@$run_arrs <2){
@@ -695,6 +697,9 @@ sub main {
     printout ("\n\n\n----------------------\n");
     printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
 
+    # TODO get rid of this when fixed 
+    printout ( "The P column currently doesn't work out shared places\n" );
+    printout ( "so it is currently not being display\n\n" );
 
     my $tots_arr = [];
 
@@ -732,7 +737,10 @@ sub main {
         printout ("-----------------\n");
         totals_header("Total", false, false);
         $pp = 1;
-        for my $tl (sort { $b->{total} <=> $a->{total} } @$tots_arr ){
+        for my $tl ( sort { $b->{total}  <=> $a->{total}
+                         || $b->{player} cmp $a->{player}
+                     } @$tots_arr
+        ) {
             totals_row($pp, $tl, "total", false, false);
             $pp++;
         }
@@ -748,7 +756,10 @@ sub main {
         printout ("--------------------------------\n");
         totals_header("Total", false, false);
         $pp = scalar @$tots_arr;
-        for my $tl (sort { $a->{total} <=> $b->{total} } @$tots_arr ){
+        for my $tl ( sort { $a->{total}  <=> $b->{total}
+                         || $a->{player} cmp $b->{player}
+                    } @$tots_arr
+        ) {
             totals_row($pp, $tl, "total", false, false);
             $pp--;
         }
@@ -764,7 +775,10 @@ sub main {
         printout ("---------------------\n");
         totals_header("FIA", false, true);
         $pp = 1;
-        for my $tl (sort { $b->{fia_total} <=> $a->{fia_total} } @$tots_arr ){
+        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
+                         || $b->{player}    cmp $a->{player}
+                    } @$tots_arr
+        ) {
             totals_row($pp, $tl, "fia_total", false, true);
             $pp++;
         }
@@ -781,7 +795,10 @@ sub main {
         printout ("-------------------------------------------\n");
         totals_header("Ave Score", false, false);
         $pp = 1;
-        for my $tl (sort { $b->{ave_score} <=> $a->{ave_score} } @$tots_arr ){
+        for my $tl ( sort { $b->{ave_score} <=> $a->{ave_score}
+                         || $b->{player}    cmp $a->{player}
+                     } @$tots_arr
+        ) {
             totals_row($pp, $tl, "ave_score", false, false);
             $pp++;
         }
@@ -804,8 +821,8 @@ sub main {
                     $b->{p4} <=> $a->{p4} ||
                     $b->{p5} <=> $a->{p5} ||
                     $b->{p6} <=> $a->{p6} ||
-                    $b->{total} <=> $a->{total}
-
+                    $b->{total}  <=> $a->{total} ||
+                    $b->{player} cmp $a->{player}
                 } @$tots_arr
         ){
             totals_row($pp, $tl, "total", true, false);
@@ -994,6 +1011,11 @@ sub totals_row($$$$$) {
     } else {
         dierr( "Prog error . Can't split number in totals_row\n");
     }
+
+    # TODO $p is currently broken on equal places.
+    # So blanking it :
+    $p = "";
+    # and $o_suppress_position_column also needs implementing.
 
     printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $tl->{player}, $scr_str, $tl->{played} , $ppos_parts));
 }

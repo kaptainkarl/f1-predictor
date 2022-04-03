@@ -13,7 +13,7 @@ mkdir -p output/2022/csv/
 ./generate-fav-types.pl
 #./generate-tlb-types.pl
 
-#git add output/2022/
-#git commit -m "generated output"
-#git push github
+git add output/2022/
+git commit -m "generated output"
+git push github
 

@@ -31,12 +31,25 @@ for my $sc ( @$score_sys ) {
         for my $r (keys %$runs){
             my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
 
-            $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r --run $runs->{$r}\n";
+            $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r --run $runs->{$r}";
 
             system( $cmd ) ;
 
 
 
+        }
+    }
+}
+
+for my $sc ( @$score_sys ) {
+    for my $ml ( @$multipliers ){
+        for my $r (keys %$runs){
+            my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
+
+            $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r-TOTALS --run $runs->{$r}";
+            $cmd .= " --no-rounds";
+
+            system( $cmd ) ;
         }
     }
 }

@@ -18,7 +18,18 @@ for my $fv ( @$favs ){
     for my $r (keys %$runs){
         my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
 
-        $cmd .= " --out-sub-dir favourites $fv --out-file $r --run $runs->{$r}\n";
+        $cmd .= " --out-sub-dir favourites $fv --out-file $r --run $runs->{$r}";
+
+        system( $cmd ) ;
+    }
+}
+
+for my $fv ( @$favs ){
+    for my $r (keys %$runs){
+        my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
+
+        $cmd .= " --out-sub-dir favourites $fv --out-file $r-TOTALS --run $runs->{$r}";
+        $cmd .= " --no-rounds";
 
         system( $cmd ) ;
     }

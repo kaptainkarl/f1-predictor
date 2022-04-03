@@ -62,6 +62,9 @@ P   Player      score | FIA   | VER        LEC        SAI        PER        RUS 
 ----------------------
 Totals Tables run for bahrain-race, jeddah-race
 
+The P column currently doesn't work out shared places
+so it is currently not being display
+
 
 <pre><code>
 -----------------
@@ -71,20 +74,20 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-1   tlb               201   |    2 
-2   karl              196   |    2 
-3   iceman            195   |    2 
-4   pylade            191   |    2 
-5   bware             190   |    2 
-6   hobbes            186   |    2 
-7   leo               184   |    2 
-8   bill              173   |    2 
-9   ggp1              168   |    2 
-10  f1ung             104   |    1 
-11  nl                 96   |    1 
-12  ray                84   |    1 
-13  joe                47   |    1 
-14  winston             0   |    0 
+    tlb               201   |    2 
+    karl              196   |    2 
+    iceman            195   |    2 
+    pylade            191   |    2 
+    bware             190   |    2 
+    hobbes            186   |    2 
+    leo               184   |    2 
+    bill              173   |    2 
+    ggp1              168   |    2 
+    f1ung             104   |    1 
+    nl                 96   |    1 
+    ray                84   |    1 
+    joe                47   |    1 
+    winston             0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -96,20 +99,20 @@ Total Score table. Reverse Order
 --------------------------------
 P   Player          Total   |Played
 ---------------------------------------
-14  winston             0   |    0 
-13  joe                47   |    1 
-12  ray                84   |    1 
-11  nl                 96   |    1 
-10  f1ung             104   |    1 
-9   ggp1              168   |    2 
-8   bill              173   |    2 
-7   leo               184   |    2 
-6   hobbes            186   |    2 
-5   bware             190   |    2 
-4   pylade            191   |    2 
-3   iceman            195   |    2 
-2   karl              196   |    2 
-1   tlb               201   |    2 
+    winston             0   |    0 
+    joe                47   |    1 
+    ray                84   |    1 
+    nl                 96   |    1 
+    f1ung             104   |    1 
+    ggp1              168   |    2 
+    bill              173   |    2 
+    leo               184   |    2 
+    hobbes            186   |    2 
+    bware             190   |    2 
+    pylade            191   |    2 
+    iceman            195   |    2 
+    karl              196   |    2 
+    tlb               201   |    2 
 ---------------------------------------
 </pre></code>
 
@@ -121,20 +124,20 @@ Total FIA Score table
 ---------------------
 P   Player       FIA   |Played
 ----------------------------------
-1   karl          37   |    2 
-2   tlb           36.25|    2 
-3   pylade        26   |    2 
-4   iceman        24   |    2 
-5   bware         19.25|    2 
-6   hobbes        15.25|    2 
-7   ray           15   |    1 
-8   bill          12.25|    2 
-9   leo           12   |    2 
-10  ggp1           3   |    2 
-11  f1ung          2   |    1 
-12  joe            0   |    1 
-13  nl             0   |    1 
-14  winston        0   |    0 
+    karl          37   |    2 
+    tlb           36.25|    2 
+    pylade        26   |    2 
+    iceman        24   |    2 
+    bware         19.25|    2 
+    hobbes        15.25|    2 
+    ray           15   |    1 
+    bill          12.25|    2 
+    leo           12   |    2 
+    ggp1           3   |    2 
+    f1ung          2   |    1 
+    winston        0   |    0 
+    nl             0   |    1 
+    joe            0   |    1 
 ----------------------------------
 </pre></code>
 
@@ -147,20 +150,20 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player      Ave Score   |Played
 ---------------------------------------
-1   f1ung             104   |    1 
-2   tlb               100.50|    2 
-3   karl               98   |    2 
-4   iceman             97.50|    2 
-5   nl                 96   |    1 
-6   pylade             95.50|    2 
-7   bware              95   |    2 
-8   hobbes             93   |    2 
-9   leo                92   |    2 
-10  bill               86.50|    2 
-11  ray                84   |    1 
-12  ggp1               84   |    2 
-13  joe                47   |    1 
-14  winston             0   |    0 
+    f1ung             104   |    1 
+    tlb               100.50|    2 
+    karl               98   |    2 
+    iceman             97.50|    2 
+    nl                 96   |    1 
+    pylade             95.50|    2 
+    bware              95   |    2 
+    hobbes             93   |    2 
+    leo                92   |    2 
+    bill               86.50|    2 
+    ray                84   |    1 
+    ggp1               84   |    2 
+    joe                47   |    1 
+    winston             0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -172,19 +175,19 @@ P1->P6 then Total Score
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
 ---------------------------------------------------------------------
-1   tlb               201   |    2 |  1 |    |  1 |    |    |    
-2   karl              196   |    2 |  1 |    |    |  1 |    |    
-3   pylade            191   |    2 |    |  1 |    |    |  1 |    
-4   iceman            195   |    2 |    |  1 |    |    |    |    
-5   bware             190   |    2 |    |    |  1 |    |  1 |    
-6   hobbes            186   |    2 |    |    |  1 |    |    |    
-7   bill              173   |    2 |    |    |  1 |    |    |    
-8   ray                84   |    1 |    |    |  1 |    |    |    
-9   leo               184   |    2 |    |    |    |    |  1 |    
-10  ggp1              168   |    2 |    |    |    |    |    |    
-11  f1ung             104   |    1 |    |    |    |    |    |    
-12  nl                 96   |    1 |    |    |    |    |    |    
-13  joe                47   |    1 |    |    |    |    |    |    
-14  winston             0   |    0 |    |    |    |    |    |    
+    tlb               201   |    2 |  1 |    |  1 |    |    |    
+    karl              196   |    2 |  1 |    |    |  1 |    |    
+    pylade            191   |    2 |    |  1 |    |    |  1 |    
+    iceman            195   |    2 |    |  1 |    |    |    |    
+    bware             190   |    2 |    |    |  1 |    |  1 |    
+    hobbes            186   |    2 |    |    |  1 |    |    |    
+    bill              173   |    2 |    |    |  1 |    |    |    
+    ray                84   |    1 |    |    |  1 |    |    |    
+    leo               184   |    2 |    |    |    |    |  1 |    
+    ggp1              168   |    2 |    |    |    |    |    |    
+    f1ung             104   |    1 |    |    |    |    |    |    
+    nl                 96   |    1 |    |    |    |    |    |    
+    joe                47   |    1 |    |    |    |    |    |    
+    winston             0   |    0 |    |    |    |    |    |    
 ---------------------------------------------------------------------
 </pre></code>
