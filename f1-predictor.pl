@@ -30,12 +30,6 @@ sub output_all_alg_dir{check_dir(output_dir()."all-algorithms/", true)}
 sub output_json_dir   {check_dir(output_dir()."json/", true)}
 sub output_csv_dir    {check_dir(output_dir()."csv/", true)}
 
-sub output_sub_dir {
-    my ($sdir) = @_;
-    # just make it if it doesn't exist :
-    return check_dir(output_dir().$sdir, true);
-}
-
 sub check_all_dirs{
     output_dir();
     output_all_alg_dir();
@@ -166,21 +160,30 @@ Options :
         Basically it is a short cut to how I think Leo
         wants the predictions rated.
 
-    --score-accuracy-sys  karl-8, karl-32 , karl-96-16 , differential_scoring , diff , exact
+        TODO , make the --leo option do a very concise output.
+
+    --score-accuracy-sys  karl-8, karl-32, karl-96-16, differential_scoring, diff, exact
         defaults to differential_scoring
 
         diff and differential_scoring are the same thing.
 
         i.e.
+        --score-accuracy-sys diff
+            would run the :
+                20 - prediction-error = score system.
+
         --score-accuracy-sys karl-8
             would run the 8,4,2,1 scoring system.
 
         --score-accuracy-sys karl-32
             would run the 32-16-8-4-2-1 Karl systems.
 
+        --score-accuracy-sys karl-96-16
+            would run the 96-16-8-4-2-1 Karl systems.
+
         --score-accuracy-sys exact
             a single point is only awarded to an exactly
-            correction prediction.
+            correct prediction.
 
     --show-test-plyr --show-test-player
         a "test-plyr" needs adding to the zdata.players file for this to work
@@ -193,7 +196,7 @@ Options :
         This option will runs the calcs with the test player.
         It also doesn't calculate non "test-plyr" scores
 
-    --score-times-sys  none , 9-to-1 , 25-to-8, power-100
+    --score-times-sys  none , 9-to-1 , 1-to-9 , 25-to-8, power-100
 
         none ( this is the default ) :
             no multiplier applied to the positional predictions.
@@ -218,6 +221,10 @@ Options :
                 P4 x 3
                 P5 x 2
                 P6 x 1
+
+        1-to-9
+            This is the reverse of 9-to-1
+            So P6 is multiplied by 9 etc.
 
         power-100 :
             Currently for the top 6 postions only
@@ -326,6 +333,17 @@ Options :
         ./output/2022/all-algorithms
         ./output/2022/tlb
 
+    --out-accuracy-sub-dir
+        if this is specified the output will go to a sub directory 
+        with the name of the "accuracy" part of the scoring system.
+
+        thus
+            --out-accuracy-sub-dir --score-accuracy-system "diff" --score-times-system 9-to-1
+
+        would output the file to something like :
+
+        ./output/2022/all-algorithms/diff/positions-times-9-to-1-ALL
+
     --debug
         Defaults to 0 . No debug.
         --debug 1 shows minimal debug,  2 and 3 a bit more ...
@@ -390,6 +408,7 @@ my $o_suppress_totals_tables;
 my $o_no_pre_code;
 my $o_out_file_suffix;
 my $o_out_sub_dir;
+my $o_out_accuracy_sub_dir;
 my $o_show_test_player;
 my $o_show_only_test_player;
 my $o_suppress_position_column;
@@ -434,6 +453,7 @@ GetOptions (
 
     "out-file-suffix=s"     => \$o_out_file_suffix,
     "out-sub-dir=s"         => \$o_out_sub_dir,
+    "out-accuracy-sub-dir"  => \$o_out_accuracy_sub_dir,
 
     "drivers-count=i"       => \$o_drivers_count,
     "constructors-count=i"  => \$o_constructors_count,
@@ -887,6 +907,16 @@ sub pre_code_close{
 }
 
 sub get_scoring_type_out() {
+    return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
+}
+
+sub get_scoring_type_out_filename_root() {
+    my $type = get_scoring_type_out ();
+    $type =~ s/\s/-/g;
+    return $type;
+}
+
+sub get_scoring_accuracy_type {
 
     my $type;
 
@@ -905,84 +935,29 @@ sub get_scoring_type_out() {
     elsif ( $o_score_accuracy_sys eq "exact" ) {
         $type="exact";
     }
+    return $type;
+}
 
+sub get_scoring_multiplier_type {
+    my $type;
     if ( is_score_times_power_100() ){
-        $type .= " and positions-times-power-one-hundred";
+        $type .= "positions-times-power-one-hundred";
     }
     elsif ( is_score_times_25_to_8() ){
-        $type .= " and positions-times-25-to-8";
+        $type .= "positions-times-25-to-8";
     }
     elsif ( is_score_times_9_to_1() ) {
-        $type .= " and positions-times-9-to-1";
+        $type .= "positions-times-9-to-1";
     }
     elsif ( is_score_times_1_to_9() ) {
-        $type .= " and positions-times-1-to-9";
+        $type .= "positions-times-1-to-9";
     }
     elsif ( is_score_times_none() ) {
-        $type .= " and no-multiplier";
+        $type .= "no-multiplier";
     }
     else {
         dierr("prog. error in score_times_sys getting scoring type out");
     }
-
-#    # Special case
-#    if ( defined $o_score_accuracy_sys
-#        && $o_score_accuracy_sys eq "exact"
-#        && is_score_times_power_100()
-#    ) {
-#        $type = "Leo-sort ";
-#    }
-
-    return $type
-}
-
-sub get_scoring_type_out_filename_root() {
-
-    my $type;
-
-    if ( $o_score_accuracy_sys eq "karl-8") {
-        $type="karl-8";
-    }
-    elsif ( $o_score_accuracy_sys eq "karl-32" ) {
-        $type="karl-32";
-    }
-    elsif ( $o_score_accuracy_sys eq "karl-96-16" ) {
-        $type="karl-96-16";
-    }
-    elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
-        $type="diff";
-    }
-    elsif ( $o_score_accuracy_sys eq "exact" ) {
-        $type="exact";
-    }
-
-    if ( is_score_times_power_100() ){
-        $type .= "-and-positions-times-power-one-hundred";
-    }
-    elsif ( is_score_times_25_to_8() ){
-        $type .= "-and-positions-times-25-to-8";
-    }
-    elsif ( is_score_times_9_to_1() ) {
-        $type .= "-and-positions-times-9-to-1";
-    }
-    elsif ( is_score_times_1_to_9() ) {
-        $type .= "-and-positions-times-1-to-9";
-    }
-    elsif ( is_score_times_none() ) {
-        $type .= "-and-positions-no-multiplier";
-    }
-    else {
-        dierr("prog. error in score_times_sys name calc");
-    }
-
-#    # Special case
-#    if ( defined $o_score_accuracy_sys
-#        && $o_score_accuracy_sys eq "exact"
-#        && is_score_times_power_100()
-#    ) {
-#        $type = "winner-takes-all-detailed";
-#    }
-
     return $type;
 }
 
@@ -1592,11 +1567,30 @@ sub all_player_file ($) { return data_dir()."$_[0].all-players" }
 sub get_out_file {
     my $suf = $o_out_file_suffix ? "-$o_out_file_suffix" : "";
 
+    my $fn ;
+
+    # first work out if it is in a sub dir of the output
+    # rather than the default all-algorithms.
     if ( $o_out_sub_dir ) {
-        return output_sub_dir("$o_out_sub_dir/").get_scoring_type_out_filename_root()."$suf";
+        $fn = check_dir(output_dir()."$o_out_sub_dir/", true);
+    }
+    else {
+        $fn = output_all_alg_dir();
     }
 
-    return output_all_alg_dir().get_scoring_type_out_filename_root()."$suf";
+    # Now work out if the output is split on 
+    # the accuracy part and the position-times part 
+    if ( $o_out_accuracy_sub_dir ){
+        $fn .= get_scoring_accuracy_type()."/";
+        check_dir($fn, true);
+
+        $fn .=get_scoring_multiplier_type()."$suf";
+    }
+    else {
+        $fn .= get_scoring_type_out_filename_root()."$suf";
+    }
+
+    return $fn;
 }
 
 sub check_dir {
@@ -1619,14 +1613,13 @@ sub check_dir {
 
 sub json_out_dump {
     output_json_dir();
-
+    # TODO
 
 }
 
 sub csv_out_dump {
     output_csv_dir();
-
-
+    # TODO
 
 }
 

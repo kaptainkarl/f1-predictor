@@ -26,19 +26,19 @@ my $multipliers = [
     "power-100",
 ];
 
-#./f1-predictor.pl --run bahrain-qual,jeddah-qual   --no-pre-code --out-file "blah"
-
 for my $sc ( @$score_sys ) {
     for my $ml ( @$multipliers ){
         for my $r (keys %$runs){
             my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
 
-            $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r --run $runs->{$r}";
+            # $cmd .= " --out-sub-dir all-algorithms "; # don't need this the default.
+            $cmd .= " --out-accuracy-sub-dir";
+            $cmd .= " --out-file $r";
+
+            $cmd .= " --score-accuracy $sc --score-times $ml ";
+            $cmd .= " --run $runs->{$r}\n";
 
             system( $cmd ) ;
-
-
-
         }
     }
 }
@@ -50,6 +50,7 @@ for my $sc ( @$score_sys ) {
 
             $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r-TOTALS --run $runs->{$r}";
             $cmd .= " --no-rounds";
+            $cmd .= " --out-accuracy-sub-dir";
 
             system( $cmd ) ;
         }
