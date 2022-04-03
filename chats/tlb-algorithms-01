@@ -104,11 +104,13 @@ So those that manage to correct P6 and P5 more correctly will get higher scores.
 This I think could be really interesting , because for 2022 we kind of now know that P1 -> P4 are going to be filled with 2 Ferraris and 2 Red Bulls. So most players are just going to do different combinations of those. But who is in P5 and P6 ?
 
 
-I do think it could be good if we could have P7 and P8 predictions , and a suitable positional-multiplier . Then we could get more differentiation between all our scores.
-If we did this then for the first few rounds already played we need to add P7 and P8 predictions to all our scores of drivers who didn't compete, so say MAZ and VET  would be added on to all players for P7 and P8 for Bahrain and Jeddah. Those would shore zero points.
+I do think it could be good if we could have P7 and P8 predictions, and a suitable positional-multiplier.
+Then we could get more differentiation between all our scores.
+If we did this then for the first few rounds already played we need to add P7 and P8 predictions to all our scores of drivers who didn't compete, so say MAZ and VET  would be added on to all players for P7 and P8 for Bahrain and Jeddah. Those would score zero points.
 
 
-Since after 2 races we know Ferrari and RB are going to be in the top 4 for most of the season (at least the first half), then a more complicated multiplier rule that says :
+Back on to the Ferrari and RB will win most of the time this year ..
+So after 2 races we know Ferrari and RB are going to be in the top 4 for most of the season (at least the first half), then a more complicated multiplier rule that says the following could be interesting :
 
 If ( player-prediction-is-a-top-4-pred and players-car-prediction-is-ferrari-or-red-bull ) {
 
@@ -120,6 +122,53 @@ else {
     apply multiplier
 
 }
+
+That would be interesting with the 25,18,15,12,10,8 multiplier
+
+At Jeddah the result was :
+    Max Verstappen
+    Charles Leclerc
+    Carlos Sainz
+    Sergio Perez
+    George Russell
+    Esteban Ocon
+
+accurate predictions for the top 4, well no multiplier.
+But the P5 and P6 , Anyone who got RUS exactly correct would get 10 x 20 = 200 points.
+
+Now Players could game this system , just put say SAI or PER , in P5 , if it was PER that would be 1 place out , so 19 diff points, then times 10.
+So PER prediction for P5 would score 
+19 x 10 = 190 
+
+But a PER prediction for P4 would score 
+20 x 1 = 20
+
+Maybe really it's only the top-3 or top-2 results where RB or Ferraris shouldn't have the multiplier applied. (instead of top-4)
+
+
+The more I think about this , the more I kind of think reward spot on accuracy could be a good idea.
+
+basically , the "Accuracy part" would be 
+
+position exactly correct 40 points
+position 1 out   10 points
+position 2 out   4 points
+position 3 out   3 points
+position 4 out   2 points
+position 5 out   1 points
+
+any thing else zero points.
+
+Exact matches are highly scored. 1 position out isn't too bad. There are scores for almost-there, that will give an order to the tables.
+Those who match exactly should win.
+
+
+
+
+
+
+
+
 
 
 
