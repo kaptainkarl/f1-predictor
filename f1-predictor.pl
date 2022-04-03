@@ -699,7 +699,7 @@ sub main {
 
     # TODO get rid of this when fixed 
     printout ( "The P column currently doesn't work out shared places\n" );
-    printout ( "so it is currently not being display\n\n" );
+    printout ( "So until it is fixed it is not being displayed below\n\n" );
 
     my $tots_arr = [];
 
