@@ -19,7 +19,7 @@ my $season = $dt_now->year();
 
 my $cwd = getcwd();
 
-die "not running from correct directory" if ! -f "f1-predictor.pl";
+die "Not running from correct directory\n" if ! -f "f1-predictor.pl";
 
 # dirs where the script will die if they don't already exist :
 sub data_dir          {check_dir("$cwd/data/$season/")}
@@ -157,10 +157,12 @@ Options :
         It sets the --score-accuracy-sys to 'exact'
         and --score-times-sys to power-100
 
-        Basically it is a short cut to how I think Leo
-        wants the predictions rated.
+        Basically it is a short cut to how Leo wants the predictions calculated.
 
-        TODO , make the --leo option do a very concise output.
+        The --leo option also only outputs a very concise output.
+        if you want to see the numbers that 
+            --score-accuracy-sys to 'exact' --score-times-sys to power-100
+        you need to run them without the --leo option.
 
     --score-accuracy-sys  karl-8, karl-32, karl-96-16, differential_scoring, diff, exact
         defaults to differential_scoring
@@ -270,7 +272,7 @@ Options :
         i.e. P1 player get 25 points and so on .
 
     --player-rating-score
-        Displays the rating score in individual rounds and 
+        Displays the rating score in individual rounds and
         the totals table.
 
         The average score table is a special case.
@@ -464,8 +466,6 @@ GetOptions (
 
 usage() if $o_help;
 
-
-
 if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
@@ -580,11 +580,136 @@ sub main {
         push @$run_arrs, $plyr_res;
     }
 
+
+    my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
+
+    for my $pr_hsh (@$run_arrs) {
+        my $pr_run = $pr_hsh->{plydata};
+
+        for my $ln (@$pr_run){
+
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            $plyr_tots->{$plyr}{player} = $plyr;
+
+            $plyr_tots->{$plyr}{"p$pos"}++;
+
+            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
+            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
+            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
+
+            $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
+            $plyr_tots->{$plyr}{total}     += $ln->{score};
+            $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
+
+            next if $pos > $o_disp_plyrs_upto_pos;
+        }
+    }
+
+    if ( $o_score_leo ){
+        leo_output ($max_p_pos, $plyr_tots, $run_arrs);
+    } else {
+        main_header_out();
+        main_totals_output( $max_p_pos, $plyr_tots, $run_arrs);
+        main_rounds_out(    $max_p_pos, $plyr_tots, $run_arrs);
+    }
+    # deliberately not printout() :
+    print get_out_file()."\n";
+}
+
+sub leo_output {
+    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+
+    printout("Winner Takes All\n");
+    printout("----------------\n\n");
+
+    for my $pr_hsh (@$run_arrs) {
+
+        my $pr_run = $pr_hsh->{plydata};
+
+        printout( round_name($pr_hsh->{round})." : ");
+
+        my $winners = "";
+
+        for my $ln (@$pr_run){
+
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            if ($ln->{score} > 0 && $pos == 1){
+                $winners .= "$plyr, ";
+            }
+        }
+
+        $winners = $winners ? $winners: "No Winners";
+
+        $winners =~ s/, $//g;
+        printout("$winners\n\n");
+    }
+
+    printout("\n\n");
+    printout("--------------\n");
+    printout("Rounds Details\n");
+    printout("--------------\n");
+
+    for my $pr_hsh (@$run_arrs) {
+
+        my $pr_run = $pr_hsh->{plydata};
+
+        printout( "\n---------------\n");
+
+        printout( round_name($pr_hsh->{round})."\n\n");
+
+        # Header row
+        my $underline = "-" x 15;
+        printout( "P   Player     ");
+
+        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
+        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
+
+        $underline .= ("-" x length($pr_run->[0]{output}));
+
+        printout ("\n");
+        printout ("$underline\n");
+
+        # Body rows :
+        for my $ln (@$pr_run){
+
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            next if $pos > $o_disp_plyrs_upto_pos;
+
+            # Output section :
+            if ($ln->{skipped}){
+                printout(sprintf("    %-10s ",$plyr));
+                printout($ln->{output}."\n");
+                next;
+            }
+
+            printout(sprintf("%-3s %-10s ",$pos, $plyr));
+
+            my $outline = $ln->{output};
+            $outline =~s/0/ /g;
+
+            printout($outline);
+
+            printout ("\n");
+        }
+        printout ("$underline\n");
+    }
+}
+
+sub main_header_out {
+
     prdebug("\n\n\n",0);
     prdebug("##############################################################\n",0);
     prdebug("OUTPUT Section\n",0);
     prdebug("##############################################################\n",0);
-
 
     if ($o_minus_points || $o_multi_points  ) {
         printout( "This is a JOKE table, with silly factors applied to certain driver predictions\n\n");
@@ -601,9 +726,7 @@ sub main {
 
     }
 
-    ##############################
-    # Output the Individual Rounds
-    if ( ! $o_no_pre_code ) {
+    if ( ! $o_no_pre_code && ! $o_score_leo) {
         printout ( "The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.\n");
         printout ( "The Tags will format a lined up table\n\n" );
 
@@ -613,18 +736,25 @@ sub main {
 
     }
 
-    printout (" The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n");
+    printout ("The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n") if ! $o_score_leo ;
 
+}
+
+sub main_rounds_out {
+    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+
+    ##############################
+    # Output the Individual Rounds
+    if ($o_suppress_rounds_tables){
+        print("Rounds have been suppressed by CLI option\n");
+        return;
+    }
 
     if ( @$run_arrs >1 ){
         printoutrnd( "\n-----------------\n");
           printoutrnd( "Individual rounds\n");
           printoutrnd( "-----------------\n");
     }
-
-    print("Rounds have been suppressed by CLI option\n") if $o_suppress_rounds_tables;
-
-    my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
 
     for my $pr_hsh (@$run_arrs) {
 
@@ -635,7 +765,7 @@ sub main {
         printoutrnd( "Scoring is '". get_scoring_type_out()."'\n");
         printoutrnd( "---------------\n");
 
-        printoutrnd( $pr_hsh->{round}."\n\n");
+        printoutrnd( round_name($pr_hsh->{round})."\n\n");
 
         # Header row
         my $underline = "-" x 15;
@@ -668,28 +798,14 @@ sub main {
         printoutrnd ("$underline\n");
 
         # Body rows :
-
         for my $ln (@$pr_run){
 
             my $pos = $ln->{pos};
             my $plyr = $ln->{player};
             dierr( "unknown player . prog error \n") if ! $ln->{player};
 
-            $plyr_tots->{$plyr}{player} = $plyr;
-
-            $plyr_tots->{$plyr}{"p$pos"}++;
-
-            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
-            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
-            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
-
-            $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
-            $plyr_tots->{$plyr}{total}     += $ln->{score};
-            $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
-
             next if $pos > $o_disp_plyrs_upto_pos;
 
-            # Output section :
             if ($ln->{skipped}){
                 printoutrnd(sprintf("    %-10s ",$plyr));
                 printoutrnd($ln->{output}."\n");
@@ -721,8 +837,12 @@ sub main {
         printoutrnd ("$underline\n");
 
         pre_code_close() if ! $o_suppress_rounds_tables;
-
     }
+}
+
+sub main_totals_output {
+
+    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
 
     if (@$run_arrs <2){
         printout ("\nonly run for one round, not showing totals\n");
@@ -871,9 +991,6 @@ sub main {
         totals_header("Total", true, false,true);
         pre_code_close();
     }
-
-    # deliberately not printout() :
-    print get_out_file()."\n";
 }
 #################################
 #################################
@@ -902,10 +1019,13 @@ sub hundreds ($){
 
 sub pre_code_open{
     printout ("\n");
-    printout ( "<pre><code>\n" ) if ! $o_no_pre_code;
+    return if $o_no_pre_code;
+    printout ( "<pre><code>\n" );
 }
+
 sub pre_code_close{
-    printout ( "</pre></code>\n" ) if ! $o_no_pre_code;
+    return if $o_no_pre_code;
+    printout ( "</pre></code>\n" );
 }
 
 sub get_scoring_type_out() {
@@ -1623,6 +1743,14 @@ sub csv_out_dump {
     output_csv_dir();
     # TODO
 
+}
+
+sub round_name {
+    my ($nm) = @_;
+    if( my ($r, $e) = $nm =~ m{(.*?)-(race|qual)}){
+        return ucfirst($r)." ".ucfirst($e);
+    }
+    return $nm;
 }
 
 main();
