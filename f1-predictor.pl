@@ -271,7 +271,7 @@ Options :
         positions , the positions of the players is mapped against proper F1 scoring in 2022
         i.e. P1 player get 25 points and so on .
 
-    --player-rating-score
+    --player-rating-score  --score  --rating
         Displays the rating score in individual rounds and
         the totals table.
 
@@ -443,7 +443,7 @@ GetOptions (
     "no-rounds|suppress-rounds"
                             => \$o_suppress_rounds_tables,
     "no-pos-col|suppress-position-column"
-                            => \$o_suppress_position_column,
+                            => \$o_suppress_position_column, # TODO implement this.
     "no-pre-code"
                             => \$o_no_pre_code,
 
@@ -639,8 +639,11 @@ sub leo_output {
             my $plyr = $ln->{player};
             dierr( "unknown player . prog error \n") if ! $ln->{player};
 
+            my $plyr_n = $z_players->{$plyr} //
+                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
+
             if ($ln->{score} > 0 && $pos == 1){
-                $winners .= "$plyr, ";
+                $winners .= "$plyr_n, ";
             }
         }
 
@@ -681,17 +684,19 @@ sub leo_output {
             my $pos = $ln->{pos};
             my $plyr = $ln->{player};
             dierr( "unknown player . prog error \n") if ! $ln->{player};
+            my $plyr_n = $z_players->{$plyr} //
+                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
 
             next if $pos > $o_disp_plyrs_upto_pos;
 
             # Output section :
             if ($ln->{skipped}){
-                printout(sprintf("    %-10s ",$plyr));
+                printout(sprintf("    %-10s ",$plyr_n));
                 printout($ln->{output}."\n");
                 next;
             }
 
-            printout(sprintf("%-3s %-10s ",$pos, $plyr));
+            printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             my $outline = $ln->{output};
             $outline =~s/0/ /g;
@@ -805,14 +810,16 @@ sub main_rounds_out {
             dierr( "unknown player . prog error \n") if ! $ln->{player};
 
             next if $pos > $o_disp_plyrs_upto_pos;
+            my $plyr_n = $z_players->{$plyr} //
+                 dierr( "Can't lookup player uppercased name (rounds)\n");
 
             if ($ln->{skipped}){
-                printoutrnd(sprintf("    %-10s ",$plyr));
+                printoutrnd(sprintf("    %-10s ",$plyr_n));
                 printoutrnd($ln->{output}."\n");
                 next;
             }
 
-            printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr));
+            printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             if ($o_player_rating_score){
                 if (is_score_times_power_100()){
@@ -1144,7 +1151,9 @@ sub totals_row($$$$$) {
     $p = "";
     # and $o_suppress_position_column also needs implementing.
 
-    printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $tl->{player}, $scr_str, $tl->{played} , $ppos_parts));
+    my $plyr_n = $z_players->{$tl->{player}} // die "Can't lookup player uppercased name\n";
+
+    printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $plyr_n, $scr_str, $tl->{played} , $ppos_parts));
 }
 
 sub expected_count ($) {
@@ -1593,11 +1602,11 @@ sub z_data_single {
         $ln =  trim($ln);
         next if ! $ln;
 
-        if ($ln !~ /^[a-z0-9_-]+$/){
-            dierr(  "$ln in file $file doesn't match a-z (lowercase only), 0-9 , hyphen, underscore only format\n");
+        if ($ln !~ /^[a-z0-9_-]+$/i){
+            dierr(  "$ln in file $file doesn't match A-Z, a-z, 0-9 , hyphen, underscore only format\n");
         }
 
-        $ret->{$ln} = 1;
+        $ret->{lc($ln)} = $ln;
     }
     return $ret;
 }
