@@ -7,11 +7,12 @@ use Text::CSV qw( csv );
 use DateTime;
 
 use Scalar::Util qw(looks_like_number);
-use Math::BigInt;
 use Number::Format;
 use Cwd;
 sub true {1}
 sub false {0}
+sub karl_winner_ta {"karl-winner-takes-all"}
+sub leo_winner_ta {"leo-winner-takes-all"}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
@@ -163,6 +164,39 @@ Options :
         if you want to see the numbers that 
             --score-accuracy-sys to 'exact' --score-times-sys to power-100
         you need to run them without the --leo option.
+
+        This isn't quite Leo's method.
+        It's the first part.
+        Leo's method as a tie break , then looks for non exact positions of drivers
+        predicted to be in the top 6 , who were in the top 6. They are counted up.
+        It is possible to have a draw.
+        Thus this still needs some coding.
+
+    --karl-winner-takes-all
+        this is more than a short cut.
+        it is 2 scoring systems, used to then order the results.
+        Using FIA points probably makes the most sense because
+        Adding the 2 scores together would be silly.
+
+        First it sorts the rounds by the scores calculated by 
+            exact and power-100.
+        This is the same as the first half of Leo's winner takes all.
+
+        A secondary sort is then done on the scoring system
+            diff and power-100
+        This will then split apart the positions with the same score as the first sort.
+        About the only way I can see a position being shared is if 2 or more players make
+        exactly the same predictions.
+
+        Having a "diff" , with P1 trumping all will mean that the players with the most
+        accurate, but not exact P1 (then P2) predictions will win.
+
+        The sequence of players can then be assigned FIA style positional points.
+        The can be used in a Totals table.
+
+        Totals tables could also be sorted on the 2 independent scores.
+        The exact-and-power-100 one again having the higher priority.
+
 
     --score-accuracy-sys  karl-8, karl-32, karl-96-16, differential_scoring, diff, exact
         defaults to differential_scoring
@@ -377,19 +411,29 @@ my $o_score_accuracy_sys;
 my $o_score_times_sys;
 
 sub is_score_times_power_100 {
-    return $o_score_times_sys eq 'power-100' ? true : false;
+    my ($times) = @_;
+    $times //= $o_score_times_sys;
+    return $times eq 'power-100' ? true : false;
 }
 sub is_score_times_none {
-    return $o_score_times_sys eq 'none' ? true : false;
+    my ($times) = @_;
+    $times //= $o_score_times_sys;
+    return $times eq 'none' ? true : false;
 }
 sub is_score_times_9_to_1 {
-    return $o_score_times_sys eq '9-to-1' ? true : false;
+    my ($times) = @_;
+    $times //= $o_score_times_sys;
+    return $times eq '9-to-1' ? true : false;
 }
 sub is_score_times_1_to_9 {
-    return $o_score_times_sys eq '1-to-9' ? true : false;
+    my ($times) = @_;
+    $times //= $o_score_times_sys;
+    return $times eq '1-to-9' ? true : false;
 }
 sub is_score_times_25_to_8 {
-    return $o_score_times_sys eq '25-to-8' ? true : false;
+    my ($times) = @_;
+    $times //= $o_score_times_sys;
+    return $times eq '25-to-8' ? true : false;
 }
 
 my $o_drivers_count       = 20;
@@ -405,6 +449,7 @@ my $o_player_fia_score;
 my $o_player_rating_score;
 my $o_suppress_average_table;
 my $o_score_leo;
+my $o_score_karl_winner_takes_all;
 my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_no_pre_code;
@@ -418,6 +463,7 @@ my $o_suppress_position_column;
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
     "leo"                   => \$o_score_leo,
+    "karl-winner-takes-all" => \$o_score_karl_winner_takes_all,
     "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
     "score-times-sys=s"     => \$o_score_times_sys,
     "minus-points=s"        => \$o_minus_points,
@@ -470,7 +516,10 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ($o_score_leo){
+if ($o_score_leo && $o_score_karl_winner_takes_all ){
+    dierr("Can't use --leo and --karl-winner-takes-all both at the same time\n");
+}
+if ($o_score_leo || $o_score_karl_winner_takes_all ){
     $o_score_accuracy_sys = "exact";
     $o_score_times_sys    = "power-100";
 }
@@ -547,7 +596,7 @@ if ($o_constructors_count < 2){
 
 if ( $o_out_file_suffix ) {
     my $file_name = get_out_file();
-    open( $out_fh, ">" , $file_name ) || die "Can't create $file_name $!" ;
+    open( $out_fh, ">" , $file_name ) || dierr( "Can't create $file_name $!") ;
 }
 
 sub main {
@@ -610,7 +659,11 @@ sub main {
 
     if ( $o_score_leo ){
         leo_output ($max_p_pos, $plyr_tots, $run_arrs);
-    } else {
+    }
+    elsif ( $o_score_karl_winner_takes_all ){
+        karl_wta_output ($max_p_pos, $plyr_tots, $run_arrs);
+    }
+    else {
         main_header_out();
         main_totals_output( $max_p_pos, $plyr_tots, $run_arrs);
         main_rounds_out(    $max_p_pos, $plyr_tots, $run_arrs);
@@ -619,11 +672,106 @@ sub main {
     print get_out_file()."\n";
 }
 
+sub karl_wta_output {
+    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+    printout("Karl Winner Takes All\n");
+    printout("---------------------\n\n");
+
+    ##############################
+    # Output the Individual Rounds
+
+    if ( @$run_arrs >1 ){
+        printoutrnd( "\n-----------------\n");
+          printoutrnd( "KARL WTA Individual rounds\n");
+          printoutrnd( "-----------------\n");
+    }
+
+    for my $pr_hsh (@$run_arrs) {
+
+        my $pr_run = $pr_hsh->{plydata};
+
+        printoutrnd( "Scoring is '". get_scoring_type_out()."'\n");
+        printoutrnd( "---------------\n");
+
+        printoutrnd( round_name($pr_hsh->{round})."\n\n");
+
+        # Header row
+        my $underline = "-" x 15;
+        printoutrnd( "P   Player     ");
+
+        if ($o_player_rating_score){
+            if (is_score_times_power_100()){
+                printoutrnd(sprintf( "%18s|", "score ")) ;
+                $underline .= "-" x 19;
+            }
+            else {
+                printoutrnd(sprintf( "%7s|", "score " ));
+                $underline .= "-" x 8;
+            }
+        }
+
+        if ($o_player_fia_score) {
+            printoutrnd(sprintf("%4s   |",'FIA'));
+            $underline .= "-" x 8;
+        }
+
+        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
+        printoutrnd(sprintf ("$fmt", $pr_hsh->{details_header} ));
+
+        $underline .= ("-" x length($pr_run->[0]{output}));
+
+        printoutrnd ("\n");
+        printoutrnd ("$underline\n");
+
+        # Body rows :
+        for my $ln (@$pr_run){
+
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            next if $pos > $o_disp_plyrs_upto_pos;
+            my $plyr_n = $z_players->{$plyr} //
+                 dierr( "Can't lookup player uppercased name (rounds)\n");
+
+            if ($ln->{skipped}){
+                printoutrnd(sprintf("    %-10s ",$plyr_n));
+                printoutrnd($ln->{output}."\n");
+                next;
+            }
+
+            printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr_n));
+
+            if ($o_player_rating_score){
+                if (is_score_times_power_100()){
+                    my $sc_str = hundreds($ln->{score});
+                    printoutrnd(sprintf( "%18s|", "$sc_str "));
+                }
+                else {
+                    printoutrnd(sprintf( "%7s|", "$ln->{score} "));
+                }
+            }
+
+            if ($o_player_fia_score) {
+                my $fia_s = sprintf("%.2f",$ln->{fia_score});
+                $fia_s =~ s/.00$/   /g;
+                printoutrnd(sprintf("%6s |",$fia_s));
+            }
+
+            printoutrnd($ln->{output});
+
+            printoutrnd ("\n");
+        }
+        printoutrnd ("$underline\n");
+
+    }
+}
+
 sub leo_output {
     my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
 
-    printout("Winner Takes All\n");
-    printout("----------------\n\n");
+    printout("Leo Winner Takes All\n");
+    printout("--------------------\n\n");
 
     for my $pr_hsh (@$run_arrs) {
 
@@ -1036,6 +1184,10 @@ sub pre_code_close{
 }
 
 sub get_scoring_type_out() {
+
+    return karl_winner_ta() if $o_score_karl_winner_takes_all ;
+    return leo_winner_ta()  if $o_score_leo ;
+
     return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
 }
 
@@ -1151,7 +1303,7 @@ sub totals_row($$$$$) {
     $p = "";
     # and $o_suppress_position_column also needs implementing.
 
-    my $plyr_n = $z_players->{$tl->{player}} // die "Can't lookup player uppercased name\n";
+    my $plyr_n = $z_players->{$tl->{player}} // dierr("Can't lookup player uppercased name\n");
 
     printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $plyr_n, $scr_str, $tl->{played} , $ppos_parts));
 }
@@ -1243,8 +1395,8 @@ PLYR:
 
         prdebug("$s_run : Processing Player $plyr\n",0);
         my $result_line = "";
-        #my $plyr_tot_score = Math::BigInt->bzero();
         my $plyr_tot_score = 0;
+        my $plyr_all_algos = { };
 
         my $skip_result_line = sub {
             my ($skip_reason) = @_;
@@ -1278,6 +1430,7 @@ PLYR:
         }
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
+
 
             my $plyr_pred = uc($plyr_data->[$i]);
             if ( ! exists z_drivers_or_constructors($s_run)->{$plyr_pred} ){
@@ -1317,70 +1470,10 @@ PLYR:
             } else {
 
                 my $error = abs($results_lkup->{$plyr_pred}-$i);
+                _all_algo_calc( $plyr_all_algos , $plyr_pred, $i, $error );
 
-                #my $score = Math::BigInt->bzero();;
-                my $score = 0;
-
-                if ( $o_score_accuracy_sys eq "karl-8") {
-                    if ( $error <= 3){
-                        $score = 2 ** (3-$error) ;
-                    }
-                }
-                elsif ( $o_score_accuracy_sys eq "karl-32" ) {
-                    if ( $error <= 5){
-                        $score = 2 ** (5-$error) ;
-                    }
-                }
-                elsif ( $o_score_accuracy_sys eq "karl-96-16" ) {
-                    if ( $error <= 5){
-                        $score = 2 ** (5-$error) ;
-                    }
-
-                    if ($error == 0){
-                        # this is an exact prediction
-                        # score has already been multiplied by 32 from the above
-                        # So thus 3 x 32 = 96 
-                        $score = $score * 3 ;
-                    }
-                }
-                elsif ( $o_score_accuracy_sys eq "differential_scoring" ) {
-                    $score = $o_drivers_count-$error;
-                }
-                elsif ( $o_score_accuracy_sys eq "exact" ) {
-                    $score = $error ? 0 : 1;
-                }
-                else {
-                    dierr( "score-sys [$o_score_accuracy_sys] invalid. Programming error\n");
-                }
-
-                if (exists $z_minus_points->{$plyr_pred}){
-                    $score = -$score;
-                }
-
-                if (exists $z_multi_points->{$plyr_pred}){
-                    $score = $score * $o_multi_points_factor ;
-                }
-
-                my $display_hundreds_score = $score;
-                if ( is_score_times_power_100() ){
-                    $score = $score * $power_hundred_score_multiplier->{$i};
-                }
-                elsif ( is_score_times_25_to_8() ){
-                    $score = $score * $real_f1_pos_scores->{$i};
-                }
-                elsif ( is_score_times_9_to_1() ) {
-                    $score = $score * $real_1990_f1_pos_scores->{$i};
-                }
-                elsif ( is_score_times_1_to_9() ) {
-                    $score = $score * $real_1990_f1_pos_scores_reverse->{$i};
-                }
-                elsif ( is_score_times_none() ) {
-                    # do nothing. effectively :
-                    # $score = $score * 1;
-                }
-                else {
-                    dierr("prog. error in score_times_sys process calc");
-                }
+                my ($score, $display_hundreds_score )
+                   = _scorer($o_score_accuracy_sys, $o_score_times_sys, $plyr_pred, $i, $error);
 
                 prdebug("$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score ".int($score)."\n",0);
                 $add_result->($plyr_pred, $score, $display_hundreds_score);
@@ -1392,19 +1485,57 @@ PLYR:
 
         prdebug("$s_run : $result_line",0);
 
-        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr ,
-                                     round=> $s_run, output => $result_line, skipped=>false};
+
+        # Test the all_algos score with the currently run output score .. TODO
+
+
+        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , all_algos => $plyr_all_algos ,
+                                     round=> $s_run, output => $result_line, skipped=>false, preds => $plyr_data };
     }
 
     #################
     # Post processing
+    my @plyr_ordered_res ;
 
-    my @plyr_ordered_res =  sort {
-                                 $b->{score} <=> $a->{score}
+
+    if ($o_score_karl_winner_takes_all ) {
+        # This is for a secondary sort special case.
+        @plyr_ordered_res =  sort {
+                              $b->{all_algos}{exact}{"power-100"}{total}
+                                    <=>
+                                    $a->{all_algos}{exact}{"power-100"}{total}
+                              || $b->{all_algos}{differential_scoring}{"power-100"}{total}
+                                    <=>
+                                    $a->{all_algos}{differential_scoring}{"power-100"}{total}
                               || $a->{skipped} <=> $b->{skipped}
                             } @$player_results_arr;
 
-    my $last_diff_score;
+    } else {
+        @plyr_ordered_res =  sort {
+                                 $b->{score} <=> $a->{score}
+                              || $a->{skipped} <=> $b->{skipped}
+                            } @$player_results_arr;
+    }
+
+    my $last_diff_plyr;
+    my $cmp_last_diff_score_plyr = sub {
+        my ($pl_cmp) = @_;
+
+        if ($o_score_karl_winner_takes_all ) {
+            return (
+                             $pl_cmp->{all_algos}{exact}{"power-100"}{total} ==
+                     $last_diff_plyr->{all_algos}{exact}{"power-100"}{total}
+
+                      &&
+
+                             $pl_cmp->{all_algos}{differential_scoring}{"power-100"}{total} ==
+                     $last_diff_plyr->{all_algos}{differential_scoring}{"power-100"}{total}
+            );
+        } else {
+            return ( $pl_cmp->{score} == $last_diff_plyr->{score});
+        }
+    };
+
     my $last_diff_score_highest_pos;
 
     my $real_fia_score_sharing = {};
@@ -1433,20 +1564,24 @@ PLYR:
         if ( $i == 0 ){
 
             $plyr_rh->{pos} = $i+1;
-            $last_diff_score = $plyr_rh->{score};
+
+            $last_diff_plyr = $plyr_rh;
+
             $last_diff_score_highest_pos = $i;
 
             $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
 
             next;
         }
-        elsif ( $plyr_rh->{score} == $last_diff_score ){
+        elsif ( $cmp_last_diff_score_plyr->( $plyr_rh ) ){
             $plyr_rh->{pos} = $last_diff_score_highest_pos+1;
             $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
         }
         else {
             $plyr_rh->{pos} = $i+1;
-            $last_diff_score = $plyr_rh->{score};
+
+            $last_diff_plyr = $plyr_rh;
+
             $last_diff_score_highest_pos = $i;
             $add_2_real_fia_score_sharing->($i,$last_diff_score_highest_pos);
         }
@@ -1700,6 +1835,7 @@ sub get_out_file {
 
     my $fn ;
 
+
     # first work out if it is in a sub dir of the output
     # rather than the default all-algorithms.
     if ( $o_out_sub_dir ) {
@@ -1709,8 +1845,18 @@ sub get_out_file {
         $fn = output_all_alg_dir();
     }
 
-    # Now work out if the output is split on 
-    # the accuracy part and the position-times part 
+    if ( $o_score_karl_winner_takes_all ) {
+        $fn .= karl_winner_ta().$suf;
+        return $fn;
+    }
+
+    if ( $o_score_leo ) {
+        $fn .= leo_winner_ta().$suf;
+        return $fn;
+    }
+
+    # Now work out if the output is split on
+    # the accuracy part and the position-times part
     if ( $o_out_accuracy_sub_dir ){
         $fn .= get_scoring_accuracy_type()."/";
         check_dir($fn, true);
@@ -1760,6 +1906,120 @@ sub round_name {
         return ucfirst($r)." ".ucfirst($e);
     }
     return $nm;
+}
+
+sub _all_algo_calc {
+    my ($algo_hsh, $plyr_pred, $pos, $error ) = @_;
+    # calcs all the scoring combinations and creates a hash of hashes.
+
+    # This is primarily so that the results can be sorted first by 
+    #   exact and power-100
+    # then they can be sorted by 
+    #   diff and power-100.
+    #
+    # What this achieves is very close to Leo's Winner Takes All
+    # but it does then order the results on the not-exact but more
+    # accurate P1 to P6 predictions.
+
+    # The only shared P places in the table should be where 
+    #   exact and power-100 are exactly the same
+    #   and diff and power-100 are exactly the same.
+    # In reality, 2 players would need to have exactly the same predictions.
+    # ( I think )
+
+# This will do all currently 25 variants :
+#    for my $accuracy ( keys %$score_accuracy_sys_lkup){
+#        for my $times ( keys %$score_times_sys_lkup ){
+# But we only need diff and exact  run against power-100 so :
+    for my $accuracy ( "differential_scoring", "exact" ){
+        for my $times ( "power-100" ){
+
+            $algo_hsh->{$accuracy}{$times} =
+                {
+                    total              => 0,
+                    positions          => [],
+                    hundreds_positions => [],
+                } if ! exists$algo_hsh->{$accuracy}{$times} ;
+
+            my ($sc, $hundreds) = _scorer($accuracy, $times,  $plyr_pred, $pos, $error);
+
+            $algo_hsh->{$accuracy}{$times}{total} += $sc;
+            $algo_hsh->{$accuracy}{$times}{positions}[$pos] = $sc;
+            $algo_hsh->{$accuracy}{$times}{hundreds_positions}[$pos] = $hundreds;
+        }
+    }
+}
+
+sub _scorer {
+    my ($accuracy, $times, $plyr_pred, $pos, $error ) = @_;
+
+    my $score = 0;
+
+    # The accuracy part 
+    if ( $accuracy eq "karl-8") {
+        if ( $error <= 3){
+            $score = 2 ** (3-$error) ;
+        }
+    }
+    elsif ( $accuracy eq "karl-32" ) {
+        if ( $error <= 5){
+            $score = 2 ** (5-$error) ;
+        }
+    }
+    elsif ( $accuracy eq "karl-96-16" ) {
+        if ( $error <= 5){
+            $score = 2 ** (5-$error) ;
+        }
+
+        if ($error == 0){
+            # this is an exact prediction
+            # score has already been multiplied by 32 from the above
+            # So thus 3 x 32 = 96 
+            $score = $score * 3 ;
+        }
+    }
+    elsif ( $accuracy eq "differential_scoring" ) {
+        $score = $o_drivers_count-$error;
+    }
+    elsif ( $accuracy eq "exact" ) {
+        $score = $error ? 0 : 1;
+    }
+    else {
+        dierr( "score-sys [$accuracy] invalid. Programming error\n");
+    }
+
+    ## The fiddle factors
+    if (exists $z_minus_points->{$plyr_pred}){
+        $score = -$score;
+    }
+
+    if (exists $z_multi_points->{$plyr_pred}){
+        $score = $score * $o_multi_points_factor ;
+    }
+
+    # The multiplier part
+    my $display_hundreds_score = $score;
+    if ( is_score_times_power_100($times) ){
+        $score = $score * $power_hundred_score_multiplier->{$pos};
+    }
+    elsif ( is_score_times_25_to_8($times) ){
+        $score = $score * $real_f1_pos_scores->{$pos};
+    }
+    elsif ( is_score_times_9_to_1($times) ) {
+        $score = $score * $real_1990_f1_pos_scores->{$pos};
+    }
+    elsif ( is_score_times_1_to_9($times) ) {
+        $score = $score * $real_1990_f1_pos_scores_reverse->{$pos};
+    }
+    elsif ( is_score_times_none($times) ) {
+        # do nothing. effectively :
+        # $score = $score * 1;
+    }
+    else {
+        dierr("prog. error in score_times_sys process calc");
+    }
+
+    return ( $score, $display_hundreds_score );
 }
 
 main();
