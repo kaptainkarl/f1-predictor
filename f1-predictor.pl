@@ -1360,6 +1360,10 @@ sub process ($) {
 
     my $results = run_file(data_dir().$file_results);
 
+    dierr( "Incorrect amount of results in [$file_results] . ".
+        "Expected [$exp_tot] . Got [".scalar(@$results)."] \n")
+            if @$results != $exp_tot;
+
     prdebug("$s_run : Results are ".Dumper($results), 1);
 
     my $results_lkup = { } ;
@@ -1372,14 +1376,14 @@ sub process ($) {
         }
 
         my $char3name = z_drivers_or_constructors($s_run)->{$resname};
+
+        dierr "Duplicate result [$char3name]/[$resname] in [$file_results]\n"
+            if exists $results_lkup->{$char3name};
+
         $results_lkup->{$char3name} = $i;
         push @$results_array, $char3name;
     }
     prdebug("$s_run : Results Lookup is ".Dumper($results_lkup), 1);
-
-    if (scalar @$results != $exp_tot){
-        dierr( "The results file [$file_results] has [".scalar @$results."] rows and not [$exp_tot]\n");
-    }
 
     # Build the "details_header"
     my $details_header = "";
@@ -1428,8 +1432,8 @@ PLYR:
         if ( ! exists $all_players_data->{$plyr} ){
             push @skip_player_errs,
                 "$s_run : Skip [$plyr] no data in $s_run.all-players file";
-            $skip_result_line->("no data (A)");
-            prdebug("  no data (A)\n",0);
+            $skip_result_line->("no data");
+            prdebug("  no data\n",0);
             next ;
         }
 
@@ -1438,27 +1442,16 @@ PLYR:
 
         prdebug("$s_run : $plyr : ".Dumper($plyr_data),0);
 
-        if (scalar @$plyr_data < $o_score_upto_pos){
-            push @skip_player_errs,
-                "$s_run : Skip [$plyr] because [".scalar @$plyr_data."] lines in file [".all_player_file($s_run)."] isn't [$o_score_upto_pos]";
-            $skip_result_line->("no data (B)");
-            prdebug("  no data (B)\n",0);
-            next;
+        if (scalar @$plyr_data != $o_score_upto_pos){
+            dierr("$s_run : player [$plyr] has  [".scalar @$plyr_data.
+                "] predictions and not [$o_score_upto_pos] in file [".all_player_file($s_run)."] ");
         }
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
 
 
             my $plyr_pred = uc($plyr_data->[$i]);
-            if ( ! exists z_drivers_or_constructors($s_run)->{$plyr_pred} ){
-                push @skip_player_errs,
-                    "$s_run : Skip [$plyr] because prediction [".
-                        ($i+1)."][$plyr_pred] in file [".all_player_file($s_run)."] not found in [".z_drivers_or_constructors_file($s_run)."]";
 
-                $skip_result_line->("no data (C)");
-                prdebug("  no data (C)\n",0);
-                next PLYR;
-            }
             # get the 3 char abbrieviation :
             $plyr_pred = z_drivers_or_constructors($s_run)->{$plyr_pred} ;
 
@@ -1797,6 +1790,7 @@ sub get_all_players_data($) {
     for my $ln (split /\n/, $filedata){
         $ln =  trim($ln);
         next if ! $ln;
+        next if $ln =~ m{^#};
 
         if ( my ($plyr, $preds) = $ln =~ m{(.*?):(.*)} ){
 
@@ -1821,15 +1815,15 @@ sub get_all_players_data($) {
 
             for my $pr ( @$p_preds_arr ){
                 if ( ! exists z_drivers_or_constructors($s_run)->{$pr} ){
-                    dierr( "The prediction [$pr] for player [$plyr] ".
-                        " in the file $all_player_filename can't be found\n");
+                    dierr( "Can't find prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename\n");
                 }
 
                 $pr = z_drivers_or_constructors($s_run)->{$pr};
 
                 if ( exists $dup_preds->{$pr}){
-                    dierr( "The prediction [$pr] for player [$plyr] ".
-                        " in the file $all_player_filename is duplicated\n");
+                    dierr( "duplicated prediction [$pr] for player [$plyr] ".
+                        " in the file $all_player_filename\n");
                 }
                 $dup_preds->{$pr} = 1;
             }
