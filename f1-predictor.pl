@@ -56,11 +56,6 @@ sub dierr {
     die "\n$msg\n";
 }
 
-my $o_suppress_rounds_tables;
-sub printoutrnd ($){
-    return if $o_suppress_rounds_tables;
-    printout( $_[0] );
-}
 
 #$o_out_file_suffix
 sub printout ($){
@@ -452,6 +447,7 @@ my $o_score_leo;
 my $o_score_karl_winner_takes_all;
 my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
+my $o_suppress_rounds_tables;
 my $o_no_pre_code;
 my $o_out_file_suffix;
 my $o_out_sub_dir;
@@ -681,44 +677,44 @@ sub karl_wta_output {
     # Output the Individual Rounds
 
     if ( @$run_arrs >1 ){
-        printoutrnd( "\n-----------------\n");
-          printoutrnd( "KARL WTA Individual rounds\n");
-          printoutrnd( "-----------------\n");
+        printout( "\n-----------------\n");
+          printout( "KARL WTA Individual rounds\n");
+          printout( "-----------------\n");
     }
 
     for my $pr_hsh (@$run_arrs) {
 
         my $pr_run = $pr_hsh->{plydata};
 
-        printoutrnd( "Scoring is '". get_scoring_type_out()."'\n");
-        printoutrnd( "---------------\n");
+        printout( "Scoring is '". get_scoring_type_out()."'\n");
+        printout( "---------------\n");
 
-        printoutrnd( round_name($pr_hsh->{round})."\n\n");
+        printout( round_name($pr_hsh->{round})."\n\n");
 
         # Header row
         my $underline = "-" x 15;
-        printoutrnd( "P   Player     ");
+        printout( "P   Player     ");
 
         if ($o_player_rating_score){
-            printoutrnd(sprintf( "%18s|", "score 1  ")) ;
+            printout(sprintf( "%18s|", "score 1  ")) ;
             $underline .= "-" x 19;
-            printoutrnd(sprintf( "%18s|", "score 2  ")) ;
+            printout(sprintf( "%18s|", "score 2  ")) ;
             $underline .= "-" x 19;
         }
 
         if ($o_player_fia_score) {
-            printoutrnd(sprintf("%4s   |",'FIA'));
+            printout(sprintf("%4s   |",'FIA'));
             $underline .= "-" x 8;
         }
 
         my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
-        printoutrnd(sprintf ("$fmt", $pr_hsh->{details_header} ));
+        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
 
 # TODO next line needs fixing, can't use the sub process built up output.
         $underline .= ("-" x length($pr_run->[0]{output}));
 
-        printoutrnd ("\n");
-        printoutrnd ("$underline\n");
+        printout ("\n");
+        printout ("$underline\n");
 
         # Body rows :
         for my $ln (@$pr_run){
@@ -732,25 +728,25 @@ sub karl_wta_output {
                  dierr( "Can't lookup player uppercased name (rounds)\n");
 
             if ($ln->{skipped}){
-                printoutrnd(sprintf("    %-10s ",$plyr_n));
-                printoutrnd($ln->{output}."\n");
+                printout(sprintf("    %-10s ",$plyr_n));
+                printout($ln->{output}."\n");
                 next;
             }
 
-            printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr_n));
+            printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             if ($o_player_rating_score){
                 my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
-                printoutrnd(sprintf( "%18s|", "$sc_str "));
+                printout(sprintf( "%18s|", "$sc_str "));
 
                 $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
-                printoutrnd(sprintf( "%18s|", "$sc_str "));
+                printout(sprintf( "%18s|", "$sc_str "));
             }
 
             if ($o_player_fia_score) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
-                printoutrnd(sprintf("%6s |",$fia_s));
+                printout(sprintf("%6s |",$fia_s));
             }
 
 
@@ -774,12 +770,12 @@ sub karl_wta_output {
 
             }
 
-            printoutrnd($oline);
+            printout($oline);
 
 
-            printoutrnd ("\n");
+            printout ("\n");
         }
-        printoutrnd ("$underline\n");
+        printout ("$underline\n");
 
     }
 }
@@ -837,11 +833,11 @@ sub leo_output {
         printout( "P   Player     ");
 
         if ($o_player_fia_score) {
-            printoutrnd(sprintf("%4s   |",'FIA'));
+            printout(sprintf("%4s   |",'FIA'));
             $underline .= "-" x 8;
         }
 
-        printoutrnd(sprintf("%6s |",'Top 6'));
+        printout(sprintf("%6s |",'Top 6'));
         $underline .= "-" x 8;
 
         my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
@@ -875,10 +871,10 @@ sub leo_output {
             if ($o_player_fia_score) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
-                printoutrnd(sprintf("%6s |",$fia_s));
+                printout(sprintf("%6s |",$fia_s));
             }
 
-            printoutrnd(sprintf("   %2s  |",$ln->{top6_count}));
+            printout(sprintf("   %2s  |",$ln->{top6_count}));
 
             my $outline = $ln->{output};
             $outline =~s/0/ /g;
@@ -978,9 +974,9 @@ sub main_rounds_out {
     }
 
     if ( @$run_arrs >1 ){
-        printoutrnd( "\n-----------------\n");
-          printoutrnd( "Individual rounds\n");
-          printoutrnd( "-----------------\n");
+        printout( "\n-----------------\n");
+          printout( "Individual rounds\n");
+          printout( "-----------------\n");
     }
 
     for my $pr_hsh (@$run_arrs) {
@@ -989,40 +985,40 @@ sub main_rounds_out {
 
         pre_code_open() if ! $o_suppress_rounds_tables;
 
-        printoutrnd( "Scoring is '". get_scoring_type_out()."'\n");
-        printoutrnd( "---------------\n");
+        printout( "Scoring is '". get_scoring_type_out()."'\n");
+        printout( "---------------\n");
 
-        printoutrnd( round_name($pr_hsh->{round})."\n\n");
+        printout( round_name($pr_hsh->{round})."\n\n");
 
         # Header row
         my $underline = "-" x 15;
-        printoutrnd( "P   Player     ");
+        printout( "P   Player     ");
 
 
         if ($o_player_rating_score){
             if (is_score_times_power_100()){
-                printoutrnd(sprintf( "%18s|", "score ")) ;
+                printout(sprintf( "%18s|", "score ")) ;
                 $underline .= "-" x 19;
             }
             else {
-                printoutrnd(sprintf( "%7s|", "score " ));
+                printout(sprintf( "%7s|", "score " ));
                 $underline .= "-" x 8;
             }
         }
 
         if ($o_player_fia_score) {
-            printoutrnd(sprintf("%4s   |",'FIA'));
+            printout(sprintf("%4s   |",'FIA'));
             $underline .= "-" x 8;
         }
 
         my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
-        printoutrnd(sprintf ("$fmt", $pr_hsh->{details_header} ));
+        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
 
         $underline .= ("-" x length($pr_run->[0]{output}));
 
 
-        printoutrnd ("\n");
-        printoutrnd ("$underline\n");
+        printout ("\n");
+        printout ("$underline\n");
 
         # Body rows :
         for my $ln (@$pr_run){
@@ -1036,34 +1032,34 @@ sub main_rounds_out {
                  dierr( "Can't lookup player uppercased name (rounds)\n");
 
             if ($ln->{skipped}){
-                printoutrnd(sprintf("    %-10s ",$plyr_n));
-                printoutrnd($ln->{output}."\n");
+                printout(sprintf("    %-10s ",$plyr_n));
+                printout($ln->{output}."\n");
                 next;
             }
 
-            printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr_n));
+            printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             if ($o_player_rating_score){
                 if (is_score_times_power_100()){
                     my $sc_str = hundreds($ln->{score});
-                    printoutrnd(sprintf( "%18s|", "$sc_str "));
+                    printout(sprintf( "%18s|", "$sc_str "));
                 }
                 else {
-                    printoutrnd(sprintf( "%7s|", "$ln->{score} "));
+                    printout(sprintf( "%7s|", "$ln->{score} "));
                 }
             }
 
             if ($o_player_fia_score) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
-                printoutrnd(sprintf("%6s |",$fia_s));
+                printout(sprintf("%6s |",$fia_s));
             }
 
-            printoutrnd($ln->{output});
+            printout($ln->{output});
 
-            printoutrnd ("\n");
+            printout ("\n");
         }
-        printoutrnd ("$underline\n");
+        printout ("$underline\n");
 
         pre_code_close() if ! $o_suppress_rounds_tables;
     }

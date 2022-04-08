@@ -10,8 +10,6 @@ for my $r (keys %$runs){
 
     $cmd .= " --out-sub-dir leo ";
     $cmd .= " --out-file $r ";
-    $cmd .= " --no-rounds";
-
     $cmd .= " --leo --no-pre-code ";
     $cmd .= " --run $runs->{$r}";
 
