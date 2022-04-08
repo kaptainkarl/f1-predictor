@@ -700,14 +700,10 @@ sub karl_wta_output {
         printoutrnd( "P   Player     ");
 
         if ($o_player_rating_score){
-            if (is_score_times_power_100()){
-                printoutrnd(sprintf( "%18s|", "score ")) ;
-                $underline .= "-" x 19;
-            }
-            else {
-                printoutrnd(sprintf( "%7s|", "score " ));
-                $underline .= "-" x 8;
-            }
+            printoutrnd(sprintf( "%18s|", "score 1  ")) ;
+            $underline .= "-" x 19;
+            printoutrnd(sprintf( "%18s|", "score 2  ")) ;
+            $underline .= "-" x 19;
         }
 
         if ($o_player_fia_score) {
@@ -718,6 +714,7 @@ sub karl_wta_output {
         my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
         printoutrnd(sprintf ("$fmt", $pr_hsh->{details_header} ));
 
+# TODO next line needs fixing, can't use the sub process built up output.
         $underline .= ("-" x length($pr_run->[0]{output}));
 
         printoutrnd ("\n");
@@ -743,13 +740,11 @@ sub karl_wta_output {
             printoutrnd(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             if ($o_player_rating_score){
-                if (is_score_times_power_100()){
-                    my $sc_str = hundreds($ln->{score});
-                    printoutrnd(sprintf( "%18s|", "$sc_str "));
-                }
-                else {
-                    printoutrnd(sprintf( "%7s|", "$ln->{score} "));
-                }
+                my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
+                printoutrnd(sprintf( "%18s|", "$sc_str "));
+
+                my $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
+                printoutrnd(sprintf( "%18s|", "$sc_str "));
             }
 
             if ($o_player_fia_score) {
@@ -758,7 +753,29 @@ sub karl_wta_output {
                 printoutrnd(sprintf("%6s |",$fia_s));
             }
 
-            printoutrnd($ln->{output});
+
+            my $oline = "";
+
+            for (my $i=0; $i<$o_score_upto_pos; $i++){
+
+                my $pred = $ln->{preds}[$i];
+                my $score =$ln->{all_algos}{differential_scoring}{"power-100"}{hundreds_positions}[$i];
+                if ( not defined $score ){
+                    $score = "DNS";
+                    $pred = lc ($pred);
+                }
+                elsif ( $score == 20 ){
+                    $score = "";
+                } else {
+                    # $pred = lc ($pred);
+                }
+
+                $oline .= sprintf(" %s %4s |", $pred, $score);
+
+            }
+
+            printoutrnd($oline);
+
 
             printoutrnd ("\n");
         }
