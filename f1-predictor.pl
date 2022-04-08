@@ -743,7 +743,7 @@ sub karl_wta_output {
                 my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
                 printoutrnd(sprintf( "%18s|", "$sc_str "));
 
-                my $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
+                $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
                 printoutrnd(sprintf( "%18s|", "$sc_str "));
             }
 
@@ -826,6 +826,7 @@ sub leo_output {
     for my $pr_hsh (@$run_arrs) {
 
         my $pr_run = $pr_hsh->{plydata};
+        pre_code_open();
 
         printout( "\n---------------\n");
 
@@ -834,6 +835,14 @@ sub leo_output {
         # Header row
         my $underline = "-" x 15;
         printout( "P   Player     ");
+
+        if ($o_player_fia_score) {
+            printoutrnd(sprintf("%4s   |",'FIA'));
+            $underline .= "-" x 8;
+        }
+
+        printoutrnd(sprintf("%6s |",'Top 6'));
+        $underline .= "-" x 8;
 
         my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
         printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
@@ -863,6 +872,14 @@ sub leo_output {
 
             printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
+            if ($o_player_fia_score) {
+                my $fia_s = sprintf("%.2f",$ln->{fia_score});
+                $fia_s =~ s/.00$/   /g;
+                printoutrnd(sprintf("%6s |",$fia_s));
+            }
+
+            printoutrnd(sprintf("   %2s  |",$ln->{top6_count}));
+
             my $outline = $ln->{output};
             $outline =~s/0/ /g;
 
@@ -871,6 +888,46 @@ sub leo_output {
             printout ("\n");
         }
         printout ("$underline\n");
+        pre_code_close();
+    }
+
+    my $tots_arr = [];
+
+    for my $tpname ( keys %$plyr_tots ){
+        my $tp = $plyr_tots->{$tpname};
+
+        if ( $tp->{played}){
+            #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
+            $tp->{ave_score} =  $tp->{total} / $tp->{played};
+        } else {
+            $tp->{ave_score} = 0;
+        }
+
+        for my $p_pos ( 1..$max_p_pos ){
+            # fill in the pNUM hash keys that are undef with 0;
+            $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
+        }
+
+        push @$tots_arr, $tp;
+    }
+
+    if ( $o_player_fia_score ){
+        pre_code_open();
+        printout ("---------------------\n");
+        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout ("Total FIA Score table\n");
+        printout ("---------------------\n");
+        totals_header("FIA", false, true);
+        my $pp = 1;
+        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
+                         || $b->{player}    cmp $a->{player}
+                    } @$tots_arr
+        ) {
+            totals_row($pp, $tl, "fia_total", false, true);
+            $pp++;
+        }
+        totals_header("FIA", false, true, true);
+        pre_code_close();
     }
 }
 
@@ -1367,6 +1424,7 @@ sub process ($) {
     prdebug("$s_run : Results are ".Dumper($results), 1);
 
     my $results_lkup = { } ;
+    my $results_lkup_top6 = { } ;
     my $results_array = [] ;
     for (my $i=0; $i<$exp_tot; $i++){
         my $resname = uc($results->[$i]);
@@ -1381,6 +1439,10 @@ sub process ($) {
             if exists $results_lkup->{$char3name};
 
         $results_lkup->{$char3name} = $i;
+
+        $results_lkup_top6->{$char3name} = $i
+            if $i <6; # zero based index so 0 -> 5
+
         push @$results_array, $char3name;
     }
     prdebug("$s_run : Results Lookup is ".Dumper($results_lkup), 1);
@@ -1415,7 +1477,10 @@ PLYR:
         }
 
         prdebug("$s_run : Processing Player $plyr\n",0);
-        my $result_line = "";
+        my $result_line    = "";
+
+        my $plyr_top6 = {};
+
         my $plyr_tot_score = 0;
         my $plyr_all_algos = { };
 
@@ -1424,7 +1489,7 @@ PLYR:
             $skip_reason //= "";
 
             push @$player_results_arr ,
-                {score => 0, player=>$plyr , round=> $s_run,
+                {score => 0, player=>$plyr , round=> $s_run, top6_count => 0,
                  output => "${result_line}${skip_reason}", skipped=>1};
         };
 
@@ -1469,6 +1534,11 @@ PLYR:
                 }
             };
 
+            # top 6 counting.
+            if ( $i < 6 && exists $results_lkup_top6->{$plyr_pred}) {
+                $plyr_top6->{$plyr_pred} = $i;
+            }
+
             if ( ! exists $results_lkup->{$plyr_pred}){
                 # TODO have a look at this.
                 # This is a programming error.
@@ -1495,20 +1565,27 @@ PLYR:
 
         prdebug("$s_run : $result_line",0);
 
-
         # Test the all_algos score with the currently run output score .. TODO
 
-
-        push @$player_results_arr , {score => $plyr_tot_score, player=>$plyr , all_algos => $plyr_all_algos ,
-                                     round=> $s_run, output => $result_line, skipped=>false, preds => $plyr_data };
+        push @$player_results_arr , {
+                score => $plyr_tot_score, player=>$plyr , all_algos => $plyr_all_algos ,
+                top6 => $plyr_top6,       top6_count => ( (scalar keys %$plyr_top6) // 0 ),
+                round=> $s_run,
+                output => $result_line,   skipped=>false, preds => $plyr_data };
     }
 
     #################
     # Post processing
     my @plyr_ordered_res ;
 
-
-    if ($o_score_karl_winner_takes_all ) {
+    if ( $o_score_leo ) {
+        @plyr_ordered_res =  sort {
+                                 $b->{score} <=> $a->{score}
+                              || $b->{top6_count} <=> $a->{top6_count}
+                              || $a->{skipped} <=> $b->{skipped}
+                            } @$player_results_arr;
+    }
+    elsif ($o_score_karl_winner_takes_all ) {
         # This is for a secondary sort special case.
         @plyr_ordered_res =  sort {
                               $b->{all_algos}{exact}{"power-100"}{total}
@@ -1531,7 +1608,11 @@ PLYR:
     my $cmp_last_diff_score_plyr = sub {
         my ($pl_cmp) = @_;
 
-        if ($o_score_karl_winner_takes_all ) {
+        if ($o_score_leo ) {
+            return ( $pl_cmp->{score} == $last_diff_plyr->{score}
+                      && $pl_cmp->{top6_count} == $last_diff_plyr->{top6_count});
+        }
+        elsif ($o_score_karl_winner_takes_all ) {
             return (
                              $pl_cmp->{all_algos}{exact}{"power-100"}{total} ==
                      $last_diff_plyr->{all_algos}{exact}{"power-100"}{total}
