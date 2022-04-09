@@ -901,10 +901,10 @@ sub leo_output {
         if ( $tp->{played}){
             #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
             $tp->{ave_score} =  $tp->{total} / $tp->{played};
-            $tp->{ave_fia} =  $tp->{fia_total} / $tp->{played};
+            $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
         } else {
             $tp->{ave_score} = 0;
-            $tp->{ave_fia} = 0;
+            $tp->{ave_fia}   = 0;
         }
 
         for my $p_pos ( 1..$max_p_pos ){
@@ -914,6 +914,8 @@ sub leo_output {
 
         push @$tots_arr, $tp;
     }
+    prdebug("plyr_tots : ".Dumper($plyr_tots),1);
+    prdebug("tots_arr  : ".Dumper($tots_arr),1);
 
     if ( $o_player_fia_score ){
         printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
@@ -1122,7 +1124,7 @@ sub main_totals_output {
     my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
 
     if (@$run_arrs <2){
-        printout ("\nonly run for one round, not showing totals\n");
+        printout ("\nOnly run for one round, not showing totals\n");
         return;
     }
 
@@ -1146,8 +1148,10 @@ sub main_totals_output {
         if ( $tp->{played}){
             #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
             $tp->{ave_score} =  $tp->{total} / $tp->{played};
+            $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
         } else {
             $tp->{ave_score} = 0;
+            $tp->{ave_fia}   = 0;
         }
 
         for my $p_pos ( 1..$max_p_pos ){
@@ -1157,7 +1161,6 @@ sub main_totals_output {
 
         push @$tots_arr, $tp;
     }
-
     prdebug("plyr_tots : ".Dumper($plyr_tots),1);
     prdebug("tots_arr  : ".Dumper($tots_arr),1);
 
@@ -1204,25 +1207,6 @@ sub main_totals_output {
         pre_code_close();
     }
 
-    if ( $o_player_fia_score ){
-        pre_code_open();
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Total FIA Score table\n");
-        printout ("---------------------\n");
-        totals_header("FIA", false, true);
-        $pp = 1;
-        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
-                         || $b->{player}    cmp $a->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "fia_total", false, true);
-            $pp++;
-        }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
-    }
-
     if ( ! $o_suppress_average_table && $o_player_rating_score ){
         pre_code_open();
         printout ("-------------------------------------------\n");
@@ -1241,6 +1225,45 @@ sub main_totals_output {
         }
         totals_header("Ave Score", false, false, true);
         pre_code_close();
+    }
+
+    if ( $o_player_fia_score ){
+        pre_code_open();
+        printout ("---------------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout ("Total FIA Score table\n");
+        printout ("---------------------\n");
+        totals_header("FIA", false, true);
+        $pp = 1;
+        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
+                         || $b->{player}    cmp $a->{player}
+                    } @$tots_arr
+        ) {
+            totals_row($pp, $tl, "fia_total", false, true);
+            $pp++;
+        }
+        totals_header("FIA", false, true, true);
+        pre_code_close();
+
+        if ( ! $o_suppress_average_table ){
+            # Ave FIA table
+            pre_code_open();
+            printout ("---------------------\n");
+            printout( "Method is '".get_scoring_type_out()."'\n\n");
+            printout ("Average FIA Score table\n");
+            printout ("---------------------\n");
+            totals_header("FIA", false, true);
+            $pp = 1;
+            for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
+                             || $b->{player}  cmp $a->{player}
+                        } @$tots_arr
+            ) {
+                totals_row($pp, $tl, "ave_fia", false, true);
+                $pp++;
+            }
+            totals_header("FIA", false, true, true);
+            pre_code_close();
+        }
     }
 
     { # P1->6 table.

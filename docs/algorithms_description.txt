@@ -225,6 +225,74 @@ The accuracy score isn't multiplied.
 This will work up to the full 20 positions.
 
 
+-------------------------------------
+Leo Winner Takes All method (Leo-WTA)
+-------------------------------------
+
+This method orders the results with 2 distinct parts to the ordering.
+(unlike the other methods documented here. karl-winner-takes-all will also do double ordering )
+
+(1) does a exact-and-position-times-power-one-hundred  calculation.
+(2) adds up the top 6 predictions that actually appeared in the top 6.
+
+The predictions are then ordered by (1) , if there are level scores, then part (2) is a secondary sort.
+
+It can's sensibly show a score. parts (1) and (2) don't really "add"  together.
+
+It can have FIA scoring applied to it. If you really want a score, and more than just one Winner.
+
+---------------------------------------
+Karl Winner Takes All method (Karl-WTA)
+---------------------------------------
+
+Very similar to Leo Winner Takes All.
+So 2 parts to the ordering :
+
+(1) does a exact-and-position-times-power-one-hundred  calculation
+(2) does a diff-and-position-times-power-one-hundred  calculation
+
+The predictions are then ordered by (1) then by (2)
+
+So exact accuracy (1) trumps more fuzzy accuracy of part (2).
+part (2) acts to break up the many shared positions of part (1).
+
+The only way I can see that 2 players can share a position is if they do the same predictions.
+Not a lot can be done about that.
+
+Most of the time this will get a very similar result as Leo Winner Takes All.
+It will split up the shared positions more because of the different part (2)
+
+
+A pretend case where a different Winner is calculated is below,
+under Leo-WTA ggp1 would win because ggp1 has 2 exact predictions,
+and 5 of the predictions did appear in the top-6
+
+But under Karl-WTA , hobbes would win, because although hobbes only got 4 of the
+predictions in the top 6 , with the same 2 exactly correct, hobbes P1 prediction of VER
+is more accurate that than ggp1's ALO prediction.
+ggp1 did then get a more accurate P5 prediction of BOT,
+but that's in P5. So under Karl-WTA, P1 accuracy trumps P5.
+
+You take your choice, what WTA variant do you want to use ?
+
+.
+---------------
+Bahrain Qual   (Pretend predictions)
+
+P   Player      LEC        VER        SAI        PER        HAM        BOT
+---------------------------------------------------------------------------------
+1   ggp1        ALO      | LEC      | SAI    1 | PER    1 | BOT      | VER      |
+1   hobbes      VER      | LEC      | SAI    1 | PER    1 | RUS      | ALO      |
+
+
+Again, probably no point trying to add the 2 large scores together, they can be used in totals table,
+and the same double sort method done.
+
+Or FIA points can be asssigned to the individual rounds and added together for the championship.
+
+This method is currently not being generated and being pushed to github, it's "almost done".
+
+
 ---------------------------------
 FIDDLE FACTORS (Joke calculations
 ---------------------------------
