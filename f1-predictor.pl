@@ -522,12 +522,15 @@ if ($o_score_leo || $o_score_karl_winner_takes_all ){
 
 my $z_races   = z_data_single(data_dir().$ZDATA_RACES);
 prdebug( "Dump of races = ".Dumper($z_races), 2 );
+json_out_dump($ZDATA_RACES, $z_races, false);
 
 my $z_players = z_data_single(data_dir().$ZDATA_PLAYERS);
 prdebug( "Dump of players = ".Dumper($z_players),2 );
+json_out_dump($ZDATA_PLAYERS, $z_players, false);
 
 my $z_drivers = z_data_pipe_split(data_dir().$ZDATA_DRIVERS);
 prdebug( "Dump of drivers = ".Dumper($z_drivers), 2 );
+json_out_dump($ZDATA_DRIVERS, $z_drivers, false);
 
 # Only works on drivers. Doesn't seem much point on WCC
 my $z_minus_points = {};
@@ -562,6 +565,7 @@ if ($o_multi_points){
 
 my $z_constructors = z_data_pipe_split(data_dir().$ZDATA_CONSTRUCTORS);
 prdebug ( "Dump of constructors = ".Dumper($z_constructors),2);
+json_out_dump($ZDATA_CONSTRUCTORS, $z_constructors, false);
 
 prdebug("constructors count  = $o_constructors_count\n", 2 );
 prdebug("drivers count       = $o_drivers_count\n", 2 );
@@ -677,6 +681,8 @@ sub main {
     prdebug("plyr_tots : ".Dumper($plyr_tots),1);
     prdebug("tots_arr  : ".Dumper($tots_arr),1);
 
+    json_out_dump("z-totals-hash",$plyr_tots, true);
+    json_out_dump("z-totals-array",$tots_arr, true);
 
     if ( $o_score_leo ){
         leo_output ($plyr_tots, $run_arrs, $tots_arr);
@@ -1762,11 +1768,15 @@ PLYR:
     prdebug("$s_run : Skipped players due to errors : \n  ".join("\n  ",@skip_player_errs)."\n",0)
         if @skip_player_errs;
 
-    return {
+    my $return = {
         round          => $s_run,
         details_header => $details_header,
         plydata        => \@plyr_ordered_res,
     };
+
+    json_out_dump($s_run,$return, false);
+
+    return $return;
 }
 
 sub z_data_pipe_split {
@@ -1974,7 +1984,6 @@ sub get_out_file {
 
     my $fn ;
 
-
     # first work out if it is in a sub dir of the output
     # rather than the default all-algorithms.
     if ( $o_out_sub_dir ) {
@@ -2005,6 +2014,37 @@ sub get_out_file {
     else {
         $fn .= get_scoring_type_out_filename_root()."$suf";
     }
+
+    return $fn;
+}
+
+sub get_out_file_json {
+    my ($fn_root, $is_totals) = @_;
+
+    # if is a totals file then needs the suffix.
+    #
+    # if it is for an individual rounds file then
+    # the suffix is pointless.
+
+    my $suf = "";
+    if ($is_totals) {
+        $suf = $o_out_file_suffix ? "-$o_out_file_suffix" : "";
+    }
+    $suf .= ".json";
+
+    my $fn = output_json_dir()."$fn_root-";
+
+    if ( $o_score_karl_winner_takes_all ) {
+        $fn .= karl_winner_ta().$suf;
+        return $fn;
+    }
+
+    if ( $o_score_leo ) {
+        $fn .= leo_winner_ta().$suf;
+        return $fn;
+    }
+
+    $fn .= get_scoring_type_out_filename_root()."$suf";
 
     return $fn;
 }
@@ -2152,17 +2192,30 @@ sub _scorer {
 sub output_total_p {
     my ($tots_arrr, $sort_fields) = @_;
 
-
-
-
+    # TODO  utility method for sorting and printing totals tables
+    # with an accurate P column that works out shared
+    # positions.
 
 }
 
 sub json_out_dump {
-    my ($filename, $data) = @_;
-    output_json_dir();
-    # TODO
+    my ($fn_root, $data, $is_totals) = @_;
 
+    dierr ("fn_root needs defining, and to be of at least 3 chars long")
+        if ! defined $fn_root || length $fn_root < 3;
+
+    my $fn_full = get_out_file_json($fn_root, $is_totals);
+
+    burp ( $fn_full, to_json($data, {utf8 => 1, pretty => 1}));
+
+}
+
+sub burp {
+    my( $file_name, $text) = @_ ;
+    open( my $fh, ">" , $file_name ) ||
+        die "can't create $file_name $!" ;
+    print $fh ($text) ;
+    close $fh;
 }
 
 sub csv_out_dump {
@@ -2171,6 +2224,5 @@ sub csv_out_dump {
     # TODO
 
 }
-
 
 main();
