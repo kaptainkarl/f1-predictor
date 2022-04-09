@@ -686,7 +686,7 @@ sub karl_wta_output {
 
         my $pr_run = $pr_hsh->{plydata};
 
-        printout( "Scoring is '". get_scoring_type_out()."'\n");
+        printout( "Method is '". get_scoring_type_out()."'\n");
         printout( "---------------\n");
 
         printout( round_name($pr_hsh->{round})."\n\n");
@@ -830,7 +830,7 @@ sub leo_output {
         pre_code_open();
 
         printout( "\n---------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
 
         printout( round_name($pr_hsh->{round})."\n\n");
 
@@ -919,7 +919,7 @@ sub leo_output {
         printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
         pre_code_open();
         printout ("---------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Total FIA Score table\n");
         printout ("---------------------\n");
         totals_header("FIA", false, true);
@@ -937,7 +937,7 @@ sub leo_output {
         # Ave FIA table
         pre_code_open();
         printout ("---------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Average FIA Score table\n");
         printout ("---------------------\n");
         totals_header("FIA", false, true);
@@ -955,7 +955,7 @@ sub leo_output {
         # P1->6 table.
         pre_code_open();
         printout ("------------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("P1->P6 then FIA Total Score \n");
         printout ("------------------------\n");
         totals_header("FIA", true, false);
@@ -1037,7 +1037,7 @@ sub main_rounds_out {
 
         pre_code_open() if ! $o_suppress_rounds_tables;
 
-        printout( "Scoring is '". get_scoring_type_out()."'\n");
+        printout( "Method is '". get_scoring_type_out()."'\n");
         printout( "---------------\n");
 
         printout( round_name($pr_hsh->{round})."\n\n");
@@ -1169,7 +1169,7 @@ sub main_totals_output {
     if ($o_player_rating_score){
         pre_code_open();
         printout ("-----------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Total Score table\n");
         printout ("-----------------\n");
         totals_header("Total", false, false);
@@ -1188,7 +1188,7 @@ sub main_totals_output {
     if ($o_player_rating_score){
         pre_code_open();
         printout ("--------------------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Total Score table. Reverse Order\n");
         printout ("--------------------------------\n");
         totals_header("Total", false, false);
@@ -1207,7 +1207,7 @@ sub main_totals_output {
     if ( $o_player_fia_score ){
         pre_code_open();
         printout ("---------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Total FIA Score table\n");
         printout ("---------------------\n");
         totals_header("FIA", false, true);
@@ -1226,7 +1226,7 @@ sub main_totals_output {
     if ( ! $o_suppress_average_table && $o_player_rating_score ){
         pre_code_open();
         printout ("-------------------------------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Average score\n");
         printout ("For players who have not entered all rounds\n");
         printout ("-------------------------------------------\n");
@@ -1246,7 +1246,7 @@ sub main_totals_output {
     { # P1->6 table.
         pre_code_open();
         printout ("------------------------\n");
-        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("P1->P6 then Total Score \n");
         printout ("------------------------\n");
         totals_header("Total", true, false);
