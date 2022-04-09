@@ -940,7 +940,8 @@ sub leo_output {
         pre_code_open();
         printout ("---------------------\n");
         printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Average FIA Score table\n");
+        printout ("Average FIA Score\n");
+        printout ("For players who have not entered all rounds\n");
         printout ("---------------------\n");
         totals_header("FIA", false, true);
         $pp = 1;
@@ -956,10 +957,10 @@ sub leo_output {
 
         # P1->6 table.
         pre_code_open();
-        printout ("------------------------\n");
+        printout("------------------------\n");
         printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("P1->P6 then FIA Total Score \n");
-        printout ("------------------------\n");
+        printout("P1 -> P6 then FIA Total Score \n");
+        printout("------------------------\n");
         totals_header("FIA", true, false);
         $pp = 1;
         for my $tl (sort {
@@ -1251,6 +1252,7 @@ sub main_totals_output {
             printout ("---------------------\n");
             printout( "Method is '".get_scoring_type_out()."'\n\n");
             printout ("Average FIA Score table\n");
+            printout ("For players who have not entered all rounds\n");
             printout ("---------------------\n");
             totals_header("FIA", false, true);
             $pp = 1;
@@ -1270,7 +1272,7 @@ sub main_totals_output {
         pre_code_open();
         printout ("------------------------\n");
         printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("P1->P6 then Total Score \n");
+        printout ("P1 -> P6 then Total Score \n");
         printout ("------------------------\n");
         totals_header("Total", true, false);
         $pp = 1;
@@ -2051,18 +2053,6 @@ sub check_dir {
     return $dir;
 }
 
-sub json_out_dump {
-    output_json_dir();
-    # TODO
-
-}
-
-sub csv_out_dump {
-    output_csv_dir();
-    # TODO
-
-}
-
 sub round_name {
     my ($nm) = @_;
     if( my ($r, $e) = $nm =~ m{(.*?)-(race|qual)}){
@@ -2184,5 +2174,20 @@ sub _scorer {
 
     return ( $score, $display_hundreds_score );
 }
+
+sub json_out_dump {
+    my ($filename, $data) = @_;
+    output_json_dir();
+    # TODO
+
+}
+
+sub csv_out_dump {
+    my ($filename, $data) = @_;
+    output_csv_dir();
+    # TODO
+
+}
+
 
 main();
