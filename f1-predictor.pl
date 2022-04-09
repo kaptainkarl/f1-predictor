@@ -941,7 +941,7 @@ sub leo_output {
         printout ("Average FIA Score table\n");
         printout ("---------------------\n");
         totals_header("FIA", false, true);
-        my $pp = 1;
+        $pp = 1;
         for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
                          || $b->{player}  cmp $a->{player}
                     } @$tots_arr
