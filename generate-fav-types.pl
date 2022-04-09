@@ -2,12 +2,10 @@
 use strict;use warnings;
 
 # for running favourite algorithms and putting in the output dir.
-
-my $runs = {
-    QUAL  => "bahrain-qual,jeddah-qual",
-    RACES => "bahrain-race,jeddah-race",
-    ALL   => "bahrain-qual,bahrain-race,jeddah-qual,jeddah-race",
-};
+use FindBin;
+use lib "$FindBin::RealBin/.";
+use GenerateRaces;
+my $runs = $GenerateRaces::RUNS;
 
 my $favs = [
     " --score-accuracy=exact --score-times power-100 ",

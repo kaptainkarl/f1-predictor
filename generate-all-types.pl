@@ -1,13 +1,10 @@
 #!/usr/bin/perl
 use strict;use warnings;
 
-# for running all the races and putting the output in the output dir.
-
-my $runs = {
-    RACES => "bahrain-race,jeddah-race",
-    QUAL  => "bahrain-qual,jeddah-qual",
-    ALL   => "bahrain-qual,bahrain-race,jeddah-qual,jeddah-race",
-};
+use FindBin;
+use lib "$FindBin::RealBin/.";
+use GenerateRaces;
+my $runs = $GenerateRaces::RUNS;
 
 
 my $score_sys = [
