@@ -625,9 +625,10 @@ sub main {
         push @$run_arrs, $plyr_res;
     }
 
-
     my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
 
+    # iterating over the rounds to build up a plyr_tots hash by
+    # plyr name lookup.
     for my $pr_hsh (@$run_arrs) {
         my $pr_run = $pr_hsh->{plydata};
 
@@ -648,28 +649,52 @@ sub main {
             $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
             $plyr_tots->{$plyr}{total}     += $ln->{score};
             $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
-
-            next if $pos > $o_disp_plyrs_upto_pos;
         }
     }
 
+    # $tots_arr contains all the totals with ave scores
+    my $tots_arr = [];
+    for my $tpname ( keys %$plyr_tots ){
+        my $tp = $plyr_tots->{$tpname};
+
+        if ( $tp->{played}){
+
+            $tp->{ave_score} =  $tp->{total} / $tp->{played};
+            $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
+        } else {
+            $tp->{ave_score} = 0;
+            $tp->{ave_fia}   = 0;
+        }
+
+        for my $p_pos ( 1..$max_p_pos ){
+            # fill in the pNUM hash keys that are undef with 0;
+            $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
+        }
+
+        push @$tots_arr, $tp;
+    }
+
+    prdebug("plyr_tots : ".Dumper($plyr_tots),1);
+    prdebug("tots_arr  : ".Dumper($tots_arr),1);
+
+
     if ( $o_score_leo ){
-        leo_output ($max_p_pos, $plyr_tots, $run_arrs);
+        leo_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     elsif ( $o_score_karl_winner_takes_all ){
-        karl_wta_output ($max_p_pos, $plyr_tots, $run_arrs);
+        karl_wta_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     else {
         main_header_out();
-        main_totals_output( $max_p_pos, $plyr_tots, $run_arrs);
-        main_rounds_out(    $max_p_pos, $plyr_tots, $run_arrs);
+        main_totals_output($plyr_tots, $run_arrs, $tots_arr);
+        main_rounds_out(   $plyr_tots, $run_arrs, $tots_arr);
     }
     # deliberately not printout() :
     print get_out_file()."\n";
 }
 
 sub karl_wta_output {
-    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+    my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
     printout("Karl Winner Takes All\n");
     printout("---------------------\n\n");
 
@@ -781,7 +806,7 @@ sub karl_wta_output {
 }
 
 sub leo_output {
-    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+    my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
 
     printout("Leo Winner Takes All\n");
     printout("--------------------\n\n");
@@ -893,30 +918,6 @@ sub leo_output {
         pre_code_close();
     }
 
-    my $tots_arr = [];
-
-    for my $tpname ( keys %$plyr_tots ){
-        my $tp = $plyr_tots->{$tpname};
-
-        if ( $tp->{played}){
-            #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
-            $tp->{ave_score} =  $tp->{total} / $tp->{played};
-            $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
-        } else {
-            $tp->{ave_score} = 0;
-            $tp->{ave_fia}   = 0;
-        }
-
-        for my $p_pos ( 1..$max_p_pos ){
-            # fill in the pNUM hash keys that are undef with 0;
-            $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
-        }
-
-        push @$tots_arr, $tp;
-    }
-    prdebug("plyr_tots : ".Dumper($plyr_tots),1);
-    prdebug("tots_arr  : ".Dumper($tots_arr),1);
-
     if ( $o_player_fia_score ){
         printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
         pre_code_open();
@@ -1019,7 +1020,7 @@ sub main_header_out {
 }
 
 sub main_rounds_out {
-    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+    my ($plyr_tots, $run_arrs, $tots_arr) = @_;
 
     ##############################
     # Output the Individual Rounds
@@ -1121,8 +1122,7 @@ sub main_rounds_out {
 }
 
 sub main_totals_output {
-
-    my ($max_p_pos, $plyr_tots, $run_arrs ) = @_;
+    my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
 
     if (@$run_arrs <2){
         printout ("\nOnly run for one round, not showing totals\n");
@@ -1141,34 +1141,8 @@ sub main_totals_output {
     printout ( "The P column currently doesn't work out shared places\n" );
     printout ( "So until it is fixed it is not being displayed below\n\n" );
 
-    my $tots_arr = [];
-
-    for my $tpname ( keys %$plyr_tots ){
-        my $tp = $plyr_tots->{$tpname};
-
-        if ( $tp->{played}){
-            #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
-            $tp->{ave_score} =  $tp->{total} / $tp->{played};
-            $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
-        } else {
-            $tp->{ave_score} = 0;
-            $tp->{ave_fia}   = 0;
-        }
-
-        for my $p_pos ( 1..$max_p_pos ){
-            # fill in the pNUM hash keys that are undef with 0;
-            $tp->{"p$p_pos"} = $tp->{"p$p_pos"} // 0;
-        }
-
-        push @$tots_arr, $tp;
-    }
-    prdebug("plyr_tots : ".Dumper($plyr_tots),1);
-    prdebug("tots_arr  : ".Dumper($tots_arr),1);
-
-
     # TODO if fia scoring is display this will need to sort by "fia_total";
     # Or maybe just generate another table.
-
     my $pp;
     if ($o_player_rating_score){
         pre_code_open();
@@ -2173,6 +2147,15 @@ sub _scorer {
     }
 
     return ( $score, $display_hundreds_score );
+}
+
+sub output_total_p {
+    my ($tots_arrr, $sort_fields) = @_;
+
+
+
+
+
 }
 
 sub json_out_dump {
