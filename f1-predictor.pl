@@ -814,12 +814,17 @@ sub leo_output {
         printout("$winners\n\n");
     }
 
-    printout("\n\n");
-    printout("--------------\n");
-    printout("Rounds Details\n");
-    printout("--------------\n");
+    if ( ! $o_suppress_rounds_tables){
+        printout("\n\n");
+        printout("--------------\n");
+        printout("Rounds Details\n");
+        printout("--------------\n");
+    }
 
     for my $pr_hsh (@$run_arrs) {
+
+        # could be done better :
+        next if $o_suppress_rounds_tables;
 
         my $pr_run = $pr_hsh->{plydata};
         pre_code_open();
@@ -908,6 +913,7 @@ sub leo_output {
     }
 
     if ( $o_player_fia_score ){
+        printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
         pre_code_open();
         printout ("---------------------\n");
         printout( "Scoring is '".get_scoring_type_out()."'\n\n");

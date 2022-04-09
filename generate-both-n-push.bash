@@ -11,4 +11,5 @@ rm -r output/2022/*
 git add output/2022/
 git commit -m "Generated output"
 git push github
+git push origin
 
