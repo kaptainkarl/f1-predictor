@@ -830,6 +830,7 @@ sub leo_output {
         pre_code_open();
 
         printout( "\n---------------\n");
+        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
 
         printout( round_name($pr_hsh->{round})."\n\n");
 
@@ -900,8 +901,10 @@ sub leo_output {
         if ( $tp->{played}){
             #$tp->{ave_score} = sprintf ( "%0.2f", $tp->{total} / $tp->{played});
             $tp->{ave_score} =  $tp->{total} / $tp->{played};
+            $tp->{ave_fia} =  $tp->{fia_total} / $tp->{played};
         } else {
             $tp->{ave_score} = 0;
+            $tp->{ave_fia} = 0;
         }
 
         for my $p_pos ( 1..$max_p_pos ){
@@ -929,6 +932,49 @@ sub leo_output {
             $pp++;
         }
         totals_header("FIA", false, true, true);
+        pre_code_close();
+
+        # Ave FIA table
+        pre_code_open();
+        printout ("---------------------\n");
+        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout ("Average FIA Score table\n");
+        printout ("---------------------\n");
+        totals_header("FIA", false, true);
+        my $pp = 1;
+        for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
+                         || $b->{player}  cmp $a->{player}
+                    } @$tots_arr
+        ) {
+            totals_row($pp, $tl, "ave_fia", false, true);
+            $pp++;
+        }
+        totals_header("FIA", false, true, true);
+        pre_code_close();
+
+        # P1->6 table.
+        pre_code_open();
+        printout ("------------------------\n");
+        printout( "Scoring is '".get_scoring_type_out()."'\n\n");
+        printout ("P1->P6 then FIA Total Score \n");
+        printout ("------------------------\n");
+        totals_header("FIA", true, false);
+        $pp = 1;
+        for my $tl (sort {
+                    $b->{p1} <=> $a->{p1} ||
+                    $b->{p2} <=> $a->{p2} ||
+                    $b->{p3} <=> $a->{p3} ||
+                    $b->{p4} <=> $a->{p4} ||
+                    $b->{p5} <=> $a->{p5} ||
+                    $b->{p6} <=> $a->{p6} ||
+                    $b->{fia_total}  <=> $a->{fia_total} ||
+                    $b->{player} cmp $a->{player}
+                } @$tots_arr
+        ){
+            totals_row($pp, $tl, "fia_total", true, false);
+            $pp++;
+        }
+        totals_header("Total", true, false,true);
         pre_code_close();
     }
 }
