@@ -1,0 +1,390 @@
+We have 2 "favourite" algorithms under :
+
+https://github.com/kaptainkarl/f1-predictor/tree/master/output/2022/favourites
+
+1) Winner Takes All
+
+2) diff and times 9 to 1
+
+There are another 24 algos to choose from in the ./output/all-algoritms directory. Some of the are pretty crap.
+The above seem to be reasonable candidates for the 1 system.
+
+------------------------
+
+(1) Winner Takes All ( WTA )
+--------------------
+
+This is based on the way Leo orders the results.
+Leo just wants to find a winner. He's not interested in second place.
+Whereas quite a few of the rest of us are.
+
+How he does this manually is :
+
+Part 1
+------
+    a)scan over the 6 predictions, look for exact matches.
+    that is , if someone has P1 completely correct then they might be the winner.
+    b) does anyone else have P1 correct ?
+
+    if more than 1 person has P1 exactly correct then it goes into a second round.
+
+    Only those that had P1 exactly correct get to round 2.
+
+    Round 2 is doing exactly the same thing, but now looking for matches on P2.
+    if only one person has P2 exactly correct they win.
+
+    If not repeat for all six predictions.
+
+    This exact matching can and does produce a lot of tied results.
+
+Part 2
+------
+
+    So the second phase is starting from P1 again , see who got that closest.
+    If more that 1 person got the same closest prediction , then go to P2,P3 ...
+
+    This will usually produce a winner, unless more than 1 player had the exact same winning predictions.
+
+    Doing the above manually is possible, to get just one winner.
+
+    It is possible to order all the results using the above kind of method.
+    But that is a real lot of work to do manually.
+
+How to Do WTA with a computer.
+------------------------------
+
+Part 1 on a computer
+--------------------
+    Rather than if then logic going over all the positions, the easier method to do it with a computer is calculate large numbers and sort the large numbers.
+    With this exact P1 matches can trump all others.
+
+    So to get the exact matches, that requires an exact match to have a value of 1. Everything else is 0.
+    It is just a binary decision.
+
+    To make P1 trump everything else, it needs to be multiplied by a number large enough to make an exact match on P2 not interfere when the numbers are sorted.
+
+    So the exact match 1 values for positions are multipled by :
+
+    P1 10,000,000,000
+    P2    100,000,000
+    P3      1,000,000
+    P4         10,000
+    P5            100
+    P6              1
+
+    The predictions from P1 to P6 are added together to find "score 1" in my tables.
+
+    We can sort the numbers for all the players and find who got the highest Position predictions exactly correct.
+
+    This produces a lot of tied results.
+
+Part 2 on a computer
+--------------------
+    So we need a second totalised number that measures the accuracy of the non exact predictions.
+    For this we can :
+
+    20 - error in prediction = value for the accuracy of the prediction.
+
+    So if a prediction was 1 place out, the value for this is 19.
+
+    Again to make a more accurate P1 be always be worth more than P2, the same multipliers above are used for the Prediction positions.
+
+    (smaller multipliers could be used, but I have code for the above, and it works, and I'm also lazy !)
+
+    All the positions for the non-exact accuracy are added together.
+
+    For the Australia 2022 race we get the following result table.
+
+    You can see it has been sorted by the "score 1" first , and then "score 2"
+
+    if you look at BWare, NL and GGP1 you can see they all had P1 exactly correct, and that is all they had exactly correct.
+    This can be seen in score 1. You can then see in score 2 Bware had a more accurate P3, so his higher score there means he becomes P1.
+
+    The scores next the the individual predictions only show the "diff" bit , and not what they're multiplied by to get the big number.
+    If the full number for each position was shown then it would be a really wide table.
+
+
+Method is 'winner-takes-all'
+---------------
+Australia Race
+
+P   Player              score 1  |         score 2  | LEC        PER        RUS        HAM        NOR        RIC
+-----------------------------------------------------------------------------------------------------------------------
+1   BWare       1,00,00,00,00,00 |20,04,19,04,18,17 | LEC      | VER    4 | PER   19 | SAI    4 | RUS   18 | GAS   17 |
+2   NL          1,00,00,00,00,00 |20,04,03,18,19,17 | LEC      | VER    4 | SAI    3 | PER   18 | HAM   19 | RUS   17 |
+3   GGP1        1,00,00,00,00,00 |20,04,03,18,08,17 | LEC      | VER    4 | SAI    3 | PER   18 | ALO    8 | RUS   17 |
+4   Karl           1,00,00,00,00 | 3,20,18,04,18,18 | VER    3 | PER      | LEC   18 | SAI    4 | RUS   18 | BOT   18 |
+5   Joe            1,00,00,00,00 | 3,20,18,04,17,09 | VER    3 | PER      | LEC   18 | SAI    4 | BOT   17 | ALO    9 |
+6   F1Ung                      0 | 3,19,19,04,11,17 | VER    3 | LEC   19 | PER   19 | SAI    4 | MAG   11 | RUS   17 |
+7   TLB                        0 | 3,19,03,18,19,17 | VER    3 | LEC   19 | SAI    3 | PER   18 | HAM   19 | RUS   17 |
+8   Hobbes                     0 | 3,02,19,19,16,09 | VER    3 | SAI    2 | PER   19 | RUS   19 | LEC   16 | ALO    9 |
+9   Bill                       0 | 3,02,18,18,18,18 | VER    3 | SAI    2 | LEC   18 | PER   18 | RUS   18 | HAM   18 |
+10  Leo                        0 | 1,19,05,18,18,09 | SAI    1 | LEC   19 | VER    5 | PER   18 | RUS   18 | ALO    9 |
+11  Iceman                     0 | 1,19,05,18,08,17 | SAI    1 | LEC   19 | VER    5 | PER   18 | ALO    8 | RUS   17 |
+    Pylade     no data
+    Ray        no data
+    Winston    no data
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+A Championship
+--------------
+
+So the question then becomes , how can you make a championship out of such large numbers from the WTA rounds ?
+The large numbers are a bit mind bending.
+
+The two large numbers could be totalised over many rounds. They would have to be kept separate for them to make sense.
+
+Then the totals table could be sorted on the 2 different scores like the individual rounds. Score 1 has priority over Score 2.
+I haven't yet programmed this type of Totals table, but it could be programmed.
+
+
+Or FIA points could be allocated on individual rounds like this table shows, these then added up over multiple rounds :
+
+Australia Race
+
+P   Player              score 1  |         score 2  | FIA   | LEC        PER        RUS        HAM        NOR        RIC
+-------------------------------------------------------------------------------------------------------------------------------
+1   BWare       1,00,00,00,00,00 |20,04,19,04,18,17 | 25    | LEC      | VER    4 | PER   19 | SAI    4 | RUS   18 | GAS   17 |
+2   NL          1,00,00,00,00,00 |20,04,03,18,19,17 | 18    | LEC      | VER    4 | SAI    3 | PER   18 | HAM   19 | RUS   17 |
+3   GGP1        1,00,00,00,00,00 |20,04,03,18,08,17 | 15    | LEC      | VER    4 | SAI    3 | PER   18 | ALO    8 | RUS   17 |
+4   Karl           1,00,00,00,00 | 3,20,18,04,18,18 | 12    | VER    3 | PER      | LEC   18 | SAI    4 | RUS   18 | BOT   18 |
+5   Joe            1,00,00,00,00 | 3,20,18,04,17,09 | 10    | VER    3 | PER      | LEC   18 | SAI    4 | BOT   17 | ALO    9 |
+6   F1Ung                      0 | 3,19,19,04,11,17 |  8    | VER    3 | LEC   19 | PER   19 | SAI    4 | MAG   11 | RUS   17 |
+7   TLB                        0 | 3,19,03,18,19,17 |  6    | VER    3 | LEC   19 | SAI    3 | PER   18 | HAM   19 | RUS   17 |
+8   Hobbes                     0 | 3,02,19,19,16,09 |  4    | VER    3 | SAI    2 | PER   19 | RUS   19 | LEC   16 | ALO    9 |
+9   Bill                       0 | 3,02,18,18,18,18 |  2    | VER    3 | SAI    2 | LEC   18 | PER   18 | RUS   18 | HAM   18 |
+10  Leo                        0 | 1,19,05,18,18,09 |  1    | SAI    1 | LEC   19 | VER    5 | PER   18 | RUS   18 | ALO    9 |
+11  Iceman                     0 | 1,19,05,18,08,17 |  0    | SAI    1 | LEC   19 | VER    5 | PER   18 | ALO    8 | RUS   17 |
+    Pylade     no data
+    Ray        no data
+    Winston    no data
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+This is the current FIA table after Australia Race '22
+
+
+Method is 'winner-takes-all'
+
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          89   |    6
+    BWare         78   |    6
+    Hobbes        66.50|    6
+    Karl          66   |    6
+    NL            53   |    4
+    Iceman        42   |    6
+    TLB           39   |    6
+    Bill          35.50|    6
+    Pylade        35   |    3
+    F1Ung         35   |    5
+    Ray           25   |    2
+    Joe           21   |    4
+    Leo           14   |    6
+    Winston        7   |    1
+----------------------------------
+
+
+
+Or the championship table could be done just be sorting on how many P1 -> P6s, then FIA points :
+
+Below you can see NL only has 53 FIA points but is above GGP1 because of better P1 and P2 counts.
+
+Hobbes is 7th , but has a lot of FIA points.
+
+
+Method is 'winner-takes-all'  ( After the Australia Race '22)
+
+P1 -> P6 then FIA Total Score
+------------------------
+
+<pre><code>
+P   Player                  FIA   |Played| P1 | P2 | P3 | P4 | P5 | P6
+---------------------------------------------------------------------------
+    BWare                    78   |    6 |  1 |  1 |    |  2 |  1 |
+    NL                       53   |    4 |  1 |  1 |    |    |    |  1
+    GGP1                     89   |    6 |  1 |    |  4 |    |    |
+    Karl                     66   |    6 |  1 |    |    |  2 |    |  1
+    Pylade                   35   |    3 |  1 |    |    |    |  1 |
+    Ray                      25   |    2 |  1 |    |    |    |    |
+    Hobbes                   66.50|    6 |    |  3 |    |    |  1 |
+    Iceman                   42   |    6 |    |  1 |    |    |  1 |  1
+    Bill                     35.50|    6 |    |  1 |    |    |  1 |
+    TLB                      39   |    6 |    |    |  1 |    |    |  1
+    F1Ung                    35   |    5 |    |    |    |  2 |    |  1
+    Joe                      21   |    4 |    |    |    |    |  1 |  1
+    Winston                   7   |    1 |    |    |    |    |    |  1
+    Leo                      14   |    6 |    |    |    |    |    |
+---------------------------------------------------------------------------
+
+
+As I say , the straight "WTA Totals of 2 scores" table hasn't yet been programmed. It will get added here when it has .
+
+
+#################################################################################################################################
+#################################################################################################################################
+#################################################################################################################################
+
+Diff and Times Positions by 9 to 1
+----------------------------------
+
+We've been using this for a few races, before I finally made WTA get the same order as what Leo does manually.
+
+The numbers are smaller and more mangeable.
+
+A spot on prediction scores 20 points.
+P1 is multiplied by 9
+...
+P6 is multiplied by 1
+I've explained this many times already !
+
+So for Australia '22 the results are :
+
+
+Method is 'diff and positions-times-9-to-1'
+---------------
+Australia Race
+
+P   Player      score | FIA   | LEC        PER        RUS        HAM        NOR        RIC
+-------------------------------------------------------------------------------------------------
+1   BWare         345 | 25    | LEC  180 | VER   24 | PER   76 | SAI   12 | RUS   36 | GAS   17 |
+2   NL            325 | 18    | LEC  180 | VER   24 | SAI   12 | PER   54 | HAM   38 | RUS   17 |
+3   GGP1          303 | 15    | LEC  180 | VER   24 | SAI   12 | PER   54 | ALO   16 | RUS   17 |
+4   Karl          285 | 12    | VER   27 | PER  120 | LEC   72 | SAI   12 | RUS   36 | BOT   18 |
+5   Joe           274 | 10    | VER   27 | PER  120 | LEC   72 | SAI   12 | BOT   34 | ALO    9 |
+6   F1Ung         268 |  8    | VER   27 | LEC  114 | PER   76 | SAI   12 | MAG   22 | RUS   17 |
+7   TLB           262 |  6    | VER   27 | LEC  114 | SAI   12 | PER   54 | HAM   38 | RUS   17 |
+8   Leo           242 |  4    | SAI    9 | LEC  114 | VER   20 | PER   54 | RUS   36 | ALO    9 |
+9   Iceman        230 |  2    | SAI    9 | LEC  114 | VER   20 | PER   54 | ALO   16 | RUS   17 |
+10  Bill          219 |  1    | VER   27 | SAI   12 | LEC   72 | PER   54 | RUS   36 | HAM   18 |
+11  Hobbes        213 |  0    | VER   27 | SAI   12 | PER   76 | RUS   57 | LEC   32 | ALO    9 |
+    Pylade     no data
+    Ray        no data
+    Winston    no data
+-------------------------------------------------------------------------------------------------
+
+
+and you can Totals tables  like the below (as of after Australia '22):
+
+Method is 'diff and positions-times-9-to-1'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    TLB             2,428   |    6
+    Karl            2,420   |    6
+    BWare           2,397   |    6
+    GGP1            2,353   |    6
+    Hobbes          2,338   |    6
+    Iceman          2,319   |    6
+    Leo             2,271   |    6
+    Bill            2,196   |    6
+    F1Ung           2,086   |    5
+    NL              1,676   |    4
+    Joe             1,347   |    4
+    Pylade          1,223   |    3
+    Ray               754   |    2
+    Winston           462   |    1
+---------------------------------------
+
+Method is 'diff and positions-times-9-to-1'
+
+Total FIA Score table
+---------------------
+P   Player       FIA   |Played
+----------------------------------
+    Karl          72   |    6
+    TLB           65.50|    6
+    GGP1          64   |    6
+    BWare         62   |    6
+    Hobbes        54   |    6
+    Joe           53   |    4
+    NL            43   |    4
+    Iceman        38   |    6
+    Bill          34   |    6
+    Leo           33   |    6
+    F1Ung         33   |    5
+    Ray           25   |    2
+    Pylade        20.50|    3
+    Winston        9   |    1
+----------------------------------
+
+
+Method is 'diff and positions-times-9-to-1'
+
+P1 -> P6 then Total Score
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6
+---------------------------------------------------------------------
+    GGP1            2,353   |    6 |  1 |  1 |  1 |    |    |
+    Joe             1,347   |    4 |  1 |  1 |    |    |  1 |
+    NL              1,676   |    4 |  1 |  1 |    |    |    |
+    BWare           2,397   |    6 |  1 |    |  1 |  1 |    |
+    Karl            2,420   |    6 |  1 |    |    |  1 |  2 |  2
+    Ray               754   |    2 |  1 |    |    |    |    |
+    Hobbes          2,338   |    6 |    |  2 |    |    |  1 |  1
+    TLB             2,428   |    6 |    |  1 |  2 |    |    |  1
+    Bill            2,196   |    6 |    |  1 |  1 |    |    |
+    Iceman          2,319   |    6 |    |    |  1 |  1 |    |
+    F1Ung           2,086   |    5 |    |    |    |  1 |    |  1
+    Pylade          1,223   |    3 |    |    |    |  1 |    |  1
+    Leo             2,271   |    6 |    |    |    |    |  2 |
+    Winston           462   |    1 |    |    |    |    |  1 |
+---------------------------------------------------------------------
+
+You can also have Average Tables on Totals , or FIA score.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
