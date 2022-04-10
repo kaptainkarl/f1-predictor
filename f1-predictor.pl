@@ -650,9 +650,19 @@ sub main {
             $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
             $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
 
+            $plyr_tots->{$plyr}{wta_score1_tot} = $plyr_tots->{$plyr}{wta_score1_tot} // 0;
+            $plyr_tots->{$plyr}{wta_score2_tot} = $plyr_tots->{$plyr}{wta_score2_tot} // 0;
+
             $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
             $plyr_tots->{$plyr}{total}     += $ln->{score};
             $plyr_tots->{$plyr}{played} ++ if ! $ln->{skipped};
+
+            $plyr_tots->{$plyr}{wta_score1_tot}
+                         += $ln->{all_algos}{exact}{"power-100"}{total};
+
+            $plyr_tots->{$plyr}{wta_score2_tot}
+                         += $ln->{all_algos}{differential_scoring}{"power-100"}{total};
+
         }
     }
 
@@ -665,7 +675,12 @@ sub main {
 
             $tp->{ave_score} =  $tp->{total} / $tp->{played};
             $tp->{ave_fia}   =  $tp->{fia_total} / $tp->{played};
+            $tp->{ave_wta_score1} = $tp->{wta_score1_tot} / $tp->{played};
+            $tp->{ave_wta_score2} = $tp->{wta_score2_tot} / $tp->{played};
+
         } else {
+            $tp->{ave_wta_score1} = 0;
+            $tp->{ave_wta_score2} = 0;
             $tp->{ave_score} = 0;
             $tp->{ave_fia}   = 0;
         }
@@ -680,6 +695,7 @@ sub main {
 
     prdebug("plyr_tots : ".Dumper($plyr_tots),1);
     prdebug("tots_arr  : ".Dumper($tots_arr),1);
+die "debug";
 
     json_out_dump("z-totals-hash",$plyr_tots, true);
     json_out_dump("z-totals-array",$tots_arr, true);
@@ -842,32 +858,38 @@ sub wta_output {
 
     }
 
-        printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
+    printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
 
-        # P1->6 table.
-        printout("------------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout("P1 -> P6 then FIA Total Score \n");
-        printout("------------------------\n");
-        pre_code_open();
-        totals_header("FIA", true, false);
-        my $pp = 1;
-        for my $tl (sort {
-                    $b->{p1} <=> $a->{p1} ||
-                    $b->{p2} <=> $a->{p2} ||
-                    $b->{p3} <=> $a->{p3} ||
-                    $b->{p4} <=> $a->{p4} ||
-                    $b->{p5} <=> $a->{p5} ||
-                    $b->{p6} <=> $a->{p6} ||
-                    $b->{fia_total}  <=> $a->{fia_total} ||
-                    $b->{player} cmp $a->{player}
-                } @$tots_arr
-        ){
-            totals_row($pp, $tl, "fia_total", true, false);
-            $pp++;
-        }
-        totals_header("Total", true, false,true);
-        pre_code_close();
+    # P1->6 table.
+    printout("------------------------\n");
+    printout( "Method is '".get_scoring_type_out()."'\n\n");
+    printout("P1 -> P6 then FIA Total Score \n");
+    printout("------------------------\n");
+    pre_code_open();
+    totals_header("FIA", true, false);
+    my $pp = 1;
+    for my $tl (sort {
+                $b->{p1} <=> $a->{p1} ||
+                $b->{p2} <=> $a->{p2} ||
+                $b->{p3} <=> $a->{p3} ||
+                $b->{p4} <=> $a->{p4} ||
+                $b->{p5} <=> $a->{p5} ||
+                $b->{p6} <=> $a->{p6} ||
+                $b->{fia_total}  <=> $a->{fia_total} ||
+                $b->{player} cmp $a->{player}
+            } @$tots_arr
+    ){
+        totals_row($pp, $tl, "fia_total", true, false);
+        $pp++;
+    }
+    totals_header("Total", true, false,true);
+    pre_code_close();
+
+    if ($o_player_rating_score){
+
+
+
+    }
 
     if ( $o_player_fia_score ){
 
@@ -889,24 +911,27 @@ sub wta_output {
         totals_header("FIA", false, true, true);
         pre_code_close();
 
-        # Ave FIA table
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Average FIA Score\n");
-        printout ("For players who have not entered all rounds\n");
-        printout ("---------------------\n");
-        pre_code_open();
-        totals_header("FIA", false, true);
-        $pp = 1;
-        for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
-                         || $b->{player}  cmp $a->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "ave_fia", false, true);
-            $pp++;
+
+        if ( !$o_suppress_average_table) {
+            # Ave FIA table
+            printout ("---------------------\n");
+            printout( "Method is '".get_scoring_type_out()."'\n\n");
+            printout ("Average FIA Score\n");
+            printout ("For players who have not entered all rounds\n");
+            printout ("---------------------\n");
+            pre_code_open();
+            totals_header("FIA", false, true);
+            $pp = 1;
+            for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
+                             || $b->{player}  cmp $a->{player}
+                        } @$tots_arr
+            ) {
+                totals_row($pp, $tl, "ave_fia", false, true);
+                $pp++;
+            }
+            totals_header("FIA", false, true, true);
+            pre_code_close();
         }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
     }
 }
 
@@ -1473,6 +1498,67 @@ sub b($){
     return $num ? $num : "";
 }
 
+sub totals_header_wta {
+    my ($score_key, $add_ppos, $is_fia, $only_underline) = @_;
+
+    my $ppos_parts = $add_ppos ?"| P1 | P2 | P3 | P4 | P5 | P6 ":"";
+
+    my $sc_wide = 14;
+    if ( $is_fia ) {
+        $sc_wide = 9;
+    }
+    elsif ( is_score_times_power_100() ){
+        $sc_wide = 20;
+    };
+
+    my $underline = "---------------------";
+    $underline .= "-" x length($ppos_parts);
+
+    $underline .= "-" x ( $sc_wide + 4 );
+
+    printout(sprintf( "P   Player    %${sc_wide}s|Played%s\n", "$score_key   ", $ppos_parts ))
+        if ! $only_underline;
+
+    printout("$underline\n");
+
+}
+
+sub totals_row_wta($$$$$) {
+    my ($p, $tl, $score_key, $add_ppos, $is_fia) = @_;
+
+    my $ppos_parts = $add_ppos ? sprintf("| %2s | %2s | %2s | %2s | %2s | %2s ", b($tl->{p1}), b($tl->{p2}), b($tl->{p3}),
+                                                      b($tl->{p4}), b($tl->{p5}), b($tl->{p6}))
+                                : "";
+
+    my $score_text = $score_key;
+
+    my $sc_wide = 14;
+    if ( $is_fia ) {
+        $sc_wide = 9;
+    }
+    elsif ( is_score_times_power_100() ){
+        $sc_wide = 20;
+    };
+
+    my $scr_str;
+    my $scr = sprintf( "%0.2f" , $tl->{$score_key});
+    if ( my ($intg, $deci) = $scr =~ m/^(\d+)\.(\d+)$/ ){
+        $scr_str =  thousands($intg).".$deci";
+        $scr_str =~ s/\.00$/   /g;
+    } else {
+        dierr( "Prog error . Can't split number in totals_row\n");
+    }
+
+    # TODO $p is currently broken on equal places.
+    # So blanking it :
+    $p = "";
+    # and $o_suppress_position_column also needs implementing.
+
+    my $plyr_n = $z_players->{$tl->{player}} // dierr("Can't lookup player uppercased name\n");
+
+    printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $plyr_n, $scr_str, $tl->{played} , $ppos_parts));
+}
+
 sub totals_header {
     my ($score_key, $add_ppos, $is_fia, $only_underline) = @_;
 
@@ -1497,6 +1583,7 @@ sub totals_header {
     printout("$underline\n");
 
 }
+
 
 sub totals_row($$$$$) {
     my ($p, $tl, $score_key, $add_ppos, $is_fia) = @_;
