@@ -8,7 +8,7 @@ use GenerateRaces;
 my $runs = $GenerateRaces::RUNS;
 
 for my $r (keys %$runs){
-    next if $r ne "ALL";
+    # next if $r ne "ALL";
 
     my $cmd = "./f1-predictor.pl ";
 
