@@ -11,8 +11,8 @@ use Number::Format;
 use Cwd;
 sub true {1}
 sub false {0}
-sub karl_winner_ta {"karl-winner-takes-all"}
-sub leo_winner_ta {"leo-winner-takes-all"}
+sub karl_winner_ta {"winner-takes-all"}
+sub leo_winner_ta {"top-6-winner-takes-all-broken"}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
@@ -688,7 +688,7 @@ sub main {
         leo_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     elsif ( $o_score_karl_winner_takes_all ){
-        karl_wta_output ($plyr_tots, $run_arrs, $tots_arr);
+        wta_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     else {
         main_header_out();
@@ -699,21 +699,51 @@ sub main {
     print get_out_file()."\n";
 }
 
-sub karl_wta_output {
+sub wta_output {
     my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
-    printout("Karl Winner Takes All\n");
+    printout("Winner Takes All\n");
     printout("---------------------\n\n");
+
+    for my $pr_hsh (@$run_arrs) {
+
+        my $pr_run = $pr_hsh->{plydata};
+
+        printout( round_name($pr_hsh->{round})." : ");
+
+        my $winners = "";
+
+        for my $ln (@$pr_run){
+
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            my $plyr_n = $z_players->{$plyr} //
+                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
+
+            if ($ln->{score} > 0 && $pos == 1){
+                $winners .= "$plyr_n, ";
+            }
+        }
+
+        $winners = $winners ? $winners: "No Winners";
+
+        $winners =~ s/, $//g;
+        printout("$winners\n\n");
+    }
 
     ##############################
     # Output the Individual Rounds
 
-    if ( @$run_arrs >1 ){
+    if ( @$run_arrs >1 && ! $o_suppress_rounds_tables ){
         printout( "\n-----------------\n");
-          printout( "KARL WTA Individual rounds\n");
+          printout( "WTA Individual rounds\n");
           printout( "-----------------\n");
     }
 
     for my $pr_hsh (@$run_arrs) {
+        # could be done better :
+        next if $o_suppress_rounds_tables;
 
         my $pr_run = $pr_hsh->{plydata};
 
@@ -722,6 +752,7 @@ sub karl_wta_output {
 
         printout( round_name($pr_hsh->{round})."\n\n");
 
+        pre_code_open();
         # Header row
         my $underline = "-" x 15;
         printout( "P   Player     ");
@@ -807,7 +838,75 @@ sub karl_wta_output {
             printout ("\n");
         }
         printout ("$underline\n");
+        pre_code_close();
 
+    }
+
+        printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
+
+        # P1->6 table.
+        printout("------------------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout("P1 -> P6 then FIA Total Score \n");
+        printout("------------------------\n");
+        pre_code_open();
+        totals_header("FIA", true, false);
+        my $pp = 1;
+        for my $tl (sort {
+                    $b->{p1} <=> $a->{p1} ||
+                    $b->{p2} <=> $a->{p2} ||
+                    $b->{p3} <=> $a->{p3} ||
+                    $b->{p4} <=> $a->{p4} ||
+                    $b->{p5} <=> $a->{p5} ||
+                    $b->{p6} <=> $a->{p6} ||
+                    $b->{fia_total}  <=> $a->{fia_total} ||
+                    $b->{player} cmp $a->{player}
+                } @$tots_arr
+        ){
+            totals_row($pp, $tl, "fia_total", true, false);
+            $pp++;
+        }
+        totals_header("Total", true, false,true);
+        pre_code_close();
+
+    if ( $o_player_fia_score ){
+
+        # Total FIA
+        printout ("---------------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout ("Total FIA Score table\n");
+        printout ("---------------------\n");
+        pre_code_open();
+        totals_header("FIA", false, true);
+        $pp = 1;
+        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
+                         || $b->{player}    cmp $a->{player}
+                    } @$tots_arr
+        ) {
+            totals_row($pp, $tl, "fia_total", false, true);
+            $pp++;
+        }
+        totals_header("FIA", false, true, true);
+        pre_code_close();
+
+        # Ave FIA table
+        printout ("---------------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout ("Average FIA Score\n");
+        printout ("For players who have not entered all rounds\n");
+        printout ("---------------------\n");
+        pre_code_open();
+        totals_header("FIA", false, true);
+        $pp = 1;
+        for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
+                         || $b->{player}  cmp $a->{player}
+                    } @$tots_arr
+        ) {
+            totals_row($pp, $tl, "ave_fia", false, true);
+            $pp++;
+        }
+        totals_header("FIA", false, true, true);
+        pre_code_close();
     }
 }
 
@@ -2200,6 +2299,15 @@ sub output_total_p {
 
 sub json_out_dump {
     my ($fn_root, $data, $is_totals) = @_;
+
+    return;
+    # TODO needs an $o_* option to switch off the json dump.
+
+    # TODO needs a sorting of hash keys to stop
+    #      some json files from having unnecessary updates.
+
+    # TODO "z" files like the season's races, drivers, constructors and players
+    #       only need 1 copy, and not 1 per different type of algo.
 
     dierr ("fn_root needs defining, and to be of at least 3 chars long")
         if ! defined $fn_root || length $fn_root < 3;
