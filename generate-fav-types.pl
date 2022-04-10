@@ -8,7 +8,7 @@ use GenerateRaces;
 my $runs = $GenerateRaces::RUNS;
 
 my $favs = [
-    " --karl ",
+    " --wta ",
     " --score-accuracy=diff  --score-times 9-to-1 ",
 
 ];

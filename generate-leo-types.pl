@@ -14,7 +14,8 @@ for my $r (keys %$runs){
 
     $cmd .= " --out-sub-dir leo ";
     $cmd .= " --out-file $r ";
-    $cmd .= " --karl ";
+    $cmd .= " --wta ";
+    $cmd .= " --no-detail ";
     #$cmd .= " --no-pre-code ";
     $cmd .= " --run $runs->{$r}";
 
