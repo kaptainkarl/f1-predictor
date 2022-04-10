@@ -11,7 +11,7 @@ use Number::Format;
 use Cwd;
 sub true {1}
 sub false {0}
-sub karl_winner_ta {"winner-takes-all"}
+sub wta_const {"winner-takes-all"}
 sub leo_winner_ta {"top-6-winner-takes-all-broken"}
 
 my $dt_now = DateTime->now();
@@ -167,7 +167,7 @@ Options :
         It is possible to have a draw.
         Thus this still needs some coding.
 
-    --karl-winner-takes-all
+    --winner-takes-all , --wta
         this is more than a short cut.
         it is 2 scoring systems, used to then order the results.
         Using FIA points probably makes the most sense because
@@ -444,7 +444,7 @@ my $o_player_fia_score;
 my $o_player_rating_score;
 my $o_suppress_average_table;
 my $o_score_leo;
-my $o_score_karl_winner_takes_all;
+my $o_score_wta;
 my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_suppress_rounds_tables;
@@ -459,7 +459,7 @@ my $o_suppress_position_column;
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
     "leo"                   => \$o_score_leo,
-    "karl-winner-takes-all" => \$o_score_karl_winner_takes_all,
+    "wta|winner-takes-all"  => \$o_score_wta,
     "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
     "score-times-sys=s"     => \$o_score_times_sys,
     "minus-points=s"        => \$o_minus_points,
@@ -512,10 +512,10 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ($o_score_leo && $o_score_karl_winner_takes_all ){
+if ($o_score_leo && $o_score_wta ){
     dierr("Can't use --leo and --karl-winner-takes-all both at the same time\n");
 }
-if ($o_score_leo || $o_score_karl_winner_takes_all ){
+if ($o_score_leo || $o_score_wta ){
     $o_score_accuracy_sys = "exact";
     $o_score_times_sys    = "power-100";
 }
@@ -695,7 +695,6 @@ sub main {
 
     prdebug("plyr_tots : ".Dumper($plyr_tots),1);
     prdebug("tots_arr  : ".Dumper($tots_arr),1);
-die "debug";
 
     json_out_dump("z-totals-hash",$plyr_tots, true);
     json_out_dump("z-totals-array",$tots_arr, true);
@@ -703,7 +702,7 @@ die "debug";
     if ( $o_score_leo ){
         leo_output ($plyr_tots, $run_arrs, $tots_arr);
     }
-    elsif ( $o_score_karl_winner_takes_all ){
+    elsif ( $o_score_wta ){
         wta_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     else {
@@ -841,15 +840,17 @@ sub wta_output {
                 elsif ( $score == 20 ){
                     $score = "";
                 } else {
-                    # $pred = lc ($pred);
+                    $pred = lc ($pred) if $o_suppress_detail_score;
                 }
 
-                $oline .= sprintf(" %s %4s |", $pred, $score);
-
+                if ($o_suppress_detail_score) {
+                    $oline .= sprintf(" %s  ", $pred);
+                } else {
+                    $oline .= sprintf(" %s %4s |", $pred, $score);
+                }
             }
 
             printout($oline);
-
 
             printout ("\n");
         }
@@ -1436,7 +1437,7 @@ sub pre_code_close{
 
 sub get_scoring_type_out() {
 
-    return karl_winner_ta() if $o_score_karl_winner_takes_all ;
+    return wta_const() if $o_score_wta ;
     return leo_winner_ta()  if $o_score_leo ;
 
     return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
@@ -1824,7 +1825,7 @@ PLYR:
                               || $a->{skipped} <=> $b->{skipped}
                             } @$player_results_arr;
     }
-    elsif ($o_score_karl_winner_takes_all ) {
+    elsif ($o_score_wta ) {
         # This is for a secondary sort special case.
         @plyr_ordered_res =  sort {
                               $b->{all_algos}{exact}{"power-100"}{total}
@@ -1851,7 +1852,7 @@ PLYR:
             return ( $pl_cmp->{score} == $last_diff_plyr->{score}
                       && $pl_cmp->{top6_count} == $last_diff_plyr->{top6_count});
         }
-        elsif ($o_score_karl_winner_takes_all ) {
+        elsif ($o_score_wta ) {
             return (
                              $pl_cmp->{all_algos}{exact}{"power-100"}{total} ==
                      $last_diff_plyr->{all_algos}{exact}{"power-100"}{total}
@@ -2179,8 +2180,8 @@ sub get_out_file {
         $fn = output_all_alg_dir();
     }
 
-    if ( $o_score_karl_winner_takes_all ) {
-        $fn .= karl_winner_ta().$suf;
+    if ( $o_score_wta ) {
+        $fn .= wta_const().$suf;
         return $fn;
     }
 
@@ -2220,8 +2221,8 @@ sub get_out_file_json {
 
     my $fn = output_json_dir()."$fn_root-";
 
-    if ( $o_score_karl_winner_takes_all ) {
-        $fn .= karl_winner_ta().$suf;
+    if ( $o_score_wta ) {
+        $fn .= wta_const().$suf;
         return $fn;
     }
 
