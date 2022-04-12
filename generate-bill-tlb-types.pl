@@ -11,6 +11,7 @@ for my $r (keys %$runs){
     my $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir bill-tlb ";
     $cmd .= " --no-pre-code";
+    $cmd .= " --no-pos-col";
     $cmd .= " --out-file $r";
 
     $cmd .= " --separator '' ";
@@ -25,9 +26,10 @@ for my $r (keys %$runs){
 
 for my $r (keys %$runs){
     my $cmd = "./f1-predictor.pl ";
-    $cmd .= " --player-rating-score ";
+    # $cmd .= " --player-rating-score ";
     $cmd .= " --out-sub-dir bill-tlb-detailed ";
     $cmd .= " --no-pre-code";
+    $cmd .= " --no-pos-col";
     $cmd .= " --out-file $r";
     # $cmd .= " --separator ', ' ";
 
