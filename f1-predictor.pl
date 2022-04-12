@@ -947,8 +947,8 @@ sub wta_output {
             }
 
             if ($o_player_fia_score) {
-                my $fia_s = sprintf("%.2f",$ln->{fia_score});
-                $fia_s =~ s/.00$/   /g;
+                my $fia_s = sprintf("%.1f",$ln->{fia_score});
+                $fia_s =~ s/.0$/  /g;
                 printout(sprintf("%6s%s",$fia_s,$o_SEP));
             }
 
