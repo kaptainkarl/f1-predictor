@@ -460,7 +460,7 @@ my $o_player_fia_simple_score;
 my $o_show_p1_to_p6_totals;
 
 my $o_SEP = " | ";
-my $o_WIDE=4; #number width in details
+my $o_WIDE=5; #number width in details
 
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
@@ -730,7 +730,10 @@ sub wta_output {
     my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
     printout("Winner Takes All\n");
     printout("---------------------\n\n");
-    printout ("Rounds this has been run for ". join(", ", split (",", $o_run))."\n\n");
+    # printout ("Rounds this has been run for ". join(", ", split (",", $o_run))."\n\n");
+
+
+    printout("Winners of Rounds are :\n\n");
 
     for my $pr_hsh (@$run_arrs) {
 
@@ -755,15 +758,15 @@ sub wta_output {
 
         $winners = $winners ? $winners: "No Winners";
         $winners =~ s/, $//g;
-        printout("$winners\n\n");
+        printout("$winners\n");
     }
+    printout("\n\n");
 
     ## Totals tables 
 
     if ( $o_show_p1_to_p6_totals){
         # P1->6 table.
         printout("------------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout("P1 -> P6 then FIA Total Score \n");
         printout("------------------------\n");
         pre_code_open();
@@ -796,29 +799,30 @@ sub wta_output {
     if ($o_player_fia_simple_score){
 
         # Total FIA Simple
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout ("------------------------------------\n");
         printout ("GPF F1 Prediction World Championship\n");
-        printout ("---------------------\n");
-        pre_code_open();
-        totals_header("FIA", false, true);
+        printout ("------------------------------------\n");
         my $pp = 1;
         for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
                          || $b->{player}    cmp $a->{player}
                     } @$tots_arr
         ) {
-            totals_row($pp, $tl, "fia_total", false, true);
+            my $scr_str = sprintf("%0.1f", $tl->{fia_total});
+            $scr_str =~ s/\.0$/  /g;
+
+            my $plyr_n = $z_players->{$tl->{player}} //
+                 dierr( "Can't lookup player uppercased name (fia simple)\n");
+
+            printout(sprintf( "%-10s %7s\n", $plyr_n, $scr_str));
             $pp++;
         }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
+        printout ("------------------------------------\n\n\n");
 
 
     } elsif ( $o_player_fia_score ){
 
         # Total FIA
         printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
         printout ("Total FIA Score table\n");
         printout ("---------------------\n");
         pre_code_open();
@@ -872,15 +876,21 @@ sub wta_output {
 
         my $pr_run = $pr_hsh->{plydata};
 
-        printout( "Method is '". get_scoring_type_out()."'\n");
         printout( "---------------\n");
 
-        printout( round_name($pr_hsh->{round})."\n\n");
+        printout( round_name($pr_hsh->{round})."\n");
 
         pre_code_open();
+
         # Header row
-        my $underline = "-" x 15;
-        printout( "P   Player     ");
+        my $underline = "";
+        if ( ! $o_suppress_position_column ){
+            $underline .= "-" x 3;
+            printout( "P  ");
+        }
+
+        $underline .= "-" x 11;
+        printout( "Player     ");
 
         if ($o_player_rating_score){
             printout(sprintf( "%18s|", "score 1  ")) ;
@@ -890,7 +900,7 @@ sub wta_output {
         }
 
         if ($o_player_fia_score) {
-            printout(sprintf("%4s   |",'FIA'));
+            printout(sprintf("%4s  %s",'FIA',$o_SEP));
             $underline .= "-" x 8;
         }
 
@@ -915,12 +925,18 @@ sub wta_output {
                  dierr( "Can't lookup player uppercased name (rounds)\n");
 
             if ($ln->{skipped}){
-                printout(sprintf("    %-10s ",$plyr_n));
+                if ( ! $o_suppress_position_column ){
+                    printout( "    ");
+                }
+                printout(sprintf("%-10s ",$plyr_n));
                 printout($ln->{output}."\n");
                 next;
             }
 
-            printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
+            if ( ! $o_suppress_position_column ){
+                printout(sprintf("%-3s",$pos));
+            }
+            printout(sprintf("%-10s ", $plyr_n));
 
             if ($o_player_rating_score){
                 my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
@@ -933,7 +949,7 @@ sub wta_output {
             if ($o_player_fia_score) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
-                printout(sprintf("%6s |",$fia_s));
+                printout(sprintf("%6s%s",$fia_s,$o_SEP));
             }
 
 
@@ -1773,9 +1789,12 @@ PLYR:
             my ($skip_reason) = @_;
             $skip_reason //= "";
 
+            _all_algo_calc( $plyr_all_algos , "", 0, "", true );
+
             push @$player_results_arr ,
                 {score => 0, player=>$plyr , round=> $s_run, top6_count => 0,
-                 output => "${result_line}${skip_reason}", skipped=>1};
+                 all_algos => $plyr_all_algos, output => "${result_line}${skip_reason}",
+                 skipped=>1};
         };
 
 
@@ -1830,7 +1849,7 @@ PLYR:
             } else {
 
                 my $error = abs($results_lkup->{$plyr_pred}-$i);
-                _all_algo_calc( $plyr_all_algos , $plyr_pred, $i, $error );
+                _all_algo_calc( $plyr_all_algos , $plyr_pred, $i, $error, false );
 
                 my ($score, $display_hundreds_score )
                    = _scorer($o_score_accuracy_sys, $o_score_times_sys, $plyr_pred, $i, $error);
@@ -2303,7 +2322,7 @@ sub round_name {
 }
 
 sub _all_algo_calc {
-    my ($algo_hsh, $plyr_pred, $pos, $error ) = @_;
+    my ($algo_hsh, $plyr_pred, $pos, $error, $just_init ) = @_;
     # calcs all the scoring combinations and creates a hash of hashes.
 
     # This is primarily so that the results can be sorted first by 
@@ -2334,6 +2353,10 @@ sub _all_algo_calc {
                     positions          => [],
                     hundreds_positions => [],
                 } if ! exists$algo_hsh->{$accuracy}{$times} ;
+
+            # use for creating struct, so I don't get undefs
+            # when a player is skipped.
+            next if $just_init;
 
             my ($sc, $hundreds) = _scorer($accuracy, $times,  $plyr_pred, $pos, $error);
 

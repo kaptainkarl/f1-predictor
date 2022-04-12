@@ -8,26 +8,30 @@ use GenerateRaces;
 my $runs = $GenerateRaces::RUNS;
 
 for my $r (keys %$runs){
-    my $cmd = "./f1-predictor.pl --player-rating-score ";
-
+    my $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir bill-tlb ";
-    # $cmd .= " --out-accuracy-sub-dir";
+    $cmd .= " --no-pre-code";
     $cmd .= " --out-file $r";
 
+    $cmd .= " --separator '' ";
+    $cmd .= " --no-detail ";
+    $cmd .= " --case-change-not-exact-predictions ";
+    $cmd .= " --fia --fia-simple ";
     $cmd .= " --wta ";
     $cmd .= " --run $runs->{$r}\n";
 
     system( $cmd ) ;
 }
 
-
 for my $r (keys %$runs){
-    my $cmd = "./f1-predictor.pl --player-rating-score ";
-
+    my $cmd = "./f1-predictor.pl ";
+    $cmd .= " --player-rating-score ";
     $cmd .= " --out-sub-dir bill-tlb-detailed ";
-    # $cmd .= " --out-accuracy-sub-dir";
+    $cmd .= " --no-pre-code";
     $cmd .= " --out-file $r";
+    # $cmd .= " --separator ', ' ";
 
+    $cmd .= " --fia --fia-simple ";
     $cmd .= " --wta ";
     $cmd .= " --run $runs->{$r}\n";
 
