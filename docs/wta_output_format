@@ -65,3 +65,252 @@ There are more combinations. Let me know what one of the above.
 
 what do you prefer ?
 
+
+#############################################################
+It has been decided that the way to order the individual rounds predictions is WTA.
+Thus this should give the same single winner as Leo wants.
+
+FIA points will be allocated.
+
+There will be a new "bill-tlb" directory where only this method is run.
+
+There will be 3 files in "bill-tlb" directory :
+
+winner-takes-all-RACES
+winner-takes-all-ALL
+winner-takes-all-QUAL
+
+Bill only wants RACES , so therefore Bill, just look at winner-takes-all-RACES
+
+Others might want to see QUAL , and all the lot added together.
+
+
+
+Their will be one Total FIA Points table shown at the top.
+It will show exactly like this :
+
+GPF F1 Prediction World Championship
+-----------------------------------------------------
+
+GGP1 89
+BWare 78
+Hobbes 66.5
+Karl 66
+NL 53
+Iceman 42
+TLB 39
+Bill 35.5
+Pylade 35
+F1Ung 35
+Ray 25
+Joe 21
+Leo 14
+Winston 7
+
+
+
+The individual rounds will be shown below, with the most recent round, at the top of the file.
+
+Then decision the comes on what format to output the individual rounds :
+
+Format 1.
+---------
+
+Below the Exact matches are in CAPS.
+A Prediction that is just 1 place out like Bware's PER is "Per"
+Any larger error and it is all lower case.
+The complicated numbers are still being calculated underneath it all, and sorting the results.
+
+
+Australia Race
+
+P   Player      FIA    LEC   PER   RUS   HAM   NOR   RIC
+----------------------------------------------------------
+1   BWare       25     LEC   ver   Per   sai   rus   gas
+2   NL          18     LEC   ver   sai   per   Ham   rus
+3   GGP1        15     LEC   ver   sai   per   alo   rus
+4   Karl        12     ver   PER   lec   sai   rus   bot
+5   Joe         10     ver   PER   lec   sai   bot   alo
+6   F1Ung        8     ver   Lec   Per   sai   mag   rus
+7   TLB          6     ver   Lec   sai   per   Ham   rus
+8   Hobbes       4     ver   sai   Per   Rus   lec   alo
+9   Bill         2     ver   sai   lec   per   rus   ham
+10  Leo          1     sai   Lec   ver   per   rus   alo
+11  Iceman       0     sai   Lec   ver   per   alo   rus
+    Pylade     no data
+    Ray        no data
+    Winston    no data
+-----------------------------------------------------------
+
+
+Format 2.
+---------
+
+So No "P" Column
+
+Australia Race
+
+Player      FIA    LEC   PER   RUS   HAM   NOR   RIC
+------------------------------------------------------
+BWare       25     LEC   ver   Per   sai   rus   gas
+NL          18     LEC   ver   sai   per   Ham   rus
+GGP1        15     LEC   ver   sai   per   alo   rus
+Karl        12     ver   PER   lec   sai   rus   bot
+Joe         10     ver   PER   lec   sai   bot   alo
+F1Ung        8     ver   Lec   Per   sai   mag   rus
+TLB          6     ver   Lec   sai   per   Ham   rus
+Hobbes       4     ver   sai   Per   Rus   lec   alo
+Bill         2     ver   sai   lec   per   rus   ham
+Leo          1     sai   Lec   ver   per   rus   alo
+Iceman       0     sai   Lec   ver   per   alo   rus
+Pylade     no data
+Ray        no data
+Winston    no data
+-------------------------------------------------------
+
+
+
+Format 3.
+---------
+
+FIA score moved to the right hand side.
+
+Australia Race
+
+Player     LEC   PER   RUS   HAM   NOR   RIC   FIA
+------------------------------------------------------
+BWare      LEC   ver   Per   sai   rus   gas   25
+NL         LEC   ver   sai   per   Ham   rus   18
+GGP1       LEC   ver   sai   per   alo   rus   15
+Karl       ver   PER   lec   sai   rus   bot   12
+Joe        ver   PER   lec   sai   bot   alo   10
+F1Ung      ver   Lec   Per   sai   mag   rus    8
+TLB        ver   Lec   sai   per   Ham   rus    6
+Hobbes     ver   sai   Per   Rus   lec   alo    4
+Bill       ver   sai   lec   per   rus   ham    2
+Leo        sai   Lec   ver   per   rus   alo    1
+Iceman     sai   Lec   ver   per   alo   rus    0
+Pylade     no data
+Ray        no data
+Winston    no data
+-------------------------------------------------------
+
+
+
+
+Format 4.
+---------
+
+The numbers showing how accurate the prediction was can be shown.
+It really needs something to split up on the individual predictions and the numbers.
+Below it's using |
+
+
+Australia Race
+
+
+P   Player      FIA    LEC      PER      RUS      HAM      NOR      RIC
+---------------------------------------------------------------------------
+1   BWare       25     LEC    | VER  4 | PER 19 | SAI  4 | RUS 18 | GAS 17
+2   NL          18     LEC    | VER  4 | SAI  3 | PER 18 | HAM 19 | RUS 17
+3   GGP1        15     LEC    | VER  4 | SAI  3 | PER 18 | ALO  8 | RUS 17
+4   Karl        12     VER  3 | PER    | LEC 18 | SAI  4 | RUS 18 | BOT 18
+5   Joe         10     VER  3 | PER    | LEC 18 | SAI  4 | BOT 17 | ALO  9
+6   F1Ung        8     VER  3 | LEC 19 | PER 19 | SAI  4 | MAG 11 | RUS 17
+7   TLB          6     VER  3 | LEC 19 | SAI  3 | PER 18 | HAM 19 | RUS 17
+8   Hobbes       4     VER  3 | SAI  2 | PER 19 | RUS 19 | LEC 16 | ALO  9
+9   Bill         2     VER  3 | SAI  2 | LEC 18 | PER 18 | RUS 18 | HAM 18
+10  Leo          1     SAI  1 | LEC 19 | VER  5 | PER 18 | RUS 18 | ALO  9
+11  Iceman       0     SAI  1 | LEC 19 | VER  5 | PER 18 | ALO  8 | RUS 17
+    Pylade     no data
+    Ray        no data
+    Winston    no data
+
+
+
+Format 5
+---------
+
+The numbers showing how accurate the prediction was can be shown.
+It really needs something to split up on the individual predictions and the numbers.
+Below it's using a comma
+The P column has been removed.
+
+
+Australia Race
+
+Player      FIA   LEC     PER     RUS     HAM     NOR     RIC
+----------------------------------------------------------------
+BWare       25    LEC   , VER  4, PER 19, SAI  4, RUS 18, GAS 17
+NL          18    LEC   , VER  4, SAI  3, PER 18, HAM 19, RUS 17
+GGP1        15    LEC   , VER  4, SAI  3, PER 18, ALO  8, RUS 17
+Karl        12    VER  3, PER   , LEC 18, SAI  4, RUS 18, BOT 18
+Joe         10    VER  3, PER   , LEC 18, SAI  4, BOT 17, ALO  9
+F1Ung        8    VER  3, LEC 19, PER 19, SAI  4, MAG 11, RUS 17
+TLB          6    VER  3, LEC 19, SAI  3, PER 18, HAM 19, RUS 17
+Hobbes       4    VER  3, SAI  2, PER 19, RUS 19, LEC 16, ALO  9
+Bill         2    VER  3, SAI  2, LEC 18, PER 18, RUS 18, HAM 18
+Leo          1    SAI  1, LEC 19, VER  5, PER 18, RUS 18, ALO  9
+Iceman       0    SAI  1, LEC 19, VER  5, PER 18, ALO  8, RUS 17
+Pylade     no data
+Ray        no data
+Winston    no data
+
+
+
+Format 6
+--------
+
+The predictions can be lower cased, when they're not exact,
+and end up with something like this :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################################################################
+Earlier more detailed stuff.
+
+If Bill , then stop reading now . You've read all this stuff.
+
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
