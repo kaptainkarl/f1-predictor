@@ -39,3 +39,19 @@ for my $r (keys %$runs){
 
     system( $cmd ) ;
 }
+
+for my $r (keys %$runs){
+    my $cmd = "./f1-predictor.pl ";
+    $cmd .= " --player-rating-score ";
+    $cmd .= " --out-sub-dir bill-tlb-very-detailed ";
+    $cmd .= " --no-pre-code";
+    $cmd .= " --no-pos-col";
+    $cmd .= " --out-file $r";
+    # $cmd .= " --separator ', ' ";
+
+    $cmd .= " --fia --fia-simple ";
+    $cmd .= " --wta ";
+    $cmd .= " --run $runs->{$r}\n";
+
+    system( $cmd ) ;
+}
