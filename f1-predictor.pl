@@ -12,7 +12,7 @@ use Cwd;
 sub true {1}
 sub false {0}
 sub wta_const {"winner-takes-all"}
-sub leo_winner_ta {"top-6-winner-takes-all-broken"}
+# sub leo_winner_ta {"top-6-winner-takes-all-broken"}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
@@ -147,26 +147,6 @@ Options :
         since we are only doing first six positions then this defaults to 6 in the code.
         and the player files with the lines of predictions must only have 6 lines.
 
-    --leo
-        this is a set of scoring CLI options short cut.
-
-        It sets the --score-accuracy-sys to 'exact'
-        and --score-times-sys to power-100
-
-        Basically it is a short cut to how Leo wants the predictions calculated.
-
-        The --leo option also only outputs a very concise output.
-        if you want to see the numbers that 
-            --score-accuracy-sys to 'exact' --score-times-sys to power-100
-        you need to run them without the --leo option.
-
-        This isn't quite Leo's method.
-        It's the first part.
-        Leo's method as a tie break , then looks for non exact positions of drivers
-        predicted to be in the top 6 , who were in the top 6. They are counted up.
-        It is possible to have a draw.
-        Thus this still needs some coding.
-
     --winner-takes-all , --wta
         this is more than a short cut.
         it is 2 scoring systems, used to then order the results.
@@ -192,6 +172,13 @@ Options :
         Totals tables could also be sorted on the 2 independent scores.
         The exact-and-power-100 one again having the higher priority.
 
+    --bill
+        this is a special winner takes all method output
+        it sets --wta --no-pre-code --fia-simple --no-pos-col
+
+        it also only outputs a simplied race result for the first race in
+        --run list. So the most recent race really needs to be the first
+        one in the list.
 
     --score-accuracy-sys  karl-8, karl-32, karl-96-16, differential_scoring, diff, exact
         defaults to differential_scoring
@@ -295,10 +282,22 @@ Options :
     --multi-points-factor 2 , 3 , 2.5 , whatever you like !
         This is used in conjunction with the --multi-points JOKE option.
 
-    --player-fia-score
+    --player-fia-score , --fia
         Instead of adding up the underlying alogithm ranking score for sorting the
         positions , the positions of the players is mapped against proper F1 scoring in 2022
         i.e. P1 player get 25 points and so on .
+
+    --fia-simple
+        same as --player-fia-score, but shows a very simplified total points table
+
+    --show-p1-to-p6-totals
+        this shows a totals table where the players are ranked on their
+        p1 -> p6 round positions.
+        It does to a "tie break" on Total or FIA score, depending
+        what other output options, and algorithm types are selected.
+
+        --wta tie breaks on FIA score , because the 2 numbers that do the sorting
+        are too large to be sensible to display
 
     --player-rating-score  --score  --rating
         Displays the rating score in individual rounds and
@@ -307,9 +306,6 @@ Options :
         The average score table is a special case.
         that only makes sense with the underlying rating
         scoring. So it always does this option.
-
-    if neither --player-fia-score or --player-rating-score are specified
-    script defaults to --player-fia-score
 
     --no-pre-code
         This suppresses the </pre></code>
@@ -323,6 +319,7 @@ Options :
 
     --suppress-totals
         suppresses the totals table
+        only on the main output right now.
 
     --suppress-rounds
         suppresses the rounds output tables
@@ -441,10 +438,11 @@ my $o_suppress_detail_score;
 my ($o_minus_points, $o_multi_points);
 my $o_multi_points_factor = 2;
 my $o_player_fia_score;
+my $o_player_fia_simple_score;
 my $o_player_rating_score;
 my $o_suppress_average_table;
-my $o_score_leo;
 my $o_score_wta;
+my $o_score_bill;
 my $o_disp_plyrs_upto_pos = 99999999;
 my $o_suppress_totals_tables;
 my $o_suppress_rounds_tables;
@@ -456,7 +454,6 @@ my $o_show_test_player;
 my $o_show_only_test_player;
 my $o_suppress_position_column;
 my $o_case_change_not_exact_predictions;
-my $o_player_fia_simple_score;
 my $o_show_p1_to_p6_totals;
 
 my $o_SEP = " | ";
@@ -464,7 +461,7 @@ my $o_WIDE=5; #number width in details
 
 GetOptions (
     "score-only-upto-pos=i"  => \$o_score_upto_pos,
-    "leo"                   => \$o_score_leo,
+    "bill"                  => \$o_score_bill,
     "wta|winner-takes-all"  => \$o_score_wta,
     "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
     "score-times-sys=s"     => \$o_score_times_sys,
@@ -524,10 +521,18 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ($o_score_leo && $o_score_wta ){
-    dierr("Can't use --leo and --karl-winner-takes-all both at the same time\n");
+if ( $o_score_bill ) {
+    # option --bill is just an output twiddling on WTA.
+    $o_score_wta = true ;
+    $o_no_pre_code = true;
+    $o_player_fia_simple_score = true;
+    $o_suppress_position_column = true;
+    # --bill option only shows the first race in the --runs list
+    #   so the most recent race , must be the first one !
+
 }
-if ($o_score_leo || $o_score_wta ){
+
+if ( $o_score_wta ){
     $o_score_accuracy_sys = "exact";
     $o_score_times_sys    = "power-100";
 }
@@ -711,10 +716,7 @@ sub main {
     json_out_dump("z-totals-hash",$plyr_tots, true);
     json_out_dump("z-totals-array",$tots_arr, true);
 
-    if ( $o_score_leo ){
-        leo_output ($plyr_tots, $run_arrs, $tots_arr);
-    }
-    elsif ( $o_score_wta ){
+    if ( $o_score_wta ){
         wta_output ($plyr_tots, $run_arrs, $tots_arr);
     }
     else {
@@ -728,49 +730,229 @@ sub main {
 
 sub wta_output {
     my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
-    printout("Winner Takes All\n");
-    printout("---------------------\n\n");
+
+    if ( $o_score_bill ){
+        # Dunno what to print out here.
+        # Probably nothing.
+        # printout("GPF Unofficial WPC Championship\n");
+    } else {
+        printout("Winner Takes All\n");
+        printout("----------------\n\n");
+    }
+    printout("Rounds played ".scalar @$run_arrs."\n\n");
+
     # printout ("Rounds this has been run for ". join(", ", split (",", $o_run))."\n\n");
 
+    if ( ! $o_score_bill ){
+        printout("Winners of Rounds are :\n\n");
 
-    printout("Winners of Rounds are :\n\n");
+        for my $pr_hsh (@$run_arrs) {
 
+            my $pr_run = $pr_hsh->{plydata};
+
+            printout( round_name($pr_hsh->{round})." : ");
+
+            my $winners = "";
+
+            for my $ln (@$pr_run){
+                my $pos = $ln->{pos};
+                my $plyr = $ln->{player};
+                dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+                my $plyr_n = $z_players->{$plyr} //
+                    dierr( "Can't lookup player uppercased name (wta_output 1)\n");
+
+                if ($ln->{score} > 0 && $pos == 1){
+                    $winners .= "$plyr_n, ";
+                }
+            }
+
+            $winners = $winners ? $winners: "No Winners";
+            $winners =~ s/, $//g;
+            printout("$winners\n");
+        }
+        printout("\n\n");
+    }
+
+    ## Totals tables
+    fia_totals_tables($tots_arr);
+
+    if ($o_player_rating_score){
+        # TODO, if ever. Unlikely to be used. Ever.
+    }
+    if ( ! $o_suppress_average_table && $o_player_rating_score ){
+        # TODO, if ever. Unlikely to be used. Ever.
+    }
+
+    positional_totals_table ($tots_arr, "fia_total");
+
+    ##############################
+    # Output the Individual Rounds
+
+    if ( @$run_arrs >1 && ! $o_suppress_rounds_tables
+        && ! $o_score_bill
+    ){
+        printout( "\n---------------------\n");
+          printout( "WTA Individual rounds\n");
+          printout( "---------------------\n");
+    }
+
+    my $showed_first_race_only_for_bill;
     for my $pr_hsh (@$run_arrs) {
+        # could be done better :
+        next if $o_suppress_rounds_tables;
+
+        next if $showed_first_race_only_for_bill;
+        $showed_first_race_only_for_bill = true if $o_score_bill ;
 
         my $pr_run = $pr_hsh->{plydata};
 
-        printout( round_name($pr_hsh->{round})." : ");
+        printout( "---------------\n");
 
-        my $winners = "";
+        printout( round_name($pr_hsh->{round})."\n");
 
+        my $underline = "";
+        if ( !$o_score_bill){
+            pre_code_open();
+
+            # Header row
+            if ( ! $o_suppress_position_column ){
+                $underline .= "-" x 3;
+                printout( "P  ");
+            }
+
+            $underline .= "-" x 11;
+            printout( "Player     ");
+
+            if ($o_player_rating_score){
+                printout(sprintf( "%18s|", "score 1  ")) ;
+                $underline .= "-" x 19;
+                printout(sprintf( "%18s|", "score 2  ")) ;
+                $underline .= "-" x 19;
+            }
+
+            if ( fia_or_fia_simple() ) {
+                printout(sprintf("%4s  %s",'FIA',$o_SEP));
+                $underline .= "-" x 8;
+            }
+
+            my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
+            printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
+
+    # TODO next line needs fixing, can't use the sub process built up output.
+            $underline .= ("-" x length($pr_run->[0]{output}));
+
+            printout ("\n");
+            printout ("$underline\n");
+        }
+
+        # Body rows :
         for my $ln (@$pr_run){
+
             my $pos = $ln->{pos};
             my $plyr = $ln->{player};
             dierr( "unknown player . prog error \n") if ! $ln->{player};
 
+            next if $pos > $o_disp_plyrs_upto_pos;
             my $plyr_n = $z_players->{$plyr} //
-                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
+                 dierr( "Can't lookup player uppercased name (rounds)\n");
 
-            if ($ln->{score} > 0 && $pos == 1){
-                $winners .= "$plyr_n, ";
+            if ($ln->{skipped}){
+                if ( ! $o_suppress_position_column ){
+                    printout( "   ");
+                }
+
+                if ($o_score_bill) {
+                    printout(sprintf("%-10s DNS\n",$plyr_n));
+                    next;
+                }
+
+                printout(sprintf("%-10s ",$plyr_n));
+                printout($ln->{output}."\n");
+                next;
             }
+
+            if ( ! $o_suppress_position_column ){
+                printout(sprintf("%-3s",$pos));
+            }
+            printout(sprintf("%-10s ", $plyr_n));
+
+            if ($o_score_bill ){
+                printout("\n");
+                next;
+            }
+
+            if ($o_player_rating_score){
+                my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
+                printout(sprintf( "%18s|", "$sc_str "));
+
+                $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
+                printout(sprintf( "%18s|", "$sc_str "));
+            }
+
+            if ( fia_or_fia_simple() ) {
+                my $fia_s = sprintf("%.1f",$ln->{fia_score});
+                $fia_s =~ s/.0$/  /g;
+                printout(sprintf("%6s%s",$fia_s,$o_SEP));
+            }
+
+            my $oline = "";
+
+            for (my $i=0; $i<$o_score_upto_pos; $i++){
+
+                my $pred = $ln->{preds}[$i];
+                my $score =$ln->{all_algos}{differential_scoring}{"power-100"}{hundreds_positions}[$i];
+                if ( not defined $score ){
+                    $score = 0;
+                }
+
+                if ( $o_case_change_not_exact_predictions ) {
+                    if ($score == 19 ){
+                        $pred = ucfirst (lc($pred));
+                    } elsif ($score < 19) {
+                        $pred = lc ($pred);
+                    }
+                }
+
+                if ( $score == 20 ){
+                #    $score = "";
+                }
+
+                $oline .= sprint_pred($pred, $score, $o_SEP);
+            }
+
+            printout($oline);
+
+            printout ("\n");
         }
+        printout ("$underline\n");
+        pre_code_close();
 
-        $winners = $winners ? $winners: "No Winners";
-        $winners =~ s/, $//g;
-        printout("$winners\n");
     }
-    printout("\n\n");
+}
 
-    ## Totals tables 
+sub positional_totals_table {
+    my ($tots_arr, $totals_type) = @_;
 
-    if ( $o_show_p1_to_p6_totals){
-        # P1->6 table.
-        printout("------------------------\n");
-        printout("P1 -> P6 then FIA Total Score \n");
-        printout("------------------------\n");
+    return if ! $o_show_p1_to_p6_totals;
+
+    if ($totals_type !~/total|ave_score|fia_total/){
+        dierr( "Prog error. Bad totals_type [$totals_type]\n");
+    }
+
+    my $tot_title =
+        join( " ", map { ucfirst(lc($_)) }
+                    split /_+/, $totals_type);
+
+    $tot_title = "FIA" if $totals_type eq "fia_total";
+
+    { # P1->6 table.
         pre_code_open();
-        totals_header("FIA", true, false);
+        printout ("------------------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n\n");
+        printout ("P1 -> P6 then $tot_title \n");
+        printout ("------------------------\n");
+        totals_header($tot_title, true, false);
         my $pp = 1;
         for my $tl (sort {
                     $b->{p1} <=> $a->{p1} ||
@@ -779,29 +961,36 @@ sub wta_output {
                     $b->{p4} <=> $a->{p4} ||
                     $b->{p5} <=> $a->{p5} ||
                     $b->{p6} <=> $a->{p6} ||
-                    $b->{fia_total}  <=> $a->{fia_total} ||
+                    $b->{$totals_type}  <=> $a->{$totals_type} ||
                     $b->{player} cmp $a->{player}
                 } @$tots_arr
         ){
-            totals_row($pp, $tl, "fia_total", true, false);
+            totals_row($pp, $tl, $totals_type, true, false);
             $pp++;
         }
-        totals_header("Total", true, false,true);
+        totals_header($totals_type, true, false,true);
         pre_code_close();
     }
+}
 
-    if ($o_player_rating_score){
-        # TODO
-
-
-    }
+sub fia_totals_tables {
+    my ($tots_arr) = @_;
 
     if ($o_player_fia_simple_score){
 
         # Total FIA Simple
-        printout ("------------------------------------\n");
-        printout ("GPF F1 Prediction World Championship\n");
-        printout ("------------------------------------\n");
+        if ( $o_score_bill ){
+            printout ("------------------------------------\n");
+            printout ("GPF F1 Prediction World Championship\n");
+            printout ("------------------------------------\n");
+        }
+        else {
+            printout ("----------------------------------\n");
+            printout ("Total FIA Score table (simplified)\n");
+            printout ("----------------------------------\n");
+        }
+
+        pre_code_open();
         my $pp = 1;
         for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
                          || $b->{player}    cmp $a->{player}
@@ -817,9 +1006,10 @@ sub wta_output {
             $pp++;
         }
         printout ("------------------------------------\n\n\n");
+        pre_code_close();
+    }
 
-
-    } elsif ( $o_player_fia_score ){
+    if ( $o_player_fia_score ){
 
         # Total FIA
         printout ("---------------------\n");
@@ -860,310 +1050,6 @@ sub wta_output {
             pre_code_close();
         }
     }
-
-    ##############################
-    # Output the Individual Rounds
-
-    if ( @$run_arrs >1 && ! $o_suppress_rounds_tables ){
-        printout( "\n-----------------\n");
-          printout( "WTA Individual rounds\n");
-          printout( "-----------------\n");
-    }
-
-    for my $pr_hsh (@$run_arrs) {
-        # could be done better :
-        next if $o_suppress_rounds_tables;
-
-        my $pr_run = $pr_hsh->{plydata};
-
-        printout( "---------------\n");
-
-        printout( round_name($pr_hsh->{round})."\n");
-
-        pre_code_open();
-
-        # Header row
-        my $underline = "";
-        if ( ! $o_suppress_position_column ){
-            $underline .= "-" x 3;
-            printout( "P  ");
-        }
-
-        $underline .= "-" x 11;
-        printout( "Player     ");
-
-        if ($o_player_rating_score){
-            printout(sprintf( "%18s|", "score 1  ")) ;
-            $underline .= "-" x 19;
-            printout(sprintf( "%18s|", "score 2  ")) ;
-            $underline .= "-" x 19;
-        }
-
-        if ($o_player_fia_score) {
-            printout(sprintf("%4s  %s",'FIA',$o_SEP));
-            $underline .= "-" x 8;
-        }
-
-        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
-        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
-
-# TODO next line needs fixing, can't use the sub process built up output.
-        $underline .= ("-" x length($pr_run->[0]{output}));
-
-        printout ("\n");
-        printout ("$underline\n");
-
-        # Body rows :
-        for my $ln (@$pr_run){
-
-            my $pos = $ln->{pos};
-            my $plyr = $ln->{player};
-            dierr( "unknown player . prog error \n") if ! $ln->{player};
-
-            next if $pos > $o_disp_plyrs_upto_pos;
-            my $plyr_n = $z_players->{$plyr} //
-                 dierr( "Can't lookup player uppercased name (rounds)\n");
-
-            if ($ln->{skipped}){
-                if ( ! $o_suppress_position_column ){
-                    printout( "    ");
-                }
-                printout(sprintf("%-10s ",$plyr_n));
-                printout($ln->{output}."\n");
-                next;
-            }
-
-            if ( ! $o_suppress_position_column ){
-                printout(sprintf("%-3s",$pos));
-            }
-            printout(sprintf("%-10s ", $plyr_n));
-
-            if ($o_player_rating_score){
-                my $sc_str = hundreds($ln->{all_algos}{exact}{"power-100"}{total});
-                printout(sprintf( "%18s|", "$sc_str "));
-
-                $sc_str = hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
-                printout(sprintf( "%18s|", "$sc_str "));
-            }
-
-            if ($o_player_fia_score) {
-                my $fia_s = sprintf("%.1f",$ln->{fia_score});
-                $fia_s =~ s/.0$/  /g;
-                printout(sprintf("%6s%s",$fia_s,$o_SEP));
-            }
-
-
-            my $oline = "";
-
-            for (my $i=0; $i<$o_score_upto_pos; $i++){
-
-                my $pred = $ln->{preds}[$i];
-                my $score =$ln->{all_algos}{differential_scoring}{"power-100"}{hundreds_positions}[$i];
-                if ( not defined $score ){
-                    $score = 0;
-                }
-
-                if ( $o_case_change_not_exact_predictions ) {
-                    if ($score == 19 ){
-                        $pred = ucfirst (lc($pred));
-                    } elsif ($score < 19) {
-                        $pred = lc ($pred);
-                    }
-                }
-
-                if ( $score == 20 ){
-                #    $score = "";
-                }
-
-                $oline .= sprint_pred($pred, $score, $o_SEP);
-            }
-
-            printout($oline);
-
-            printout ("\n");
-        }
-        printout ("$underline\n");
-        pre_code_close();
-
-    }
-}
-
-sub leo_output {
-    my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
-
-    printout("Leo Winner Takes All\n");
-    printout("--------------------\n\n");
-
-    for my $pr_hsh (@$run_arrs) {
-
-        my $pr_run = $pr_hsh->{plydata};
-
-        printout( round_name($pr_hsh->{round})." : ");
-
-        my $winners = "";
-
-        for my $ln (@$pr_run){
-
-            my $pos = $ln->{pos};
-            my $plyr = $ln->{player};
-            dierr( "unknown player . prog error \n") if ! $ln->{player};
-
-            my $plyr_n = $z_players->{$plyr} //
-                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
-
-            if ($ln->{score} > 0 && $pos == 1){
-                $winners .= "$plyr_n, ";
-            }
-        }
-
-        $winners = $winners ? $winners: "No Winners";
-
-        $winners =~ s/, $//g;
-        printout("$winners\n\n");
-    }
-
-    if ( ! $o_suppress_rounds_tables){
-        printout("\n\n");
-        printout("--------------\n");
-        printout("Rounds Details\n");
-        printout("--------------\n");
-    }
-
-    for my $pr_hsh (@$run_arrs) {
-
-        # could be done better :
-        next if $o_suppress_rounds_tables;
-
-        my $pr_run = $pr_hsh->{plydata};
-        pre_code_open();
-
-        printout( "\n---------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-
-        printout( round_name($pr_hsh->{round})."\n\n");
-
-        # Header row
-        my $underline = "-" x 15;
-        printout( "P   Player     ");
-
-        if ($o_player_fia_score) {
-            printout(sprintf("%4s   |",'FIA'));
-            $underline .= "-" x 8;
-        }
-
-        printout(sprintf("%6s |",'Top 6'));
-        $underline .= "-" x 8;
-
-        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
-        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
-
-        $underline .= ("-" x length($pr_run->[0]{output}));
-
-        printout ("\n");
-        printout ("$underline\n");
-
-        # Body rows :
-        for my $ln (@$pr_run){
-
-            my $pos = $ln->{pos};
-            my $plyr = $ln->{player};
-            dierr( "unknown player . prog error \n") if ! $ln->{player};
-            my $plyr_n = $z_players->{$plyr} //
-                dierr( "Can't lookup player uppercased name (leo_output 1)\n");
-
-            next if $pos > $o_disp_plyrs_upto_pos;
-
-            # Output section :
-            if ($ln->{skipped}){
-                printout(sprintf("    %-10s ",$plyr_n));
-                printout($ln->{output}."\n");
-                next;
-            }
-
-            printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
-
-            if ($o_player_fia_score) {
-                my $fia_s = sprintf("%.2f",$ln->{fia_score});
-                $fia_s =~ s/.00$/   /g;
-                printout(sprintf("%6s |",$fia_s));
-            }
-
-            printout(sprintf("   %2s  |",$ln->{top6_count}));
-
-            my $outline = $ln->{output};
-            $outline =~s/0/ /g;
-
-            printout($outline);
-
-            printout ("\n");
-        }
-        printout ("$underline\n");
-        pre_code_close();
-    }
-
-    if ( $o_player_fia_score ){
-        printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
-        pre_code_open();
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Total FIA Score table\n");
-        printout ("---------------------\n");
-        totals_header("FIA", false, true);
-        my $pp = 1;
-        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
-                         || $b->{player}    cmp $a->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "fia_total", false, true);
-            $pp++;
-        }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
-
-        # Ave FIA table
-        pre_code_open();
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Average FIA Score\n");
-        printout ("For players who have not entered all rounds\n");
-        printout ("---------------------\n");
-        totals_header("FIA", false, true);
-        $pp = 1;
-        for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
-                         || $b->{player}  cmp $a->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "ave_fia", false, true);
-            $pp++;
-        }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
-
-        # P1->6 table.
-        pre_code_open();
-        printout("------------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout("P1 -> P6 then FIA Total Score \n");
-        printout("------------------------\n");
-        totals_header("FIA", true, false);
-        $pp = 1;
-        for my $tl (sort {
-                    $b->{p1} <=> $a->{p1} ||
-                    $b->{p2} <=> $a->{p2} ||
-                    $b->{p3} <=> $a->{p3} ||
-                    $b->{p4} <=> $a->{p4} ||
-                    $b->{p5} <=> $a->{p5} ||
-                    $b->{p6} <=> $a->{p6} ||
-                    $b->{fia_total}  <=> $a->{fia_total} ||
-                    $b->{player} cmp $a->{player}
-                } @$tots_arr
-        ){
-            totals_row($pp, $tl, "fia_total", true, false);
-            $pp++;
-        }
-        totals_header("Total", true, false,true);
-        pre_code_close();
-    }
 }
 
 sub main_header_out {
@@ -1188,7 +1074,7 @@ sub main_header_out {
 
     }
 
-    if ( ! $o_no_pre_code && ! $o_score_leo) {
+    if ( ! $o_no_pre_code) {
         printout ( "The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.\n");
         printout ( "The Tags will format a lined up table\n\n" );
 
@@ -1198,7 +1084,7 @@ sub main_header_out {
 
     }
 
-    printout ("The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n") if ! $o_score_leo ;
+    printout ("The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n");
 
 }
 
@@ -1222,7 +1108,7 @@ sub main_rounds_out {
 
         my $pr_run = $pr_hsh->{plydata};
 
-        pre_code_open() if ! $o_suppress_rounds_tables;
+        pre_code_open();
 
         printout( "Method is '". get_scoring_type_out()."'\n");
         printout( "---------------\n");
@@ -1245,7 +1131,7 @@ sub main_rounds_out {
             }
         }
 
-        if ($o_player_fia_score) {
+        if ( fia_or_fia_simple() ) {
             printout(sprintf("%4s   |",'FIA'));
             $underline .= "-" x 8;
         }
@@ -1288,7 +1174,7 @@ sub main_rounds_out {
                 }
             }
 
-            if ($o_player_fia_score) {
+            if ( fia_or_fia_simple() ) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
                 printout(sprintf("%6s |",$fia_s));
@@ -1300,7 +1186,7 @@ sub main_rounds_out {
         }
         printout ("$underline\n");
 
-        pre_code_close() if ! $o_suppress_rounds_tables;
+        pre_code_close();
     }
 }
 
@@ -1324,8 +1210,8 @@ sub main_totals_output {
     printout ( "The P column currently doesn't work out shared places\n" );
     printout ( "So until it is fixed it is not being displayed below\n\n" );
 
-    # TODO if fia scoring is display this will need to sort by "fia_total";
-    # Or maybe just generate another table.
+    fia_totals_tables($tots_arr);
+
     my $pp;
     if ($o_player_rating_score){
         pre_code_open();
@@ -1341,25 +1227,6 @@ sub main_totals_output {
         ) {
             totals_row($pp, $tl, "total", false, false);
             $pp++;
-        }
-        totals_header("Total", false, false, true);
-        pre_code_close();
-    }
-
-    if ($o_player_rating_score){
-        pre_code_open();
-        printout ("--------------------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Total Score table. Reverse Order\n");
-        printout ("--------------------------------\n");
-        totals_header("Total", false, false);
-        $pp = scalar @$tots_arr;
-        for my $tl ( sort { $a->{total}  <=> $b->{total}
-                         || $a->{player} cmp $b->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "total", false, false);
-            $pp--;
         }
         totals_header("Total", false, false, true);
         pre_code_close();
@@ -1385,71 +1252,8 @@ sub main_totals_output {
         pre_code_close();
     }
 
-    if ( $o_player_fia_score ){
-        pre_code_open();
-        printout ("---------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("Total FIA Score table\n");
-        printout ("---------------------\n");
-        totals_header("FIA", false, true);
-        $pp = 1;
-        for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
-                         || $b->{player}    cmp $a->{player}
-                    } @$tots_arr
-        ) {
-            totals_row($pp, $tl, "fia_total", false, true);
-            $pp++;
-        }
-        totals_header("FIA", false, true, true);
-        pre_code_close();
+    positional_totals_table ($tots_arr, "total");
 
-        if ( ! $o_suppress_average_table ){
-            # Ave FIA table
-            pre_code_open();
-            printout ("---------------------\n");
-            printout( "Method is '".get_scoring_type_out()."'\n\n");
-            printout ("Average FIA Score table\n");
-            printout ("For players who have not entered all rounds\n");
-            printout ("---------------------\n");
-            totals_header("FIA", false, true);
-            $pp = 1;
-            for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
-                             || $b->{player}  cmp $a->{player}
-                        } @$tots_arr
-            ) {
-                totals_row($pp, $tl, "ave_fia", false, true);
-                $pp++;
-            }
-            totals_header("FIA", false, true, true);
-            pre_code_close();
-        }
-    }
-
-    { # P1->6 table.
-        pre_code_open();
-        printout ("------------------------\n");
-        printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("P1 -> P6 then Total Score \n");
-        printout ("------------------------\n");
-        totals_header("Total", true, false);
-        $pp = 1;
-        for my $tl (sort {
-                    $b->{p1} <=> $a->{p1} ||
-                    $b->{p2} <=> $a->{p2} ||
-                    $b->{p3} <=> $a->{p3} ||
-                    $b->{p4} <=> $a->{p4} ||
-                    $b->{p5} <=> $a->{p5} ||
-                    $b->{p6} <=> $a->{p6} ||
-                    $b->{total}  <=> $a->{total} ||
-                    $b->{player} cmp $a->{player}
-                } @$tots_arr
-        ){
-            totals_row($pp, $tl, "total", true, false);
-            $pp++;
-        }
-        totals_header("Total", true, false,true);
-        pre_code_close();
-    }
 }
 #################################
 #################################
@@ -1502,7 +1306,6 @@ sub pre_code_close{
 sub get_scoring_type_out() {
 
     return wta_const() if $o_score_wta ;
-    return leo_winner_ta()  if $o_score_leo ;
 
     return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
 }
@@ -1797,17 +1600,15 @@ PLYR:
                  skipped=>1};
         };
 
-
         if ( ! exists $all_players_data->{$plyr} ){
             push @skip_player_errs,
-                "$s_run : Skip [$plyr] no data in $s_run.all-players file";
-            $skip_result_line->("no data");
-            prdebug("  no data\n",0);
+                "$s_run : Skip [$plyr] DNS in $s_run.all-players file";
+            $skip_result_line->("DNS");
+            prdebug("  DNS\n",0);
             next ;
         }
 
         my $plyr_data = $all_players_data->{$plyr};
-
 
         prdebug("$s_run : $plyr : ".Dumper($plyr_data),0);
 
@@ -1877,14 +1678,7 @@ PLYR:
     # Post processing
     my @plyr_ordered_res ;
 
-    if ( $o_score_leo ) {
-        @plyr_ordered_res =  sort {
-                                 $b->{score} <=> $a->{score}
-                              || $b->{top6_count} <=> $a->{top6_count}
-                              || $a->{skipped} <=> $b->{skipped}
-                            } @$player_results_arr;
-    }
-    elsif ($o_score_wta ) {
+    if ($o_score_wta ) {
         # This is for a secondary sort special case.
         @plyr_ordered_res =  sort {
                               $b->{all_algos}{exact}{"power-100"}{total}
@@ -1907,11 +1701,7 @@ PLYR:
     my $cmp_last_diff_score_plyr = sub {
         my ($pl_cmp) = @_;
 
-        if ($o_score_leo ) {
-            return ( $pl_cmp->{score} == $last_diff_plyr->{score}
-                      && $pl_cmp->{top6_count} == $last_diff_plyr->{top6_count});
-        }
-        elsif ($o_score_wta ) {
+        if ($o_score_wta ) {
             return (
                              $pl_cmp->{all_algos}{exact}{"power-100"}{total} ==
                      $last_diff_plyr->{all_algos}{exact}{"power-100"}{total}
@@ -2244,11 +2034,6 @@ sub get_out_file {
         return $fn;
     }
 
-    if ( $o_score_leo ) {
-        $fn .= leo_winner_ta().$suf;
-        return $fn;
-    }
-
     # Now work out if the output is split on
     # the accuracy part and the position-times part
     if ( $o_out_accuracy_sub_dir ){
@@ -2282,11 +2067,6 @@ sub get_out_file_json {
 
     if ( $o_score_wta ) {
         $fn .= wta_const().$suf;
-        return $fn;
-    }
-
-    if ( $o_score_leo ) {
-        $fn .= leo_winner_ta().$suf;
         return $fn;
     }
 
@@ -2482,6 +2262,10 @@ sub csv_out_dump {
     output_csv_dir();
     # TODO
 
+}
+
+sub fia_or_fia_simple {
+    return $o_player_fia_score || $o_player_fia_simple_score ;
 }
 
 main();
