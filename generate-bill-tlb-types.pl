@@ -11,7 +11,7 @@ for my $r (keys %$runs){
     my $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir bill-tlb ";
     $cmd .= " --no-pre-code";
-    $cmd .= " --no-pos-col";
+    #$cmd .= " --no-pos-col";
     $cmd .= " --out-file $r";
 
     $cmd .= " --separator '' ";

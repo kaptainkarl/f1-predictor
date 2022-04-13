@@ -113,6 +113,50 @@ P   Player              score 1  |         score 2  | LEC        PER        RUS 
     Winston    no data
 -----------------------------------------------------------------------------------------------------------------------
 
+Why do we need "score 1" and "score 2" ?
+------------------------------------
+On a lot of tables Score 2 just provides a more separated order than score 1.
+The players are in pretty much the same positions.
+Without "Score 2" there would be a lot of shared places.
+
+About the only way I can see 2 players being in the same position with Score 2 is they have exactly the same predictions.
+There's not much that can be done about that.
+
+So why have "score 1" at all ?
+
+This is because it is possible to have a higher value for score 2 , but a lower value for score 1 than someone else has.
+Basically someone got the predictions pretty accurate , but they didn't get the higher places exactly correct.
+
+An exampe we've already has is the one shown below.
+
+P4 Karl and P5 Hobbes. Hobbes got a higher "score 2", but Karl (ME !!!)  got a higher "score 1"
+
+Also in the below you can see that Bill and TLB shared the FIA points because they had exactly the same predictions.
+So the sum is :
+( P7 + P8 points ) / 2  = 5
+    or
+( 6 + 4 ) / 2 = 5
+
+
+Australia Qual
+P   Player              score 1  |         score 2  | FIA   | LEC        VER        PER        NOR        HAM        RUS
+-------------------------------------------------------------------------------------------------------------------------------
+1   NL          1,01,00,00,01,01 |20,20,14,19,20,20 |  25   | LEC   20 | VER   20 | SAI   14 | PER   19 | HAM   20 | RUS   20 |
+2   BWare       1,00,00,00,00,00 |20,13,19,19,14,09 |  18   | LEC   20 | SAI   13 | VER   19 | PER   19 | GAS   14 | MAG    9 |
+3   GGP1        1,00,00,00,00,00 |20,13,19,19,13,09 |  15   | LEC   20 | SAI   13 | VER   19 | PER   19 | BOT   13 | MAG    9 |
+4   Karl           1,00,00,00,00 |18,20,18,15,19,16 |  12   | PER   18 | VER   20 | LEC   18 | SAI   15 | RUS   19 | ALO   16 |
+5   Hobbes            1,00,00,01 |19,19,20,15,13,20 |  10   | VER   19 | LEC   19 | PER   20 | SAI   15 | BOT   13 | RUS   20 |
+6   Joe               1,00,00,00 |19,19,20,15,19,15 |   8   | VER   19 | LEC   19 | PER   20 | SAI   15 | RUS   19 | GAS   15 |
+7   Bill                    1,01 |19,19,14,19,20,20 |   5   | VER   19 | LEC   19 | SAI   14 | PER   19 | HAM   20 | RUS   20 |
+7   TLB                     1,01 |19,19,14,19,20,20 |   5   | VER   19 | LEC   19 | SAI   14 | PER   19 | HAM   20 | RUS   20 |
+9   Leo                        1 |19,13,18,19,15,20 |   2   | VER   19 | SAI   13 | LEC   18 | PER   19 | ALO   15 | RUS   20 |
+10  F1Ung                      0 |19,19,18,15,13,09 |   1   | VER   19 | PER   19 | LEC   18 | SAI   15 | BOT   13 | MAG    9 |
+11  Iceman                     0 |12,19,19,19,15,14 |   0   | SAI   12 | LEC   19 | VER   19 | PER   19 | ALO   15 | BOT   14 |
+
+
+You maybe wondering why the commas separting the numbers aren't at the normal spaces of every 3 digits.
+Well that's because it makes it easier to visually line up the scores to the prediction positions.
+They are still numbers.
 
 
 A Championship
@@ -124,7 +168,7 @@ The large numbers are a bit mind bending.
 The two large numbers could be totalised over many rounds. They would have to be kept separate for them to make sense.
 
 Then the totals table could be sorted on the 2 different scores like the individual rounds. Score 1 has priority over Score 2.
-I haven't yet programmed this type of Totals table, but it could be programmed.
+I haven't yet programmed this type of Totals table, but it could be programmed. (update , this is unlikely to happen anytime soon )
 
 
 Or FIA points could be allocated on individual rounds like this table shows, these then added up over multiple rounds :
@@ -151,15 +195,14 @@ P   Player              score 1  |         score 2  | FIA   | LEC        PER    
 
 
 
-This is the current FIA table after Australia Race '22
-
+This is the current FIA table after Australia Race '22, and just running on the 3 Races :
 
 Method is 'winner-takes-all'
 
 Total FIA Score table
 ---------------------
 
-<pre><code>
+
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          89   |    6
@@ -178,6 +221,11 @@ P   Player       FIA   |Played
     Winston        7   |    1
 ----------------------------------
 
+in the output Bill wants for the "Unofficial GPF championship" it will look like this :
+
+
+
+
 
 
 Or the championship table could be done just be sorting on how many P1 -> P6s, then FIA points :
@@ -185,6 +233,9 @@ Or the championship table could be done just be sorting on how many P1 -> P6s, t
 Below you can see NL only has 53 FIA points but is above GGP1 because of better P1 and P2 counts.
 
 Hobbes is 7th , but has a lot of FIA points.
+
+Some people think it's wrong to have higher FIA points but be lower in a table. I do get that.
+It really just depend on how you want to sort ...
 
 
 Method is 'winner-takes-all'  ( After the Australia Race '22)
@@ -213,12 +264,5 @@ P   Player                  FIA   |Played| P1 | P2 | P3 | P4 | P5 | P6
 
 
 As I say , the straight "WTA Totals of 2 scores" table hasn't yet been programmed. It will get added here when it has .
-
-
-
-
-
-
-
-
+It is now also unlikely to get programmed, because we are likely to just use a FIA points scoring system for the "unofficial GPF championship"
 
