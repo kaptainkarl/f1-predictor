@@ -663,12 +663,12 @@ sub main {
 
             $plyr_tots->{$plyr}{"p$pos"}++;
 
-            $plyr_tots->{$plyr}{fia_total} = $plyr_tots->{$plyr}{fia_total} // 0;
-            $plyr_tots->{$plyr}{total}     = $plyr_tots->{$plyr}{total}     // 0;
-            $plyr_tots->{$plyr}{played}    = $plyr_tots->{$plyr}{played}    // 0;
+            $plyr_tots->{$plyr}{fia_total}      //= 0;
+            $plyr_tots->{$plyr}{total}          //= 0;
+            $plyr_tots->{$plyr}{played}         //= 0;
 
-            $plyr_tots->{$plyr}{wta_score1_tot} = $plyr_tots->{$plyr}{wta_score1_tot} // 0;
-            $plyr_tots->{$plyr}{wta_score2_tot} = $plyr_tots->{$plyr}{wta_score2_tot} // 0;
+            $plyr_tots->{$plyr}{wta_score1_tot} //= 0;
+            $plyr_tots->{$plyr}{wta_score2_tot} //= 0;
 
             $plyr_tots->{$plyr}{fia_total} += $ln->{fia_score};
             $plyr_tots->{$plyr}{total}     += $ln->{score};
@@ -743,6 +743,8 @@ sub wta_output {
 
     # printout ("Rounds this has been run for ". join(", ", split (",", $o_run))."\n\n");
 
+    # TODO This could go in a separate sub,
+    # and have it's own CLI option
     if ( ! $o_score_bill ){
         printout("Winners of Rounds are :\n\n");
 
@@ -860,11 +862,6 @@ sub wta_output {
             if ($ln->{skipped}){
                 if ( ! $o_suppress_position_column ){
                     printout( "   ");
-                }
-
-                if ($o_score_bill) {
-                    printout(sprintf("%-10s DNS\n",$plyr_n));
-                    next;
                 }
 
                 printout(sprintf("%-10s ",$plyr_n));
@@ -1119,7 +1116,6 @@ sub main_rounds_out {
         my $underline = "-" x 15;
         printout( "P   Player     ");
 
-
         if ($o_player_rating_score){
             if (is_score_times_power_100()){
                 printout(sprintf( "%18s|", "score ")) ;
@@ -1140,7 +1136,6 @@ sub main_rounds_out {
         printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
 
         $underline .= ("-" x length($pr_run->[0]{output}));
-
 
         printout ("\n");
         printout ("$underline\n");
@@ -1452,7 +1447,6 @@ sub totals_header {
 
 }
 
-
 sub totals_row($$$$$) {
     my ($p, $tl, $score_key, $add_ppos, $is_fia) = @_;
 
@@ -1619,7 +1613,6 @@ PLYR:
 
         for (my $i=0; $i<$o_score_upto_pos; $i++){
 
-
             my $plyr_pred = uc($plyr_data->[$i]);
 
             # get the 3 char abbrieviation :
@@ -1640,9 +1633,8 @@ PLYR:
             }
 
             if ( ! exists $results_lkup->{$plyr_pred}){
-                # TODO have a look at this.
-                # This is a programming error.
-                # dierr( "The lookup \$results_lkup->{$plyr_pred} []should work. Programmng error"."\n");
+                # About the only way this piece is run is if a prediction is for a driver
+                # who didn't even start the race.
 
                 prdebug("$s_run : $plyr : ".($i+1)." $plyr_pred  (0)\n",0);
                 $add_result->($plyr_pred,0,0);
@@ -1983,7 +1975,6 @@ sub get_all_players_data($) {
                 map { uc(trim ($_)) }
                 split ("," ,$preds )
             ];
-
 
             my $dup_preds = {};
 
