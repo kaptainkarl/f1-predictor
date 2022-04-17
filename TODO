@@ -1,28 +1,19 @@
 TODO things here.
 
 
-bill-tlb directory.
 
-does WTA only.
+still some pipes in output that don't take the $o_SEP
 
-Total FIA points table only.
-this is shown at the top of the output.
 
-After the Total FIA points, the individual rounds are shown in most recent at the top order.
-
-No pipes in the output.
-
-Individual Rounds shown
-
-Player Predictions
+meta algo picker for a player's best system !
+generate output and make a table for each player.
+show the systems ranked in order of where they are.
 
 
 
+finish writing this for a quick link to paste to players.
+docs/gpf-players-explanation
 
-
-bill-tlb-detailed directory
-
-Same as bill-tlb directory, but has lots of numbers next to the output.
 
 ---------------
 
@@ -67,21 +58,42 @@ The number of predictions will need to be limited because if there is ever a cas
 are predicted the numbers would be so huge they'd almost certainly break perl integer number size limits.
 
 
-
 substitute drivers ? Should they be ignored, ?
 If someone picks a driver who then goes off sick (probably with covid) should the players
 prediction of say VET at Bahrain just be substituted for HUL ?
 
 
 Average Score table only calculated on players that have entered at least 50% of the rounds.
+probably from 1/2 way through season.
 
-Do an Ave score table on FIA scores.
+
+sums to work out what results someone will need to win the championship
+when it's getting close to complete.
+As requested by Bill.
 
 
 Output the individual races and totals tables in :
 1) CSV
 2) JSON
 put this is a separate directory, otherwise there will be an explosion of files in one place (with all the different algorithms)
+
+
+---------------
+
+git hub pages in html.
+
+Techie Stuff description of the WTA algorithm.
+
+2022 season
+    WTA alg
+        Races Only (Bills Races only championship )
+        Quali Only
+        All
+
+    Leo area ...
+
+
+
 
 
 
