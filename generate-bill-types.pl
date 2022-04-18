@@ -13,8 +13,13 @@ for my $r (keys %$runs){
     # --bill implies :
     # --wta, --no-pre-code --fia-simple
     # --no-pos-col
+
     $cmd .= " --out-file $r";
     $cmd .= " --run $runs->{$r}\n";
 
+    $cmd .= " --html-out ";
     system( $cmd );
 }
+
+
+

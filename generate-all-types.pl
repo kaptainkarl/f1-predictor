@@ -36,6 +36,7 @@ for my $sc ( @$score_sys ) {
             $cmd .= " --score-accuracy $sc --score-times $ml ";
             $cmd .= " --run $runs->{$r}\n";
 
+            $cmd .= " --html-out ";
             system( $cmd ) ;
         }
     }
@@ -51,6 +52,7 @@ for my $sc ( @$score_sys ) {
             $cmd .= " --no-rounds";
             $cmd .= " --out-accuracy-sub-dir";
 
+            $cmd .= " --html-out ";
             system( $cmd ) ;
         }
     }

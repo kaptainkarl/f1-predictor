@@ -27,13 +27,13 @@ sub data_dir          {check_dir("$cwd/data/$season/")}
 sub output_dir        {check_dir("$cwd/output/$season/")}
 
 # dirs that will get "made" :
-sub output_all_alg_dir{check_dir(output_dir()."all-algorithms/", true)}
 sub output_json_dir   {check_dir(output_dir()."json/", true)}
 sub output_csv_dir    {check_dir(output_dir()."csv/", true)}
 
+sub docs_html_dir         {check_dir("$cwd/docs/html/$season/"), true}
+
 sub check_all_dirs{
     output_dir();
-    output_all_alg_dir();
     output_json_dir();
     output_csv_dir();
     data_dir();
@@ -46,11 +46,13 @@ my $ZDATA_CONSTRUCTORS  = 'zdata.constructors';
 my $ZDATA_RACES         = 'zdata.races';
 my $ZDATA_PLAYERS       = 'zdata.players';
 
-my $out_fh;
+my ($out_fh, $out_html);
+my $o_html_output;
 sub dierr {
     my ($msg) = @_;
 
-    close $out_fh if $out_fh;
+    close $out_fh   if $out_fh;
+    close $out_html if $out_html;
 
     $msg = "ERROR $msg" ;
     die "\n$msg\n";
@@ -62,6 +64,21 @@ sub printout ($){
     my ($txt) = @_;
     if ($out_fh){
         print $out_fh ($txt);
+
+        #print $txt;
+    }
+    else {
+        print $txt;
+    }
+}
+
+sub printout_html ($){
+    my ($txt) = @_;
+
+    return if ! $o_html_output;
+
+    if ($out_html){
+        print $out_html ($txt);
 
         #print $txt;
     }
@@ -433,7 +450,6 @@ my $o_constructors_count  = 10;
 my $o_score_upto_pos = 6;
 my ($o_run, $o_help);
 
-my $o_html_output;
 my $o_suppress_detail_score;
 my ($o_minus_points, $o_multi_points);
 my $o_multi_points_factor = 2;
@@ -612,8 +628,11 @@ if ($o_constructors_count < 2){
 }
 
 if ( $o_out_file_suffix ) {
-    my $file_name = get_out_file();
+    my $file_name = get_out_file(output_dir());
     open( $out_fh, ">" , $file_name ) || dierr( "Can't create $file_name $!") ;
+
+    my $file_html_n =  get_out_file(docs_html_dir()).".html";
+    open( $out_html, ">" , $file_html_n ) || dierr( "Can't create $file_html_n $!") ;
 }
 
 sub main {
@@ -716,6 +735,9 @@ sub main {
     json_out_dump("z-totals-hash",$plyr_tots, true);
     json_out_dump("z-totals-array",$tots_arr, true);
 
+
+    ## NON debug output to stdout/stderr starts here >>
+    print_html_start();
     if ( $o_score_wta ){
         wta_output ($plyr_tots, $run_arrs, $tots_arr);
     }
@@ -724,8 +746,124 @@ sub main {
         main_totals_output($plyr_tots, $run_arrs, $tots_arr);
         main_rounds_out(   $plyr_tots, $run_arrs, $tots_arr);
     }
-    # deliberately not printout() :
-    print get_out_file()."\n";
+    print_html_end();
+    ## << NON debug output to stdout/stderr ends here
+
+
+    if ( $o_out_file_suffix ){
+        # deliberately not printout() this is meant to go to stdout
+        # if the output has been sent to files.
+        print get_out_file(output_dir())."\n";
+        print get_out_file(docs_html_dir()).".html\n" if $o_html_output;
+    }
+}
+
+sub _html_round {
+    my ($pr_hsh) = @_;
+
+    my $pr_run = $pr_hsh->{plydata};
+
+    my $html = "";
+
+    $html .= "<div class='round'>\n";
+    $html .= "<p class='round-name'>".round_name($pr_hsh->{round})."</p>\n";
+
+    $html .= "<table class='round-table'>\n";
+
+    # header out :
+    $html .= "<tr class='round-trh'>\n";
+    $html .= "  <th class='hdr-pos'>Pos</th>\n";
+    $html .= "  <th class='hdr-player'>Player</th>\n";
+    $html .= "  <th class='hdr-fia'>FIA</th>\n";
+
+    if ($o_score_wta){
+        $html .= "  <th class='hdr-score1'>Score 1</th>\n";
+        $html .= "  <th class='hdr-score2'>Score 2</th>\n";
+    }
+    else {
+        $html .= "  <th class='hdr-score1'>Score</th>\n";
+    }
+
+    for (my $i=0; $i<$o_score_upto_pos; $i++){
+        $html .= "  <th class='hdr-pred' colspan=2>$pr_hsh->{results}[$i]</th>\n";
+    }
+    $html .= "</tr>\n";
+
+    # players out :
+    for my $ln (@$pr_run){
+        my $pos = $ln->{pos};
+        my $plyr = $ln->{player};
+        dierr( "unknown player . prog error \n") if ! $ln->{player};
+        next if $pos > $o_disp_plyrs_upto_pos;
+        my $plyr_n = $z_players->{$plyr} //
+             dierr( "Can't lookup player uppercased name (rounds)\n");
+
+        if ($ln->{skipped}){
+            $html .= "<tr class='round-td-skip'>\n";
+            $html .= "  <td class='td-pos'></td>\n";
+            $html .= "  <td class='td-player'>$plyr_n</td><td class='td-dns'>DNS</td>\n";
+            $html .= "</tr>\n";
+            next;
+        }
+        $html .= "<tr class='round-td'>\n";
+        $html .= "  <td class='td-pos'>$pos</td>\n";
+        $html .= "  <td class='td-player'>$plyr_n</td>\n";
+        $html .= "  <td class='td-fia'>$ln->{fia_score}</td>\n";
+
+        if ( $o_score_wta ){
+            $html .= "  <td class='td-score1'>";
+            $html .= hundreds($ln->{all_algos}{exact}{"power-100"}{total});
+            $html .= "</td>\n";
+
+            $html .= "  <td class='td-score2'>";
+            $html .= hundreds($ln->{all_algos}{differential_scoring}{"power-100"}{total});
+            $html .= "</td>\n";
+        }
+        else {
+            $html .= "  <td class='td-score'>$ln->{score}</td>\n";
+        }
+
+        for (my $i=0; $i<$o_score_upto_pos; $i++){
+
+            my $pred = $ln->{preds}[$i];
+            my $pred_score = $ln->{pred_scores}[$i];
+            my $score ;
+
+            if ( $o_score_wta ){
+                $score = $ln->{all_algos}{differential_scoring}{"power-100"}{hundreds_positions}[$i];
+            }
+            else {
+                $score = $pred_score;
+            }
+
+            if ( not defined $score ){
+                $score = 0;
+            }
+
+#            if ( $o_case_change_not_exact_predictions ) {
+#                if ($score == 19 ){
+#                    $pred = ucfirst (lc($pred));
+#                } elsif ($score < 19) {
+#                    $pred = lc ($pred);
+#                }
+#            }
+#
+#            if ( $score == 20 ){
+#            #    $score = "";
+#            }
+
+            my $odd_even = $i % 2 ? "odd-col" : "even-col";
+
+            $html .= "  <td class='td-pred $odd_even'>$pred</td>";
+            $html .= " <td class='td-pred-sc $odd_even'>$score</td>\n";
+        }
+
+        $html .= "</tr>\n";
+    }
+
+    $html .= "</table>\n";
+    $html .= "</div>\n";
+    return $html;
 }
 
 sub wta_output {
@@ -786,7 +924,7 @@ sub wta_output {
         # TODO, if ever. Unlikely to be used. Ever.
     }
 
-    positional_totals_table ($tots_arr, "fia_total");
+    positional_totals_table($tots_arr, "fia_total");
 
     ##############################
     # Output the Individual Rounds
@@ -925,6 +1063,7 @@ sub wta_output {
         printout ("$underline\n");
         pre_code_close();
 
+        printout_html( _html_round($pr_hsh) );
     }
 }
 
@@ -970,8 +1109,81 @@ sub positional_totals_table {
     }
 }
 
+
+sub _html_fia_totals {
+    my ($tots_arr) = @_;
+
+    my $html = "";
+
+    # Total FIA
+    $html .= "<div class='fia-score-total'>\n";
+    $html .= "<p class='totals-heading'>Total FIA Score table</p>\n";
+    $html .= "<table class='fia-totals'>\n";
+    $html .= "<tr class='round-trh'>\n";
+    $html .= "  <th class='hdr-pos'>Pos</th>";
+    $html .= "  <th class='hdr-player'>Player</th>";
+    $html .= "  <th class='hdr-fia'>FIA</th>";
+    $html .= "  <th class='hdr-played'>Played</th>\n";
+    $html .= "</tr>\n";
+
+    for my $tl ( sort { $b->{fia_total} <=> $a->{fia_total}
+                     || $b->{player}    cmp $a->{player}
+                } @$tots_arr
+    ) {
+
+        my $plyr = $tl->{player};
+        my $plyr_n = $z_players->{$plyr} //
+             dierr( "Can't lookup player uppercased name (rounds)\n");
+
+        $html .= "<tr class='round-td'>\n";
+        $html .= "  <td class='td-pos'></td>";
+        $html .= "  <td class='td-player'>$plyr_n</td>";
+        $html .= "  <td class='td-fia'>$tl->{fia_total}</td>";
+        $html .= "  <td class='td-fia'>$tl->{played}</td>\n";
+
+        $html .= "</tr>\n";
+    }
+    $html .= "</table>\n";
+
+
+    # Average FIA
+    $html .= "<p class='totals-heading'>Average FIA Score table</p>\n";
+    $html .= "<table class='fia-ave-totals'>\n";
+    $html .= "<tr class='round-trh'>\n";
+    $html .= "  <th class='hdr-pos'>Pos</th>";
+    $html .= "  <th class='hdr-player'>Player</th>";
+    $html .= "  <th class='hdr-fia'>FIA ave.</th>";
+    $html .= "  <th class='hdr-played'>Played</th>\n";
+    $html .= "</tr>\n";
+
+    for my $tl ( sort { $b->{ave_fia} <=> $a->{ave_fia}
+                     || $b->{player}  cmp $a->{player}
+                } @$tots_arr
+    ) {
+
+        my $plyr = $tl->{player};
+        my $plyr_n = $z_players->{$plyr} //
+             dierr( "Can't lookup player uppercased name (rounds)\n");
+
+        $html .= "<tr class='round-td'>\n";
+        $html .= "  <td class='td-pos'></td>";
+        $html .= "  <td class='td-player'>$plyr_n</td>";
+        $html .= "  <td class='td-fia'>".
+            sprintf("%0.1f",$tl->{ave_fia})."</td>";
+        $html .= "  <td class='td-fia'>$tl->{played}</td>\n";
+
+        $html .= "</tr>\n";
+    }
+    $html .= "</table>\n";
+    $html .= "</div>\n";
+
+    return $html;
+}
+
 sub fia_totals_tables {
     my ($tots_arr) = @_;
+
+    printout_html( _html_fia_totals ($tots_arr) );
 
     if ($o_player_fia_simple_score){
 
@@ -1180,6 +1392,8 @@ sub main_rounds_out {
             printout ("\n");
         }
         printout ("$underline\n");
+
+        printout_html( _html_round($pr_hsh) );
 
         pre_code_close();
     }
@@ -1552,7 +1766,6 @@ sub process ($) {
     my $details_header = "";
     my $add_header_detail = sub ($$$){
         my ($pred) = @_;
-
         my $pad = " " x length($o_SEP);
         $details_header .= sprint_pred($pred, "", $pad);
     };
@@ -1578,6 +1791,7 @@ PLYR:
         my $result_line    = "";
 
         my $plyr_top6 = {};
+        my $plyr_pred_scores = [];
 
         my $plyr_tot_score = 0;
         my $plyr_all_algos = { };
@@ -1624,6 +1838,9 @@ PLYR:
                 $plyr_tot_score += $real_score;
 
                 my $score = is_score_times_power_100() ? $disp_hundred_score : $real_score;
+
+                push @$plyr_pred_scores, $score;
+
                 $result_line .= sprint_pred($pred, $score, $o_SEP);
             };
 
@@ -1663,11 +1880,13 @@ PLYR:
                 score => $plyr_tot_score, player=>$plyr , all_algos => $plyr_all_algos ,
                 top6 => $plyr_top6,       top6_count => ( (scalar keys %$plyr_top6) // 0 ),
                 round=> $s_run,
-                output => $result_line,   skipped=>false, preds => $plyr_data };
+                output => $result_line,   skipped=>false,
+                pred_scores => $plyr_pred_scores, preds => $plyr_data };
     }
 
     #################
     # Post processing
+    # Ordering, applying FIA scores.
     my @plyr_ordered_res ;
 
     if ($o_score_wta ) {
@@ -1797,9 +2016,10 @@ PLYR:
         if @skip_player_errs;
 
     my $return = {
-        round          => $s_run,
-        details_header => $details_header,
-        plydata        => \@plyr_ordered_res,
+        round           => $s_run,
+        details_header  => $details_header,
+        results         => $results_array,
+        plydata         => \@plyr_ordered_res,
     };
 
     json_out_dump($s_run,$return, false);
@@ -2007,6 +2227,10 @@ sub get_all_players_data($) {
 sub all_player_file ($) { return data_dir()."$_[0].all-players" }
 
 sub get_out_file {
+    my ($base_dir) = @_;
+    die "No base dir\n" if ! $base_dir;
+    check_dir($base_dir);
+
     my $suf = $o_out_file_suffix ? "-$o_out_file_suffix" : "";
 
     my $fn ;
@@ -2014,10 +2238,10 @@ sub get_out_file {
     # first work out if it is in a sub dir of the output
     # rather than the default all-algorithms.
     if ( $o_out_sub_dir ) {
-        $fn = check_dir(output_dir()."$o_out_sub_dir/", true);
+        $fn = check_dir($base_dir.$o_out_sub_dir."/", true);
     }
     else {
-        $fn = output_all_alg_dir();
+        $fn = check_dir($base_dir."all-algorithms/", true);
     }
 
     if ( $o_score_wta ) {
@@ -2086,7 +2310,7 @@ sub check_dir {
 
 sub round_name {
     my ($nm) = @_;
-    if( my ($r, $e) = $nm =~ m{(.*?)-(race|qual)}){
+    if( my ($r, $e) = $nm =~ m{(.*?)-(race|sprint|qual)$}){
         return ucfirst($r)." ".ucfirst($e);
     }
     return $nm;
@@ -2100,10 +2324,6 @@ sub _all_algo_calc {
     #   exact and power-100
     # then they can be sorted by 
     #   diff and power-100.
-    #
-    # What this achieves is very close to Leo's Winner Takes All
-    # but it does then order the results on the not-exact but more
-    # accurate P1 to P6 predictions.
 
     # The only shared P places in the table should be where 
     #   exact and power-100 are exactly the same
@@ -2258,5 +2478,59 @@ sub csv_out_dump {
 sub fia_or_fia_simple {
     return $o_player_fia_score || $o_player_fia_simple_score ;
 }
+
+sub print_html_start(){
+    my ($title) = @_;
+    return if ! $o_html_output;
+
+    $title //= "";
+
+my $docroot = "https://kaptainkarl.github.io/f1-predictor/";
+
+my $html = <<EOHTMLSTART;
+<html>
+
+<head>
+<title>$title</title>
+
+<link rel=STYLESHEET type="text/css" href="${docroot}main.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<script language="JavaScript" src="${docroot}mouseover.js" type="text/javascript"></script>
+<script language="JavaScript" src="${docroot}main.js" type="text/javascript"></script>
+
+
+
+</head>
+
+<body>
+<div align='center' ><br><br><br>
+
+EOHTMLSTART
+
+$html .= "<p class='method-name'>Method is ".get_scoring_type_out()."</p>\n";
+printout_html($html);
+
+}
+
+sub print_html_end(){
+  return if ! $o_html_output;
+
+my $html = <<EOHTMLEND;
+</div>
+</body>
+
+</html>
+
+EOHTMLEND
+
+printout_html($html);
+
+}
+
+
+
 
 main();
