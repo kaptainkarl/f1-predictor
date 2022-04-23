@@ -802,6 +802,7 @@ sub main {
     }
     else {
         main_header_out();
+        winners_of_rounds_out($plyr_tots, $run_arrs, $tots_arr);
         main_totals_output($plyr_tots, $run_arrs, $tots_arr);
         main_rounds_out(   $plyr_tots, $run_arrs, $tots_arr);
     }
@@ -928,6 +929,13 @@ sub _html_round {
 sub wta_output {
     my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
 
+    # This really needs to be factored into a
+    # "double rating score sort"
+    # So it could do what is now known as "Winner Takes All"
+    # it could also do the --closest-p1 as the primary "score 1"
+    # and a secondary sort to do tie breaking.
+    
+
     if ( $o_score_bill ){
         # Dunno what to print out here.
         # Probably nothing.
@@ -940,38 +948,7 @@ sub wta_output {
 
     # printout ("Rounds this has been run for ". join(", ", split (",", $o_run))."\n\n");
 
-    # TODO This could go in a separate sub,
-    # and have it's own CLI option
-    if ( ! $o_score_bill ){
-        printout("Winners of Rounds are :\n\n");
-
-        for my $pr_hsh (@$run_arrs) {
-
-            my $pr_run = $pr_hsh->{plydata};
-
-            printout( round_name($pr_hsh->{round})." : ");
-
-            my $winners = "";
-
-            for my $ln (@$pr_run){
-                my $pos = $ln->{pos};
-                my $plyr = $ln->{player};
-                dierr( "unknown player . prog error \n") if ! $ln->{player};
-
-                my $plyr_n = $z_players->{$plyr} //
-                    dierr( "Can't lookup player uppercased name (wta_output 1)\n");
-
-                if ($ln->{score} > 0 && $pos == 1){
-                    $winners .= "$plyr_n, ";
-                }
-            }
-
-            $winners = $winners ? $winners: "No Winners";
-            $winners =~ s/, $//g;
-            printout("$winners\n");
-        }
-        printout("\n\n");
-    }
+    winners_of_rounds_out($plyr_tots, $run_arrs, $tots_arr);
 
     ## Totals tables
     fia_totals_tables($tots_arr);
@@ -1239,6 +1216,44 @@ sub _html_fia_totals {
     return $html;
 }
 
+sub winners_of_rounds_out {
+    my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
+
+    return if $o_score_bill ;
+
+    # and have it's own CLI option rather than just --bill
+
+    printout("Winners of Rounds are :\n\n");
+
+    for my $pr_hsh (@$run_arrs) {
+
+        my $pr_run = $pr_hsh->{plydata};
+
+        printout( round_name($pr_hsh->{round})." : ");
+
+        my $winners = "";
+
+        for my $ln (@$pr_run){
+            my $pos = $ln->{pos};
+            my $plyr = $ln->{player};
+            dierr( "unknown player . prog error \n") if ! $ln->{player};
+
+            my $plyr_n = $z_players->{$plyr} //
+                dierr( "Can't lookup player uppercased name (wta_output 1)\n");
+
+            if ($ln->{score} > 0 && $pos == 1){
+                $winners .= "$plyr_n, ";
+            }
+        }
+
+        $winners = $winners ? $winners: "No Winners";
+        $winners =~ s/, $//g;
+        printout("$winners\n");
+    }
+    printout("\n\n");
+
+}
+
 sub fia_totals_tables {
     my ($tots_arr) = @_;
 
@@ -1327,7 +1342,7 @@ sub main_header_out {
     prdebug("OUTPUT Section\n",0);
     prdebug("##############################################################\n",0);
 
-    if ($o_minus_points || $o_multi_points  ) {
+    if ( ! $o_closest_p1 && ($o_minus_points || $o_multi_points )) {
         printout( "This is a JOKE table, with silly factors applied to certain driver predictions\n\n");
 
         if ($o_minus_points) {
@@ -1341,8 +1356,7 @@ sub main_header_out {
         printout("\n");
 
     }
-
-    if ( ! $o_no_pre_code) {
+    if ( ! $o_no_pre_code ) {
         printout ( "The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.\n");
         printout ( "The Tags will format a lined up table\n\n" );
 
@@ -2487,6 +2501,31 @@ sub _scorer_closest_p1 {
 
     # Also to make the system work with the calculations only
     # player predictions that were in the $o_score_upto_pos are scored.
+
+    # currently this does NOT apply the JOKE factor driver
+    # multipliers.
+
+
+    # Future Dev.
+    #   The entire 20 positions could be scored this way.
+    #   (maybe 18 positions is just worth considering)
+    #   But using a single huge number to do the sorting will not work
+    #   because   20 (21 ** ( 19 )) maximum score for P1 is something like 10**25 in 
+    #   order of magnitude , and too big for normal perl integers.
+    #   (there is always Math::BigInt ...)
+    #
+    #   So to do all 18 places it could :
+    #   (1) split the sum in to 2 scores.
+    #       the first part would be for P1 -> P9
+    #       the second part for P10 -> P18
+    #       P19 and P20 would be dropped.
+    #
+    #       this has the advantage that the positional scores can be seen in the 2 large
+    #       numbers that do the sorting , because it is just 0 to 9.
+    #
+    #   (2) put all the positional scores in a perl array and do a 20 level sort on the array elements
+    #       just like the P1->P6 totals table currently does.
+
 
     my $score = 0;
     my $display_hundreds_score = 0;
