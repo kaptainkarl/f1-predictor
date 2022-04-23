@@ -12,7 +12,7 @@ use Cwd;
 sub true {1}
 sub false {0}
 sub wta_const {"winner-takes-all"}
-# sub leo_winner_ta {"top-6-winner-takes-all-broken"}
+sub closest_p1_const {"closest-p1"}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
@@ -163,6 +163,44 @@ Options :
 
         since we are only doing first six positions then this defaults to 6 in the code.
         and the player files with the lines of predictions must only have 6 lines.
+
+    --closest-p1
+        latest variant attempting to get Leo's algorithm.
+
+        The key difference with this method is that 
+        it is not the positional score of the player that is
+        multiplied by a power-100 base,
+        but the position the driver was in.
+        
+        So it looks like it is almost the same as
+        diff and times-power-100
+        but it isn't.
+
+        Also to make the system work with the calculations only
+
+        player predictions that were in the --score-only-upto-pos are scored.
+
+        Since it only considers the --score-only-upto-pos the maximum diff score
+        for getting a position exactly correct is --score-only-upto-pos.
+
+        --score-only-upto-pos defaults to 6
+
+        if --score-only-upto-pos defaults is set to more than 10 , then it
+        might break perl's maximum integer size. 
+        Although that is a huge number :
+        9007199254740992
+
+        the algorithm if it --score-only-upto-pos is set to 20
+        this I think will make the P1 sorting score be 
+
+        20 x ( 21 ^ 19 )
+
+        20 x ( 1.324849664×(10^25) ) 
+
+        in that order of magnitude. Too big for perl ints.
+        we're never going to do all 20 positions.
+ 
+        The fiddle factors do NOT work with this method.
 
     --winner-takes-all , --wta
         this is more than a short cut.
@@ -406,6 +444,7 @@ my $score_accuracy_sys_lkup = {
     "karl-96-16" => 1,
     "differential_scoring" => 1,
     "exact" => 1,
+    
 };
 
 my $score_times_sys_lkup = {
@@ -471,13 +510,15 @@ my $o_show_only_test_player;
 my $o_suppress_position_column;
 my $o_case_change_not_exact_predictions;
 my $o_show_p1_to_p6_totals;
+my $o_closest_p1;
 
 my $o_SEP = " | ";
 my $o_WIDE=5; #number width in details
 
 GetOptions (
-    "score-only-upto-pos=i"  => \$o_score_upto_pos,
+    "score-only-upto-pos=i" => \$o_score_upto_pos,
     "bill"                  => \$o_score_bill,
+    "closest-p1"            => \$o_closest_p1,
     "wta|winner-takes-all"  => \$o_score_wta,
     "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
     "score-times-sys=s"     => \$o_score_times_sys,
@@ -537,20 +578,38 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ( $o_score_bill ) {
-    # option --bill is just an output twiddling on WTA.
-    $o_score_wta = true ;
-    $o_no_pre_code = true;
-    $o_player_fia_simple_score = true;
-    $o_suppress_position_column = true;
-    # --bill option only shows the first race in the --runs list
-    #   so the most recent race , must be the first one !
+if ( $o_closest_p1 ) {
+    # This is a bit of a hack.
+    # so much of the display code relies on is_score_times_power_100()
+    # for display purposes.
+    # The special _scorer_closest_p1 , does use p1 -> P6 power-100
+    # but it turns the diff-ing on it's head.
+    $o_score_times_sys = "power-100";
 
-}
+    if ( $o_score_upto_pos > 9 ){
+        dierr ("--closest-p1 cannot score more than up to 9 positions. ".
+            "output gets messy, and the numbers get too large\n");
+    }
 
-if ( $o_score_wta ){
-    $o_score_accuracy_sys = "exact";
-    $o_score_times_sys    = "power-100";
+    # Not really needed :
+    $o_score_accuracy_sys = "differential_scoring";
+
+} else {
+    if ( $o_score_bill ) {
+        # option --bill is just an output twiddling on WTA.
+        $o_score_wta = true ;
+        $o_no_pre_code = true;
+        $o_player_fia_simple_score = true;
+        $o_suppress_position_column = true;
+        # --bill option only shows the first race in the --runs list
+        #   so the most recent race , must be the first one !
+
+    }
+
+    if ( $o_score_wta ){
+        $o_score_accuracy_sys = "exact";
+        $o_score_times_sys    = "power-100";
+    }
 }
 
 my $z_races   = z_data_single(data_dir().$ZDATA_RACES);
@@ -1329,13 +1388,13 @@ sub main_rounds_out {
         printout( "P   Player     ");
 
         if ($o_player_rating_score){
-            if (is_score_times_power_100()){
-                printout(sprintf( "%18s|", "score ")) ;
-                $underline .= "-" x 19;
+            if ($o_closest_p1 || ! is_score_times_power_100()){
+                printout(sprintf( "%12s|", "score " ));
+                $underline .= "-" x 10;
             }
             else {
-                printout(sprintf( "%7s|", "score " ));
-                $underline .= "-" x 8;
+                printout(sprintf( "%18s|", "score ")) ;
+                $underline .= "-" x 19;
             }
         }
 
@@ -1372,12 +1431,13 @@ sub main_rounds_out {
             printout(sprintf("%-3s %-10s ",$pos, $plyr_n));
 
             if ($o_player_rating_score){
-                if (is_score_times_power_100()){
+                if ( $o_closest_p1 || ! is_score_times_power_100() ) {
+                    my $sc_str = thousands($ln->{score});
+                    printout(sprintf( "%12s|", "$sc_str "));
+                }
+                else{
                     my $sc_str = hundreds($ln->{score});
                     printout(sprintf( "%18s|", "$sc_str "));
-                }
-                else {
-                    printout(sprintf( "%7s|", "$ln->{score} "));
                 }
             }
 
@@ -1387,7 +1447,39 @@ sub main_rounds_out {
                 printout(sprintf("%6s |",$fia_s));
             }
 
-            printout($ln->{output});
+            # this does work instead of iterating over the "pred_scores"
+            # printout($ln->{output});
+
+            # editting here . FIXME !
+            my $oline = "";
+
+            for (my $i=0; $i<$o_score_upto_pos; $i++){
+
+                my $pred = $ln->{preds}[$i];
+                my $score = $ln->{pred_scores}[$i];
+
+                if ( not defined $score ){
+                    $score = 0;
+                }
+
+                if ( $o_case_change_not_exact_predictions ) {
+                    if ($score == 19 ){
+                        $pred = ucfirst (lc($pred));
+                    } elsif ($score < 19) {
+                        $pred = lc ($pred);
+                    }
+                }
+
+                if ( $score == 20 ){
+                    #    $score = "";
+                }
+
+                $score ||= ""; # make 0 score an empty string.
+
+                $oline .= sprint_pred($pred, $score, $o_SEP);
+            }
+
+            printout($oline);
 
             printout ("\n");
         }
@@ -1515,6 +1607,8 @@ sub pre_code_close{
 sub get_scoring_type_out() {
 
     return wta_const() if $o_score_wta ;
+
+    return closest_p1_const() if $o_closest_p1;
 
     return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
 }
@@ -1841,6 +1935,8 @@ PLYR:
 
                 push @$plyr_pred_scores, $score;
 
+                $score ||= ""; # make 0 score an empty string.
+
                 $result_line .= sprint_pred($pred, $score, $o_SEP);
             };
 
@@ -1861,8 +1957,16 @@ PLYR:
                 my $error = abs($results_lkup->{$plyr_pred}-$i);
                 _all_algo_calc( $plyr_all_algos , $plyr_pred, $i, $error, false );
 
-                my ($score, $display_hundreds_score )
-                   = _scorer($o_score_accuracy_sys, $o_score_times_sys, $plyr_pred, $i, $error);
+                my ($score, $display_hundreds_score );
+
+                if ( $o_closest_p1 ) {
+                    ($score, $display_hundreds_score )
+                        = _scorer_closest_p1( $results_lkup, $plyr_pred, $i);
+                } else {
+                    ($score, $display_hundreds_score )
+                        = _scorer($o_score_accuracy_sys, $o_score_times_sys,
+                                  $plyr_pred, $i, $error);
+                }
 
                 prdebug("$s_run : $plyr : ".($i+1)." $plyr_pred  : error $error : score ".int($score)."\n",0);
                 $add_result->($plyr_pred, $score, $display_hundreds_score);
@@ -2249,6 +2353,11 @@ sub get_out_file {
         return $fn;
     }
 
+    if ( $o_closest_p1 ){
+        $fn .= closest_p1_const().$suf;
+        return $fn;
+    }
+
     # Now work out if the output is split on
     # the accuracy part and the position-times part
     if ( $o_out_accuracy_sub_dir ){
@@ -2282,6 +2391,11 @@ sub get_out_file_json {
 
     if ( $o_score_wta ) {
         $fn .= wta_const().$suf;
+        return $fn;
+    }
+
+    if ( $o_closest_p1 ){
+        $fn .= closest_p1_const().$suf;
         return $fn;
     }
 
@@ -2356,6 +2470,44 @@ sub _all_algo_calc {
             $algo_hsh->{$accuracy}{$times}{hundreds_positions}[$pos] = $hundreds;
         }
     }
+}
+
+
+sub _scorer_closest_p1 {
+    my ($results_lkup, $plyr_pred, $pos ) = @_;
+
+    # The key difference with this method is that 
+    # it is not the positional score of the player that is
+    # multiplied by a power-100 base,
+    # but the position the driver was in.
+    #
+    # So it looks like it is almost the same as
+    # diff and times-power-100
+    # but it isn't.
+
+    # Also to make the system work with the calculations only
+    # player predictions that were in the $o_score_upto_pos are scored.
+
+    my $score = 0;
+    my $display_hundreds_score = 0;
+
+    my $pos_of_driver = $results_lkup->{$plyr_pred};
+
+    if ( $pos_of_driver < $o_score_upto_pos ){
+        $score = $o_score_upto_pos - abs($results_lkup->{$plyr_pred}-$pos);
+        $display_hundreds_score  = $score;
+
+        my $power_of ;
+        if ($o_score_upto_pos < 10 ) {
+            $power_of = 10 ;
+        } else {
+            $power_of = $o_score_upto_pos + 1;
+        }
+
+        $score = $score * ($power_of ** ( $o_score_upto_pos - $pos_of_driver - 1 ));
+    }
+
+    return ($score, $display_hundreds_score );
 }
 
 sub _scorer {
