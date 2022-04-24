@@ -11,8 +11,10 @@ use Number::Format;
 use Cwd;
 sub true {1}
 sub false {0}
-sub wta_const {"winner-takes-all"}
+
+sub closest_p1_const_all_20 {"closest-p1-20"}
 sub closest_p1_const {"closest-p1"}
+sub wta_const {"winner-takes-all"}
 
 my $dt_now = DateTime->now();
 my $season = $dt_now->year();
@@ -107,6 +109,23 @@ my $real_f1_pos_scores = {
     9 => 1,
 };
 
+my $real_f1_pos_sprint_scores = {
+    0 => 8,
+    1 => 7,
+    2 => 6,
+    3 => 5,
+    4 => 4,
+    5 => 3,
+    6 => 2,
+    7 => 1,
+};
+
+my $real_f1_pos_qual_scores = {
+    0 => 3,
+    1 => 2,
+    2 => 1,
+};
+
 # These are -1 out, so 0 is really P1 !!! :
 my $real_1990_f1_pos_scores = {
     0 => 9,
@@ -164,6 +183,18 @@ Options :
         since we are only doing first six positions then this defaults to 6 in the code.
         and the player files with the lines of predictions must only have 6 lines.
 
+    --closest-p1-20
+        a much better version of --closest-p1
+        uses a large array sort.
+        the only way to get joint places is to have exactly the same predictions.
+
+        it has a sister option 
+        --closest-p1-20-details
+
+        This shows the entire list of 20 positions, with just
+        the players score for that driver.
+
+
     --closest-p1
         latest variant attempting to get Leo's algorithm.
 
@@ -203,7 +234,12 @@ Options :
         The fiddle factors do NOT work with this method.
 
     --winner-takes-all , --wta
-        this is more than a short cut.
+
+        This has really been superceded by the --closest-p1 ,
+        and the better --closest-p1-20
+        this doesn't get Leo's ordering, where as I think --closest-p1-20 
+
+        This is more than a short cut.
         it is 2 scoring systems, used to then order the results.
         Using FIA points probably makes the most sense because
         Adding the 2 scores together would be silly.
@@ -228,12 +264,19 @@ Options :
         The exact-and-power-100 one again having the higher priority.
 
     --bill
-        this is a special winner takes all method output
-        it sets --wta --no-pre-code --fia-simple --no-pos-col
+        this is a bunch of CLI option
+        it sets --no-pre-code --no-pos-col
+                --no-prediction-detail
+                --closest-p1-20
+                --fia-simple
+                --fia-sprint-qual-diff
+                    so different scoring for sprint races.
 
-        it also only outputs a simplied race result for the first race in
-        --run list. So the most recent race really needs to be the first
-        one in the list.
+
+                --only-first-race-in-list
+
+        The --only-first-race-in-list means the the most recent race
+        really needs to be the first one in the list.
 
     --score-accuracy-sys  karl-8, karl-32, karl-96-16, differential_scoring, diff, exact
         defaults to differential_scoring
@@ -337,13 +380,22 @@ Options :
     --multi-points-factor 2 , 3 , 2.5 , whatever you like !
         This is used in conjunction with the --multi-points JOKE option.
 
-    --player-fia-score , --fia
+
+    --fia, --player-fia-score
         Instead of adding up the underlying alogithm ranking score for sorting the
         positions , the positions of the players is mapped against proper F1 scoring in 2022
         i.e. P1 player get 25 points and so on .
 
     --fia-simple
         same as --player-fia-score, but shows a very simplified total points table
+
+    --fia-sprint-qual-diff
+        needs to be used with --fia , or --fia-simple.
+        if it is defined, then sprints score 8,7,6,5,4,3,2,1
+        and qual uses 3,2,1
+        "race" rounds always use 25,18,15 ...
+
+        If this option is NOT used then all rounds use 25,18,15,.... scoring.
 
     --show-p1-to-p6-totals
         this shows a totals table where the players are ranked on their
@@ -366,8 +418,12 @@ Options :
         This suppresses the </pre></code>
         that is useful for disqus formating of tables.
 
-    --suppress-detail-score
+    --suppress-detail-score , --no-detail
         suppresses the position player scores of the round.
+
+    --no-prediction-detail, --suppress-prediction-detail
+        suppresses all of the prediction details,
+        predictions and the scores
 
     --suppress-average-table
         suppresses the average table
@@ -490,10 +546,13 @@ my $o_score_upto_pos = 6;
 my ($o_run, $o_help);
 
 my $o_suppress_detail_score;
+my $o_suppress_all_detail;
+my $o_only_first_race_in_list;
 my ($o_minus_points, $o_multi_points);
 my $o_multi_points_factor = 2;
 my $o_player_fia_score;
 my $o_player_fia_simple_score;
+my $o_fia_sprint_qual_diff;
 my $o_player_rating_score;
 my $o_suppress_average_table;
 my $o_score_wta;
@@ -511,6 +570,8 @@ my $o_suppress_position_column;
 my $o_case_change_not_exact_predictions;
 my $o_show_p1_to_p6_totals;
 my $o_closest_p1;
+my $o_closest_p1_all_20;
+my $o_closest_p1_all_20_show_details;
 
 my $o_SEP = " | ";
 my $o_WIDE=5; #number width in details
@@ -519,6 +580,10 @@ GetOptions (
     "score-only-upto-pos=i" => \$o_score_upto_pos,
     "bill"                  => \$o_score_bill,
     "closest-p1"            => \$o_closest_p1,
+    "closest-p1-20" =>
+                               \$o_closest_p1_all_20,
+    "closest-p1-20-details" =>
+                               \$o_closest_p1_all_20_show_details,
     "wta|winner-takes-all"  => \$o_score_wta,
     "score-accuracy-sys=s"  => \$o_score_accuracy_sys,
     "score-times-sys=s"     => \$o_score_times_sys,
@@ -535,12 +600,20 @@ GetOptions (
                             => \$o_player_rating_score,
     "fia|player-fia-score"  => \$o_player_fia_score,
     "fia-simple"            => \$o_player_fia_simple_score,
+    "fia-sprint-qual-diff"  => \$o_fia_sprint_qual_diff,
+
     "show-p1-to-p6-totals"  => \$o_show_p1_to_p6_totals,
 
     "disp_players|display-players-upto=i" => \$o_disp_plyrs_upto_pos,
 
     "no-detail|suppress-detail-score"
                             => \$o_suppress_detail_score,
+    "no-prediction-detail|suppress-prediction-detail"
+                            => \$o_suppress_all_detail,
+    "only-first-race-in-list"
+                            => \$o_only_first_race_in_list,
+
+
     "case-change-not-exact-predictions"
                             => \$o_case_change_not_exact_predictions,
     "no-ave|suppress-average-table"
@@ -551,7 +624,8 @@ GetOptions (
     "no-rounds|suppress-rounds"
                             => \$o_suppress_rounds_tables,
     "no-pos-col|suppress-position-column"
-                            => \$o_suppress_position_column, # TODO implement this.
+                            => \$o_suppress_position_column,
+     # TODO finish implementing the above.
     "no-pre-code"
                             => \$o_no_pre_code,
 
@@ -578,7 +652,57 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ( $o_closest_p1 ) {
+if ( $o_fia_sprint_qual_diff &&
+    ! $o_player_fia_score && ! $o_player_fia_simple_score
+){
+    dierr( "--fia-sprint-qual-diff needs to have --fia-simple or --fia also specified\n");
+}
+
+if ( $o_score_bill ) {
+    # option --bill is just an output twiddling closest-p1-20
+    $o_closest_p1_all_20 = true;
+    $o_no_pre_code = true;
+    $o_player_fia_simple_score = true;
+    $o_fia_sprint_qual_diff =true;
+
+    $o_suppress_position_column = true;
+    $o_suppress_all_detail = true;
+    $o_SEP = "";
+    # TODO make this live :
+    # $o_only_first_race_in_list = true;
+    # --bill option only shows the first race in the --runs list
+    #   so the most recent race , must be the first one !
+
+    # $o_suppress_position_column=true;
+}
+
+if ( $o_closest_p1_all_20 ) {
+
+    # TODO , suppress the fiddle factors ?
+    # I'm not sure, they would work with the 20 way array
+    # sort this method does ...
+
+    if ( $o_minus_points ) {
+        dierr("--minus-points are not really sensible with --closest-p1-20\n");
+    }
+
+    if ( $o_multi_points ) {
+        dierr("--multi-points are not really sensible with --closest-p1-20\n");
+    }
+
+    if ( $o_score_wta ){
+        dierr("--wta is not really sensible with --closest-p1-20\n");
+    }
+    if ( $o_closest_p1 ) {
+        dierr("--closest-p1 is not really sensible with --closest-p1-20\n");
+    }
+
+    # These are sensible options on closest-p1-20 :
+    $o_player_rating_score = undef;
+    $o_WIDE = 3;
+
+}
+elsif ( $o_closest_p1 ) {
     # This is a bit of a hack.
     # so much of the display code relies on is_score_times_power_100()
     # for display purposes.
@@ -588,24 +712,35 @@ if ( $o_closest_p1 ) {
 
     if ( $o_score_upto_pos > 9 ){
         dierr ("--closest-p1 cannot score more than up to 9 positions. ".
-            "output gets messy, and the numbers get too large\n");
+            "output gets messy, and the numbers get too large\n".
+            "use --closest-p1-20 instead, that should work\n"
+        );
     }
 
     # Not really needed :
     $o_score_accuracy_sys = "differential_scoring";
 
-} else {
-    if ( $o_score_bill ) {
-        # option --bill is just an output twiddling on WTA.
-        $o_score_wta = true ;
-        $o_no_pre_code = true;
-        $o_player_fia_simple_score = true;
-        $o_suppress_position_column = true;
-        # --bill option only shows the first race in the --runs list
-        #   so the most recent race , must be the first one !
-
+    if ( $o_minus_points ) {
+        dierr("--minus-points are not really sensible with --closest-p1\n");
     }
 
+    if ( $o_multi_points ) {
+        dierr("--multi-points are not really sensible with --closest-p1\n");
+    }
+
+    if ( $o_score_wta ){
+        dierr("--wta is not really sensible with --closest-p1\n");
+    }
+
+    if ( $o_closest_p1_all_20 ) {
+        dierr("--closest-p1-20 is not really sensible with --closest-p1\n");
+    }
+
+    if ( $o_closest_p1_all_20_show_details ) {
+        dierr("--closest-p1-20-details is not really sensible with --closest-p1\n");
+    }
+
+} else {
     if ( $o_score_wta ){
         $o_score_accuracy_sys = "exact";
         $o_score_times_sys    = "power-100";
@@ -973,13 +1108,13 @@ sub wta_output {
           printout( "---------------------\n");
     }
 
-    my $showed_first_race_only_for_bill;
+    my $showed_first_race_only;
     for my $pr_hsh (@$run_arrs) {
         # could be done better :
         next if $o_suppress_rounds_tables;
 
-        next if $showed_first_race_only_for_bill;
-        $showed_first_race_only_for_bill = true if $o_score_bill ;
+        next if $showed_first_race_only;
+        $showed_first_race_only = true if $o_only_first_race_in_list ;
 
         my $pr_run = $pr_hsh->{plydata};
 
@@ -1366,7 +1501,7 @@ sub main_header_out {
 
     }
 
-    printout ("The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n");
+    # printout ("The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt\n\n");
 
 }
 
@@ -1380,22 +1515,26 @@ sub main_rounds_out {
         return;
     }
 
-    if ( @$run_arrs >1 ){
+    if ( @$run_arrs >1 && ! $o_score_bill ){
         printout( "\n-----------------\n");
           printout( "Individual rounds\n");
           printout( "-----------------\n");
     }
 
+    my $showed_first_race_only;
     for my $pr_hsh (@$run_arrs) {
+
+        next if $showed_first_race_only;
+        $showed_first_race_only = true if $o_only_first_race_in_list ;
 
         my $pr_run = $pr_hsh->{plydata};
 
         pre_code_open();
 
-        printout( "Method is '". get_scoring_type_out()."'\n");
-        printout( "---------------\n");
+        printout( "Method is '".get_scoring_type_out()."'\n" );
+        printout( "---------------\n" );
 
-        printout( round_name($pr_hsh->{round})."\n\n");
+        printout( round_name($pr_hsh->{round})."\n\n" );
 
         # Header row
         my $underline = "-" x 15;
@@ -1403,24 +1542,35 @@ sub main_rounds_out {
 
         if ($o_player_rating_score){
             if ($o_closest_p1 || ! is_score_times_power_100()){
-                printout(sprintf( "%12s|", "score " ));
-                $underline .= "-" x 10;
+                printout(sprintf( "%12s%s", "score ", $o_SEP ));
+                $underline .= "-" x 9;
+                $underline .= "-" x length($o_SEP);
             }
             else {
-                printout(sprintf( "%18s|", "score ")) ;
-                $underline .= "-" x 19;
+                printout(sprintf( "%18s%s", "score ", $o_SEP)) ;
+                $underline .= "-" x 18;
+                $underline .= "-" x length($o_SEP);
             }
         }
 
         if ( fia_or_fia_simple() ) {
-            printout(sprintf("%4s   |",'FIA'));
+            printout(sprintf("%4s   %s",'FIA', $o_SEP));
             $underline .= "-" x 8;
         }
 
-        my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
-        printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
+        if ( ! $o_suppress_all_detail ){
+            my  $fmt  ="%-".(length($pr_run->[0]{output})-1)."s";
+            printout(sprintf ("$fmt", $pr_hsh->{details_header} ));
 
-        $underline .= ("-" x length($pr_run->[0]{output}));
+            $underline .= ("-" x length($pr_run->[0]{output}));
+        }
+
+        if ($o_closest_p1_all_20 && $o_closest_p1_all_20_show_details ){
+            for ( my $i=0; $i < $o_drivers_count; $i++ ){
+                printout(sprintf("%3s ",$pr_hsh->{results}[$i]));
+            }
+            $underline .= ("-" x 80);
+        }
 
         printout ("\n");
         printout ("$underline\n");
@@ -1447,55 +1597,60 @@ sub main_rounds_out {
             if ($o_player_rating_score){
                 if ( $o_closest_p1 || ! is_score_times_power_100() ) {
                     my $sc_str = thousands($ln->{score});
-                    printout(sprintf( "%12s|", "$sc_str "));
+                    printout(sprintf( "%12s%s", "$sc_str ", $o_SEP));
                 }
                 else{
                     my $sc_str = hundreds($ln->{score});
-                    printout(sprintf( "%18s|", "$sc_str "));
+                    printout(sprintf( "%18s%s", "$sc_str ", $o_SEP));
                 }
             }
 
             if ( fia_or_fia_simple() ) {
                 my $fia_s = sprintf("%.2f",$ln->{fia_score});
                 $fia_s =~ s/.00$/   /g;
-                printout(sprintf("%6s |",$fia_s));
+                printout(sprintf("%6s %s",$fia_s, $o_SEP));
             }
 
-            # this does work instead of iterating over the "pred_scores"
-            # printout($ln->{output});
 
-            # editting here . FIXME !
             my $oline = "";
+            if ( ! $o_suppress_all_detail ){
+                # this does work instead of iterating over the "pred_scores"
+                # printout($ln->{output});
 
-            for (my $i=0; $i<$o_score_upto_pos; $i++){
 
-                my $pred = $ln->{preds}[$i];
-                my $score = $ln->{pred_scores}[$i];
+                for (my $i=0; $i<$o_score_upto_pos; $i++){
 
-                if ( not defined $score ){
-                    $score = 0;
-                }
+                    my $pred = $ln->{preds}[$i];
+                    my $score = $ln->{pred_scores}[$i];
 
-                if ( $o_case_change_not_exact_predictions ) {
-                    if ($score == 19 ){
-                        $pred = ucfirst (lc($pred));
-                    } elsif ($score < 19) {
-                        $pred = lc ($pred);
+                    if ( not defined $score ){
+                        $score = 0;
                     }
+
+                    if ( $o_case_change_not_exact_predictions ) {
+                        if ($score == 19 ){
+                            $pred = ucfirst (lc($pred));
+                        } elsif ($score < 19) {
+                            $pred = lc ($pred);
+                        }
+                    }
+
+                    if ( $score == 20 ){
+                        #    $score = "";
+                    }
+
+                    $score ||= ""; # make 0 score an empty string.
+
+                    $oline .= sprint_pred($pred, $score, $o_SEP);
                 }
-
-                if ( $score == 20 ){
-                    #    $score = "";
-                }
-
-                $score ||= ""; # make 0 score an empty string.
-
-                $oline .= sprint_pred($pred, $score, $o_SEP);
             }
 
-            printout($oline);
+            if ($o_closest_p1_all_20 && $o_closest_p1_all_20_show_details ){
+                my $sc20str = join( "", map {$_?sprintf(" %2d ",$_):"    "} @{$ln->{closest_p1_20}});
+                $oline .= $sc20str;
+            }
 
-            printout ("\n");
+            printout ("$oline\n");
         }
         printout ("$underline\n");
 
@@ -1522,8 +1677,10 @@ sub main_totals_output {
     printout ("Totals Tables run for ". join(", ", split (",", $o_run))."\n\n");
 
     # TODO get rid of this when fixed 
-    printout ( "The P column currently doesn't work out shared places\n" );
-    printout ( "So until it is fixed it is not being displayed below\n\n" );
+    if ( ! $o_score_bill ){
+        printout ( "The P column currently doesn't work out shared places\n" );
+        printout ( "So until it is fixed it is not being displayed below\n\n" );
+    }
 
     fia_totals_tables($tots_arr);
 
@@ -1620,9 +1777,9 @@ sub pre_code_close{
 
 sub get_scoring_type_out() {
 
-    return wta_const() if $o_score_wta ;
-
+    return closest_p1_const_all_20() if $o_closest_p1_all_20;
     return closest_p1_const() if $o_closest_p1;
+    return wta_const() if $o_score_wta ;
 
     return get_scoring_accuracy_type()." and ".get_scoring_multiplier_type();
 }
@@ -1904,6 +2061,11 @@ PLYR:
         my $plyr_tot_score = 0;
         my $plyr_all_algos = { };
 
+        my $close_p1_20_arr = [];
+        for ( my $i=0; $i < $o_drivers_count; $i++ ){
+            push @$close_p1_20_arr, 0;
+        }
+
         my $skip_result_line = sub {
             my ($skip_reason) = @_;
             $skip_reason //= "";
@@ -1913,7 +2075,7 @@ PLYR:
             push @$player_results_arr ,
                 {score => 0, player=>$plyr , round=> $s_run, top6_count => 0,
                  all_algos => $plyr_all_algos, output => "${result_line}${skip_reason}",
-                 skipped=>1};
+                 closest_p1_20 => $close_p1_20_arr, skipped=>1};
         };
 
         if ( ! exists $all_players_data->{$plyr} ){
@@ -1973,7 +2135,22 @@ PLYR:
 
                 my ($score, $display_hundreds_score );
 
-                if ( $o_closest_p1 ) {
+                if ( $o_closest_p1_all_20 ) {
+
+                    # This method does NOT sort on scores.
+                    # It sorts on an array with scores for the drivers
+                    # the accuracy of the P1 driver being the most important
+                    # part of the array sort.
+
+                    ($score, $display_hundreds_score )
+                        = _scorer("differential_scoring", "none",
+                                  $plyr_pred, $i, $error);
+
+                    my $pos_of_driver = $results_lkup->{$plyr_pred};
+                    $close_p1_20_arr->[$pos_of_driver] = $display_hundreds_score;
+
+                }
+                elsif ( $o_closest_p1 ) {
                     ($score, $display_hundreds_score )
                         = _scorer_closest_p1( $results_lkup, $plyr_pred, $i);
                 } else {
@@ -1999,7 +2176,9 @@ PLYR:
                 top6 => $plyr_top6,       top6_count => ( (scalar keys %$plyr_top6) // 0 ),
                 round=> $s_run,
                 output => $result_line,   skipped=>false,
-                pred_scores => $plyr_pred_scores, preds => $plyr_data };
+                pred_scores => $plyr_pred_scores, preds => $plyr_data,
+                closest_p1_20 => $close_p1_20_arr,
+        };
     }
 
     #################
@@ -2007,7 +2186,34 @@ PLYR:
     # Ordering, applying FIA scores.
     my @plyr_ordered_res ;
 
-    if ($o_score_wta ) {
+    if ( $o_closest_p1_all_20 ) {
+        # TODO , if driver count is ever greater than 20 this will break ...
+        # must be a better way , and using the $o_drivers_count
+        @plyr_ordered_res =  sort {
+                              $b->{closest_p1_20}[0]  <=> $a->{closest_p1_20}[0]
+                          ||  $b->{closest_p1_20}[1]  <=> $a->{closest_p1_20}[1]
+                          ||  $b->{closest_p1_20}[2]  <=> $a->{closest_p1_20}[2]
+                          ||  $b->{closest_p1_20}[3]  <=> $a->{closest_p1_20}[3]
+                          ||  $b->{closest_p1_20}[4]  <=> $a->{closest_p1_20}[4]
+                          ||  $b->{closest_p1_20}[5]  <=> $a->{closest_p1_20}[5]
+                          ||  $b->{closest_p1_20}[6]  <=> $a->{closest_p1_20}[6]
+                          ||  $b->{closest_p1_20}[7]  <=> $a->{closest_p1_20}[7]
+                          ||  $b->{closest_p1_20}[8]  <=> $a->{closest_p1_20}[8]
+                          ||  $b->{closest_p1_20}[9]  <=> $a->{closest_p1_20}[9]
+                          ||  $b->{closest_p1_20}[10] <=> $a->{closest_p1_20}[10]
+                          ||  $b->{closest_p1_20}[11] <=> $a->{closest_p1_20}[11]
+                          ||  $b->{closest_p1_20}[12] <=> $a->{closest_p1_20}[12]
+                          ||  $b->{closest_p1_20}[13] <=> $a->{closest_p1_20}[13]
+                          ||  $b->{closest_p1_20}[14] <=> $a->{closest_p1_20}[14]
+                          ||  $b->{closest_p1_20}[15] <=> $a->{closest_p1_20}[15]
+                          ||  $b->{closest_p1_20}[16] <=> $a->{closest_p1_20}[16]
+                          ||  $b->{closest_p1_20}[17] <=> $a->{closest_p1_20}[17]
+                          ||  $b->{closest_p1_20}[18] <=> $a->{closest_p1_20}[18]
+                          ||  $b->{closest_p1_20}[19] <=> $a->{closest_p1_20}[19]
+                          ||     $a->{skipped} <=> $b->{skipped}
+                            } @$player_results_arr;
+    }
+    elsif ($o_score_wta ) {
         # This is for a secondary sort special case.
         @plyr_ordered_res =  sort {
                               $b->{all_algos}{exact}{"power-100"}{total}
@@ -2030,7 +2236,35 @@ PLYR:
     my $cmp_last_diff_score_plyr = sub {
         my ($pl_cmp) = @_;
 
-        if ($o_score_wta ) {
+        if ( $o_closest_p1_all_20 ) {
+            my $b = $pl_cmp;
+            my $a = $last_diff_plyr;
+
+            # TODO , this could be done with a loop ... and using the $o_drivers_count
+            return (
+                      $b->{closest_p1_20}[0]  == $a->{closest_p1_20}[0]
+                  &&  $b->{closest_p1_20}[1]  == $a->{closest_p1_20}[1]
+                  &&  $b->{closest_p1_20}[2]  == $a->{closest_p1_20}[2]
+                  &&  $b->{closest_p1_20}[3]  == $a->{closest_p1_20}[3]
+                  &&  $b->{closest_p1_20}[4]  == $a->{closest_p1_20}[4]
+                  &&  $b->{closest_p1_20}[5]  == $a->{closest_p1_20}[5]
+                  &&  $b->{closest_p1_20}[6]  == $a->{closest_p1_20}[6]
+                  &&  $b->{closest_p1_20}[7]  == $a->{closest_p1_20}[7]
+                  &&  $b->{closest_p1_20}[8]  == $a->{closest_p1_20}[8]
+                  &&  $b->{closest_p1_20}[9]  == $a->{closest_p1_20}[9]
+                  &&  $b->{closest_p1_20}[10] == $a->{closest_p1_20}[10]
+                  &&  $b->{closest_p1_20}[11] == $a->{closest_p1_20}[11]
+                  &&  $b->{closest_p1_20}[12] == $a->{closest_p1_20}[12]
+                  &&  $b->{closest_p1_20}[13] == $a->{closest_p1_20}[13]
+                  &&  $b->{closest_p1_20}[14] == $a->{closest_p1_20}[14]
+                  &&  $b->{closest_p1_20}[15] == $a->{closest_p1_20}[15]
+                  &&  $b->{closest_p1_20}[16] == $a->{closest_p1_20}[16]
+                  &&  $b->{closest_p1_20}[17] == $a->{closest_p1_20}[17]
+                  &&  $b->{closest_p1_20}[18] == $a->{closest_p1_20}[18]
+                  &&  $b->{closest_p1_20}[19] == $a->{closest_p1_20}[19]
+            );
+        }
+        elsif ( $o_score_wta ){
             return (
                              $pl_cmp->{all_algos}{exact}{"power-100"}{total} ==
                      $last_diff_plyr->{all_algos}{exact}{"power-100"}{total}
@@ -2097,14 +2331,17 @@ PLYR:
     }
 
     # calculate the fia_scoring for shared / non-shared positions.
-    for my $rfp ( keys %$real_f1_pos_scores ){
+
+    my $fia_sc_hash = get_fia_scoring_round_type($s_run);
+
+    for my $rfp ( keys %$fia_sc_hash ){
         if (exists $real_fia_score_sharing->{$rfp}){
             my $tot   = 0;
             my $count = 0;
 
             for my $has_p (@{$real_fia_score_sharing->{$rfp}{pos}}){
                 $count ++;
-                $tot += $real_f1_pos_scores->{$has_p} // 0;
+                $tot += $fia_sc_hash->{$has_p} // 0;
             }
             $real_fia_score_sharing->{$rfp}{score_each} = $tot/$count;
         }
@@ -2143,6 +2380,34 @@ PLYR:
     json_out_dump($s_run,$return, false);
 
     return $return;
+}
+
+sub get_fia_scoring_round_type {
+    my ($round) = @_;
+
+    # if the CLI option of --fia-sprint-qual-diff
+    # is true, then this sub will supply a
+    # different FIA scoring for race, sprint or qual.
+    #
+    # if does depend on the round being suffixed
+    # with -race , -qual or -sprint
+
+    if ( ! $o_fia_sprint_qual_diff ){
+        return $real_f1_pos_scores  ;
+    }
+
+    if ( $round =~ /-race$/ ){
+        return $real_f1_pos_scores ;
+    }
+    if ( $round =~ /-sprint$/ ){
+        return $real_f1_pos_sprint_scores  ;
+    }
+    if ( $round =~ /-qual$/ ){
+        return $real_f1_pos_qual_scores ;
+    }
+    else {
+        dierr (" unknown round type in [$round]");
+    }
 }
 
 sub z_data_pipe_split {
@@ -2362,13 +2627,18 @@ sub get_out_file {
         $fn = check_dir($base_dir."all-algorithms/", true);
     }
 
-    if ( $o_score_wta ) {
-        $fn .= wta_const().$suf;
+    if ( $o_closest_p1_all_20 ){
+        $fn .= closest_p1_const_all_20().$suf;
         return $fn;
     }
 
     if ( $o_closest_p1 ){
         $fn .= closest_p1_const().$suf;
+        return $fn;
+    }
+
+    if ( $o_score_wta ) {
+        $fn .= wta_const().$suf;
         return $fn;
     }
 
@@ -2403,13 +2673,18 @@ sub get_out_file_json {
 
     my $fn = output_json_dir()."$fn_root-";
 
-    if ( $o_score_wta ) {
-        $fn .= wta_const().$suf;
+    if ( $o_closest_p1_all_20 ){
+        $fn .= closest_p1_const_all_20().$suf;
         return $fn;
     }
 
     if ( $o_closest_p1 ){
         $fn .= closest_p1_const().$suf;
+        return $fn;
+    }
+
+    if ( $o_score_wta ) {
+        $fn .= wta_const().$suf;
         return $fn;
     }
 
