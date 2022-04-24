@@ -4,17 +4,87 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
-The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
-
 
 
 
 ----------------------
-Totals Tables run for australia-race, jeddah-race, bahrain-race
+Totals Tables run for enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
 
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+BWare         70  
+Hobbes        63.5
+Karl          55  
+GGP1          53  
+NL            51  
+Iceman        50.5
+TLB           30.5
+Pylade        28  
+Leo           26  
+Ray           25  
+Bill          22.5
+F1Ung         20  
+Joe           10  
+Winston        0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    BWare         70   |    5 
+    Hobbes        63.50|    5 
+    Karl          55   |    5 
+    GGP1          53   |    5 
+    NL            51   |    4 
+    Iceman        50.50|    5 
+    TLB           30.50|    5 
+    Pylade        28   |    4 
+    Leo           26   |    5 
+    Ray           25   |    1 
+    Bill          22.50|    5 
+    F1Ung         20   |    2 
+    Joe           10   |    2 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'karl-32 and positions-times-9-to-1'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Ray           25   |    1 
+    BWare         14   |    5 
+    NL            12.75|    4 
+    Hobbes        12.70|    5 
+    Karl          11   |    5 
+    GGP1          10.60|    5 
+    Iceman        10.10|    5 
+    F1Ung         10   |    2 
+    Pylade         7   |    4 
+    TLB            6.10|    5 
+    Leo            5.20|    5 
+    Joe            5   |    2 
+    Bill           4.50|    5 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
 
 <pre><code>
 -----------------
@@ -24,45 +94,20 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    BWare           1,135   |    3 
-    Karl            1,102   |    3 
-    Hobbes          1,018   |    3 
-    GGP1              992   |    3 
-    Iceman            880   |    3 
-    TLB               878   |    3 
-    NL                781   |    2 
-    Leo               776   |    3 
+    BWare           1,984   |    5 
+    Hobbes          1,827   |    5 
+    Iceman          1,792   |    5 
+    GGP1            1,744   |    5 
+    NL              1,696   |    4 
+    Karl            1,660   |    5 
+    Leo             1,380   |    5 
+    Pylade          1,372   |    4 
+    TLB             1,368   |    5 
+    Bill            1,225   |    5 
     F1Ung             758   |    2 
-    Bill              736   |    3 
-    Pylade            628   |    2 
     Ray               388   |    1 
     Joe               240   |    2 
     Winston             0   |    0 
----------------------------------------
-</pre></code>
-
-<pre><code>
---------------------------------
-Method is 'karl-32 and positions-times-9-to-1'
-
-Total Score table. Reverse Order
---------------------------------
-P   Player          Total   |Played
----------------------------------------
-    Winston             0   |    0 
-    Joe               240   |    2 
-    Ray               388   |    1 
-    Pylade            628   |    2 
-    Bill              736   |    3 
-    F1Ung             758   |    2 
-    Leo               776   |    3 
-    NL                781   |    2 
-    TLB               878   |    3 
-    Iceman            880   |    3 
-    GGP1              992   |    3 
-    Hobbes          1,018   |    3 
-    Karl            1,102   |    3 
-    BWare           1,135   |    3 
 ---------------------------------------
 </pre></code>
 
@@ -75,95 +120,44 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player      Ave Score   |Played
 ---------------------------------------
-    NL                390.50|    2 
+    NL                424   |    4 
+    BWare             396.80|    5 
     Ray               388   |    1 
     F1Ung             379   |    2 
-    BWare             378.33|    3 
-    Karl              367.33|    3 
-    Hobbes            339.33|    3 
-    GGP1              330.67|    3 
-    Pylade            314   |    2 
-    Iceman            293.33|    3 
-    TLB               292.67|    3 
-    Leo               258.67|    3 
-    Bill              245.33|    3 
+    Hobbes            365.40|    5 
+    Iceman            358.40|    5 
+    GGP1              348.80|    5 
+    Pylade            343   |    4 
+    Karl              332   |    5 
+    Leo               276   |    5 
+    TLB               273.60|    5 
+    Bill              245   |    5 
     Joe               120   |    2 
     Winston             0   |    0 
 ---------------------------------------
 </pre></code>
 
 <pre><code>
----------------------
-Method is 'karl-32 and positions-times-9-to-1'
-
-Total FIA Score table
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    Karl          43   |    3 
-    BWare         43   |    3 
-    Hobbes        35.50|    3 
-    GGP1          27   |    3 
-    Ray           25   |    1 
-    TLB           23.50|    3 
-    Iceman        21.50|    3 
-    F1Ung         20   |    2 
-    NL            18   |    2 
-    Bill          17.50|    3 
-    Leo           14   |    3 
-    Joe           10   |    2 
-    Pylade         5   |    2 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
----------------------
-Method is 'karl-32 and positions-times-9-to-1'
-
-Average FIA Score table
-For players who have not entered all rounds
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    Ray           25   |    1 
-    Karl          14.33|    3 
-    BWare         14.33|    3 
-    Hobbes        11.83|    3 
-    F1Ung         10   |    2 
-    NL             9   |    2 
-    GGP1           9   |    3 
-    TLB            7.83|    3 
-    Iceman         7.17|    3 
-    Bill           5.83|    3 
-    Joe            5   |    2 
-    Leo            4.67|    3 
-    Pylade         2.50|    2 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
 ------------------------
 Method is 'karl-32 and positions-times-9-to-1'
 
-P1 -> P6 then Total Score 
+P1 -> P6 then Total 
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
 ---------------------------------------------------------------------
-    Karl            1,102   |    3 |  1 |    |    |  1 |    |    
-    BWare           1,135   |    3 |  1 |    |    |    |  1 |  1 
+    NL              1,696   |    4 |  1 |  1 |    |    |    |  1 
+    BWare           1,984   |    5 |  1 |    |  1 |  1 |  1 |  1 
+    GGP1            1,744   |    5 |  1 |    |  1 |    |  1 |    
+    Karl            1,660   |    5 |  1 |    |    |  1 |    |    
     Ray               388   |    1 |  1 |    |    |    |    |    
-    Hobbes          1,018   |    3 |    |  2 |    |    |    |    
-    NL                781   |    2 |    |  1 |    |    |    |    
-    Bill              736   |    3 |    |  1 |    |    |    |    
-    GGP1              992   |    3 |    |    |  1 |    |  1 |    
-    Iceman            880   |    3 |    |    |  1 |    |    |    
-    TLB               878   |    3 |    |    |  1 |    |    |    
+    Hobbes          1,827   |    5 |    |  3 |    |    |  1 |    
+    Iceman          1,792   |    5 |    |  1 |  1 |  1 |    |    
+    Bill            1,225   |    5 |    |  1 |    |    |    |    
+    Pylade          1,372   |    4 |    |    |  1 |    |    |  1 
+    TLB             1,368   |    5 |    |    |  1 |    |    |    
+    Leo             1,380   |    5 |    |    |    |  1 |    |  1 
     F1Ung             758   |    2 |    |    |    |  1 |    |  1 
     Joe               240   |    2 |    |    |    |    |  1 |    
-    Leo               776   |    3 |    |    |    |    |    |  1 
-    Pylade            628   |    2 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    
 ---------------------------------------------------------------------
 </pre></code>
@@ -175,25 +169,73 @@ Individual rounds
 <pre><code>
 Method is 'karl-32 and positions-times-9-to-1'
 ---------------
+Enzo Race
+
+P   Player           score  |  FIA    | VER        PER        NOR        RUS        BOT        LEC        
+-----------------------------------------------------------------------------------------------------
+1   NL                 512  |  25     | VER  288 | PER  192 | SAI      | LEC   24 | HAM      | RUS    8 | 
+2   Hobbes             392  |  18     | VER  288 | SAI      | PER   64 | ALO      | LEC   32 | RUS    8 | 
+3   BWare              389  |  15     | VER  288 | LEC   12 | SAI      | PER   24 | BOT   64 | OCO    1 | 
+4   Iceman             312  |  11     | VER  288 | LEC   12 | ALO      | SAI      | PER    8 | NOR    4 | 
+4   Leo                312  |  11     | VER  288 | SAI      | LEC   16 | ALO      | PER    8 | RIC      | 
+6   Pylade             217  |   8     | LEC    9 | VER   96 | PER   64 | NOR   48 | SAI      | ALO      | 
+7   Karl               201  |   6     | LEC    9 | VER   96 | PER   64 | SAI      | RUS   32 | HAM      | 
+8   Bill               137  |   3     | LEC    9 | VER   96 | SAI      | PER   24 | HAM      | RUS    8 | 
+8   TLB                137  |   3     | LEC    9 | VER   96 | SAI      | PER   24 | HAM      | RUS    8 | 
+10  GGP1                84  |   1     | SAI      | LEC   12 | VER   32 | PER   24 | NOR   16 | ALO      | 
+    F1Ung      DNS
+    Joe        DNS
+    Ray        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
+Enzo Sprint
+
+P   Player           score  |  FIA    | VER        LEC        PER        SAI        NOR        RIC        
+-----------------------------------------------------------------------------------------------------
+1   GGP1               668  |  25     | VER  288 | LEC  192 | PER  128 | NOR   48 | ALO    4 | SAI    8 | 
+2   Iceman             600  |  18     | VER  288 | LEC  192 | ALO      | PER   48 | NOR   64 | SAI    8 | 
+3   Pylade             527  |  15     | VER  288 | LEC  192 | NOR   32 | ALO    3 | MAG    8 | PER    4 | 
+4   BWare              460  |  12     | VER  288 | SAI   48 | LEC   64 | PER   48 | ALO    4 | MAG    8 | 
+5   Hobbes             417  |  10     | VER  288 | SAI   48 | LEC   64 | HAM      | PER   16 | RUS    1 | 
+6   NL                 403  |   8     | VER  288 | PER   96 | HAM      | ALO    3 | RUS      | BOT   16 | 
+7   Karl               357  |   6     | LEC  144 | VER   96 | SAI   64 | PER   48 | ALO    4 | RUS    1 | 
+8   TLB                353  |   4     | LEC  144 | VER   96 | SAI   64 | PER   48 | HAM      | RUS    1 | 
+9   Bill               352  |   2     | LEC  144 | VER   96 | SAI   64 | PER   48 | RUS      | HAM      | 
+10  Leo                292  |   1     | LEC  144 | SAI   48 | VER   32 | PER   48 | ALO    4 | NOR   16 | 
+    F1Ung      DNS
+    Joe        DNS
+    Ray        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
 Australia Race
 
-P   Player      score | FIA   |LEC        PER        RUS        HAM        NOR        RIC        
--------------------------------------------------------------------------------------------------
-1   BWare         372 | 25    |LEC  288 | VER    0 | PER   64 | SAI    0 | RUS   16 | GAS    4 | 
-2   NL            348 | 18    |LEC  288 | VER    0 | SAI    0 | PER   24 | HAM   32 | RUS    4 | 
-3   GGP1          316 | 15    |LEC  288 | VER    0 | SAI    0 | PER   24 | ALO    0 | RUS    4 | 
-4   Karl          248 | 12    |VER    0 | PER  192 | LEC   32 | SAI    0 | RUS   16 | BOT    8 | 
-5   Joe           232 | 10    |VER    0 | PER  192 | LEC   32 | SAI    0 | BOT    8 | ALO    0 | 
-6   F1Ung         164 |  8    |VER    0 | LEC   96 | PER   64 | SAI    0 | MAG    0 | RUS    4 | 
-7   TLB           156 |  6    |VER    0 | LEC   96 | SAI    0 | PER   24 | HAM   32 | RUS    4 | 
-8   Leo           136 |  4    |SAI    0 | LEC   96 | VER    0 | PER   24 | RUS   16 | ALO    0 | 
-9   Iceman        124 |  2    |SAI    0 | LEC   96 | VER    0 | PER   24 | ALO    0 | RUS    4 | 
-10  Hobbes        116 |  1    |VER    0 | SAI    0 | PER   64 | RUS   48 | LEC    4 | ALO    0 | 
-11  Bill           80 |  0    |VER    0 | SAI    0 | LEC   32 | PER   24 | RUS   16 | HAM    8 | 
-    Pylade     no data
-    Ray        no data
-    Winston    no data
--------------------------------------------------------------------------------------------------
+P   Player           score  |  FIA    | LEC        PER        RUS        HAM        NOR        RIC        
+-----------------------------------------------------------------------------------------------------
+1   BWare              372  |  25     | LEC  288 | VER      | PER   64 | SAI      | RUS   16 | GAS    4 | 
+2   NL                 348  |  18     | LEC  288 | VER      | SAI      | PER   24 | HAM   32 | RUS    4 | 
+3   GGP1               316  |  15     | LEC  288 | VER      | SAI      | PER   24 | ALO      | RUS    4 | 
+4   Karl               248  |  12     | VER      | PER  192 | LEC   32 | SAI      | RUS   16 | BOT    8 | 
+5   Joe                232  |  10     | VER      | PER  192 | LEC   32 | SAI      | BOT    8 | ALO      | 
+6   F1Ung              164  |   8     | VER      | LEC   96 | PER   64 | SAI      | MAG      | RUS    4 | 
+7   TLB                156  |   6     | VER      | LEC   96 | SAI      | PER   24 | HAM   32 | RUS    4 | 
+8   Leo                136  |   4     | SAI      | LEC   96 | VER      | PER   24 | RUS   16 | ALO      | 
+9   Iceman             124  |   2     | SAI      | LEC   96 | VER      | PER   24 | ALO      | RUS    4 | 
+10  Hobbes             116  |   1     | VER      | SAI      | PER   64 | RUS   48 | LEC    4 | ALO      | 
+11  Bill                80  |   0     | VER      | SAI      | LEC   32 | PER   24 | RUS   16 | HAM    8 | 
+    Pylade     DNS
+    Ray        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
 </pre></code>
 
 <pre><code>
@@ -201,23 +243,23 @@ Method is 'karl-32 and positions-times-9-to-1'
 ---------------
 Jeddah Race
 
-P   Player      score | FIA   |VER        LEC        SAI        PER        RUS        OCO        
--------------------------------------------------------------------------------------------------
-1   Karl          658 | 25    |VER  288 | LEC  192 | PER   64 | SAI   48 | RUS   64 | HAM    2 | 
-2   Bill          610 | 16.50 |VER  288 | LEC  192 | PER   64 | SAI   48 | HAM    2 | RUS   16 | 
-2   Hobbes        610 | 16.50 |VER  288 | LEC  192 | PER   64 | SAI   48 | HAM    2 | RUS   16 | 
-4   F1Ung         594 | 12    |VER  288 | LEC  192 | PER   64 | SAI   48 | BOT    0 | HAM    2 | 
-5   BWare         562 | 10    |VER  288 | SAI   96 | LEC   64 | PER   96 | HAM    2 | RUS   16 | 
-6   Leo           528 |  8    |VER  288 | SAI   96 | LEC   64 | RUS   48 | PER   32 | ALO    0 | 
-7   Iceman        516 |  6    |VER  288 | SAI   96 | LEC   64 | HAM    0 | RUS   64 | MAG    4 | 
-8   TLB           482 |  4    |LEC  144 | VER   96 | SAI  128 | PER   96 | HAM    2 | RUS   16 | 
-9   GGP1          464 |  2    |VER  288 | SAI   96 | PER   64 | HAM    0 | BOT    0 | RUS   16 | 
-10  Pylade        436 |  1    |LEC  144 | SAI   96 | VER   32 | PER   96 | RUS   64 | MAG    4 | 
-11  NL            433 |  0    |VER  288 | SAI   96 | HAM    0 | RUS   48 | BOT    0 | ZHO    1 | 
-    Joe        no data
-    Ray        no data
-    Winston    no data
--------------------------------------------------------------------------------------------------
+P   Player           score  |  FIA    | VER        LEC        SAI        PER        RUS        OCO        
+-----------------------------------------------------------------------------------------------------
+1   Karl               658  |  25     | VER  288 | LEC  192 | PER   64 | SAI   48 | RUS   64 | HAM    2 | 
+2   Bill               610  |  16.50  | VER  288 | LEC  192 | PER   64 | SAI   48 | HAM    2 | RUS   16 | 
+2   Hobbes             610  |  16.50  | VER  288 | LEC  192 | PER   64 | SAI   48 | HAM    2 | RUS   16 | 
+4   F1Ung              594  |  12     | VER  288 | LEC  192 | PER   64 | SAI   48 | BOT      | HAM    2 | 
+5   BWare              562  |  10     | VER  288 | SAI   96 | LEC   64 | PER   96 | HAM    2 | RUS   16 | 
+6   Leo                528  |   8     | VER  288 | SAI   96 | LEC   64 | RUS   48 | PER   32 | ALO      | 
+7   Iceman             516  |   6     | VER  288 | SAI   96 | LEC   64 | HAM      | RUS   64 | MAG    4 | 
+8   TLB                482  |   4     | LEC  144 | VER   96 | SAI  128 | PER   96 | HAM    2 | RUS   16 | 
+9   GGP1               464  |   2     | VER  288 | SAI   96 | PER   64 | HAM      | BOT      | RUS   16 | 
+10  Pylade             436  |   1     | LEC  144 | SAI   96 | VER   32 | PER   96 | RUS   64 | MAG    4 | 
+11  NL                 433  |   0     | VER  288 | SAI   96 | HAM      | RUS   48 | BOT      | ZHO    1 | 
+    Joe        DNS
+    Ray        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
 </pre></code>
 
 <pre><code>
@@ -225,21 +267,21 @@ Method is 'karl-32 and positions-times-9-to-1'
 ---------------
 Bahrain Race
 
-P   Player      score | FIA   |LEC        SAI        HAM        RUS        MAG        BOT        
--------------------------------------------------------------------------------------------------
-1   Ray           388 | 25    |LEC  288 | VER    0 | SAI   64 | PER    0 | RUS   32 | HAM    4 | 
-2   Hobbes        292 | 18    |VER    0 | SAI  192 | NOR    0 | RUS   96 | LEC    4 | PER    0 | 
-3   Iceman        240 | 13.50 |VER    0 | LEC   96 | SAI   64 | HAM   48 | RUS   32 | PER    0 | 
-3   TLB           240 | 13.50 |VER    0 | LEC   96 | SAI   64 | HAM   48 | RUS   32 | NOR    0 | 
-5   GGP1          212 | 10    |VER    0 | SAI  192 | PER    0 | LEC   12 | GAS    0 | RUS    8 | 
-6   BWare         201 |  8    |VER    0 | HAM   96 | PER    0 | RUS   96 | SAI    8 | LEC    1 | 
-7   Karl          196 |  6    |VER    0 | LEC   96 | SAI   64 | PER    0 | RUS   32 | ALO    4 | 
-8   Pylade        192 |  4    |SAI  144 | VER    0 | GAS    0 | LEC   12 | RUS   32 | ALO    4 | 
-9   Leo           112 |  2    |VER    0 | PER    0 | SAI   64 | LEC   12 | RUS   32 | ALO    4 | 
-10  Bill           46 |  1    |VER    0 | PER    0 | GAS    0 | LEC   12 | RUS   32 | SAI    2 | 
-11  Joe             8 |  0    |VER    0 | RIC    0 | ALO    0 | VET    0 | GAS    0 | RUS    8 | 
-    F1Ung      no data
-    NL         no data
-    Winston    no data
--------------------------------------------------------------------------------------------------
+P   Player           score  |  FIA    | LEC        SAI        HAM        RUS        MAG        BOT        
+-----------------------------------------------------------------------------------------------------
+1   Ray                388  |  25     | LEC  288 | VER      | SAI   64 | PER      | RUS   32 | HAM    4 | 
+2   Hobbes             292  |  18     | VER      | SAI  192 | NOR      | RUS   96 | LEC    4 | PER      | 
+3   Iceman             240  |  13.50  | VER      | LEC   96 | SAI   64 | HAM   48 | RUS   32 | PER      | 
+3   TLB                240  |  13.50  | VER      | LEC   96 | SAI   64 | HAM   48 | RUS   32 | NOR      | 
+5   GGP1               212  |  10     | VER      | SAI  192 | PER      | LEC   12 | GAS      | RUS    8 | 
+6   BWare              201  |   8     | VER      | HAM   96 | PER      | RUS   96 | SAI    8 | LEC    1 | 
+7   Karl               196  |   6     | VER      | LEC   96 | SAI   64 | PER      | RUS   32 | ALO    4 | 
+8   Pylade             192  |   4     | SAI  144 | VER      | GAS      | LEC   12 | RUS   32 | ALO    4 | 
+9   Leo                112  |   2     | VER      | PER      | SAI   64 | LEC   12 | RUS   32 | ALO    4 | 
+10  Bill                46  |   1     | VER      | PER      | GAS      | LEC   12 | RUS   32 | SAI    2 | 
+11  Joe                  8  |   0     | VER      | RIC      | ALO      | VET      | GAS      | RUS    8 | 
+    F1Ung      DNS
+    NL         DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
 </pre></code>

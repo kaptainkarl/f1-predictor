@@ -4,17 +4,87 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
-The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
-
 
 
 
 ----------------------
-Totals Tables run for australia-race, jeddah-race, bahrain-race
+Totals Tables run for enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
 
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+BWare         67  
+NL            57  
+GGP1          57  
+Karl          55  
+Hobbes        52.5
+Iceman        47  
+Pylade        44  
+Ray           25  
+Leo           25  
+TLB           23  
+Bill          22.5
+F1Ung         20  
+Joe           10  
+Winston        0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    BWare         67   |    5 
+    NL            57   |    4 
+    GGP1          57   |    5 
+    Karl          55   |    5 
+    Hobbes        52.50|    5 
+    Iceman        47   |    5 
+    Pylade        44   |    4 
+    Ray           25   |    1 
+    Leo           25   |    5 
+    TLB           23   |    5 
+    Bill          22.50|    5 
+    F1Ung         20   |    2 
+    Joe           10   |    2 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'karl-96-16 and positions-times-power-one-hundred'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Ray           25   |    1 
+    NL            14.25|    4 
+    BWare         13.40|    5 
+    GGP1          11.40|    5 
+    Pylade        11   |    4 
+    Karl          11   |    5 
+    Hobbes        10.50|    5 
+    F1Ung         10   |    2 
+    Iceman         9.40|    5 
+    Leo            5   |    5 
+    Joe            5   |    2 
+    TLB            4.60|    5 
+    Bill           4.50|    5 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
 
 <pre><code>
 -----------------
@@ -24,45 +94,20 @@ Total Score table
 -----------------
 P   Player                Total   |Played
 ---------------------------------------------
-    GGP1      1,931,216,120,028   |    3 
-    BWare     1,923,233,921,321   |    3 
-    NL        1,921,600,241,605   |    2 
-    Karl        980,840,172,014   |    3 
-    Hobbes      979,233,280,516   |    3 
+    NL        3,852,800,331,629   |    4 
+    BWare     3,844,250,171,130   |    5 
+    GGP1      2,901,120,361,036   |    5 
+    Hobbes    2,900,065,282,925   |    5 
+    Iceman    2,894,632,421,220   |    5 
+    Leo       2,084,044,444,620   |    5 
+    Pylade    1,302,833,181,612   |    4 
+    Karl      1,154,072,333,815   |    5 
+    Bill      1,142,840,522,534   |    5 
     F1Ung       971,232,160,006   |    2 
-    Bill        969,624,282,526   |    3 
-    Iceman      964,832,251,208   |    3 
-    Leo         963,232,284,004   |    3 
     Ray         960,016,001,604   |    1 
-    Pylade      321,609,011,208   |    2 
-    TLB         164,913,203,320   |    3 
+    TLB         338,129,443,329   |    5 
     Joe           9,608,000,408   |    2 
     Winston                   0   |    0 
----------------------------------------------
-</pre></code>
-
-<pre><code>
---------------------------------
-Method is 'karl-96-16 and positions-times-power-one-hundred'
-
-Total Score table. Reverse Order
---------------------------------
-P   Player                Total   |Played
----------------------------------------------
-    Winston                   0   |    0 
-    Joe           9,608,000,408   |    2 
-    TLB         164,913,203,320   |    3 
-    Pylade      321,609,011,208   |    2 
-    Ray         960,016,001,604   |    1 
-    Leo         963,232,284,004   |    3 
-    Iceman      964,832,251,208   |    3 
-    Bill        969,624,282,526   |    3 
-    F1Ung       971,232,160,006   |    2 
-    Hobbes      979,233,280,516   |    3 
-    Karl        980,840,172,014   |    3 
-    NL        1,921,600,241,605   |    2 
-    BWare     1,923,233,921,321   |    3 
-    GGP1      1,931,216,120,028   |    3 
 ---------------------------------------------
 </pre></code>
 
@@ -75,95 +120,44 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player            Ave Score   |Played
 ---------------------------------------------
-    NL          960,800,120,802.50|    2 
+    NL          963,200,082,907.25|    4 
     Ray         960,016,001,604   |    1 
-    GGP1        643,738,706,676   |    3 
-    BWare       641,077,973,773.67|    3 
+    BWare       768,850,034,226   |    5 
+    GGP1        580,224,072,207.20|    5 
+    Hobbes      580,013,056,585   |    5 
+    Iceman      578,926,484,244   |    5 
     F1Ung       485,616,080,003   |    2 
-    Karl        326,946,724,004.67|    3 
-    Hobbes      326,411,093,505.33|    3 
-    Bill        323,208,094,175.33|    3 
-    Iceman      321,610,750,402.67|    3 
-    Leo         321,077,428,001.33|    3 
-    Pylade      160,804,505,604   |    2 
-    TLB          54,971,067,773.33|    3 
+    Leo         416,808,888,924   |    5 
+    Pylade      325,708,295,403   |    4 
+    Karl        230,814,466,763   |    5 
+    Bill        228,568,104,506.80|    5 
+    TLB          67,625,888,665.80|    5 
     Joe           4,804,000,204   |    2 
     Winston                   0   |    0 
 ---------------------------------------------
 </pre></code>
 
 <pre><code>
----------------------
-Method is 'karl-96-16 and positions-times-power-one-hundred'
-
-Total FIA Score table
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    Karl          43   |    3 
-    BWare         39   |    3 
-    Hobbes        32.50|    3 
-    GGP1          31   |    3 
-    Ray           25   |    1 
-    NL            20   |    2 
-    F1Ung         20   |    2 
-    Pylade        18   |    2 
-    Bill          17.50|    3 
-    Iceman        17   |    3 
-    TLB           16   |    3 
-    Leo           14   |    3 
-    Joe           10   |    2 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
----------------------
-Method is 'karl-96-16 and positions-times-power-one-hundred'
-
-Average FIA Score table
-For players who have not entered all rounds
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    Ray           25   |    1 
-    Karl          14.33|    3 
-    BWare         13   |    3 
-    Hobbes        10.83|    3 
-    GGP1          10.33|    3 
-    NL            10   |    2 
-    F1Ung         10   |    2 
-    Pylade         9   |    2 
-    Bill           5.83|    3 
-    Iceman         5.67|    3 
-    TLB            5.33|    3 
-    Joe            5   |    2 
-    Leo            4.67|    3 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
 ------------------------
 Method is 'karl-96-16 and positions-times-power-one-hundred'
 
-P1 -> P6 then Total Score 
+P1 -> P6 then Total 
 ------------------------
 P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
 ---------------------------------------------------------------------------
-    Karl        980,840,172,014   |    3 |  1 |    |    |  1 |    |    
-    BWare     1,923,233,921,321   |    3 |  1 |    |    |    |  1 |    
+    NL        3,852,800,331,629   |    4 |  1 |  1 |    |  1 |    |    
+    BWare     3,844,250,171,130   |    5 |  1 |  1 |    |    |  2 |    
+    GGP1      2,901,120,361,036   |    5 |  1 |    |  1 |  1 |    |    
+    Karl      1,154,072,333,815   |    5 |  1 |    |    |  1 |    |    
     Ray         960,016,001,604   |    1 |  1 |    |    |    |    |    
-    Hobbes      979,233,280,516   |    3 |    |  1 |  1 |    |    |    
-    NL        1,921,600,241,605   |    2 |    |  1 |    |    |    |    
-    Bill        969,624,282,526   |    3 |    |  1 |    |    |    |    
-    Pylade      321,609,011,208   |    2 |    |  1 |    |    |    |    
-    GGP1      1,931,216,120,028   |    3 |    |    |  1 |  1 |    |    
+    Pylade    1,302,833,181,612   |    4 |    |  2 |    |    |    |  1 
+    Hobbes    2,900,065,282,925   |    5 |    |  1 |  1 |  1 |    |  1 
+    Bill      1,142,840,522,534   |    5 |    |  1 |    |    |    |    
+    Iceman    2,894,632,421,220   |    5 |    |    |  2 |    |  1 |    
     F1Ung       971,232,160,006   |    2 |    |    |    |  1 |    |  1 
-    Iceman      964,832,251,208   |    3 |    |    |    |    |  1 |    
-    TLB         164,913,203,320   |    3 |    |    |    |    |  1 |    
+    Leo       2,084,044,444,620   |    5 |    |    |    |    |  1 |  1 
+    TLB         338,129,443,329   |    5 |    |    |    |    |  1 |    
     Joe           9,608,000,408   |    2 |    |    |    |    |  1 |    
-    Leo         963,232,284,004   |    3 |    |    |    |    |    |  1 
     Winston                   0   |    0 |    |    |    |    |    |    
 ---------------------------------------------------------------------------
 </pre></code>

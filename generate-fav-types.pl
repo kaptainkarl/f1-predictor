@@ -9,8 +9,8 @@ my $runs = $GenerateRaces::RUNS;
 
 my $favs = [
     " --wta ",
+    " --closest-p1-20 ",
     " --score-accuracy=diff  --score-times 9-to-1 ",
-
 ];
 
 for my $fv ( @$favs ){

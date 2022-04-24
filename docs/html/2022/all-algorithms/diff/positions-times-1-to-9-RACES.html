@@ -1,0 +1,913 @@
+<html>
+
+<head>
+<title></title>
+
+<link rel=STYLESHEET type="text/css" href="https://kaptainkarl.github.io/f1-predictor/main.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<script language="JavaScript" src="https://kaptainkarl.github.io/f1-predictor/mouseover.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://kaptainkarl.github.io/f1-predictor/main.js" type="text/javascript"></script>
+
+
+
+</head>
+
+<body>
+<div align='center' ><br><br><br>
+
+<p class='method-name'>Method is diff and positions-times-1-to-9</p>
+<div class='fia-score-total'>
+<p class='totals-heading'>Total FIA Score table</p>
+<table class='fia-totals'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>  <th class='hdr-player'>Player</th>  <th class='hdr-fia'>FIA</th>  <th class='hdr-played'>Played</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>BWare</td>  <td class='td-fia'>69</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>TLB</td>  <td class='td-fia'>64</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Karl</td>  <td class='td-fia'>64</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Bill</td>  <td class='td-fia'>50</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Iceman</td>  <td class='td-fia'>49</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Pylade</td>  <td class='td-fia'>45</td>  <td class='td-fia'>4</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Leo</td>  <td class='td-fia'>44</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Hobbes</td>  <td class='td-fia'>36</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>NL</td>  <td class='td-fia'>33</td>  <td class='td-fia'>4</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>GGP1</td>  <td class='td-fia'>29</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Ray</td>  <td class='td-fia'>12</td>  <td class='td-fia'>1</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>F1Ung</td>  <td class='td-fia'>10</td>  <td class='td-fia'>2</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Winston</td>  <td class='td-fia'>0</td>  <td class='td-fia'>0</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Joe</td>  <td class='td-fia'>0</td>  <td class='td-fia'>2</td>
+</tr>
+</table>
+<p class='totals-heading'>Average FIA Score table</p>
+<table class='fia-ave-totals'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>  <th class='hdr-player'>Player</th>  <th class='hdr-fia'>FIA ave.</th>  <th class='hdr-played'>Played</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>BWare</td>  <td class='td-fia'>13.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>TLB</td>  <td class='td-fia'>12.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Karl</td>  <td class='td-fia'>12.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Ray</td>  <td class='td-fia'>12.0</td>  <td class='td-fia'>1</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Pylade</td>  <td class='td-fia'>11.2</td>  <td class='td-fia'>4</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Bill</td>  <td class='td-fia'>10.0</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Iceman</td>  <td class='td-fia'>9.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Leo</td>  <td class='td-fia'>8.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>NL</td>  <td class='td-fia'>8.2</td>  <td class='td-fia'>4</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Hobbes</td>  <td class='td-fia'>7.2</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>GGP1</td>  <td class='td-fia'>5.8</td>  <td class='td-fia'>5</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>F1Ung</td>  <td class='td-fia'>5.0</td>  <td class='td-fia'>2</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Winston</td>  <td class='td-fia'>0.0</td>  <td class='td-fia'>0</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'></td>  <td class='td-player'>Joe</td>  <td class='td-fia'>0.0</td>  <td class='td-fia'>2</td>
+</tr>
+</table>
+</div>
+<div class='round'>
+<p class='round-name'>Enzo Race</p>
+<table class='round-table'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>
+  <th class='hdr-player'>Player</th>
+  <th class='hdr-fia'>FIA</th>
+  <th class='hdr-score1'>Score</th>
+  <th class='hdr-pred' colspan=2>VER</th>
+  <th class='hdr-pred' colspan=2>PER</th>
+  <th class='hdr-pred' colspan=2>NOR</th>
+  <th class='hdr-pred' colspan=2>RUS</th>
+  <th class='hdr-pred' colspan=2>BOT</th>
+  <th class='hdr-pred' colspan=2>LEC</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>1</td>
+  <td class='td-player'>BWare</td>
+  <td class='td-fia'>25</td>
+  <td class='td-score'>388</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>32</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>BOT</td> <td class='td-pred-sc even-col'>120</td>
+  <td class='td-pred odd-col'>OCO</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>2</td>
+  <td class='td-player'>Hobbes</td>
+  <td class='td-fia'>18</td>
+  <td class='td-score'>377</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>4</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>20</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>3</td>
+  <td class='td-player'>NL</td>
+  <td class='td-fia'>15</td>
+  <td class='td-score'>369</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>66</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>Bill</td>
+  <td class='td-fia'>11</td>
+  <td class='td-score'>362</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>66</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>TLB</td>
+  <td class='td-fia'>11</td>
+  <td class='td-score'>362</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>66</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>6</td>
+  <td class='td-player'>Karl</td>
+  <td class='td-fia'>8</td>
+  <td class='td-score'>348</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>108</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>7</td>
+  <td class='td-player'>Iceman</td>
+  <td class='td-fia'>6</td>
+  <td class='td-score'>335</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>32</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>12</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>102</td>
+  <td class='td-pred odd-col'>NOR</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>8</td>
+  <td class='td-player'>GGP1</td>
+  <td class='td-fia'>4</td>
+  <td class='td-score'>330</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>1</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>32</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>NOR</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>63</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>9</td>
+  <td class='td-player'>Pylade</td>
+  <td class='td-fia'>2</td>
+  <td class='td-score'>279</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>NOR</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>30</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>63</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>10</td>
+  <td class='td-player'>Leo</td>
+  <td class='td-fia'>1</td>
+  <td class='td-score'>269</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>4</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>51</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>20</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>102</td>
+  <td class='td-pred odd-col'>RIC</td> <td class='td-pred-sc odd-col'>72</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>F1Ung</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Joe</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Ray</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Winston</td><td class='td-dns'>DNS</td>
+</tr>
+</table>
+</div>
+<div class='round'>
+<p class='round-name'>Enzo Sprint</p>
+<table class='round-table'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>
+  <th class='hdr-player'>Player</th>
+  <th class='hdr-fia'>FIA</th>
+  <th class='hdr-score1'>Score</th>
+  <th class='hdr-pred' colspan=2>VER</th>
+  <th class='hdr-pred' colspan=2>LEC</th>
+  <th class='hdr-pred' colspan=2>PER</th>
+  <th class='hdr-pred' colspan=2>SAI</th>
+  <th class='hdr-pred' colspan=2>NOR</th>
+  <th class='hdr-pred' colspan=2>RIC</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>1</td>
+  <td class='td-player'>Iceman</td>
+  <td class='td-fia'>25</td>
+  <td class='td-score'>460</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>42</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>NOR</td> <td class='td-pred-sc even-col'>120</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>2</td>
+  <td class='td-player'>GGP1</td>
+  <td class='td-fia'>18</td>
+  <td class='td-score'>454</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>60</td>
+  <td class='td-pred odd-col'>NOR</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>3</td>
+  <td class='td-player'>Leo</td>
+  <td class='td-fia'>15</td>
+  <td class='td-score'>452</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>36</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>NOR</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>BWare</td>
+  <td class='td-fia'>12</td>
+  <td class='td-score'>447</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>36</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>MAG</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>5</td>
+  <td class='td-player'>Pylade</td>
+  <td class='td-fia'>10</td>
+  <td class='td-score'>429</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>NOR</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>60</td>
+  <td class='td-pred even-col'>MAG</td> <td class='td-pred-sc even-col'>102</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>6</td>
+  <td class='td-player'>Karl</td>
+  <td class='td-fia'>8</td>
+  <td class='td-score'>421</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>7</td>
+  <td class='td-player'>NL</td>
+  <td class='td-fia'>6</td>
+  <td class='td-score'>400</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>27</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>60</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>84</td>
+  <td class='td-pred odd-col'>BOT</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>8</td>
+  <td class='td-player'>Hobbes</td>
+  <td class='td-fia'>4</td>
+  <td class='td-score'>396</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>36</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>9</td>
+  <td class='td-player'>TLB</td>
+  <td class='td-fia'>2</td>
+  <td class='td-score'>391</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>66</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>10</td>
+  <td class='td-player'>Bill</td>
+  <td class='td-fia'>1</td>
+  <td class='td-score'>382</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>84</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>108</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>F1Ung</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Joe</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Ray</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Winston</td><td class='td-dns'>DNS</td>
+</tr>
+</table>
+</div>
+<div class='round'>
+<p class='round-name'>Australia Race</p>
+<table class='round-table'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>
+  <th class='hdr-player'>Player</th>
+  <th class='hdr-fia'>FIA</th>
+  <th class='hdr-score1'>Score</th>
+  <th class='hdr-pred' colspan=2>LEC</th>
+  <th class='hdr-pred' colspan=2>PER</th>
+  <th class='hdr-pred' colspan=2>RUS</th>
+  <th class='hdr-pred' colspan=2>HAM</th>
+  <th class='hdr-pred' colspan=2>NOR</th>
+  <th class='hdr-pred' colspan=2>RIC</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>1</td>
+  <td class='td-player'>Bill</td>
+  <td class='td-fia'>25</td>
+  <td class='td-score'>403</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>4</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>2</td>
+  <td class='td-player'>TLB</td>
+  <td class='td-fia'>18</td>
+  <td class='td-score'>389</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>3</td>
+  <td class='td-player'>Karl</td>
+  <td class='td-fia'>15</td>
+  <td class='td-score'>383</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>BOT</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>NL</td>
+  <td class='td-fia'>12</td>
+  <td class='td-score'>376</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>8</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>5</td>
+  <td class='td-player'>BWare</td>
+  <td class='td-fia'>10</td>
+  <td class='td-score'>362</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>8</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>GAS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>6</td>
+  <td class='td-player'>F1Ung</td>
+  <td class='td-fia'>8</td>
+  <td class='td-score'>333</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>MAG</td> <td class='td-pred-sc even-col'>66</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>7</td>
+  <td class='td-player'>Iceman</td>
+  <td class='td-fia'>6</td>
+  <td class='td-score'>327</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>1</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>48</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>8</td>
+  <td class='td-player'>Hobbes</td>
+  <td class='td-fia'>4</td>
+  <td class='td-score'>317</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>4</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>81</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>9</td>
+  <td class='td-player'>Leo</td>
+  <td class='td-fia'>2</td>
+  <td class='td-score'>315</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>1</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>108</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>81</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>10</td>
+  <td class='td-player'>GGP1</td>
+  <td class='td-fia'>1</td>
+  <td class='td-score'>310</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>8</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>48</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>11</td>
+  <td class='td-player'>Joe</td>
+  <td class='td-fia'>0</td>
+  <td class='td-score'>296</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>3</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>BOT</td> <td class='td-pred-sc even-col'>102</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>81</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Pylade</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Ray</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Winston</td><td class='td-dns'>DNS</td>
+</tr>
+</table>
+</div>
+<div class='round'>
+<p class='round-name'>Jeddah Race</p>
+<table class='round-table'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>
+  <th class='hdr-player'>Player</th>
+  <th class='hdr-fia'>FIA</th>
+  <th class='hdr-score1'>Score</th>
+  <th class='hdr-pred' colspan=2>VER</th>
+  <th class='hdr-pred' colspan=2>LEC</th>
+  <th class='hdr-pred' colspan=2>SAI</th>
+  <th class='hdr-pred' colspan=2>PER</th>
+  <th class='hdr-pred' colspan=2>RUS</th>
+  <th class='hdr-pred' colspan=2>OCO</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>1</td>
+  <td class='td-player'>Pylade</td>
+  <td class='td-fia'>25</td>
+  <td class='td-score'>464</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>54</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>80</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>120</td>
+  <td class='td-pred odd-col'>MAG</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>2</td>
+  <td class='td-player'>TLB</td>
+  <td class='td-fia'>18</td>
+  <td class='td-score'>458</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>60</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>80</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>90</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>3</td>
+  <td class='td-player'>Karl</td>
+  <td class='td-fia'>15</td>
+  <td class='td-score'>457</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>120</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>144</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>BWare</td>
+  <td class='td-fia'>12</td>
+  <td class='td-score'>456</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>80</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>90</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>5</td>
+  <td class='td-player'>Bill</td>
+  <td class='td-fia'>9</td>
+  <td class='td-score'>454</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>90</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>5</td>
+  <td class='td-player'>Hobbes</td>
+  <td class='td-fia'>9</td>
+  <td class='td-score'>454</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>90</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>7</td>
+  <td class='td-player'>Iceman</td>
+  <td class='td-fia'>6</td>
+  <td class='td-score'>444</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>56</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>120</td>
+  <td class='td-pred odd-col'>MAG</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>8</td>
+  <td class='td-player'>GGP1</td>
+  <td class='td-fia'>4</td>
+  <td class='td-score'>402</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>56</td>
+  <td class='td-pred even-col'>BOT</td> <td class='td-pred-sc even-col'>60</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>171</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>9</td>
+  <td class='td-player'>F1Ung</td>
+  <td class='td-fia'>2</td>
+  <td class='td-score'>397</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>BOT</td> <td class='td-pred-sc even-col'>60</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>144</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>10</td>
+  <td class='td-player'>Leo</td>
+  <td class='td-fia'>1</td>
+  <td class='td-score'>395</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>90</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>11</td>
+  <td class='td-player'>NL</td>
+  <td class='td-fia'>0</td>
+  <td class='td-score'>368</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>HAM</td> <td class='td-pred-sc even-col'>39</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>BOT</td> <td class='td-pred-sc even-col'>60</td>
+  <td class='td-pred odd-col'>ZHO</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Joe</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Ray</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Winston</td><td class='td-dns'>DNS</td>
+</tr>
+</table>
+</div>
+<div class='round'>
+<p class='round-name'>Bahrain Race</p>
+<table class='round-table'>
+<tr class='round-trh'>
+  <th class='hdr-pos'>Pos</th>
+  <th class='hdr-player'>Player</th>
+  <th class='hdr-fia'>FIA</th>
+  <th class='hdr-score1'>Score</th>
+  <th class='hdr-pred' colspan=2>LEC</th>
+  <th class='hdr-pred' colspan=2>SAI</th>
+  <th class='hdr-pred' colspan=2>HAM</th>
+  <th class='hdr-pred' colspan=2>RUS</th>
+  <th class='hdr-pred' colspan=2>MAG</th>
+  <th class='hdr-pred' colspan=2>BOT</th>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>1</td>
+  <td class='td-player'>Leo</td>
+  <td class='td-fia'>25</td>
+  <td class='td-score'>402</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>8</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>68</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>2</td>
+  <td class='td-player'>Karl</td>
+  <td class='td-fia'>18</td>
+  <td class='td-score'>388</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>24</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>3</td>
+  <td class='td-player'>TLB</td>
+  <td class='td-fia'>15</td>
+  <td class='td-score'>386</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>NOR</td> <td class='td-pred-sc odd-col'>99</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>4</td>
+  <td class='td-player'>Ray</td>
+  <td class='td-fia'>12</td>
+  <td class='td-score'>374</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>20</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>6</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>24</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>5</td>
+  <td class='td-player'>BWare</td>
+  <td class='td-fia'>10</td>
+  <td class='td-score'>372</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>80</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>102</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>135</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>6</td>
+  <td class='td-player'>Pylade</td>
+  <td class='td-fia'>8</td>
+  <td class='td-score'>369</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>19</td>
+  <td class='td-pred odd-col'>VER</td> <td class='td-pred-sc odd-col'>6</td>
+  <td class='td-pred even-col'>GAS</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>68</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>ALO</td> <td class='td-pred-sc odd-col'>153</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>7</td>
+  <td class='td-player'>Iceman</td>
+  <td class='td-fia'>6</td>
+  <td class='td-score'>359</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>38</td>
+  <td class='td-pred even-col'>SAI</td> <td class='td-pred-sc even-col'>57</td>
+  <td class='td-pred odd-col'>HAM</td> <td class='td-pred-sc odd-col'>76</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>8</td>
+  <td class='td-player'>Bill</td>
+  <td class='td-fia'>4</td>
+  <td class='td-score'>345</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>8</td>
+  <td class='td-pred even-col'>GAS</td> <td class='td-pred-sc even-col'>9</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>68</td>
+  <td class='td-pred even-col'>RUS</td> <td class='td-pred-sc even-col'>114</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>144</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>9</td>
+  <td class='td-player'>GGP1</td>
+  <td class='td-fia'>2</td>
+  <td class='td-score'>317</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>PER</td> <td class='td-pred-sc even-col'>15</td>
+  <td class='td-pred odd-col'>LEC</td> <td class='td-pred-sc odd-col'>68</td>
+  <td class='td-pred even-col'>GAS</td> <td class='td-pred-sc even-col'>30</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>10</td>
+  <td class='td-player'>Hobbes</td>
+  <td class='td-fia'>1</td>
+  <td class='td-score'>314</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>SAI</td> <td class='td-pred-sc odd-col'>40</td>
+  <td class='td-pred even-col'>NOR</td> <td class='td-pred-sc even-col'>24</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>80</td>
+  <td class='td-pred even-col'>LEC</td> <td class='td-pred-sc even-col'>96</td>
+  <td class='td-pred odd-col'>PER</td> <td class='td-pred-sc odd-col'>72</td>
+</tr>
+<tr class='round-td'>
+  <td class='td-pos'>11</td>
+  <td class='td-player'>Joe</td>
+  <td class='td-fia'>0</td>
+  <td class='td-score'>252</td>
+  <td class='td-pred even-col'>VER</td> <td class='td-pred-sc even-col'>2</td>
+  <td class='td-pred odd-col'>RIC</td> <td class='td-pred-sc odd-col'>16</td>
+  <td class='td-pred even-col'>ALO</td> <td class='td-pred-sc even-col'>42</td>
+  <td class='td-pred odd-col'>VET</td> <td class='td-pred-sc odd-col'>0</td>
+  <td class='td-pred even-col'>GAS</td> <td class='td-pred-sc even-col'>30</td>
+  <td class='td-pred odd-col'>RUS</td> <td class='td-pred-sc odd-col'>162</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>F1Ung</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>NL</td><td class='td-dns'>DNS</td>
+</tr>
+<tr class='round-td-skip'>
+  <td class='td-pos'></td>
+  <td class='td-player'>Winston</td><td class='td-dns'>DNS</td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+
+</html>
+

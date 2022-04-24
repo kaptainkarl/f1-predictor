@@ -10,14 +10,11 @@ for my $r (keys %$runs){
     my $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir bill ";
     $cmd .= " --bill";
-    # --bill implies :
-    # --wta, --no-pre-code --fia-simple
-    # --no-pos-col
-
     $cmd .= " --out-file $r";
-    $cmd .= " --run $runs->{$r}\n";
+    $cmd .= " --run $runs->{$r}";
 
     $cmd .= " --html-out ";
+    print "$cmd\n";
     system( $cmd );
 }
 

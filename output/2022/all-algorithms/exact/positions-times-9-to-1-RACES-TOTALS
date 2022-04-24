@@ -4,17 +4,87 @@ The Tags will format a lined up table
 Please note you will see some colour highlighting because disqus thinks it is computer code.
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
-The way the scores are calculated is described at https://github.com/kaptainkarl/f1-predictor/blob/master/docs/algorithms_description.txt
-
 
 
 
 ----------------------
-Totals Tables run for australia-race, jeddah-race, bahrain-race
+Totals Tables run for enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
 
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+BWare         69.3
+GGP1          67.5
+Hobbes        62.3
+NL            58.3
+Karl          47.9
+Iceman        46.3
+Bill          30.4
+Leo           27.5
+Pylade        23.6
+Ray           21.5
+F1Ung         18.5
+TLB           16.4
+Joe           15.4
+Winston        0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    BWare         69.33|    5 
+    GGP1          67.53|    5 
+    Hobbes        62.33|    5 
+    NL            58.33|    4 
+    Karl          47.88|    5 
+    Iceman        46.26|    5 
+    Bill          30.38|    5 
+    Leo           27.51|    5 
+    Pylade        23.63|    4 
+    Ray           21.50|    1 
+    F1Ung         18.50|    2 
+    TLB           16.38|    5 
+    Joe           15.43|    2 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'exact and positions-times-9-to-1'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Ray           21.50|    1 
+    NL            14.58|    4 
+    BWare         13.87|    5 
+    GGP1          13.51|    5 
+    Hobbes        12.47|    5 
+    Karl           9.58|    5 
+    Iceman         9.25|    5 
+    F1Ung          9.25|    2 
+    Joe            7.71|    2 
+    Bill           6.08|    5 
+    Pylade         5.91|    4 
+    Leo            5.50|    5 
+    TLB            3.28|    5 
+    Winston        0   |    0 
+----------------------------------
+</pre></code>
 
 <pre><code>
 -----------------
@@ -24,45 +94,20 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    Hobbes             24   |    3 
-    GGP1               24   |    3 
-    BWare              24   |    3 
-    Karl               23   |    3 
-    NL                 18   |    2 
+    BWare              44   |    5 
+    GGP1               43   |    5 
+    NL                 42   |    4 
+    Hobbes             42   |    5 
+    Iceman             37   |    5 
+    Karl               23   |    5 
+    Pylade             20   |    4 
+    Leo                18   |    5 
     F1Ung              15   |    2 
-    Bill               15   |    3 
-    Iceman             11   |    3 
+    Bill               15   |    5 
     Ray                 9   |    1 
-    Leo                 9   |    3 
-    TLB                 7   |    3 
+    TLB                 7   |    5 
     Joe                 6   |    2 
-    Pylade              5   |    2 
     Winston             0   |    0 
----------------------------------------
-</pre></code>
-
-<pre><code>
---------------------------------
-Method is 'exact and positions-times-9-to-1'
-
-Total Score table. Reverse Order
---------------------------------
-P   Player          Total   |Played
----------------------------------------
-    Winston             0   |    0 
-    Pylade              5   |    2 
-    Joe                 6   |    2 
-    TLB                 7   |    3 
-    Leo                 9   |    3 
-    Ray                 9   |    1 
-    Iceman             11   |    3 
-    Bill               15   |    3 
-    F1Ung              15   |    2 
-    NL                 18   |    2 
-    Karl               23   |    3 
-    BWare              24   |    3 
-    GGP1               24   |    3 
-    Hobbes             24   |    3 
 ---------------------------------------
 </pre></code>
 
@@ -75,95 +120,44 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player      Ave Score   |Played
 ---------------------------------------
+    NL                 10.50|    4 
     Ray                 9   |    1 
-    NL                  9   |    2 
-    Hobbes              8   |    3 
-    GGP1                8   |    3 
-    BWare               8   |    3 
-    Karl                7.67|    3 
+    BWare               8.80|    5 
+    GGP1                8.60|    5 
+    Hobbes              8.40|    5 
     F1Ung               7.50|    2 
-    Bill                5   |    3 
-    Iceman              3.67|    3 
-    Leo                 3   |    3 
+    Iceman              7.40|    5 
+    Pylade              5   |    4 
+    Karl                4.60|    5 
+    Leo                 3.60|    5 
     Joe                 3   |    2 
-    Pylade              2.50|    2 
-    TLB                 2.33|    3 
+    Bill                3   |    5 
+    TLB                 1.40|    5 
     Winston             0   |    0 
 ---------------------------------------
 </pre></code>
 
 <pre><code>
----------------------
-Method is 'exact and positions-times-9-to-1'
-
-Total FIA Score table
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    BWare         41.33|    3 
-    Karl          40.43|    3 
-    Hobbes        40   |    3 
-    GGP1          38.33|    3 
-    NL            23.33|    2 
-    Bill          22.93|    3 
-    Ray           21.50|    1 
-    F1Ung         18.50|    2 
-    Iceman        15.93|    3 
-    Joe           15.43|    2 
-    Leo           11.93|    3 
-    TLB            8.93|    3 
-    Pylade         4.43|    2 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
----------------------
-Method is 'exact and positions-times-9-to-1'
-
-Average FIA Score table
-For players who have not entered all rounds
----------------------
-P   Player       FIA   |Played
-----------------------------------
-    Ray           21.50|    1 
-    BWare         13.78|    3 
-    Karl          13.48|    3 
-    Hobbes        13.33|    3 
-    GGP1          12.78|    3 
-    NL            11.67|    2 
-    F1Ung          9.25|    2 
-    Joe            7.71|    2 
-    Bill           7.64|    3 
-    Iceman         5.31|    3 
-    Leo            3.98|    3 
-    TLB            2.98|    3 
-    Pylade         2.21|    2 
-    Winston        0   |    0 
-----------------------------------
-</pre></code>
-
-<pre><code>
 ------------------------
 Method is 'exact and positions-times-9-to-1'
 
-P1 -> P6 then Total Score 
+P1 -> P6 then Total 
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 
 ---------------------------------------------------------------------
-    Hobbes             24   |    3 |  1 |  1 |    |    |    |  1 
-    GGP1               24   |    3 |  1 |    |  1 |    |    |    
-    BWare              24   |    3 |  1 |    |    |  1 |  1 |    
-    Karl               23   |    3 |  1 |    |    |  1 |  1 |    
-    NL                 18   |    2 |  1 |    |    |    |    |    
+    GGP1               43   |    5 |  2 |    |  1 |    |    |  1 
+    NL                 42   |    4 |  2 |    |    |  1 |    |    
+    Hobbes             42   |    5 |  1 |  1 |  1 |  1 |    |  1 
+    BWare              44   |    5 |  1 |  1 |    |  2 |  1 |    
+    Karl               23   |    5 |  1 |    |    |  1 |  1 |  1 
     Ray                 9   |    1 |  1 |    |    |    |    |    
-    Bill               15   |    3 |    |  1 |    |    |  1 |  1 
+    Iceman             37   |    5 |    |  1 |  1 |    |  1 |  2 
+    Bill               15   |    5 |    |  1 |    |    |  1 |  2 
     F1Ung              15   |    2 |    |  1 |    |    |    |  1 
+    Pylade             20   |    4 |    |    |  1 |    |  1 |  1 
+    Leo                18   |    5 |    |    |  1 |    |  1 |  1 
     Joe                 6   |    2 |    |    |    |  1 |  1 |    
-    Iceman             11   |    3 |    |    |    |    |  1 |  2 
-    Leo                 9   |    3 |    |    |    |    |  1 |  1 
-    TLB                 7   |    3 |    |    |    |    |  1 |  1 
-    Pylade              5   |    2 |    |    |    |    |  1 |    
+    TLB                 7   |    5 |    |    |    |    |  1 |  2 
     Winston             0   |    0 |    |    |    |    |    |    
 ---------------------------------------------------------------------
 </pre></code>
