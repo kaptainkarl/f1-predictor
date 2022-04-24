@@ -34,7 +34,7 @@ for my $sc ( @$score_sys ) {
             $cmd .= " --out-file $r";
 
             $cmd .= " --score-accuracy $sc --score-times $ml ";
-            $cmd .= " --run $runs->{$r}\n";
+            $cmd .= " --run $runs->{$r}";
 
             $cmd .= " --html-out ";
             system( $cmd ) ;
@@ -57,3 +57,35 @@ for my $sc ( @$score_sys ) {
         }
     }
 }
+
+my $favs = [
+    " --wta ",
+    " --closest-p1-20 ",
+];
+
+for my $fv ( @$favs ){
+    for my $r (keys %$runs){
+        my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
+
+        $cmd .= " --out-sub-dir favourites $fv --out-file $r --run $runs->{$r}";
+        $cmd .= " --html-out ";
+
+        system( $cmd ) ;
+    }
+}
+
+for my $fv ( @$favs ){
+    for my $r (keys %$runs){
+        my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
+
+        $cmd .= " --out-sub-dir favourites $fv --out-file $r-TOTALS --run $runs->{$r}";
+        $cmd .= " --no-rounds";
+        $cmd .= " --html-out ";
+
+        system( $cmd ) ;
+    }
+}
+
+
+
+

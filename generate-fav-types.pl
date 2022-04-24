@@ -19,6 +19,7 @@ for my $fv ( @$favs ){
 
         $cmd .= " --out-sub-dir favourites $fv --out-file $r --run $runs->{$r}";
 
+        $cmd .= " --html-out ";
         system( $cmd ) ;
     }
 }
@@ -30,6 +31,7 @@ for my $fv ( @$favs ){
         $cmd .= " --out-sub-dir favourites $fv --out-file $r-TOTALS --run $runs->{$r}";
         $cmd .= " --no-rounds";
 
+        $cmd .= " --html-out ";
         system( $cmd ) ;
     }
 }

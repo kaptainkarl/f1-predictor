@@ -566,6 +566,7 @@ my $o_out_sub_dir;
 my $o_out_accuracy_sub_dir;
 my $o_show_test_player;
 my $o_show_only_test_player;
+my $o_show_winners_summary;
 my $o_suppress_position_column;
 my $o_case_change_not_exact_predictions;
 my $o_show_p1_to_p6_totals;
@@ -613,9 +614,9 @@ GetOptions (
     "only-first-race-in-list"
                             => \$o_only_first_race_in_list,
 
-
     "case-change-not-exact-predictions"
                             => \$o_case_change_not_exact_predictions,
+
     "no-ave|suppress-average-table"
                             => \$o_suppress_average_table,
 
@@ -631,6 +632,8 @@ GetOptions (
 
     "show-test-plyr|show-test-player"
                             => \$o_show_test_player,
+    "show-winners-summary"
+                            => \$o_show_winners_summary,
     "show-only-test-plyr|show-only-test-player"
                             => \$o_show_only_test_player,
     #### << display type options
@@ -669,7 +672,9 @@ if ( $o_score_bill ) {
     $o_suppress_all_detail = true;
     $o_SEP = "";
     # TODO make this live :
-    # $o_only_first_race_in_list = true;
+    $o_only_first_race_in_list = true;
+
+    $o_show_winners_summary = false;
     # --bill option only shows the first race in the --runs list
     #   so the most recent race , must be the first one !
 
@@ -1354,8 +1359,7 @@ sub _html_fia_totals {
 sub winners_of_rounds_out {
     my ($plyr_tots, $run_arrs, $tots_arr ) = @_;
 
-    return if $o_score_bill ;
-
+    return if ! $o_show_winners_summary;
     # and have it's own CLI option rather than just --bill
 
     printout("Winners of Rounds are :\n\n");
@@ -2902,6 +2906,8 @@ sub output_total_p {
     # TODO  utility method for sorting and printing totals tables
     # with an accurate P column that works out shared
     # positions.
+
+    # needs to work on fia score, fia ave score, total score , total ave score
 
 }
 

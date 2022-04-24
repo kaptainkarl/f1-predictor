@@ -9,9 +9,10 @@ for my $r (keys %$runs){
     my $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir leo ";
     $cmd .= " --out-file $r ";
-    $cmd .= " --wta ";
+    $cmd .= " --closest-p1-20 ";
     $cmd .= " --no-detail ";
-    #$cmd .= " --no-pre-code ";
+    $cmd .= " --no-pre-code ";
+    $cmd .= " --show-winners-summary ";
     $cmd .= " --run $runs->{$r}";
     system( $cmd ) ;
 }
