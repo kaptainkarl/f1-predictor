@@ -655,30 +655,28 @@ if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
 }
 
-if ( $o_fia_sprint_qual_diff &&
-    ! $o_player_fia_score && ! $o_player_fia_simple_score
-){
-    dierr( "--fia-sprint-qual-diff needs to have --fia-simple or --fia also specified\n");
-}
-
 if ( $o_score_bill ) {
-    # option --bill is just an output twiddling closest-p1-20
-    $o_closest_p1_all_20 = true;
+    # option --bill is just an output twiddling
+    # the generate-bill-types.pl should define that is is --closest-p1-20 
+
     $o_no_pre_code = true;
     $o_player_fia_simple_score = true;
-    $o_fia_sprint_qual_diff =true;
 
     $o_suppress_position_column = true;
     $o_suppress_all_detail = true;
     $o_SEP = "";
-    # TODO make this live :
-    $o_only_first_race_in_list = true;
 
     $o_show_winners_summary = false;
     # --bill option only shows the first race in the --runs list
     #   so the most recent race , must be the first one !
+    $o_only_first_race_in_list = true;
 
-    # $o_suppress_position_column=true;
+}
+
+if ( $o_fia_sprint_qual_diff &&
+    ! $o_player_fia_score && ! $o_player_fia_simple_score
+){
+    dierr( "--fia-sprint-qual-diff needs to have --fia-simple or --fia also specified\n");
 }
 
 if ( $o_closest_p1_all_20 ) {
@@ -745,11 +743,9 @@ elsif ( $o_closest_p1 ) {
         dierr("--closest-p1-20-details is not really sensible with --closest-p1\n");
     }
 
-} else {
-    if ( $o_score_wta ){
-        $o_score_accuracy_sys = "exact";
-        $o_score_times_sys    = "power-100";
-    }
+} elsif ( $o_score_wta ){
+    $o_score_accuracy_sys = "exact";
+    $o_score_times_sys    = "power-100";
 }
 
 my $z_races   = z_data_single(data_dir().$ZDATA_RACES);
