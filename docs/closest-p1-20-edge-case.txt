@@ -1,0 +1,113 @@
+"Closest P1 20"  Slightly odd edge Case.
+----------------------------------------------
+
+The only 1 result that "troubles" me so far is what I've seen is below.
+
+On positions 7 -> 9 on Enzo Sprint.
+
+
+
+Closest-P1 ( only top 6 positions considered, the way Leo does it)
+-----------
+Leo only looks at the top 6 positions thus Bill, Karl and TLB would have all been equal.
+They all had identical top 4 predictions, who all finished in the top 6.
+
+The ALO, RUS and HAM predictions would have all been ignored , because they didn't finish in the top 6.
+
+So they would have shared 3 FIA points , 3 ways. 1 point each.
+
+I guess on lower points at P7->9 this isn't too much of an issue.
+If the same kind of thing happened near P1 , more points would be won or lost,
+with someone arguing "my predictions were better, more accurate, better order etc ..."
+
+
+Just show P7 -> P9
+
+<pre><code>
+Method is 'closest-p1'
+---------------
+Enzo Sprint
+
+P   Player      FIA    | VER     LEC     PER     SAI     NOR     RIC
+-----------------------------------------------------------------------
+7   Bill         1     | LEC 5 | VER 5 | SAI 5 | PER 5 | RUS   | HAM   |
+7   Karl         1     | LEC 5 | VER 5 | SAI 5 | PER 5 | ALO   | RUS   |
+7   TLB          1     | LEC 5 | VER 5 | SAI 5 | PER 5 | HAM   | RUS   |
+</pre></code>
+
+
+
+
+Closest-P1-20
+-------------
+
+So In the Enzo Sprint the drivers in Karl, Bill and TLB's non top-6 predictions finished :
+
+ALO P9
+RUS P11
+HAM P14
+
+The closest-p1-20 looks at all 20 positions.
+
+Karl's ALO 16 rates higher, because it was only 4 places out, and because ALO was closer to P1 than either RUS or HAM.
+So that seems reasonable.
+
+But Bill and TLB just have RUS and HAM swapped round.
+
+Now RUS finished higher than HAM, so therefore the accuracy score for RUS trumps HAM.
+
+Having RUS in P6 is more accurate than having RUS in P5.
+
+So
+TLB gets  RUS 15.
+Bill gets RUS 14.
+
+Therefore TLB by the closest-p1-20 algo is rated better.
+
+But there is part of me thinking that Bill had their order more correct.
+
+After all RUS did beat HAM.
+
+This is real tight edge case. That is probably not worth worrying about.
+
+I think the closest-p1-20 algo is the best so far. but I could see someone arguing that what it's produced below looks odd.
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Enzo Sprint
+P   Player      FIA    | VER      LEC      PER      SAI      NOR      RIC
+-----------------------------------------------------------------------------
+7   Karl         2     | LEC 19 | VER 19 | SAI 19 | PER 19 | ALO 16 | RUS 15 |
+8   TLB          1     | LEC 19 | VER 19 | SAI 19 | PER 19 | HAM 11 | RUS 15 |
+9   Bill         0     | LEC 19 | VER 19 | SAI 19 | PER 19 | RUS 14 | HAM 12 |
+</pre></code>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
