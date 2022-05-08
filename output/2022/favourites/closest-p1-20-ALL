@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
+Totals Tables run for miami-race, miami-qual, enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,19 +20,19 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1         111   |    9 
-    NL           109   |    7 
-    Iceman       104   |    9 
-    BWare        103   |    9 
-    Hobbes        91.50|    9 
-    Karl          88   |    9 
-    Leo           57   |    9 
-    Bill          53.50|    9 
-    TLB           53   |    8 
-    Pylade        44   |    5 
-    F1Ung         41   |    5 
-    Ray           27   |    2 
-    Joe           13   |    4 
+    NL           135   |    9 
+    Iceman       132   |   11 
+    BWare        117   |   11 
+    GGP1         113   |    9 
+    Karl         110.50|   11 
+    Hobbes       103.50|   11 
+    Leo           87   |   11 
+    TLB           79.50|   10 
+    Bill          64.50|   11 
+    Pylade        61   |    7 
+    F1Ung         59   |    7 
+    Joe           21   |    6 
+    Arttu         14   |    2 
     Winston       11   |    1 
 ----------------------------------
 </pre></code>
@@ -46,26 +46,74 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            15.57|    7 
-    Ray           13.50|    2 
-    GGP1          12.33|    9 
-    Iceman        11.56|    9 
-    BWare         11.44|    9 
+    NL            15   |    9 
+    GGP1          12.56|    9 
+    Iceman        12   |   11 
     Winston       11   |    1 
-    Hobbes        10.17|    9 
-    Karl           9.78|    9 
-    Pylade         8.80|    5 
-    F1Ung          8.20|    5 
-    TLB            6.62|    8 
-    Leo            6.33|    9 
-    Bill           5.94|    9 
-    Joe            3.25|    4 
+    BWare         10.64|   11 
+    Karl          10.05|   11 
+    Hobbes         9.41|   11 
+    Pylade         8.71|    7 
+    F1Ung          8.43|    7 
+    TLB            7.95|   10 
+    Leo            7.91|   11 
+    Arttu          7   |    2 
+    Bill           5.86|   11 
+    Joe            3.50|    6 
 ----------------------------------
 </pre></code>
 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Miami Race
+
+P   Player      FIA    | VER      LEC      SAI      PER      RUS      HAM      
+-----------------------------------------------------------------------------
+1   Iceman      25     | VER 20 | LEC 20 | SAI 20 | PER 20 | ALO 16 | NOR  7 | 
+2   Karl        16.50  | VER 20 | LEC 20 | PER 19 | SAI 19 | NOR  6 | RUS 19 | 
+2   TLB         16.50  | VER 20 | LEC 20 | PER 19 | SAI 19 | NOR  6 | RUS 19 | 
+4   F1Ung       12     | VER 20 | LEC 20 | PER 19 | SAI 19 | ALO 16 | BOT 19 | 
+5   Hobbes      10     | VER 20 | LEC 20 | NOR  4 | SAI 19 | RUS 20 | PER 18 | 
+6   NL           8     | VER 20 | PER 18 | LEC 19 | HAM 18 | SAI 18 | RUS 19 | 
+7   Joe          6     | VER 20 | PER 18 | LEC 19 | BOT 17 | SAI 18 | RUS 19 | 
+8   Arttu        4     | VER 20 | PER 18 | LEC 19 | NOR  5 | SAI 18 | RUS 19 | 
+9   Leo          2     | VER 20 | PER 18 | SAI 20 | LEC 18 | RIC 14 | ALO 17 | 
+10  BWare        1     | VER 20 | SAI 19 | RUS 18 | LEC 18 | PER 19 | NOR  7 | 
+11  Bill         0     | LEC 19 | VER 19 | SAI 20 | NOR  5 | PER 19 | RUS 19 | 
+12  Pylade       0     | LEC 19 | VER 19 | SAI 20 | NOR  5 | RUS 20 | ALO 17 | 
+    GGP1       DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Miami Qual
+
+P   Player      FIA    | LEC      SAI      VER      PER      BOT      HAM      
+-----------------------------------------------------------------------------
+1   Leo         25     | LEC 20 | SAI 20 | PER 19 | VER 19 | ALO 14 | RIC 12 | 
+2   NL          18     | LEC 20 | VER 19 | PER 19 | SAI 18 | HAM 19 | RUS 14 | 
+3   Pylade      15     | LEC 20 | VER 19 | PER 19 | SAI 18 | RUS 13 | NOR 18 | 
+4   BWare       12     | LEC 20 | VER 19 | PER 19 | SAI 18 | ALO 14 | RUS 14 | 
+5   Arttu       10     | VER 18 | LEC 19 | SAI 19 | PER 20 | NOR 17 | BOT 19 | 
+6   Bill         8     | VER 18 | LEC 19 | SAI 19 | NOR 16 | PER 19 | ALO 15 | 
+7   F1Ung        6     | VER 18 | LEC 19 | PER 19 | SAI 18 | ALO 14 | BOT 19 | 
+8   Karl         3     | VER 18 | LEC 19 | PER 19 | SAI 18 | NOR 17 | RUS 14 | 
+8   TLB          3     | VER 18 | LEC 19 | PER 19 | SAI 18 | NOR 17 | RUS 14 | 
+10  Joe          1     | VER 18 | LEC 19 | PER 19 | NOR 16 | BOT 20 | SAI 16 | 
+11  Iceman       0     | VER 18 | SAI 20 | LEC 18 | PER 20 | RUS 13 | ALO 15 | 
+12  Hobbes       0     | VER 18 | PER 18 | SAI 19 | LEC 17 | NOR 17 | BOT 19 | 
+    GGP1       DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
@@ -84,9 +132,9 @@ P   Player      FIA    | VER      PER      NOR      RUS      BOT      LEC
 8   Bill         3     | LEC 15 | VER 19 | SAI  3 | PER 18 | HAM 11 | RUS 18 | 
 8   TLB          3     | LEC 15 | VER 19 | SAI  3 | PER 18 | HAM 11 | RUS 18 | 
 10  GGP1         1     | SAI  1 | LEC 16 | VER 18 | PER 18 | NOR 18 | ALO  7 | 
+    Arttu      DNS
     F1Ung      DNS
     Joe        DNS
-    Ray        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -108,9 +156,9 @@ P   Player      FIA    | VER      LEC      PER      SAI      NOR      RIC
 8   TLB          4     | LEC 19 | VER 19 | SAI 19 | PER 19 | HAM 11 | RUS 15 | 
 9   Bill         2     | LEC 19 | VER 19 | SAI 19 | PER 19 | RUS 14 | HAM 12 | 
 10  Leo          1     | LEC 19 | SAI 18 | VER 18 | PER 19 | ALO 16 | NOR 19 | 
+    Arttu      DNS
     F1Ung      DNS
     Joe        DNS
-    Ray        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -130,10 +178,10 @@ P   Player      FIA    | VER      LEC      NOR      MAG      ALO      RIC
 6   GGP1         8     | SAI 11 | LEC 20 | VER 18 | NOR 19 | PER 18 | ALO 19 | 
 7   NL           6     | SAI 11 | LEC 20 | VER 18 | PER 17 | ALO 20 | HAM 13 | 
 8   Karl         4     | LEC 19 | PER 15 | SAI 13 | VER 17 | RUS 14 | ALO 19 | 
+    Arttu      DNS
     F1Ung      DNS
     Joe        DNS
     Pylade     DNS
-    Ray        DNS
     TLB        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
@@ -157,8 +205,8 @@ P   Player      FIA    | LEC      PER      RUS      HAM      NOR      RIC
 9   Joe          2     | VER  3 | PER 20 | LEC 18 | SAI  4 | BOT 17 | ALO  9 | 
 10  Bill         1     | VER  3 | SAI  2 | LEC 18 | PER 18 | RUS 18 | HAM 18 | 
 11  Hobbes       0     | VER  3 | SAI  2 | PER 19 | RUS 19 | LEC 16 | ALO  9 | 
+    Arttu      DNS
     Pylade     DNS
-    Ray        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -181,8 +229,8 @@ P   Player      FIA    | LEC      VER      PER      NOR      HAM      RUS
 9   Karl         2     | PER 18 | VER 20 | LEC 18 | SAI 15 | RUS 19 | ALO 16 | 
 10  Leo          1     | VER 19 | SAI 13 | LEC 18 | PER 19 | ALO 15 | RUS 20 | 
 11  F1Ung        0     | VER 19 | PER 19 | LEC 18 | SAI 15 | BOT 13 | MAG  9 | 
+    Arttu      DNS
     Pylade     DNS
-    Ray        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -205,8 +253,8 @@ P   Player      FIA    | VER      LEC      SAI      PER      RUS      OCO
 9   NL           2     | VER 20 | SAI 19 | HAM 13 | RUS 19 | BOT 10 | ZHO 15 | 
 10  TLB          1     | LEC 19 | VER 19 | SAI 20 | PER 20 | HAM 15 | RUS 19 | 
 11  Pylade       0     | LEC 19 | SAI 19 | VER 18 | PER 20 | RUS 20 | MAG 17 | 
+    Arttu      DNS
     Joe        DNS
-    Ray        DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -230,7 +278,7 @@ P   Player      FIA    | PER      LEC      SAI      VER      OCO      RUS
 10  Joe          1     | LEC 19 | SAI 19 | VER 19 | PER 17 | GAS 16 | MAG 16 | 
 11  Hobbes       0     | VER 17 | SAI 19 | LEC 19 | PER 17 | RUS 19 | HAM 10 | 
 12  Leo          0     | SAI 18 | VER 18 | LEC 19 | RUS 18 | PER 16 | ALO 19 | 
-    Ray        DNS
+    Arttu      DNS
     Winston    DNS
 -----------------------------------------------------------------------------
 </pre></code>
@@ -242,17 +290,17 @@ Bahrain Race
 
 P   Player      FIA    | LEC      SAI      HAM      RUS      MAG      BOT      
 -----------------------------------------------------------------------------
-1   Ray         25     | LEC 20 | VER  3 | SAI 19 | PER  6 | RUS 19 | HAM 17 | 
-2   TLB         18     | VER  2 | LEC 19 | SAI 19 | HAM 19 | RUS 19 | NOR 11 | 
-3   Iceman      15     | VER  2 | LEC 19 | SAI 19 | HAM 19 | RUS 19 | PER  8 | 
-4   Karl        12     | VER  2 | LEC 19 | SAI 19 | PER  6 | RUS 19 | ALO 17 | 
-5   GGP1        10     | VER  2 | SAI 20 | PER  5 | LEC 17 | GAS  5 | RUS 18 | 
-6   Leo          8     | VER  2 | PER  4 | SAI 19 | LEC 17 | RUS 19 | ALO 17 | 
-7   Pylade       6     | SAI 19 | VER  3 | GAS  3 | LEC 17 | RUS 19 | ALO 17 | 
-8   Bill         4     | VER  2 | PER  4 | GAS  3 | LEC 17 | RUS 19 | SAI 16 | 
-9   Hobbes       2     | VER  2 | SAI 20 | NOR  8 | RUS 20 | LEC 16 | PER  8 | 
-10  BWare        1     | VER  2 | HAM 19 | PER  5 | RUS 20 | SAI 17 | LEC 15 | 
-11  Joe          0     | VER  2 | RIC  8 | ALO 14 | VET    | GAS  5 | RUS 18 | 
+1   TLB         25     | VER  2 | LEC 19 | SAI 19 | HAM 19 | RUS 19 | NOR 11 | 
+2   Iceman      18     | VER  2 | LEC 19 | SAI 19 | HAM 19 | RUS 19 | PER  8 | 
+3   Karl        15     | VER  2 | LEC 19 | SAI 19 | PER  6 | RUS 19 | ALO 17 | 
+4   GGP1        12     | VER  2 | SAI 20 | PER  5 | LEC 17 | GAS  5 | RUS 18 | 
+5   Leo         10     | VER  2 | PER  4 | SAI 19 | LEC 17 | RUS 19 | ALO 17 | 
+6   Pylade       8     | SAI 19 | VER  3 | GAS  3 | LEC 17 | RUS 19 | ALO 17 | 
+7   Bill         6     | VER  2 | PER  4 | GAS  3 | LEC 17 | RUS 19 | SAI 16 | 
+8   Hobbes       4     | VER  2 | SAI 20 | NOR  8 | RUS 20 | LEC 16 | PER  8 | 
+9   BWare        2     | VER  2 | HAM 19 | PER  5 | RUS 20 | SAI 17 | LEC 15 | 
+10  Joe          1     | VER  2 | RIC  8 | ALO 14 | VET    | GAS  5 | RUS 18 | 
+    Arttu      DNS
     F1Ung      DNS
     NL         DNS
     Winston    DNS
@@ -274,9 +322,9 @@ P   Player      FIA    | LEC      VER      SAI      PER      HAM      BOT
 6   TLB          8     | VER 19 | LEC 19 | SAI 20 | HAM 19 | RUS 16 | PER 18 | 
 7   Iceman       6     | VER 19 | LEC 19 | SAI 20 | RUS 15 | ALO 17 | MSC 14 | 
 8   BWare        4     | VER 19 | LEC 19 | NOR 10 | HAM 19 | RUS 16 | GAS 16 | 
-9   Ray          2     | HAM 16 | LEC 19 | OCO 12 | BOT 18 | VER 17 | NOR 13 | 
-10  Leo          1     | VER 19 | SAI 19 | RUS 14 | PER 20 | LEC 16 | ALO 18 | 
-11  Bill         0     | VER 19 | HAM 17 | RUS 14 | PER 20 | LEC 16 | SAI 17 | 
+9   Leo          2     | VER 19 | SAI 19 | RUS 14 | PER 20 | LEC 16 | ALO 18 | 
+10  Bill         1     | VER 19 | HAM 17 | RUS 14 | PER 20 | LEC 16 | SAI 17 | 
+    Arttu      DNS
     Joe        DNS
     NL         DNS
     Pylade     DNS
