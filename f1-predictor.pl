@@ -397,14 +397,18 @@ Options :
 
         If this option is NOT used then all rounds use 25,18,15,.... scoring.
 
-    --show-p1-to-p6-totals
+    --show-p1-to-p10-totals
         this shows a totals table where the players are ranked on their
-        p1 -> p6 round positions.
+        p1 -> p10 round positions.
         It does to a "tie break" on Total or FIA score, depending
         what other output options, and algorithm types are selected.
 
         --wta tie breaks on FIA score , because the 2 numbers that do the sorting
         are too large to be sensible to display
+
+    --show-p1-to-p10-hide-total
+        this implies --show-p1-to-p10-totals, it also suppresses the
+        FIA score or the Total Score from the table.
 
     --player-rating-score  --score  --rating
         Displays the rating score in individual rounds and
@@ -569,7 +573,8 @@ my $o_show_only_test_player;
 my $o_show_winners_summary;
 my $o_suppress_position_column;
 my $o_case_change_not_exact_predictions;
-my $o_show_p1_to_p6_totals;
+my $o_show_p1_to_p10_totals;
+my $o_show_p1_to_p10_hide_total;
 my $o_closest_p1;
 my $o_closest_p1_all_20;
 my $o_closest_p1_all_20_show_details;
@@ -603,7 +608,8 @@ GetOptions (
     "fia-simple"            => \$o_player_fia_simple_score,
     "fia-sprint-qual-diff"  => \$o_fia_sprint_qual_diff,
 
-    "show-p1-to-p6-totals"  => \$o_show_p1_to_p6_totals,
+    "show-p1-to-p10-totals"  => \$o_show_p1_to_p10_totals,
+    "show-p1-to-p10-hide-total" => \$o_show_p1_to_p10_hide_total,
 
     "disp_players|display-players-upto=i" => \$o_disp_plyrs_upto_pos,
 
@@ -650,6 +656,10 @@ GetOptions (
 ) or die "Option errors\n";
 
 usage() if $o_help;
+
+if ( $o_show_p1_to_p10_hide_total ){
+    $o_show_p1_to_p10_totals = true;
+}
 
 if ( ! looks_like_number $o_multi_points_factor ){
     dierr( "--multi-points-factor $o_multi_points_factor does not look like a number\n");
@@ -860,7 +870,7 @@ sub main {
         push @$run_arrs, $plyr_res;
     }
 
-    my $max_p_pos = 6; # used for classifying winning by the first 6 positions.
+    my $max_p_pos = 10; # used for classifying winning by the first 10 positions.
 
     # iterating over the rounds to build up a plyr_tots hash by
     # plyr name lookup.
@@ -875,7 +885,7 @@ sub main {
 
             $plyr_tots->{$plyr}{player} = $plyr;
 
-            $plyr_tots->{$plyr}{"p$pos"}++;
+            $plyr_tots->{$plyr}{"p$pos"}++ if ! $ln->{skipped};
 
             $plyr_tots->{$plyr}{fia_total}      //= 0;
             $plyr_tots->{$plyr}{total}          //= 0;
@@ -1242,7 +1252,7 @@ sub wta_output {
 sub positional_totals_table {
     my ($tots_arr, $totals_type) = @_;
 
-    return if ! $o_show_p1_to_p6_totals;
+    return if ! $o_show_p1_to_p10_totals;
 
     if ($totals_type !~/total|ave_score|fia_total/){
         dierr( "Prog error. Bad totals_type [$totals_type]\n");
@@ -1252,15 +1262,26 @@ sub positional_totals_table {
         join( " ", map { ucfirst(lc($_)) }
                     split /_+/, $totals_type);
 
-    $tot_title = "FIA" if $totals_type eq "fia_total";
+    my $is_fia = false;
+    if ( $totals_type eq "fia_total" ){
+        $tot_title = "FIA";
+        $is_fia    = true;
+    }
 
-    { # P1->6 table.
+    { # P1 -> P10 table.
         pre_code_open();
         printout ("------------------------\n");
         printout( "Method is '".get_scoring_type_out()."'\n\n");
-        printout ("P1 -> P6 then $tot_title \n");
+
+        if ($o_show_p1_to_p10_hide_total){
+            printout ("P1 -> P10 \n");
+        } else {
+            printout ("P1 -> P10 then $tot_title \n");
+        }
+
         printout ("------------------------\n");
-        totals_header($tot_title, true, false);
+        totals_header($tot_title, true, $is_fia,
+                      undef, $o_show_p1_to_p10_hide_total);
         my $pp = 1;
         for my $tl (sort {
                     $b->{p1} <=> $a->{p1} ||
@@ -1269,14 +1290,20 @@ sub positional_totals_table {
                     $b->{p4} <=> $a->{p4} ||
                     $b->{p5} <=> $a->{p5} ||
                     $b->{p6} <=> $a->{p6} ||
+                    $b->{p7} <=> $a->{p7} ||
+                    $b->{p8} <=> $a->{p8} ||
+                    $b->{p9} <=> $a->{p9} ||
+                    $b->{p10} <=> $a->{p10} ||
                     $b->{$totals_type}  <=> $a->{$totals_type} ||
                     $b->{player} cmp $a->{player}
                 } @$tots_arr
         ){
-            totals_row($pp, $tl, $totals_type, true, false);
+            totals_row($pp, $tl, $totals_type,
+                       true, $is_fia, $o_show_p1_to_p10_hide_total);
             $pp++;
         }
-        totals_header($totals_type, true, false,true);
+        totals_header($totals_type, true, $is_fia,
+                      true, $o_show_p1_to_p10_hide_total);
         pre_code_close();
     }
 }
@@ -1902,9 +1929,9 @@ sub totals_row_wta($$$$$) {
 }
 
 sub totals_header {
-    my ($score_key, $add_ppos, $is_fia, $only_underline) = @_;
+    my ($score_key, $add_ppos, $is_fia, $only_underline, $hide_total) = @_;
 
-    my $ppos_parts = $add_ppos ?"| P1 | P2 | P3 | P4 | P5 | P6 ":"";
+    my $ppos_parts = $add_ppos ?"| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10":"";
 
     my $sc_wide = 14;
     if ( $is_fia ) {
@@ -1914,24 +1941,36 @@ sub totals_header {
         $sc_wide = 20;
     };
 
-    my $underline = "---------------------";
-    $underline .= "-" x length($ppos_parts);
+    if ($hide_total){
+        my $underline = "---------------------";
+        $underline .= "-" x length($ppos_parts);
 
-    $underline .= "-" x ( $sc_wide + 4 );
+        printout(sprintf( "P   Player    Played%s\n", $ppos_parts ))
+            if ! $only_underline;
 
-    printout(sprintf( "P   Player    %${sc_wide}s|Played%s\n", "$score_key   ", $ppos_parts ))
-        if ! $only_underline;
+        printout("$underline\n");
 
-    printout("$underline\n");
+    } else {
+        my $underline = "---------------------";
+        $underline .= "-" x length($ppos_parts);
+
+        $underline .= "-" x ( $sc_wide + 4 );
+
+        printout(sprintf( "P   Player    %${sc_wide}s|Played%s\n", "$score_key   ", $ppos_parts ))
+            if ! $only_underline;
+
+        printout("$underline\n");
+    }
 
 }
 
 sub totals_row($$$$$) {
-    my ($p, $tl, $score_key, $add_ppos, $is_fia) = @_;
+    my ($p, $tl, $score_key, $add_ppos, $is_fia, $hide_total) = @_;
 
-    my $ppos_parts = $add_ppos ? sprintf("| %2s | %2s | %2s | %2s | %2s | %2s ", b($tl->{p1}), b($tl->{p2}), b($tl->{p3}),
-                                                      b($tl->{p4}), b($tl->{p5}), b($tl->{p6}))
-                                : "";
+    my $ppos_parts = $add_ppos ? sprintf("| %2s | %2s | %2s | %2s | %2s | %2s | %2s | %2s | %2s | %2s ",
+                             b($tl->{p1}), b($tl->{p2}), b($tl->{p3}), b($tl->{p4}), b($tl->{p5}),
+                             b($tl->{p6}), b($tl->{p7}), b($tl->{p8}), b($tl->{p9}), b($tl->{p10}))
+                             : "";
 
     my $score_text = $score_key;
 
@@ -1956,10 +1995,13 @@ sub totals_row($$$$$) {
     # So blanking it :
     $p = "";
     # and $o_suppress_position_column also needs implementing.
-
     my $plyr_n = $z_players->{$tl->{player}} // dierr("Can't lookup player uppercased name\n");
 
-    printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $plyr_n, $scr_str, $tl->{played} , $ppos_parts));
+    if ($hide_total){
+        printout(sprintf( "%-3s %-10s%5s %s\n", $p, $plyr_n, $tl->{played} , $ppos_parts));
+    } else {
+        printout(sprintf( "%-3s %-10s%${sc_wide}s|%5s %s\n", $p, $plyr_n, $scr_str, $tl->{played} , $ppos_parts));
+    }
 }
 
 sub expected_count ($) {
@@ -1997,11 +2039,11 @@ sub process ($) {
 
     my $results = run_file(data_dir().$file_results);
 
+    prdebug("$s_run : Results are ".Dumper($results), 1);
+
     dierr( "Incorrect amount of results in [$file_results] . ".
         "Expected [$exp_tot] . Got [".scalar(@$results)."] \n")
             if @$results != $exp_tot;
-
-    prdebug("$s_run : Results are ".Dumper($results), 1);
 
     my $results_lkup = { } ;
     my $results_lkup_top6 = { } ;
@@ -2535,6 +2577,7 @@ sub run_file {
     for my $ln (split /\n/, $data){
         $ln =  trim($ln);
         next if ! $ln;
+        next if $ln =~ m/^#/;
 
         push @$ret, $ln;
     }
