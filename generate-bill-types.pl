@@ -27,6 +27,19 @@ for my $r (keys %$runs){
     print "$cmd\n";
     system( $cmd );
 
+    $cmd = "./f1-predictor.pl ";
+    $cmd .= " --out-sub-dir bill ";
+    $cmd .= " $o_method ";
+    $cmd .= " --fia ";
+    $cmd .= " $o_fia_sprint_qual_diff ";
+    $cmd .= " --suppress-average-table ";
+    $cmd .= " --no-pre-code ";
+    $cmd .= " --no-detail ";
+    $cmd .= " --out-file $r-MINI-DETAIL ";
+    $cmd .= " --run $runs->{$r}";
+    $cmd .= " --html-out ";
+    print "$cmd\n";
+    system( $cmd );
 
     $cmd = "./f1-predictor.pl ";
     $cmd .= " --out-sub-dir bill ";

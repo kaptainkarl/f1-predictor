@@ -27,7 +27,7 @@ for my $sc ( @$score_sys ) {
     for my $ml ( @$multipliers ){
         for my $r (keys %$runs){
             my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
-            $cmd .= " --fia-simple --show-p1-to-p6-totals";
+            $cmd .= " --fia-simple --show-p1-to-p10-totals";
 
             # $cmd .= " --out-sub-dir all-algorithms "; # don't need this the default.
             $cmd .= " --out-accuracy-sub-dir";
@@ -46,7 +46,7 @@ for my $sc ( @$score_sys ) {
     for my $ml ( @$multipliers ){
         for my $r (keys %$runs){
             my $cmd = "./f1-predictor.pl --player-fia-score --player-rating-score ";
-            $cmd .= " --fia-simple --show-p1-to-p6-totals";
+            $cmd .= " --fia-simple --show-p1-to-p10-totals";
 
             $cmd .= " --score-accuracy $sc --score-times $ml --out-file $r-TOTALS --run $runs->{$r}";
             $cmd .= " --no-rounds";
