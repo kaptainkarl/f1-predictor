@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,13 +13,13 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          40   |    2 
+    Karl          77   |    4 
+    Pylade        61   |    4 
+    TLB           58   |    4 
+    NL            55   |    4 
     GGP1          31   |    2 
+    F1Ung         30   |    3 
     Bill          30   |    2 
-    Pylade        28   |    2 
-    TLB           25   |    2 
-    NL            20   |    2 
-    F1Ung          8   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -37,13 +37,13 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          20   |    2 
+    Karl          19.25|    4 
     GGP1          15.50|    2 
+    Pylade        15.25|    4 
     Bill          15   |    2 
-    Pylade        14   |    2 
-    TLB           12.50|    2 
-    NL            10   |    2 
-    F1Ung          8   |    1 
+    TLB           14.50|    4 
+    NL            13.75|    4 
+    F1Ung         10   |    3 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -60,13 +60,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              206   |    2 |  1 |    |  1 |    |    |    |    |    |    |    
+    Karl              412   |    4 |  2 |    |  1 |  1 |    |    |    |    |    |    
+    NL                404   |    4 |  1 |    |    |  1 |  1 |  1 |    |    |    |    
     GGP1              212   |    2 |  1 |    |    |    |    |    |  1 |    |    |    
+    Pylade            406   |    4 |    |  2 |  1 |    |  1 |    |    |    |    |    
+    TLB               416   |    4 |    |  1 |  2 |    |  1 |    |    |    |    |    
     Bill              206   |    2 |    |  1 |    |  1 |    |    |    |    |    |    
-    Pylade            203   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
-    TLB               208   |    2 |    |    |  1 |    |  1 |    |    |    |    |    
-    NL                207   |    2 |    |    |    |  1 |    |  1 |    |    |    |    
-    F1Ung              84   |    1 |    |    |    |    |    |  1 |    |    |    |    
+    F1Ung             278   |    3 |    |    |    |  1 |  1 |  1 |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
     Joe                 0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -79,6 +79,50 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Baku-bottom-6 Race
+
+P   Player      FIA    |  SAI  LEC  ZHO  MAG  STR  LAT 
+-----------------------------------------------------
+1   Karl        25     |  STR  LAT  ZHO  ALB  MSC  TSU 
+2   TLB         18     |  LAT  ZHO  MSC  ALB  STR  MAG 
+3   Pylade      15     |  ZHO  LAT  STR  ALB  MSC  MAG 
+4   F1Ung       12     |  STR  LAT  ALB  MSC  ZHO  VET 
+5   NL          10     |  ZHO  TSU  LAT  MSC  ALB  RIC 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------
+
+Method is 'closest-p1-20'
+---------------
+Baku-bottom-6 Qual
+
+P   Player      FIA    |  MSC  STR  LAT  ALB  MAG  BOT 
+-----------------------------------------------------
+1   NL          25     |  LAT  ALB  MSC  STR  RIC  VET 
+2   Pylade      18     |  LAT  ZHO  STR  MSC  VET  ALB 
+3   TLB         15     |  LAT  ZHO  ALB  MSC  MAG  STR 
+4   Karl        12     |  STR  LAT  ZHO  ALB  MSC  TSU 
+5   F1Ung       10     |  LAT  STR  ALB  ZHO  VET  MSC 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

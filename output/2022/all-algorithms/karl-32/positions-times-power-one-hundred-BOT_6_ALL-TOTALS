@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,13 +18,13 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
+Karl          68  
+NL            60  
+Pylade        58  
+TLB           44  
 GGP1          43  
+F1Ung         36  
 Bill          33  
-Karl          28  
-NL            27  
-Pylade        23  
-TLB           22  
-F1Ung          6  
 Winston        0  
 Leo            0  
 Joe            0  
@@ -43,13 +43,13 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    Karl          68   |    4 
+    NL            60   |    4 
+    Pylade        58   |    4 
+    TLB           44   |    4 
     GGP1          43   |    2 
+    F1Ung         36   |    3 
     Bill          33   |    2 
-    Karl          28   |    2 
-    NL            27   |    2 
-    Pylade        23   |    2 
-    TLB           22   |    2 
-    F1Ung          6   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -70,12 +70,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          21.50|    2 
+    Karl          17   |    4 
     Bill          16.50|    2 
-    Karl          14   |    2 
-    NL            13.50|    2 
-    Pylade        11.50|    2 
-    TLB           11   |    2 
-    F1Ung          6   |    1 
+    NL            15   |    4 
+    Pylade        14.50|    4 
+    F1Ung         12   |    3 
+    TLB           11   |    4 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -94,13 +94,13 @@ Total Score table
 -----------------
 P   Player                Total   |Played
 ---------------------------------------------
+    Karl        353,868,651,609   |    4 
+    NL          332,815,322,417   |    4 
+    Pylade      332,358,052,836   |    4 
+    TLB         262,552,219,830   |    4 
     GGP1        201,840,202,402   |    2 
     Bill        173,416,203,405   |    2 
-    Karl        172,034,320,601   |    2 
-    Pylade      172,034,002,020   |    2 
-    NL          172,003,202,017   |    2 
-    TLB         170,834,163,420   |    2 
-    F1Ung        10,400,040,400   |    1 
+    F1Ung       113,816,121,201   |    3 
     Winston                   0   |    0 
     Leo                       0   |    0 
     Joe                       0   |    0 
@@ -121,12 +121,12 @@ For players who have not entered all rounds
 P   Player            Ave Score   |Played
 ---------------------------------------------
     GGP1        100,920,101,201   |    2 
+    Karl         88,467,162,902.25|    4 
     Bill         86,708,101,702.50|    2 
-    Karl         86,017,160,300.50|    2 
-    Pylade       86,017,001,010   |    2 
-    NL           86,001,601,008.50|    2 
-    TLB          85,417,081,710   |    2 
-    F1Ung        10,400,040,400   |    1 
+    NL           83,203,830,604.25|    4 
+    Pylade       83,089,513,209   |    4 
+    TLB          65,638,054,957.50|    4 
+    F1Ung        37,938,707,067   |    3 
     Winston                   0   |    0 
     Leo                       0   |    0 
     Joe                       0   |    0 
@@ -145,13 +145,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------------
+    Karl        353,868,651,609   |    4 |  1 |  1 |  1 |    |  1 |    |    |    |    |    
     GGP1        201,840,202,402   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
+    Pylade      332,358,052,836   |    4 |  1 |    |  1 |    |  1 |  1 |    |    |    |    
     Bill        173,416,203,405   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
-    Karl        172,034,320,601   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
-    NL          172,003,202,017   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
-    Pylade      172,034,002,020   |    2 |    |    |  1 |    |    |  1 |    |    |    |    
-    TLB         170,834,163,420   |    2 |    |    |    |  1 |  1 |    |    |    |    |    
-    F1Ung        10,400,040,400   |    1 |    |    |    |    |    |    |  1 |    |    |    
+    NL          332,815,322,417   |    4 |    |  1 |  2 |  1 |    |    |    |    |    |    
+    F1Ung       113,816,121,201   |    3 |    |  1 |    |  1 |    |    |  1 |    |    |    
+    TLB         262,552,219,830   |    4 |    |    |    |  2 |  2 |    |    |    |    |    
     Winston                   0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                       0   |    0 |    |    |    |    |    |    |    |    |    |    
     Joe                       0   |    0 |    |    |    |    |    |    |    |    |    |    

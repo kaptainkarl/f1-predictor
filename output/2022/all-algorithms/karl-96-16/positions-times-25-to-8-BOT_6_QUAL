@@ -5,7 +5,190 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for baku-bottom-6-qual, monaco-bottom-6-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+Karl          33  
+Pylade        28  
+TLB           27  
+GGP1          25  
+F1Ung         25  
+NL            20  
+Bill          10  
+Winston        0  
+Leo            0  
+Joe            0  
+Iceman         0  
+Hobbes         0  
+BWare          0  
+Arttu          0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Karl          33   |    2 
+    Pylade        28   |    2 
+    TLB           27   |    2 
+    GGP1          25   |    1 
+    F1Ung         25   |    1 
+    NL            20   |    2 
+    Bill          10   |    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'karl-96-16 and positions-times-25-to-8'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          25   |    1 
+    F1Ung         25   |    1 
+    Karl          16.50|    2 
+    Pylade        14   |    2 
+    TLB           13.50|    2 
+    NL            10   |    2 
+    Bill          10   |    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-----------------
+Method is 'karl-96-16 and positions-times-25-to-8'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    Karl            4,250   |    2 
+    TLB             3,566   |    2 
+    Pylade          2,986   |    2 
+    GGP1            2,480   |    1 
+    F1Ung           2,224   |    1 
+    Bill            1,973   |    1 
+    NL              1,442   |    2 
+    Winston             0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    Iceman              0   |    0 
+    Hobbes              0   |    0 
+    BWare               0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Method is 'karl-96-16 and positions-times-25-to-8'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    GGP1            2,480   |    1 
+    F1Ung           2,224   |    1 
+    Karl            2,125   |    2 
+    Bill            1,973   |    1 
+    TLB             1,783   |    2 
+    Pylade          1,493   |    2 
+    NL                721   |    2 
+    Winston             0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    Iceman              0   |    0 
+    Hobbes              0   |    0 
+    BWare               0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Method is 'karl-96-16 and positions-times-25-to-8'
+
+P1 -> P10 then Total 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
+-----------------------------------------------------------------------------------------
+    GGP1            2,480   |    1 |  1 |    |    |    |    |    |    |    |    |    
+    F1Ung           2,224   |    1 |  1 |    |    |    |    |    |    |    |    |    
+    Karl            4,250   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
+    Pylade          2,986   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
+    TLB             3,566   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
+    NL              1,442   |    2 |    |    |    |  1 |    |  1 |    |    |    |    
+    Bill            1,973   |    1 |    |    |    |    |  1 |    |    |    |    |    
+    Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Joe                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Iceman              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
+-----------------------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Method is 'karl-96-16 and positions-times-25-to-8'
+---------------
+Baku-bottom-6 Qual
+
+P   Player           score  |  FIA    | MSC        STR        LAT        ALB        MAG        BOT        
+-----------------------------------------------------------------------------------------------------
+1   F1Ung            2,224  |  25     | LAT  200 | STR 1728 | ALB  240 | ZHO   48 | VET      | MSC    8 | 
+2   Karl             1,890  |  18     | STR  400 | LAT  288 | ZHO   30 | ALB 1152 | MSC   20 | TSU      | 
+3   TLB              1,482  |  15     | LAT  200 | ZHO   18 | ALB  240 | MSC   48 | MAG  960 | STR   16 | 
+4   NL                 580  |  12     | LAT  200 | ALB  144 | MSC  120 | STR   96 | RIC   20 | VET      | 
+5   Pylade             570  |  10     | LAT  200 | ZHO   18 | STR  240 | MSC   48 | VET      | ALB   64 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-96-16 and positions-times-25-to-8'

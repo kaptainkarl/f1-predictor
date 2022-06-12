@@ -5,7 +5,190 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for baku-bottom-6-qual, monaco-bottom-6-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+Karl          43  
+NL            27  
+Pylade        25  
+GGP1          25  
+TLB           22  
+F1Ung         18  
+Bill           8  
+Winston        0  
+Leo            0  
+Joe            0  
+Iceman         0  
+Hobbes         0  
+BWare          0  
+Arttu          0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Karl          43   |    2 
+    NL            27   |    2 
+    Pylade        25   |    2 
+    GGP1          25   |    1 
+    TLB           22   |    2 
+    F1Ung         18   |    1 
+    Bill           8   |    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'diff and positions-times-power-one-hundred'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          25   |    1 
+    Karl          21.50|    2 
+    F1Ung         18   |    1 
+    NL            13.50|    2 
+    Pylade        12.50|    2 
+    TLB           11   |    2 
+    Bill           8   |    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-----------------
+Method is 'diff and positions-times-power-one-hundred'
+
+Total Score table
+-----------------
+P   Player                Total   |Played
+---------------------------------------------
+    Karl        383,836,393,327   |    2 
+    NL          373,534,373,529   |    2 
+    Pylade      373,439,293,237   |    2 
+    TLB         372,739,353,635   |    2 
+    GGP1        191,920,191,914   |    1 
+    F1Ung       182,019,171,315   |    1 
+    Bill        152,013,191,615   |    1 
+    Winston                   0   |    0 
+    Leo                       0   |    0 
+    Joe                       0   |    0 
+    Iceman                    0   |    0 
+    Hobbes                    0   |    0 
+    BWare                     0   |    0 
+    Arttu                     0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Method is 'diff and positions-times-power-one-hundred'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player            Ave Score   |Played
+---------------------------------------------
+    GGP1        191,920,191,914   |    1 
+    Karl        191,918,196,663.50|    2 
+    NL          186,767,186,764.50|    2 
+    Pylade      186,719,646,618.50|    2 
+    TLB         186,369,676,817.50|    2 
+    F1Ung       182,019,171,315   |    1 
+    Bill        152,013,191,615   |    1 
+    Winston                   0   |    0 
+    Leo                       0   |    0 
+    Joe                       0   |    0 
+    Iceman                    0   |    0 
+    Hobbes                    0   |    0 
+    BWare                     0   |    0 
+    Arttu                     0   |    0 
+---------------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Method is 'diff and positions-times-power-one-hundred'
+
+P1 -> P10 then Total 
+------------------------
+P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
+-----------------------------------------------------------------------------------------------
+    Karl        383,836,393,327   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
+    GGP1        191,920,191,914   |    1 |  1 |    |    |    |    |    |    |    |    |    
+    F1Ung       182,019,171,315   |    1 |    |  1 |    |    |    |    |    |    |    |    
+    NL          373,534,373,529   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
+    Pylade      373,439,293,237   |    2 |    |    |  1 |    |  1 |    |    |    |    |    
+    TLB         372,739,353,635   |    2 |    |    |    |  1 |  1 |    |    |    |    |    
+    Bill        152,013,191,615   |    1 |    |    |    |    |    |  1 |    |    |    |    
+    Winston                   0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Leo                       0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Joe                       0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Iceman                    0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Hobbes                    0   |    0 |    |    |    |    |    |    |    |    |    |    
+    BWare                     0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Arttu                     0   |    0 |    |    |    |    |    |    |    |    |    |    
+-----------------------------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Method is 'diff and positions-times-power-one-hundred'
+---------------
+Baku-bottom-6 Qual
+
+P   Player                 score  |  FIA    | MSC        STR        LAT        ALB        MAG        BOT        
+--------------------------------------------------------------------------------------------------------------
+1   Karl       19,19,16,20,16,13  |  25     | STR   19 | LAT   19 | ZHO   16 | ALB   20 | MSC   16 | TSU   13 | 
+2   F1Ung      18,20,19,17,13,15  |  18     | LAT   18 | STR   20 | ALB   19 | ZHO   17 | VET   13 | MSC   15 | 
+3   NL         18,18,18,18,16,14  |  15     | LAT   18 | ALB   18 | MSC   18 | STR   18 | RIC   16 | VET   14 | 
+4   TLB        18,15,19,17,20,16  |  12     | LAT   18 | ZHO   15 | ALB   19 | MSC   17 | MAG   20 | STR   16 | 
+5   Pylade     18,15,19,17,13,18  |  10     | LAT   18 | ZHO   15 | STR   19 | MSC   17 | VET   13 | ALB   18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+--------------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'diff and positions-times-power-one-hundred'

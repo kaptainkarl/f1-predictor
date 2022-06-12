@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,18 +13,18 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    Iceman        93   |    8 
-    NL            91   |    7 
-    TLB           90.50|    8 
-    Karl          88.50|    8 
-    GGP1          73   |    7 
-    Hobbes        70.50|    8 
+    TLB          107   |    9 
+    Karl         105   |    9 
+    NL           101   |    8 
+    Iceman        95   |    9 
+    Hobbes        82.50|    9 
+    GGP1          78   |    8 
+    Joe           77   |    6 
     BWare         65   |    7 
     Leo           59   |    7 
-    Joe           52   |    5 
-    F1Ung         44   |    5 
+    F1Ung         52   |    6 
     Bill          41.50|    8 
-    Pylade        36   |    7 
+    Pylade        41   |    8 
     Arttu          4   |    1 
     Winston        0   |    0 
 ----------------------------------
@@ -37,18 +37,18 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    NL            13   |    7 
-    Iceman        11.62|    8 
-    TLB           11.31|    8 
-    Karl          11.06|    8 
-    GGP1          10.43|    7 
-    Joe           10.40|    5 
+    Joe           12.83|    6 
+    NL            12.62|    8 
+    TLB           11.89|    9 
+    Karl          11.67|    9 
+    Iceman        10.56|    9 
+    GGP1           9.75|    8 
     BWare          9.29|    7 
-    Hobbes         8.81|    8 
-    F1Ung          8.80|    5 
+    Hobbes         9.17|    9 
+    F1Ung          8.67|    6 
     Leo            8.43|    7 
     Bill           5.19|    8 
-    Pylade         5.14|    7 
+    Pylade         5.12|    8 
     Arttu          4   |    1 
     Winston        0   |    0 
 ----------------------------------
@@ -60,18 +60,18 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB               777   |    8 |  2 |  1 |    |    |    |  2 |    |  2 |    |  1 
-    Iceman            758   |    8 |  1 |  2 |    |  1 |    |  1 |  2 |    |    |    
-    NL                686   |    7 |  1 |  1 |  2 |    |    |  2 |    |    |  1 |    
-    Karl              780   |    8 |  1 |  1 |  1 |  1 |    |    |  2 |  2 |    |    
-    Joe               439   |    5 |  1 |  1 |    |    |    |    |  1 |    |  1 |  1 
-    GGP1              637   |    7 |  1 |    |  1 |  1 |  1 |    |  1 |  1 |    |  1 
+    TLB               861   |    9 |  2 |  2 |    |    |    |  2 |    |  2 |    |  1 
+    Joe               549   |    6 |  2 |  1 |    |    |    |    |  1 |    |  1 |  1 
+    Karl              864   |    9 |  1 |  2 |  1 |  1 |    |    |  2 |  2 |    |    
+    Iceman            849   |    9 |  1 |  2 |    |  1 |    |  1 |  2 |    |  1 |    
+    NL                782   |    8 |  1 |  1 |  2 |    |  1 |  2 |    |    |  1 |    
+    GGP1              716   |    8 |  1 |    |  1 |  1 |  1 |    |  2 |  1 |    |  1 
     BWare             666   |    7 |  1 |    |  1 |  1 |  1 |    |    |    |  1 |  1 
-    Hobbes            737   |    8 |    |  2 |    |    |  3 |    |    |  1 |  1 |    
+    Hobbes            820   |    9 |    |  2 |    |  1 |  3 |    |    |  1 |  1 |    
     Bill              739   |    8 |    |  1 |    |  1 |    |    |  1 |  1 |  1 |  2 
     Leo               632   |    7 |    |  1 |    |    |  3 |  1 |    |    |  1 |  1 
-    Pylade            683   |    7 |    |    |  1 |    |    |  2 |    |  1 |    |  1 
-    F1Ung             491   |    5 |    |    |    |  3 |    |    |  1 |    |  1 |    
+    Pylade            762   |    8 |    |    |  1 |    |    |  2 |  1 |  1 |    |  1 
+    F1Ung             575   |    6 |    |    |    |  3 |    |  1 |  1 |    |  1 |    
     Arttu              99   |    1 |    |    |    |    |    |    |    |  1 |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
@@ -79,6 +79,28 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Baku Race
+
+P   Player      FIA   |VER    PER    RUS    HAM    GAS    VET    VER PER RUS HAM GAS VET ALO RIC NOR OCO BOT ALB TSU MSC LAT STR MAG ZHO LEC SAI 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   Joe         25    |VER 20|PER 20|RUS 20|BOT 13|GAS 20|NOR 17| 20  20  20      20              17      13                                     
+2   Karl        16.50 |VER 20|PER 20|LEC  4|SAI  4|RUS 18|HAM 18| 20  20  18  18                                                           4   4 
+2   TLB         16.50 |VER 20|PER 20|LEC  4|SAI  4|RUS 18|HAM 18| 20  20  18  18                                                           4   4 
+4   Hobbes      12    |VER 20|PER 20|SAI  3|LEC  5|RUS 18|NOR 17| 20  20  18                      17                                       5   3 
+5   NL          10    |VER 20|PER 20|NOR 14|SAI  4|GAS 20|HAM 18| 20  20      18  20              14                                           4 
+6   F1Ung        8    |VER 20|PER 20|LEC  4|ALO 17|SAI  5|HAM 18| 20  20      18          17                                               4   5 
+7   GGP1         5    |LEC  2|VER 19|PER 19|SAI  4|NOR 16|ALO 19| 19  19                  19      16                                       2   4 
+7   Pylade       5    |LEC  2|VER 19|PER 19|SAI  4|NOR 16|ALO 19| 19  19                  19      16                                       2   4 
+9   Iceman       2    |PER 19|ALO 15|SAI  3|NOR 15|HAM 19|VET 20|     19      19      20  15      15                                           3 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

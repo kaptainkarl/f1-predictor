@@ -5,4 +5,159 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for baku-bottom-6-race, monaco-bottom-6-race
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+TLB           39.5
+Karl          35.2
+Pylade        22.5
+NL            22.5
+F1Ung         22.5
+Bill          21.5
+GGP1          10.2
+Winston        0  
+Leo            0  
+Joe            0  
+Iceman         0  
+Hobbes         0  
+BWare          0  
+Arttu          0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    TLB           39.50|    2 
+    Karl          35.20|    2 
+    Pylade        22.53|    2 
+    NL            22.53|    2 
+    F1Ung         22.53|    2 
+    Bill          21.50|    1 
+    GGP1          10.20|    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'exact and positions-times-25-to-8'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Bill          21.50|    1 
+    TLB           19.75|    2 
+    Karl          17.60|    2 
+    Pylade        11.27|    2 
+    NL            11.27|    2 
+    F1Ung         11.27|    2 
+    GGP1          10.20|    1 
+    Winston        0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    Iceman         0   |    0 
+    Hobbes         0   |    0 
+    BWare          0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-----------------
+Method is 'exact and positions-times-25-to-8'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    TLB                20   |    2 
+    Karl               15   |    2 
+    Bill               10   |    1 
+    Winston             0   |    0 
+    Pylade              0   |    2 
+    NL                  0   |    2 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    Iceman              0   |    0 
+    Hobbes              0   |    0 
+    GGP1                0   |    1 
+    F1Ung               0   |    2 
+    BWare               0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Method is 'exact and positions-times-25-to-8'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    TLB                10   |    2 
+    Bill               10   |    1 
+    Karl                7.50|    2 
+    Winston             0   |    0 
+    Pylade              0   |    2 
+    NL                  0   |    2 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    Iceman              0   |    0 
+    Hobbes              0   |    0 
+    GGP1                0   |    1 
+    F1Ung               0   |    2 
+    BWare               0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Method is 'exact and positions-times-25-to-8'
+
+P1 -> P10 then Total 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
+-----------------------------------------------------------------------------------------
+    TLB                20   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
+    Karl               15   |    2 |  1 |    |  1 |    |    |    |    |    |    |    
+    Bill               10   |    1 |  1 |    |    |    |    |    |    |    |    |    
+    Pylade              0   |    2 |    |    |  2 |    |    |    |    |    |    |    
+    NL                  0   |    2 |    |    |  2 |    |    |    |    |    |    |    
+    F1Ung               0   |    2 |    |    |  2 |    |    |    |    |    |    |    
+    GGP1                0   |    1 |    |    |  1 |    |    |    |    |    |    |    
+    Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Joe                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Iceman              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
+-----------------------------------------------------------------------------------------
+</pre></code>
