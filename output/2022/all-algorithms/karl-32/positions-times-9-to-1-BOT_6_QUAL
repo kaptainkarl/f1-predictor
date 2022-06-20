@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,12 +18,13 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-Karl          43  
-TLB           27  
-Pylade        25  
+Karl          68  
+Pylade        43  
+TLB           42  
+NL            34  
 GGP1          25  
-NL            22  
 F1Ung         18  
+Arttu         10  
 Bill           8  
 Winston        0  
 Leo            0  
@@ -31,7 +32,6 @@ Joe            0
 Iceman         0  
 Hobbes         0  
 BWare          0  
-Arttu          0  
 ------------------------------------
 
 
@@ -43,12 +43,13 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          43   |    2 
-    TLB           27   |    2 
-    Pylade        25   |    2 
+    Karl          68   |    3 
+    Pylade        43   |    3 
+    TLB           42   |    3 
+    NL            34   |    3 
     GGP1          25   |    1 
-    NL            22   |    2 
     F1Ung         18   |    1 
+    Arttu         10   |    1 
     Bill           8   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -56,7 +57,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 ---------------------
@@ -70,11 +70,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          25   |    1 
-    Karl          21.50|    2 
+    Karl          22.67|    3 
     F1Ung         18   |    1 
-    TLB           13.50|    2 
-    Pylade        12.50|    2 
-    NL            11   |    2 
+    Pylade        14.33|    3 
+    TLB           14   |    3 
+    NL            11.33|    3 
+    Arttu         10   |    1 
     Bill           8   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -82,7 +83,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 
@@ -94,20 +94,20 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    Karl              772   |    2 
-    Pylade            578   |    2 
-    TLB               536   |    2 
+    Karl              935   |    3 
+    Pylade            710   |    3 
+    TLB               643   |    3 
+    NL                526   |    3 
     GGP1              448   |    1 
-    NL                437   |    2 
     F1Ung             341   |    1 
     Bill              254   |    1 
+    Arttu              16   |    1 
     Winston             0   |    0 
     Leo                 0   |    0 
     Joe                 0   |    0 
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -121,19 +121,19 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              448   |    1 
-    Karl              386   |    2 
     F1Ung             341   |    1 
-    Pylade            289   |    2 
-    TLB               268   |    2 
+    Karl              311.67|    3 
     Bill              254   |    1 
-    NL                218.50|    2 
+    Pylade            236.67|    3 
+    TLB               214.33|    3 
+    NL                175.33|    3 
+    Arttu              16   |    1 
     Winston             0   |    0 
     Leo                 0   |    0 
     Joe                 0   |    0 
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -145,12 +145,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              772   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
+    Karl              935   |    3 |  2 |  1 |    |    |    |    |    |    |    |    
     GGP1              448   |    1 |  1 |    |    |    |    |    |    |    |    |    
+    Pylade            710   |    3 |    |  1 |  1 |    |  1 |    |    |    |    |    
     F1Ung             341   |    1 |    |  1 |    |    |    |    |    |    |    |    
-    TLB               536   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
-    Pylade            578   |    2 |    |    |  1 |    |  1 |    |    |    |    |    
-    NL                437   |    2 |    |    |    |  1 |  1 |    |    |    |    |    
+    TLB               643   |    3 |    |    |  2 |  1 |    |    |    |    |    |    
+    NL                526   |    3 |    |    |    |  2 |  1 |    |    |    |    |    
+    Arttu              16   |    1 |    |    |    |    |  1 |    |    |    |    |    
     Bill              254   |    1 |    |    |    |    |    |  1 |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -158,13 +159,36 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
     Iceman              0   |    0 |    |    |    |    |    |    |    |    |    |    
     Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
     BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
-    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
 </pre></code>
 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
+Canada-bottom-6 Qual
+
+P   Player           score  |  FIA    | TSU        LEC        LAT        STR        VET        GAS        
+-----------------------------------------------------------------------------------------------------
+1   Karl               163  |  25     | MSC      | ZHO      | LAT  128 | ALB    3 | STR   32 | MAG      | 
+2   Pylade             132  |  18     | ZHO      | ALB      | LAT  128 | MSC      | TSU    4 | MAG      | 
+3   TLB                107  |  15     | LAT   72 | MSC      | ZHO      | ALB    3 | STR   32 | MAG      | 
+4   NL                  89  |  12     | LAT   72 | MSC      | RUS      | TSU   12 | ALB    4 | ZHO    1 | 
+5   Arttu               16  |  10     | BOT      | ALB      | MSC      | TSU   12 | ZHO      | LAT    4 | 
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-32 and positions-times-9-to-1'

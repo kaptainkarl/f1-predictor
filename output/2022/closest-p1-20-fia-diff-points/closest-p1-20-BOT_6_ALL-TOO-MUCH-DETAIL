@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,12 +13,13 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          51   |    4 
-    TLB           34   |    4 
-    Pylade        29   |    4 
-    NL            25   |    4 
+    Karl          63   |    6 
+    TLB           59   |    6 
+    NL            46   |    6 
+    Pylade        40   |    6 
     F1Ung         20   |    3 
     Bill          18   |    2 
+    Arttu         17   |    2 
     GGP1           9   |    2 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -26,7 +27,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 ---------------------
 Method is 'closest-p1-20'
@@ -37,12 +37,13 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          12.75|    4 
+    Karl          10.50|    6 
+    TLB            9.83|    6 
     Bill           9   |    2 
-    TLB            8.50|    4 
-    Pylade         7.25|    4 
+    Arttu          8.50|    2 
+    NL             7.67|    6 
+    Pylade         6.67|    6 
     F1Ung          6.67|    3 
-    NL             6.25|    4 
     GGP1           4.50|    2 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -50,7 +51,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 
 ------------------------
@@ -60,11 +60,12 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              412   |    4 |  2 |    |  1 |  1 |    |    |    |    |    |    
-    NL                404   |    4 |  1 |    |    |  1 |  1 |  1 |    |    |    |    
+    NL                581   |    6 |  2 |  1 |    |  1 |  1 |  1 |    |    |    |    
+    Karl              587   |    6 |  2 |    |  1 |  3 |    |    |    |    |    |    
+    TLB               593   |    6 |  1 |  1 |  2 |    |  2 |    |    |    |    |    
     GGP1              212   |    2 |  1 |    |    |    |    |    |  1 |    |    |    
-    Pylade            406   |    4 |    |  2 |  1 |    |  1 |    |    |    |    |    
-    TLB               416   |    4 |    |  1 |  2 |    |  1 |    |    |    |    |    
+    Pylade            572   |    6 |    |  2 |  2 |    |  2 |    |    |    |    |    
+    Arttu             170   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
     Bill              206   |    2 |    |  1 |    |  1 |    |    |    |    |    |    
     F1Ung             278   |    3 |    |    |    |  1 |  1 |  1 |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -73,12 +74,55 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
     Iceman              0   |    0 |    |    |    |    |    |    |    |    |    |    
     Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
     BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
-    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Canada-bottom-6 Race
+
+P   Player      FIA   |PER    MSC    TSU    MAG    LAT    NOR    PER MSC TSU MAG LAT NOR GAS ALB VET RIC STR ALO ZHO BOT OCO LEC RUS HAM SAI VER 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   TLB         25    |LAT 16|MSC 20|ZHO 10|STR 13|MAG 19|ALB 18|     20      19  16          18          13      10                             
+2   NL          18    |LAT 16|TSU 19|MSC 19|ZHO 11|ALB 17|BOT 12|     19  19      16          17                  11  12                         
+3   Arttu       15    |TSU 18|LAT 17|MSC 19|MAG 20|SAI  6|LEC 10|     19  18  20  17                                          10           6     
+4   Karl        12    |MSC 19|ZHO  9|LAT 18|ALB 16|STR 14|MAG 18|     19      18  18          16          14       9                             
+5   Pylade      10    |RIC 11|GAS 15|ALB 15|ZHO 11|LAT 20|MSC 16|     16          20      15  15      11          11                             
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Method is 'closest-p1-20'
+---------------
+Canada-bottom-6 Qual
+
+P   Player      FIA   |TSU    LEC    LAT    STR    VET    GAS    TSU LEC LAT STR VET GAS NOR PER ALB BOT ZHO RIC RUS OCO MSC MAG HAM SAI ALO VER 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   NL           3    |LAT 18|MSC  7|RUS 10|TSU 17|ALB 16|ZHO 15| 17      18                      16      15      10       7                     
+2   Arttu        2    |BOT 11|ALB 13|MSC  8|TSU 17|ZHO 14|LAT 17| 17      17                      13  11  14               8                     
+3   Pylade       1    |ZHO 10|ALB 13|LAT 20|MSC  9|TSU 16|MAG 10| 16      20                      13      10               9  10                 
+4   Karl         0    |MSC  6|ZHO 11|LAT 20|ALB 15|STR 19|MAG 10|         20  19                  15      11               6  10                 
+5   TLB          0    |LAT 18|MSC  7|ZHO 12|ALB 15|STR 19|MAG 10|         18  19                  15      12               7  10                 
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

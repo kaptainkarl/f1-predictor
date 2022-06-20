@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,11 +20,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          71   |    4 
-    Pylade        58   |    4 
-    TLB           52   |    4 
-    NL            51   |    4 
+    Karl          93   |    6 
+    TLB           92   |    6 
+    NL            87   |    6 
+    Pylade        83   |    6 
     GGP1          43   |    2 
+    Arttu         37   |    2 
     F1Ung         34   |    3 
     Bill          33   |    2 
     Winston        0   |    0 
@@ -33,7 +34,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 ---------------------
@@ -47,11 +47,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          21.50|    2 
-    Karl          17.75|    4 
+    Arttu         18.50|    2 
     Bill          16.50|    2 
-    Pylade        14.50|    4 
-    TLB           13   |    4 
-    NL            12.75|    4 
+    Karl          15.50|    6 
+    TLB           15.33|    6 
+    NL            14.50|    6 
+    Pylade        13.83|    6 
     F1Ung         11.33|    3 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -59,7 +60,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 
@@ -71,20 +71,20 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    Karl            1,748   |    4 
-    NL              1,712   |    4 
-    Pylade          1,701   |    4 
-    TLB             1,697   |    4 
+    NL              2,467   |    6 
+    TLB             2,441   |    6 
+    Karl            2,432   |    6 
+    Pylade          2,356   |    6 
     F1Ung           1,196   |    3 
     GGP1              898   |    2 
     Bill              862   |    2 
+    Arttu             727   |    2 
     Winston             0   |    0 
     Leo                 0   |    0 
     Joe                 0   |    0 
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -98,25 +98,73 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              449   |    2 
-    Karl              437   |    4 
     Bill              431   |    2 
-    NL                428   |    4 
-    Pylade            425.25|    4 
-    TLB               424.25|    4 
+    NL                411.17|    6 
+    TLB               406.83|    6 
+    Karl              405.33|    6 
     F1Ung             398.67|    3 
+    Pylade            392.67|    6 
+    Arttu             363.50|    2 
     Winston             0   |    0 
     Leo                 0   |    0 
     Joe                 0   |    0 
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'diff and positions-times-9-to-1'
+---------------
+Canada-bottom-6 Race
+
+P   Player           score  |  FIA    | PER        MSC        TSU        MAG        LAT        NOR        
+-----------------------------------------------------------------------------------------------------
+1   Arttu              422  |  25     | TSU  162 | LAT  102 | MSC   76 | MAG   60 | SAI   12 | LEC   10 | 
+2   NL                 413  |  18     | LAT  144 | TSU  114 | MSC   76 | ZHO   33 | ALB   34 | BOT   12 | 
+3   TLB                399  |  15     | LAT  144 | MSC  120 | ZHO   40 | STR   39 | MAG   38 | ALB   18 | 
+4   Karl               391  |  12     | MSC  171 | ZHO   54 | LAT   72 | ALB   48 | STR   28 | MAG   18 | 
+5   Pylade             338  |  10     | RIC   99 | GAS   90 | ALB   60 | ZHO   33 | LAT   40 | MSC   16 | 
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'diff and positions-times-9-to-1'
+---------------
+Canada-bottom-6 Qual
+
+P   Player           score  |  FIA    | TSU        LEC        LAT        STR        VET        GAS        
+-----------------------------------------------------------------------------------------------------
+1   TLB                345  |  25     | LAT  162 | MSC   42 | ZHO   48 | ALB   45 | STR   38 | MAG   10 | 
+2   NL                 342  |  18     | LAT  162 | MSC   42 | RUS   40 | TSU   51 | ALB   32 | ZHO   15 | 
+3   Pylade             317  |  15     | ZHO   90 | ALB   78 | LAT   80 | MSC   27 | TSU   32 | MAG   10 | 
+4   Arttu              305  |  12     | BOT   99 | ALB   78 | MSC   32 | TSU   51 | ZHO   28 | LAT   17 | 
+5   Karl               293  |  10     | MSC   54 | ZHO   66 | LAT   80 | ALB   45 | STR   38 | MAG   10 | 
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'diff and positions-times-9-to-1'

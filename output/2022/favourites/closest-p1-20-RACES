@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,19 +20,19 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          107   |    9 
-    Karl         105   |    9 
-    NL           101   |    8 
-    Iceman        95   |    9 
-    Hobbes        82.50|    9 
-    GGP1          78   |    8 
-    Joe           77   |    6 
+    NL           126   |    9 
+    TLB          122   |   10 
+    Karl         117   |   10 
+    Iceman       105   |   10 
+    Hobbes       100.50|   10 
+    GGP1          86   |    9 
+    Joe           81   |    7 
     BWare         65   |    7 
     Leo           59   |    7 
     F1Ung         52   |    6 
+    Pylade        43   |    9 
     Bill          41.50|    8 
-    Pylade        41   |    8 
-    Arttu          4   |    1 
+    Arttu         10   |    2 
     Winston        0   |    0 
 ----------------------------------
 </pre></code>
@@ -46,19 +46,19 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Joe           12.83|    6 
-    NL            12.62|    8 
-    TLB           11.89|    9 
-    Karl          11.67|    9 
-    Iceman        10.56|    9 
-    GGP1           9.75|    8 
+    NL            14   |    9 
+    TLB           12.20|   10 
+    Karl          11.70|   10 
+    Joe           11.57|    7 
+    Iceman        10.50|   10 
+    Hobbes        10.05|   10 
+    GGP1           9.56|    9 
     BWare          9.29|    7 
-    Hobbes         9.17|    9 
     F1Ung          8.67|    6 
     Leo            8.43|    7 
     Bill           5.19|    8 
-    Pylade         5.12|    8 
-    Arttu          4   |    1 
+    Arttu          5   |    2 
+    Pylade         4.78|    9 
     Winston        0   |    0 
 ----------------------------------
 </pre></code>
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Canada Race
+
+P   Player      FIA    | VER      SAI      HAM      RUS      LEC      OCO      
+-----------------------------------------------------------------------------
+1   NL          25     | VER 20 | SAI 20 | VET 11 | PER  4 | LEC 20 | NOR 11 | 
+2   Hobbes      18     | VER 20 | LEC 17 | SAI 19 | HAM 19 | PER  5 | NOR 11 | 
+3   TLB         15     | VER 20 | PER  2 | SAI 19 | LEC 19 | RUS 19 | HAM 17 | 
+4   Karl        12     | VER 20 | PER  2 | SAI 19 | LEC 19 | RUS 19 | NOR 11 | 
+5   Iceman      10     | VER 20 | LEC 17 | SAI 19 | PER  4 | RUS 19 | VET 14 | 
+6   GGP1         8     | VER 20 | PER  2 | ALO 14 | LEC 19 | HAM 18 | RUS 18 | 
+7   Arttu        6     | VER 20 | PER  2 | ALO 14 | VET 12 | RUS 19 | RIC 15 | 
+8   Joe          4     | VER 20 | PER  2 | ALO 14 | GAS 10 | RUS 19 | TSU  8 | 
+9   Pylade       2     | SAI 19 | VER 19 | ALO 14 | PER  4 | RUS 19 | LEC 19 | 
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

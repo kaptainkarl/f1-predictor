@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,20 +13,20 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    NL            11   |    7 
-    Iceman         7   |    8 
-    GGP1           7   |    7 
-    TLB            5   |    7 
+    NL            11   |    8 
+    Iceman         7   |    9 
+    GGP1           7   |    8 
+    TLB            5   |    8 
     Leo            5   |    6 
-    Karl           4   |    8 
-    Hobbes         3   |    8 
-    Pylade         2   |    5 
+    Karl           5   |    9 
+    Joe            4   |    7 
+    Hobbes         3   |    9 
+    Pylade         2   |    6 
     BWare          2   |    6 
-    Joe            1   |    6 
+    Arttu          2   |    2 
     F1Ung          1   |    7 
     Winston        0   |    1 
     Bill           0   |    7 
-    Arttu          0   |    1 
 ----------------------------------
 ---------------------
 Method is 'closest-p1-20'
@@ -37,20 +37,20 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    NL             1.57|    7 
-    GGP1           1   |    7 
-    Iceman         0.88|    8 
+    NL             1.38|    8 
+    Arttu          1   |    2 
+    GGP1           0.88|    8 
     Leo            0.83|    6 
-    TLB            0.71|    7 
-    Karl           0.50|    8 
-    Pylade         0.40|    5 
-    Hobbes         0.38|    8 
+    Iceman         0.78|    9 
+    TLB            0.62|    8 
+    Joe            0.57|    7 
+    Karl           0.56|    9 
+    Pylade         0.33|    6 
+    Hobbes         0.33|    9 
     BWare          0.33|    6 
-    Joe            0.17|    6 
     F1Ung          0.14|    7 
     Winston        0   |    1 
     Bill           0   |    7 
-    Arttu          0   |    1 
 ----------------------------------
 
 ------------------------
@@ -60,25 +60,47 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL                755   |    7 |  2 |  2 |  1 |    |    |    |  1 |    |  1 |    
-    Iceman            843   |    8 |  2 |    |  1 |  1 |    |    |  1 |  1 |    |    
-    GGP1              744   |    7 |  2 |    |  1 |    |    |  3 |    |    |    |  1 
-    TLB               773   |    7 |  1 |  1 |    |    |    |  3 |    |  2 |    |    
+    NL                839   |    8 |  2 |  2 |  1 |    |    |  1 |  1 |    |  1 |    
+    Iceman            935   |    9 |  2 |    |  1 |  1 |  1 |    |  1 |  1 |    |    
+    GGP1              848   |    8 |  2 |    |  1 |  1 |    |  3 |    |    |    |  1 
+    TLB               858   |    8 |  1 |  1 |    |    |    |  3 |    |  2 |  1 |    
     Leo               632   |    6 |  1 |  1 |    |    |    |    |  1 |    |  1 |  1 
-    Karl              862   |    8 |    |  2 |    |  1 |    |    |  2 |  2 |  1 |    
-    Hobbes            858   |    8 |    |  1 |  1 |  1 |  1 |    |    |    |  1 |    
+    Joe               743   |    7 |  1 |    |  1 |    |  2 |    |    |    |  1 |  2 
+    Karl              954   |    9 |    |  2 |  1 |  1 |    |    |  2 |  2 |  1 |    
+    Hobbes            947   |    9 |    |  1 |  1 |  1 |  1 |    |  1 |    |  1 |    
     BWare             605   |    6 |    |  1 |    |  2 |    |    |  1 |  1 |    |  1 
-    Pylade            539   |    5 |    |    |  2 |  2 |    |    |    |  1 |    |    
+    Arttu             205   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
+    Pylade            629   |    6 |    |    |  2 |  2 |    |    |    |  2 |    |    
     F1Ung             744   |    7 |    |    |  1 |  1 |  1 |  1 |  1 |    |  1 |    
-    Joe               649   |    6 |    |    |  1 |    |  2 |    |    |    |  1 |  2 
     Winston           108   |    1 |    |    |    |  1 |    |    |    |    |    |    
     Bill              732   |    7 |    |    |    |    |  2 |  2 |    |  2 |    |  1 
-    Arttu             112   |    1 |    |    |    |    |  1 |    |    |    |    |    
 -----------------------------------------------------------------------------------------
 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Canada Qual
+
+P   Player      FIA    | VER ALO SAI HAM MAG MSC OCO RUS RIC ZHO BOT ALB PER NOR GAS VET STR LAT LEC TSU 
+-------------------------------------------------------------------------------------------------------
+1   Joe          3     |  20  19  18              19                       9       9                     
+2   Arttu        2     |  20  18  19                      17              10           9                 
+3   Karl         1     |  20  17  20                  16                   9          10                 
+4   GGP1         0     |  20  17  19  20              18                  10                             
+5   Iceman       0     |  20  17  19                  16                  10          10                 
+6   NL           0     |  20  16  19                                      11  11       7                 
+7   Hobbes       0     |  20      19  19              18                  10                       3     
+8   Pylade       0     |  19  17  18                  16                  10          10                 
+9   TLB          0     |  19      19  18              17                  10                       2     
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

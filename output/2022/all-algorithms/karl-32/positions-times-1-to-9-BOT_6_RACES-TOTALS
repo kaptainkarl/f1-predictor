@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,12 +18,13 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB           43  
-Karl          28  
-NL            25  
+TLB           68  
+Pylade        41  
+Karl          40  
+NL            35  
 Bill          25  
-Pylade        23  
 F1Ung         18  
+Arttu         15  
 GGP1          12  
 Winston        0  
 Leo            0  
@@ -31,7 +32,6 @@ Joe            0
 Iceman         0  
 Hobbes         0  
 BWare          0  
-Arttu          0  
 ------------------------------------
 
 
@@ -43,12 +43,13 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           43   |    2 
-    Karl          28   |    2 
-    NL            25   |    2 
+    TLB           68   |    3 
+    Pylade        41   |    3 
+    Karl          40   |    3 
+    NL            35   |    3 
     Bill          25   |    1 
-    Pylade        23   |    2 
     F1Ung         18   |    2 
+    Arttu         15   |    1 
     GGP1          12   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -56,7 +57,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 ---------------------
@@ -70,11 +70,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Bill          25   |    1 
-    TLB           21.50|    2 
-    Karl          14   |    2 
-    NL            12.50|    2 
+    TLB           22.67|    3 
+    Arttu         15   |    1 
+    Pylade        13.67|    3 
+    Karl          13.33|    3 
     GGP1          12   |    1 
-    Pylade        11.50|    2 
+    NL            11.67|    3 
     F1Ung          9   |    2 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -82,7 +83,6 @@ P   Player       FIA   |Played
     Iceman         0   |    0 
     Hobbes         0   |    0 
     BWare          0   |    0 
-    Arttu          0   |    0 
 ----------------------------------
 </pre></code>
 
@@ -94,11 +94,12 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB               590   |    2 
-    Karl              326   |    2 
+    TLB               824   |    3 
+    Pylade            450   |    3 
+    Karl              446   |    3 
+    NL                374   |    3 
     Bill              312   |    1 
-    NL                268   |    2 
-    Pylade            235   |    2 
+    Arttu             192   |    1 
     F1Ung             119   |    2 
     GGP1              114   |    1 
     Winston             0   |    0 
@@ -107,7 +108,6 @@ P   Player          Total   |Played
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -121,10 +121,11 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     Bill              312   |    1 
-    TLB               295   |    2 
-    Karl              163   |    2 
-    NL                134   |    2 
-    Pylade            117.50|    2 
+    TLB               274.67|    3 
+    Arttu             192   |    1 
+    Pylade            150   |    3 
+    Karl              148.67|    3 
+    NL                124.67|    3 
     GGP1              114   |    1 
     F1Ung              59.50|    2 
     Winston             0   |    0 
@@ -133,7 +134,6 @@ P   Player      Ave Score   |Played
     Iceman              0   |    0 
     Hobbes              0   |    0 
     BWare               0   |    0 
-    Arttu               0   |    0 
 ---------------------------------------
 </pre></code>
 
@@ -145,11 +145,12 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB               590   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
+    TLB               824   |    3 |  2 |  1 |    |    |    |    |    |    |    |    
     Bill              312   |    1 |  1 |    |    |    |    |    |    |    |    |    
-    Karl              326   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
-    NL                268   |    2 |    |    |  1 |    |  1 |    |    |    |    |    
-    Pylade            235   |    2 |    |    |  1 |    |    |  1 |    |    |    |    
+    Pylade            450   |    3 |    |  1 |  1 |    |    |  1 |    |    |    |    
+    Karl              446   |    3 |    |  1 |    |  1 |  1 |    |    |    |    |    
+    NL                374   |    3 |    |    |  1 |    |  2 |    |    |    |    |    
+    Arttu             192   |    1 |    |    |  1 |    |    |    |    |    |    |    
     F1Ung             119   |    2 |    |    |    |  1 |    |    |  1 |    |    |    
     GGP1              114   |    1 |    |    |    |  1 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -158,6 +159,5 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
     Iceman              0   |    0 |    |    |    |    |    |    |    |    |    |    
     Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
     BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
-    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
 </pre></code>
