@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,12 +18,12 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB           55  
+TLB           80  
+Karl          73  
 Pylade        55  
-Karl          55  
-NL            28  
+NL            40  
+F1Ung         30  
 GGP1          18  
-F1Ung         15  
 Arttu         12  
 Bill          10  
 Winston        0  
@@ -43,12 +43,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           55   |    3 
+    TLB           80   |    4 
+    Karl          73   |    4 
     Pylade        55   |    3 
-    Karl          55   |    3 
-    NL            28   |    3 
+    NL            40   |    4 
+    F1Ung         30   |    2 
     GGP1          18   |    1 
-    F1Ung         15   |    1 
     Arttu         12   |    1 
     Bill          10   |    1 
     Winston        0   |    0 
@@ -69,14 +69,14 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           18.33|    3 
+    TLB           20   |    4 
     Pylade        18.33|    3 
-    Karl          18.33|    3 
+    Karl          18.25|    4 
     GGP1          18   |    1 
-    F1Ung         15   |    1 
+    F1Ung         15   |    2 
     Arttu         12   |    1 
+    NL            10   |    4 
     Bill          10   |    1 
-    NL             9.33|    3 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -94,13 +94,13 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB             1,268   |    3 
-    Karl            1,262   |    3 
+    TLB             1,629   |    4 
+    Karl            1,558   |    4 
     Pylade          1,022   |    3 
     GGP1              496   |    1 
-    NL                336   |    3 
+    NL                456   |    4 
+    F1Ung             425   |    2 
     Bill              278   |    1 
-    F1Ung             273   |    1 
     Arttu              52   |    1 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -121,12 +121,12 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              496   |    1 
-    TLB               422.67|    3 
-    Karl              420.67|    3 
+    TLB               407.25|    4 
+    Karl              389.50|    4 
     Pylade            340.67|    3 
     Bill              278   |    1 
-    F1Ung             273   |    1 
-    NL                112   |    3 
+    F1Ung             212.50|    2 
+    NL                114   |    4 
     Arttu              52   |    1 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -145,13 +145,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl            1,262   |    3 |  1 |  1 |    |  1 |    |    |    |    |    |    
+    TLB             1,629   |    4 |  2 |    |  2 |    |    |    |    |    |    |    
+    Karl            1,558   |    4 |  1 |  2 |    |  1 |    |    |    |    |    |    
     Pylade          1,022   |    3 |  1 |  1 |    |  1 |    |    |    |    |    |    
-    TLB             1,268   |    3 |  1 |    |  2 |    |    |    |    |    |    |    
     GGP1              496   |    1 |    |  1 |    |    |    |    |    |    |    |    
-    F1Ung             273   |    1 |    |    |  1 |    |    |    |    |    |    |    
+    F1Ung             425   |    2 |    |    |  2 |    |    |    |    |    |    |    
+    NL                456   |    4 |    |    |    |  1 |  2 |  1 |    |    |    |    
     Arttu              52   |    1 |    |    |    |  1 |    |    |    |    |    |    
-    NL                336   |    3 |    |    |    |    |  2 |  1 |    |    |    |    
     Bill              278   |    1 |    |    |    |    |  1 |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    

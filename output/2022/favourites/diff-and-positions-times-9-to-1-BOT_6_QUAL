@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,12 +20,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          53   |    3 
-    TLB           47   |    3 
-    NL            45   |    3 
+    Karl          78   |    4 
+    TLB           63.50|    4 
+    NL            57   |    4 
     Pylade        40   |    3 
+    F1Ung         34.50|    2 
     GGP1          25   |    1 
-    F1Ung         18   |    1 
     Arttu         12   |    1 
     Bill           8   |    1 
     Winston        0   |    0 
@@ -47,10 +47,10 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          25   |    1 
-    F1Ung         18   |    1 
-    Karl          17.67|    3 
-    TLB           15.67|    3 
-    NL            15   |    3 
+    Karl          19.50|    4 
+    F1Ung         17.25|    2 
+    TLB           15.88|    4 
+    NL            14.25|    4 
     Pylade        13.33|    3 
     Arttu         12   |    1 
     Bill           8   |    1 
@@ -71,12 +71,12 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    NL              1,231   |    3 
-    Karl            1,217   |    3 
-    TLB             1,208   |    3 
+    Karl            1,617   |    4 
+    TLB             1,572   |    4 
+    NL              1,547   |    4 
     Pylade          1,198   |    3 
+    F1Ung             814   |    2 
     GGP1              474   |    1 
-    F1Ung             450   |    1 
     Bill              411   |    1 
     Arttu             305   |    1 
     Winston             0   |    0 
@@ -98,12 +98,12 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              474   |    1 
-    F1Ung             450   |    1 
     Bill              411   |    1 
-    NL                410.33|    3 
-    Karl              405.67|    3 
-    TLB               402.67|    3 
+    F1Ung             407   |    2 
+    Karl              404.25|    4 
     Pylade            399.33|    3 
+    TLB               393   |    4 
+    NL                386.75|    4 
     Arttu             305   |    1 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -117,6 +117,30 @@ P   Player      Ave Score   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'diff and positions-times-9-to-1'
+---------------
+Britain-bottom-6 Qual
+
+P   Player           score  |  FIA    | STR        MSC        VET        MAG        ALB        OCO        
+-----------------------------------------------------------------------------------------------------
+1   Karl               400  |  25     | STR  180 | LAT   66 | ZHO   44 | MSC   54 | MAG   38 | TSU   18 | 
+2   F1Ung              364  |  16.50  | LAT   90 | STR  114 | ALB   72 | ZHO   36 | MSC   34 | MAG   18 | 
+2   TLB                364  |  16.50  | LAT   90 | MSC  120 | ZHO   44 | ALB   57 | MAG   38 | STR   15 | 
+4   NL                 316  |  12     | LAT   90 | ZHO   60 | STR   72 | GAS   42 | MSC   34 | MAG   18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'diff and positions-times-9-to-1'

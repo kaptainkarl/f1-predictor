@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,16 +20,16 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           117   |    8 
-    GGP1         102   |    8 
+    NL           121   |    9 
+    GGP1         108   |    9 
     Iceman        97   |    9 
-    Karl          83   |    9 
-    TLB           75   |    8 
-    Joe           64   |    7 
-    Hobbes        63   |    9 
+    Karl          93   |   10 
+    TLB           87   |    9 
+    Joe           82   |    8 
+    F1Ung         78   |    8 
+    Hobbes        71   |   10 
+    BWare         68   |    7 
     Pylade        62   |    6 
-    F1Ung         53   |    7 
-    BWare         53   |    6 
     Leo           52   |    6 
     Bill          44   |    7 
     Arttu         28   |    2 
@@ -46,19 +46,19 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            14.62|    8 
     Arttu         14   |    2 
-    GGP1          12.75|    8 
+    NL            13.44|    9 
+    GGP1          12   |    9 
     Winston       11   |    1 
     Iceman        10.78|    9 
     Pylade        10.33|    6 
-    TLB            9.38|    8 
-    Karl           9.22|    9 
-    Joe            9.14|    7 
-    BWare          8.83|    6 
+    Joe           10.25|    8 
+    F1Ung          9.75|    8 
+    BWare          9.71|    7 
+    TLB            9.67|    9 
+    Karl           9.30|   10 
     Leo            8.67|    6 
-    F1Ung          7.57|    7 
-    Hobbes         7   |    9 
+    Hobbes         7.10|   10 
     Bill           6.29|    7 
 ----------------------------------
 </pre></code>
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Britain Qual
+
+P   Player      FIA    | SAI      VER      LEC      PER      HAM      NOR      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | LEC 18 | SAI 19 | VER 19 | PER 20 | HAM 20 | RUS 18 | 
+2   Joe         18     | LEC 18 | SAI 19 | VER 19 | PER 20 | ALO 18 | RUS 18 | 
+3   BWare       15     | LEC 18 | SAI 19 | VER 19 | RUS 16 | PER 19 | NOR 20 | 
+4   TLB         12     | LEC 18 | VER 20 | SAI 18 | PER 20 | RUS 17 | HAM 19 | 
+5   Karl        10     | LEC 18 | VER 20 | SAI 18 | PER 20 | RUS 17 | NOR 20 | 
+6   Hobbes       8     | VER 19 | LEC 19 | SAI 18 | PER 20 | RUS 17 | HAM 19 | 
+7   GGP1         6     | VER 19 | LEC 19 | PER 19 | SAI 17 | HAM 20 | RUS 18 | 
+8   NL           4     | VER 19 | LEC 19 | HAM 18 | PER 20 | RUS 17 | NOR 20 | 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,18 +18,18 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-GGP1         108  
-Karl         100.5
-TLB           96  
+GGP1         121.5
+Karl         114  
+TLB          104  
+NL           103  
 Iceman        90.5
-NL            85  
-Joe           72  
-Hobbes        71.5
+Hobbes        81.5
+Joe           78  
+F1Ung         72  
 Leo           61.5
 Pylade        49  
-F1Ung         47  
 Bill          42  
-BWare         37.5
+BWare         41.5
 Arttu         34.5
 Winston        9  
 ------------------------------------
@@ -43,18 +43,18 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1         108   |    8 
-    Karl         100.50|    9 
-    TLB           96   |    8 
+    GGP1         121.50|    9 
+    Karl         114   |   10 
+    TLB          104   |    9 
+    NL           103   |    9 
     Iceman        90.50|    9 
-    NL            85   |    8 
-    Joe           72   |    7 
-    Hobbes        71.50|    9 
+    Hobbes        81.50|   10 
+    Joe           78   |    8 
+    F1Ung         72   |    8 
     Leo           61.50|    6 
     Pylade        49   |    6 
-    F1Ung         47   |    7 
     Bill          42   |    7 
-    BWare         37.50|    6 
+    BWare         41.50|    7 
     Arttu         34.50|    2 
     Winston        9   |    1 
 ----------------------------------
@@ -70,19 +70,19 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Arttu         17.25|    2 
-    GGP1          13.50|    8 
-    TLB           12   |    8 
-    Karl          11.17|    9 
-    NL            10.62|    8 
-    Joe           10.29|    7 
+    GGP1          13.50|    9 
+    TLB           11.56|    9 
+    NL            11.44|    9 
+    Karl          11.40|   10 
     Leo           10.25|    6 
     Iceman        10.06|    9 
+    Joe            9.75|    8 
     Winston        9   |    1 
+    F1Ung          9   |    8 
     Pylade         8.17|    6 
-    Hobbes         7.94|    9 
-    F1Ung          6.71|    7 
-    BWare          6.25|    6 
+    Hobbes         8.15|   10 
     Bill           6   |    7 
+    BWare          5.93|    7 
 ----------------------------------
 </pre></code>
 
@@ -94,18 +94,18 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    Karl           14,228   |    9 
+    Karl           15,878   |   10 
+    Hobbes         15,689   |   10 
+    GGP1           14,288   |    9 
+    TLB            14,206   |    9 
+    NL             14,161   |    9 
     Iceman         14,076   |    9 
-    Hobbes         14,040   |    9 
-    GGP1           12,638   |    8 
-    TLB            12,564   |    8 
-    NL             12,504   |    8 
-    F1Ung          11,181   |    7 
-    Joe            11,091   |    7 
+    F1Ung          12,842   |    8 
+    Joe            12,732   |    8 
     Bill           10,902   |    7 
+    BWare          10,808   |    7 
     Pylade          9,485   |    6 
     Leo             9,470   |    6 
-    BWare           9,189   |    6 
     Arttu           3,073   |    2 
     Winston         1,611   |    1 
 ---------------------------------------
@@ -121,19 +121,19 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     Winston         1,611   |    1 
-    F1Ung           1,597.29|    7 
-    Joe             1,584.43|    7 
-    Karl            1,580.89|    9 
+    F1Ung           1,605.25|    8 
+    Joe             1,591.50|    8 
+    Karl            1,587.80|   10 
+    GGP1            1,587.56|    9 
     Pylade          1,580.83|    6 
-    GGP1            1,579.75|    8 
+    TLB             1,578.44|    9 
     Leo             1,578.33|    6 
-    TLB             1,570.50|    8 
+    NL              1,573.44|    9 
+    Hobbes          1,568.90|   10 
     Iceman          1,564   |    9 
-    NL              1,563   |    8 
-    Hobbes          1,560   |    9 
     Bill            1,557.43|    7 
+    BWare           1,544   |    7 
     Arttu           1,536.50|    2 
-    BWare           1,531.50|    6 
 ---------------------------------------
 </pre></code>
 
@@ -145,19 +145,19 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    GGP1           12,638   |    8 |  3 |  1 |    |    |  1 |    |    |    |  2 |  1 
-    NL             12,504   |    8 |  2 |    |    |  1 |    |  1 |  1 |  2 |    |  1 
-    TLB            12,564   |    8 |  1 |  2 |  1 |  1 |    |  1 |    |    |  1 |  1 
+    GGP1           14,288   |    9 |  3 |  1 |  1 |    |  1 |    |    |    |  2 |  1 
+    NL             14,161   |    9 |  2 |  1 |    |  1 |    |  1 |  1 |  2 |    |  1 
+    TLB            14,206   |    9 |  1 |  2 |  1 |  1 |    |  2 |    |    |  1 |  1 
     Iceman         14,076   |    9 |  1 |  2 |  1 |    |  1 |    |  1 |    |    |    
-    Karl           14,228   |    9 |  1 |  1 |  1 |  1 |  1 |  2 |  1 |    |    |  1 
+    Karl           15,878   |   10 |  1 |  1 |  2 |  1 |  1 |  2 |  1 |    |    |  1 
     Leo             9,470   |    6 |  1 |    |  1 |  1 |    |    |  1 |  1 |    |  1 
+    F1Ung          12,842   |    8 |  1 |    |    |  1 |  1 |  1 |  2 |  1 |  1 |    
     Arttu           3,073   |    2 |    |  2 |    |    |    |    |    |    |    |    
-    Hobbes         14,040   |    9 |    |  1 |  2 |    |  1 |    |  1 |  2 |  1 |    
+    Hobbes         15,689   |   10 |    |  1 |  2 |    |  2 |    |  1 |  2 |  1 |    
     Bill           10,902   |    7 |    |  1 |  1 |    |    |  1 |    |    |  2 |    
-    Joe            11,091   |    7 |    |  1 |    |  1 |  3 |  1 |    |  1 |    |    
-    BWare           9,189   |    6 |    |    |  1 |  1 |    |  1 |    |    |  1 |  2 
+    Joe            12,732   |    8 |    |  1 |    |  1 |  3 |  1 |  1 |  1 |    |    
+    BWare          10,808   |    7 |    |    |  1 |  1 |    |  1 |    |  1 |  1 |  2 
     Pylade          9,485   |    6 |    |    |  1 |    |  1 |  1 |  2 |  1 |    |    
-    F1Ung          11,181   |    7 |    |    |    |  1 |  1 |  1 |  2 |  1 |  1 |    
     Winston         1,611   |    1 |    |    |    |    |  1 |    |    |    |    |    
 -----------------------------------------------------------------------------------------
 </pre></code>
