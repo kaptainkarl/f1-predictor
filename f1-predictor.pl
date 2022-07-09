@@ -2603,6 +2603,7 @@ sub get_all_players_data($) {
         $ln =  trim($ln);
         next if ! $ln;
         next if $ln =~ m{^#};
+        next if $ln =~ m{^-};
 
         if ( my ($plyr, $preds) = $ln =~ m{(.*?):(.*)} ){
 
