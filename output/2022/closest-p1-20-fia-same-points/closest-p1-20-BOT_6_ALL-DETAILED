@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,10 +13,10 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         138   |    8 
+    Karl         196   |   11 
+    TLB          181   |   11 
+    Pylade       144   |    9 
     NL           128   |    8 
-    TLB          123   |    8 
-    Pylade        86   |    6 
     F1Ung         73   |    5 
     Arttu         33   |    2 
     GGP1          31   |    2 
@@ -37,14 +37,14 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          17.25|    8 
+    Karl          17.82|   11 
     Arttu         16.50|    2 
+    TLB           16.45|   11 
+    Pylade        16   |    9 
     NL            16   |    8 
     GGP1          15.50|    2 
-    TLB           15.38|    8 
     Bill          15   |    2 
     F1Ung         14.60|    5 
-    Pylade        14.33|    6 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -60,12 +60,12 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              771   |    8 |  3 |    |  1 |  4 |    |    |    |    |    |    
+    Karl            1,041   |   11 |  4 |  1 |  2 |  4 |    |    |    |    |    |    
+    TLB             1,038   |   11 |  2 |  3 |  3 |  1 |  2 |    |    |    |    |    
     NL                760   |    8 |  2 |  1 |  2 |  1 |  1 |  1 |    |    |    |    
-    TLB               772   |    8 |  1 |  2 |  2 |  1 |  2 |    |    |    |    |    
+    Pylade            856   |    9 |  1 |  3 |  3 |    |  2 |    |    |    |    |    
     F1Ung             469   |    5 |  1 |  1 |    |  1 |  1 |  1 |    |    |    |    
     GGP1              212   |    2 |  1 |    |    |    |    |    |  1 |    |    |    
-    Pylade            572   |    6 |    |  2 |  2 |    |  2 |    |    |    |    |    
     Arttu             170   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
     Bill              206   |    2 |    |  1 |    |  1 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -79,6 +79,72 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Austria-bottom-6 Race
+
+P   Player      FIA    | PER      LAT      SAI      VET      TSU      GAS      
+-----------------------------------------------------------------------------
+1   Karl        25     | LAT 19 | STR 14 | MSC  8 | MAG 11 | ZHO 18 | TSU 19 | 
+2   TLB         18     | MSC  6 | ZHO 15 | LAT 19 | STR 16 | MAG 12 | ALB 17 | 
+3   Pylade      15     | BOT 11 | ZHO 15 | ALB 14 | LAT 18 | STR 17 | RIC 14 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+
+Method is 'closest-p1-20'
+---------------
+Austria-bottom-6 Sprint
+
+P   Player      FIA    | ALO      VET      LAT      TSU      ALB      GAS      
+-----------------------------------------------------------------------------
+1   Pylade      25     | TSU 17 | ZHO 15 | LAT 20 | RIC 15 | MSC 13 | STR 18 | 
+2   Karl        18     | LAT 18 | STR 14 | MSC 11 | MAG 10 | ZHO 18 | TSU 18 | 
+3   TLB         15     | LAT 18 | MSC 10 | ZHO 16 | ALB 19 | MAG 11 | STR 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+
+Method is 'closest-p1-20'
+---------------
+Austria-bottom-6 Qual
+
+P   Player      FIA    | VET      LAT      ZHO      STR      RIC      NOR      
+-----------------------------------------------------------------------------
+1   TLB         25     | LAT 19 | MSC  8 | ZHO 20 | ALB 14 | MAG 10 | STR 18 | 
+2   Pylade      18     | LAT 19 | STR 18 | ALB 13 | MSC 10 | ZHO 18 | RIC 19 | 
+3   Karl        15     | LAT 19 | STR 18 | MSC  9 | MAG  9 | ZHO 18 | TSU 19 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

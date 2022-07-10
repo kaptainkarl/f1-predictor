@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for austria-qual, britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,16 +13,16 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    NL           121   |    9 
-    GGP1         108   |    9 
+    NL           136   |   10 
+    GGP1         133   |   10 
+    Karl          99   |   11 
+    TLB           97   |   10 
     Iceman        97   |    9 
-    Karl          93   |   10 
-    TLB           87   |    9 
+    Hobbes        89   |   11 
     Joe           82   |    8 
     F1Ung         78   |    8 
-    Hobbes        71   |   10 
-    BWare         68   |    7 
-    Pylade        62   |    6 
+    BWare         76   |    8 
+    Pylade        74   |    7 
     Leo           52   |    6 
     Bill          44   |    7 
     Arttu         28   |    2 
@@ -38,18 +38,18 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Arttu         14   |    2 
-    NL            13.44|    9 
-    GGP1          12   |    9 
+    NL            13.60|   10 
+    GGP1          13.30|   10 
     Winston       11   |    1 
     Iceman        10.78|    9 
-    Pylade        10.33|    6 
+    Pylade        10.57|    7 
     Joe           10.25|    8 
     F1Ung          9.75|    8 
-    BWare          9.71|    7 
-    TLB            9.67|    9 
-    Karl           9.30|   10 
+    TLB            9.70|   10 
+    BWare          9.50|    8 
+    Karl           9   |   11 
     Leo            8.67|    6 
-    Hobbes         7.10|   10 
+    Hobbes         8.09|   11 
     Bill           6.29|    7 
 ----------------------------------
 
@@ -60,18 +60,18 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL                952   |    9 |  2 |  2 |  1 |    |    |  1 |  1 |  1 |  1 |    
+    GGP1            1,069   |   10 |  3 |    |  1 |  1 |    |  3 |  1 |    |    |  1 
+    NL              1,055   |   10 |  2 |  2 |  2 |    |    |  1 |  1 |  1 |  1 |    
     Iceman            935   |    9 |  2 |    |  1 |  1 |  1 |    |  1 |  1 |    |    
-    GGP1              960   |    9 |  2 |    |  1 |  1 |    |  3 |  1 |    |    |  1 
     Joe               855   |    8 |  1 |  1 |  1 |    |  2 |    |    |    |  1 |  2 
-    TLB               970   |    9 |  1 |  1 |    |  1 |    |  3 |    |  2 |  1 |    
+    TLB             1,071   |   10 |  1 |  1 |    |  1 |  1 |  3 |    |  2 |  1 |    
     Leo               632   |    6 |  1 |  1 |    |    |    |    |  1 |    |  1 |  1 
     F1Ung             858   |    8 |  1 |    |  1 |  1 |  1 |  1 |  1 |    |  1 |    
-    Karl            1,067   |   10 |    |  2 |  1 |  1 |  1 |    |  2 |  2 |  1 |    
-    BWare             716   |    7 |    |  1 |  1 |  2 |    |    |  1 |  1 |    |  1 
-    Hobbes          1,059   |   10 |    |  1 |  1 |  1 |  1 |  1 |  1 |    |  1 |    
+    Hobbes          1,164   |   11 |    |  2 |  1 |  1 |  1 |  1 |  1 |    |  1 |    
+    Karl            1,168   |   11 |    |  2 |  1 |  1 |  1 |    |  3 |  2 |  1 |    
+    BWare             813   |    8 |    |  1 |  1 |  2 |    |  1 |  1 |  1 |    |  1 
     Arttu             205   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
-    Pylade            629   |    6 |    |    |  2 |  2 |    |    |    |  2 |    |    
+    Pylade            732   |    7 |    |    |  2 |  3 |    |    |    |  2 |    |    
     Winston           108   |    1 |    |    |    |  1 |    |    |    |    |    |    
     Bill              732   |    7 |    |    |    |    |  2 |  2 |    |  2 |    |  1 
 -----------------------------------------------------------------------------------------
@@ -79,6 +79,28 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Austria Qual
+
+P   Player      FIA    | VER LEC SAI RUS OCO MAG MSC ALO HAM GAS ALB BOT PER TSU NOR RIC STR ZHO LAT VET 
+-------------------------------------------------------------------------------------------------------
+1   GGP1        25     |  20  20  20  20                  17              12                             
+2   Hobbes      18     |  20  20  19  19                  17              10                             
+3   NL          15     |  20  20  19  18                  16              10                             
+4   Pylade      12     |  19  19  20                  18  16              11                             
+5   TLB         10     |  19  19  19  18                  16              10                             
+6   BWare        8     |  19  19  19          20                          10      10                     
+7   Karl         6     |  18  19  19  18                  16              11                             
+    Arttu      DNS
+    Bill       DNS
+    F1Ung      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

@@ -2,7 +2,7 @@
 
 
 ----------------------
-Totals Tables run for britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -13,18 +13,18 @@ Total FIA Score table
 
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          134   |   11 
-    NL           127   |   10 
-    Karl         125   |   11 
-    Hobbes        98.50|   11 
+    TLB          155.50|   13 
+    Karl         151   |   13 
+    NL           136   |   12 
+    Hobbes       112.50|   13 
+    GGP1         105.50|   12 
+    F1Ung         97   |    9 
     Iceman        94   |   10 
     Joe           91   |    8 
-    GGP1          87   |   10 
-    F1Ung         77   |    7 
-    BWare         66   |    8 
+    BWare         74   |   10 
     Leo           58   |    7 
+    Pylade        51   |   11 
     Bill          39.50|    8 
-    Pylade        34   |    9 
     Arttu         10   |    2 
     Winston        0   |    0 
 ----------------------------------
@@ -37,19 +37,19 @@ For players who have not entered all rounds
 
 P   Player       FIA   |Played
 ----------------------------------
-    NL            12.70|   10 
-    TLB           12.18|   11 
+    TLB           11.96|   13 
+    Karl          11.62|   13 
     Joe           11.38|    8 
-    Karl          11.36|   11 
-    F1Ung         11   |    7 
+    NL            11.33|   12 
+    F1Ung         10.78|    9 
     Iceman         9.40|   10 
-    Hobbes         8.95|   11 
-    GGP1           8.70|   10 
+    GGP1           8.79|   12 
+    Hobbes         8.65|   13 
     Leo            8.29|    7 
-    BWare          8.25|    8 
+    BWare          7.40|   10 
     Arttu          5   |    2 
     Bill           4.94|    8 
-    Pylade         3.78|    9 
+    Pylade         4.64|   11 
     Winston        0   |    0 
 ----------------------------------
 
@@ -60,18 +60,18 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB             1,049   |   11 |  2 |  2 |  2 |    |    |  2 |    |  2 |    |  1 
-    NL                962   |   10 |  2 |  1 |  2 |    |  1 |  2 |  1 |    |  1 |    
+    TLB             1,244   |   13 |  2 |  3 |  2 |  1 |    |  2 |    |  2 |    |  1 
+    Karl            1,242   |   13 |  2 |  2 |  1 |  3 |    |    |  2 |  3 |    |    
+    NL              1,151   |   12 |  2 |  1 |  2 |    |  1 |  3 |  2 |    |  1 |    
     Joe               707   |    8 |  2 |  1 |    |    |  1 |    |  1 |  1 |  1 |  1 
-    Karl            1,049   |   11 |  1 |  2 |  1 |  3 |    |    |  2 |  2 |    |    
+    F1Ung             845   |    9 |  2 |    |    |  4 |    |  1 |  1 |    |  1 |    
+    GGP1            1,098   |   12 |  1 |  2 |  1 |  1 |  1 |  1 |  3 |  1 |    |  1 
     Iceman            942   |   10 |  1 |  2 |    |  1 |  1 |  1 |  2 |    |  1 |    
-    GGP1              901   |   10 |  1 |  1 |  1 |  1 |  1 |  1 |  2 |  1 |    |  1 
-    BWare             764   |    8 |  1 |    |  1 |  1 |  1 |  1 |    |    |  1 |  1 
-    F1Ung             658   |    7 |  1 |    |    |  3 |    |  1 |  1 |    |  1 |    
-    Hobbes            999   |   11 |    |  3 |    |  1 |  3 |    |    |  2 |  1 |    
+    BWare             938   |   10 |  1 |    |  1 |  1 |  2 |  1 |    |  1 |  1 |  1 
+    Hobbes          1,176   |   13 |    |  3 |  1 |  1 |  3 |  1 |    |  2 |  1 |    
+    Pylade          1,040   |   11 |    |  1 |  1 |    |  1 |  2 |  1 |  1 |  1 |  1 
     Bill              739   |    8 |    |  1 |    |  1 |    |    |  1 |  1 |  1 |  2 
     Leo               632   |    7 |    |  1 |    |    |  3 |  1 |    |    |  1 |  1 
-    Pylade            856   |    9 |    |    |  1 |    |    |  2 |  1 |  1 |  1 |  1 
     Arttu             181   |    2 |    |    |    |    |    |    |  1 |  1 |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
@@ -79,6 +79,50 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+Method is 'closest-p1-20'
+---------------
+Austria Race
+
+P   Player      FIA   |LEC    VER    HAM    RUS    OCO    MSC    LEC VER HAM RUS OCO MSC NOR MAG RIC ALO BOT ALB STR ZHO GAS TSU VET SAI LAT PER 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   Karl        25    |LEC 20|SAI  4|VER 19|PER  4|HAM 18|RUS 18| 20  19  18  18                                                       4       4 
+2   GGP1        16.50 |VER 19|LEC 19|PER  3|SAI  6|HAM 18|RUS 18| 19  19  18  18                                                       6       3 
+2   TLB         16.50 |VER 19|LEC 19|PER  3|SAI  6|HAM 18|RUS 18| 19  19  18  18                                                       6       3 
+4   F1Ung       12    |VER 19|LEC 19|PER  3|SAI  6|RUS 19|HAM 17| 19  19  17  19                                                       6       3 
+5   Pylade      10    |VER 19|LEC 19|SAI  5|PER  4|RUS 19|ALO 16| 19  19      19                      16                               5       4 
+6   Hobbes       8    |VER 19|PER  2|LEC 18|SAI  6|RUS 19|HAM 17| 18  19  17  19                                                       6       2 
+7   NL           6    |VER 19|PER  2|SAI  5|HAM 19|LEC 16|RUS 18| 16  19  19  18                                                       5       2 
+8   BWare        4    |VER 19|PER  2|SAI  5|NOR 17|LEC 16|RUS 18| 16  19      18          17                                           5       2 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Method is 'closest-p1-20'
+---------------
+Austria Sprint
+
+P   Player      FIA   |VER    LEC    SAI    RUS    PER    OCO    VER LEC SAI RUS PER OCO MAG HAM MSC BOT NOR RIC STR ZHO GAS ALB TSU LAT VET ALO 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   F1Ung        8    |VER 20|LEC 20|SAI 20|PER 19|RUS 19|ALO  6| 20  20  20  19  19                                                           6 
+2   Pylade       7    |VER 20|LEC 20|SAI 20|PER 19|ALO  5|RUS 18| 20  20  20  18  19                                                           5 
+3   Hobbes       6    |VER 20|LEC 20|SAI 20|ALO  4|NOR 14|RUS 18| 20  20  20  18                          14                                   4 
+4   TLB          5    |VER 20|LEC 20|PER 18|SAI 19|HAM 17|RUS 18| 20  20  19  18  18          17                                                 
+5   BWare        4    |VER 20|LEC 20|NOR 12|SAI 19|PER 20|ALO  6| 20  20  19      20                      12                                   6 
+6   NL           3    |VER 20|PER 17|LEC 19|SAI 19|HAM 17|RUS 18| 20  19  19  18  17          17                                                 
+7   GGP1         2    |LEC 19|VER 19|SAI 20|PER 19|RUS 19|HAM 18| 19  19  20  19  19          18                                                 
+8   Karl         1    |LEC 19|SAI 19|VER 18|PER 19|HAM 17|RUS 18| 18  19  19  18  19          17                                                 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 Method is 'closest-p1-20'
 ---------------

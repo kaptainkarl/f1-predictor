@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-Karl         131.5
+Karl         189.5
+TLB          170  
+Pylade       151  
 NL           124  
-TLB          122  
-Pylade        83  
 F1Ung         68.5
 GGP1          43  
 Arttu         37  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         131.50|    8 
+    Karl         189.50|   11 
+    TLB          170   |   11 
+    Pylade       151   |    9 
     NL           124   |    8 
-    TLB          122   |    8 
-    Pylade        83   |    6 
     F1Ung         68.50|    5 
     GGP1          43   |    2 
     Arttu         37   |    2 
@@ -71,11 +71,11 @@ P   Player       FIA   |Played
 ----------------------------------
     GGP1          21.50|    2 
     Arttu         18.50|    2 
+    Karl          17.23|   11 
+    Pylade        16.78|    9 
     Bill          16.50|    2 
-    Karl          16.44|    8 
     NL            15.50|    8 
-    TLB           15.25|    8 
-    Pylade        13.83|    6 
+    TLB           15.45|   11 
     F1Ung         13.70|    5 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -94,10 +94,10 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
+    Karl            4,311   |   11 
+    TLB             4,209   |   11 
+    Pylade          3,531   |    9 
     NL              3,186   |    8 
-    Karl            3,165   |    8 
-    TLB             3,138   |    8 
-    Pylade          2,356   |    6 
     F1Ung           1,945   |    5 
     GGP1              898   |    2 
     Bill              862   |    2 
@@ -123,10 +123,10 @@ P   Player      Ave Score   |Played
     GGP1              449   |    2 
     Bill              431   |    2 
     NL                398.25|    8 
-    Karl              395.62|    8 
-    Pylade            392.67|    6 
-    TLB               392.25|    8 
+    Pylade            392.33|    9 
+    Karl              391.91|   11 
     F1Ung             389   |    5 
+    TLB               382.64|   11 
     Arttu             363.50|    2 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -145,11 +145,11 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl            3,165   |    8 |  2 |  2 |  1 |  1 |  2 |    |    |    |    |    
+    Karl            4,311   |   11 |  3 |  3 |  2 |  1 |  2 |    |    |    |    |    
+    Pylade          3,531   |    9 |  3 |  1 |  2 |    |  2 |  1 |    |    |    |    
+    TLB             4,209   |   11 |  1 |  2 |  6 |  1 |  1 |    |    |    |    |    
     NL              3,186   |    8 |  1 |  2 |  1 |  4 |    |    |    |    |    |    
-    TLB             3,138   |    8 |  1 |  1 |  4 |  1 |  1 |    |    |    |    |    
     GGP1              898   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
-    Pylade          2,356   |    6 |  1 |    |  2 |    |  2 |  1 |    |    |    |    
     Arttu             727   |    2 |  1 |    |    |  1 |    |    |    |    |    |    
     Bill              862   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
     F1Ung           1,945   |    5 |    |  3 |    |    |  1 |    |  1 |    |    |    

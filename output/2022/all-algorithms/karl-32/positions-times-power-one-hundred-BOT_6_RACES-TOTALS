@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
+Karl         105  
+TLB           98  
+Pylade        73  
 NL            70  
-Karl          62  
-TLB           55  
-Pylade        43  
 F1Ung         33  
 Bill          25  
 GGP1          18  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    Karl         105   |    6 
+    TLB           98   |    6 
+    Pylade        73   |    5 
     NL            70   |    4 
-    Karl          62   |    4 
-    TLB           55   |    4 
-    Pylade        43   |    3 
     F1Ung         33   |    3 
     Bill          25   |    1 
     GGP1          18   |    1 
@@ -73,9 +73,9 @@ P   Player       FIA   |Played
     GGP1          18   |    1 
     Arttu         18   |    1 
     NL            17.50|    4 
-    Karl          15.50|    4 
-    Pylade        14.33|    3 
-    TLB           13.75|    4 
+    Karl          17.50|    6 
+    TLB           16.33|    6 
+    Pylade        14.60|    5 
     F1Ung         11   |    3 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -94,12 +94,12 @@ Total Score table
 -----------------
 P   Player                Total   |Played
 ---------------------------------------------
+    Karl        430,658,192,657   |    6 
     NL          273,237,081,117   |    4 
-    Karl        190,658,191,033   |    4 
     Bill        160,216,043,204   |    1 
-    Pylade       90,711,014,414   |    3 
+    Pylade      130,943,104,822   |    5 
+    TLB         128,922,278,033   |    6 
     Arttu        80,416,320,000   |    1 
-    TLB          48,804,098,021   |    4 
     GGP1         40,208,040,802   |    1 
     F1Ung        32,216,082,008   |    3 
     Winston                   0   |    0 
@@ -122,11 +122,11 @@ P   Player            Ave Score   |Played
 ---------------------------------------------
     Bill        160,216,043,204   |    1 
     Arttu        80,416,320,000   |    1 
+    Karl         71,776,365,442.83|    6 
     NL           68,309,270,279.25|    4 
-    Karl         47,664,547,758.25|    4 
     GGP1         40,208,040,802   |    1 
-    Pylade       30,237,004,804.67|    3 
-    TLB          12,201,024,505.25|    4 
+    Pylade       26,188,620,964.40|    5 
+    TLB          21,487,046,338.83|    6 
     F1Ung        10,738,694,002.67|    3 
     Winston                   0   |    0 
     Leo                       0   |    0 
@@ -145,11 +145,11 @@ P1 -> P10 then Total
 ------------------------
 P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------------
+    Karl        430,658,192,657   |    6 |  2 |  1 |  1 |  1 |  1 |    |    |    |    |    
+    TLB         128,922,278,033   |    6 |  1 |  2 |  1 |  1 |  1 |    |    |    |    |    
     NL          273,237,081,117   |    4 |  1 |  1 |  1 |  1 |    |    |    |    |    |    
-    Karl        190,658,191,033   |    4 |  1 |    |  1 |  1 |  1 |    |    |    |    |    
-    Pylade       90,711,014,414   |    3 |  1 |    |    |    |  1 |  1 |    |    |    |    
+    Pylade      130,943,104,822   |    5 |  1 |    |  2 |    |  1 |  1 |    |    |    |    
     Bill        160,216,043,204   |    1 |  1 |    |    |    |    |    |    |    |    |    
-    TLB          48,804,098,021   |    4 |    |  1 |  1 |  1 |  1 |    |    |    |    |    
     Arttu        80,416,320,000   |    1 |    |  1 |    |    |    |    |    |    |    |    
     GGP1         40,208,040,802   |    1 |    |  1 |    |    |    |    |    |    |    |    
     F1Ung        32,216,082,008   |    3 |    |    |  1 |  1 |    |    |  1 |    |    |    

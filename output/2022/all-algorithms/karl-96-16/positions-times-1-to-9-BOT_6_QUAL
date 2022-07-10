@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,9 +18,9 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB           80  
-Karl          73  
-Pylade        55  
+TLB          105  
+Karl          89.5
+Pylade        71.5
 NL            40  
 F1Ung         30  
 GGP1          18  
@@ -43,9 +43,9 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           80   |    4 
-    Karl          73   |    4 
-    Pylade        55   |    3 
+    TLB          105   |    5 
+    Karl          89.50|    5 
+    Pylade        71.50|    4 
     NL            40   |    4 
     F1Ung         30   |    2 
     GGP1          18   |    1 
@@ -69,10 +69,10 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           20   |    4 
-    Pylade        18.33|    3 
-    Karl          18.25|    4 
+    TLB           21   |    5 
     GGP1          18   |    1 
+    Karl          17.90|    5 
+    Pylade        17.88|    4 
     F1Ung         15   |    2 
     Arttu         12   |    1 
     NL            10   |    4 
@@ -94,9 +94,9 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB             1,629   |    4 
-    Karl            1,558   |    4 
-    Pylade          1,022   |    3 
+    TLB             2,005   |    5 
+    Karl            1,782   |    5 
+    Pylade          1,246   |    4 
     GGP1              496   |    1 
     NL                456   |    4 
     F1Ung             425   |    2 
@@ -121,9 +121,9 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              496   |    1 
-    TLB               407.25|    4 
-    Karl              389.50|    4 
-    Pylade            340.67|    3 
+    TLB               401   |    5 
+    Karl              356.40|    5 
+    Pylade            311.50|    4 
     Bill              278   |    1 
     F1Ung             212.50|    2 
     NL                114   |    4 
@@ -145,9 +145,9 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB             1,629   |    4 |  2 |    |  2 |    |    |    |    |    |    |    
-    Karl            1,558   |    4 |  1 |  2 |    |  1 |    |    |    |    |    |    
-    Pylade          1,022   |    3 |  1 |  1 |    |  1 |    |    |    |    |    |    
+    TLB             2,005   |    5 |  3 |    |  2 |    |    |    |    |    |    |    
+    Karl            1,782   |    5 |  1 |  3 |    |  1 |    |    |    |    |    |    
+    Pylade          1,246   |    4 |  1 |  2 |    |  1 |    |    |    |    |    |    
     GGP1              496   |    1 |    |  1 |    |    |    |    |    |    |    |    
     F1Ung             425   |    2 |    |    |  2 |    |    |    |    |    |    |    
     NL                456   |    4 |    |    |    |  1 |  2 |  1 |    |    |    |    
@@ -165,6 +165,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'karl-96-16 and positions-times-1-to-9'
+---------------
+Austria-bottom-6 Qual
+
+P   Player           score  |  FIA    | VET        LAT        ZHO        STR        RIC        NOR        
+-----------------------------------------------------------------------------------------------------
+1   TLB                376  |  25     | LAT   16 | MSC      | ZHO  288 | ALB      | MAG      | STR   72 | 
+2   Karl               224  |  16.50  | LAT   16 | STR   16 | MSC      | MAG      | ZHO   48 | TSU  144 | 
+2   Pylade             224  |  16.50  | LAT   16 | STR   16 | ALB      | MSC      | ZHO   48 | RIC  144 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-96-16 and positions-times-1-to-9'
