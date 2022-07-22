@@ -10,10 +10,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          199   |   11 
-    Karl         193   |   11 
-    Pylade       146   |    9 
-    NL            96   |    8 
+    Karl         190   |   11 
+    TLB          186   |   11 
+    NL           154   |   11 
+    Pylade       140   |    9 
     F1Ung         71   |    5 
     Bill          50   |    2 
     GGP1          33   |    2 
@@ -37,13 +37,13 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Bill          25   |    2 
-    TLB           18.09|   11 
-    Karl          17.55|   11 
+    Karl          17.27|   11 
+    TLB           16.91|   11 
     GGP1          16.50|    2 
-    Pylade        16.22|    9 
+    Pylade        15.56|    9 
     F1Ung         14.20|    5 
+    NL            14   |   11 
     Arttu         14   |    2 
-    NL            12   |    8 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -63,8 +63,9 @@ Austria-bottom-6 Race
 P  Player              score 1  |         score 2  | FIA   | PER        LAT        SAI        VET        TSU        GAS        
 ------------------------------------------------------------------------------------------------------------------------------
 1  Karl                       0 |19,14,08,11,18,19 |  25   | LAT   19 | STR   14 | MSC    8 | MAG   11 | ZHO   18 | TSU   19 | 
-2  Pylade                     0 |11,15,14,18,17,14 |  18   | BOT   11 | ZHO   15 | ALB   14 | LAT   18 | STR   17 | RIC   14 | 
-3  TLB                        0 | 6,15,19,16,12,17 |  15   | MSC    6 | ZHO   15 | LAT   19 | STR   16 | MAG   12 | ALB   17 | 
+2  NL                         0 |15,09,11,18,17,10 |  18   | GAS   15 | MAG    9 | RIC   11 | LAT   18 | STR   17 | OCO   10 | 
+3  Pylade                     0 |11,15,14,18,17,14 |  15   | BOT   11 | ZHO   15 | ALB   14 | LAT   18 | STR   17 | RIC   14 | 
+4  TLB                        0 | 6,15,19,16,12,17 |  12   | MSC    6 | ZHO   15 | LAT   19 | STR   16 | MAG   12 | ALB   17 | 
    Arttu      DNS
    Bill       DNS
    BWare      DNS
@@ -74,7 +75,6 @@ P  Player              score 1  |         score 2  | FIA   | PER        LAT     
    Iceman     DNS
    Joe        DNS
    Leo        DNS
-   NL         DNS
    Winston    DNS
 ------------------------------------------------------------------------------------------------------------------------------
 </pre></code>
@@ -86,7 +86,8 @@ P  Player              score 1  |         score 2  | FIA   | ALO        VET     
 ------------------------------------------------------------------------------------------------------------------------------
 1  Pylade            1,00,00,00 |17,15,20,15,13,18 |  25   | TSU   17 | ZHO   15 | LAT   20 | RIC   15 | MSC   13 | STR   18 | 
 2  Karl                       0 |18,14,11,10,18,18 |  18   | LAT   18 | STR   14 | MSC   11 | MAG   10 | ZHO   18 | TSU   18 | 
-3  TLB                        0 |18,10,16,19,11,18 |  15   | LAT   18 | MSC   10 | ZHO   16 | ALB   19 | MAG   11 | STR   18 | 
+3  NL                         0 |18,11,14,18,13,12 |  15   | LAT   18 | BOT   11 | RIC   14 | VET   18 | MSC   13 | MAG   12 | 
+4  TLB                        0 |18,10,16,19,11,18 |  12   | LAT   18 | MSC   10 | ZHO   16 | ALB   19 | MAG   11 | STR   18 | 
    Arttu      DNS
    Bill       DNS
    BWare      DNS
@@ -96,7 +97,6 @@ P  Player              score 1  |         score 2  | FIA   | ALO        VET     
    Iceman     DNS
    Joe        DNS
    Leo        DNS
-   NL         DNS
    Winston    DNS
 ------------------------------------------------------------------------------------------------------------------------------
 </pre></code>
@@ -106,9 +106,10 @@ Austria-bottom-6 Qual
 <pre><code>
 P  Player              score 1  |         score 2  | FIA   | VET        LAT        ZHO        STR        RIC        NOR        
 ------------------------------------------------------------------------------------------------------------------------------
-1  TLB               1,00,00,00 |19,08,20,14,10,18 |  25   | LAT   19 | MSC    8 | ZHO   20 | ALB   14 | MAG   10 | STR   18 | 
-2  Pylade                     0 |19,18,13,10,18,19 |  18   | LAT   19 | STR   18 | ALB   13 | MSC   10 | ZHO   18 | RIC   19 | 
-3  Karl                       0 |19,18,09,09,18,19 |  15   | LAT   19 | STR   18 | MSC    9 | MAG    9 | ZHO   18 | TSU   19 | 
+1  NL             1,00,00,00,00 |17,20,16,17,11,16 |  25   | STR   17 | LAT   20 | TSU   16 | VET   17 | MSC   11 | ALB   16 | 
+2  TLB               1,00,00,00 |19,08,20,14,10,18 |  18   | LAT   19 | MSC    8 | ZHO   20 | ALB   14 | MAG   10 | STR   18 | 
+3  Pylade                     0 |19,18,13,10,18,19 |  15   | LAT   19 | STR   18 | ALB   13 | MSC   10 | ZHO   18 | RIC   19 | 
+4  Karl                       0 |19,18,09,09,18,19 |  12   | LAT   19 | STR   18 | MSC    9 | MAG    9 | ZHO   18 | TSU   19 | 
    Arttu      DNS
    Bill       DNS
    BWare      DNS
@@ -118,7 +119,6 @@ P  Player              score 1  |         score 2  | FIA   | VET        LAT     
    Iceman     DNS
    Joe        DNS
    Leo        DNS
-   NL         DNS
    Winston    DNS
 ------------------------------------------------------------------------------------------------------------------------------
 </pre></code>

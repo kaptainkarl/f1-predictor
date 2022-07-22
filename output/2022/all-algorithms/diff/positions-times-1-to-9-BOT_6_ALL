@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB          198  
+TLB          195  
 Karl         183  
 Pylade       160  
-NL           111  
+NL           150  
 F1Ung         69  
 Arttu         35  
 Bill          33  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          198   |   11 
+    TLB          195   |   11 
     Karl         183   |   11 
     Pylade       160   |    9 
-    NL           111   |    8 
+    NL           150   |   11 
     F1Ung         69   |    5 
     Arttu         35   |    2 
     Bill          33   |    2 
@@ -69,13 +69,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           18   |   11 
     Pylade        17.78|    9 
+    TLB           17.73|   11 
     Arttu         17.50|    2 
     Karl          16.64|   11 
     Bill          16.50|    2 
-    NL            13.88|    8 
     F1Ung         13.80|    5 
+    NL            13.64|   11 
     GGP1          13.50|    2 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -96,8 +96,8 @@ P   Player          Total   |Played
 ---------------------------------------
     TLB             4,430   |   11 
     Karl            4,410   |   11 
+    NL              4,199   |   11 
     Pylade          3,616   |    9 
-    NL              3,146   |    8 
     F1Ung           1,953   |    5 
     GGP1              856   |    2 
     Bill              850   |    2 
@@ -125,8 +125,8 @@ P   Player      Ave Score   |Played
     TLB               402.73|   11 
     Pylade            401.78|    9 
     Karl              400.91|   11 
-    NL                393.25|    8 
     F1Ung             390.60|    5 
+    NL                381.73|   11 
     Arttu             340.50|    2 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -145,13 +145,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB             4,430   |   11 |  3 |  3 |  3 |  2 |    |    |    |    |    |    
+    TLB             4,430   |   11 |  3 |  3 |  2 |  3 |    |    |    |    |    |    
     Pylade          3,616   |    9 |  3 |  2 |  2 |    |  2 |    |    |    |    |    
     Karl            4,410   |   11 |  2 |  4 |  2 |  1 |  2 |    |    |    |    |    
     F1Ung           1,953   |    5 |  1 |  1 |    |    |  2 |    |  1 |    |    |    
     Arttu             681   |    2 |  1 |    |    |    |  1 |    |    |    |    |    
     Bill              850   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
-    NL              3,146   |    8 |    |  1 |  3 |  4 |    |    |    |    |    |    
+    NL              4,199   |   11 |    |  1 |  4 |  6 |    |    |    |    |    |    
     GGP1              856   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -176,6 +176,7 @@ P   Player           score  |  FIA    | PER        LAT        SAI        VET    
 1   Karl               394  |  25     | LAT   19 | STR   28 | MSC   24 | MAG   44 | ZHO  108 | TSU  171 | 
 2   Pylade             383  |  18     | BOT   11 | ZHO   30 | ALB   42 | LAT   72 | STR  102 | RIC  126 | 
 3   TLB                382  |  15     | MSC    6 | ZHO   30 | LAT   57 | STR   64 | MAG   72 | ALB  153 | 
+4   NL                 330  |  12     | GAS   15 | MAG   18 | RIC   33 | LAT   72 | STR  102 | OCO   90 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -185,7 +186,6 @@ P   Player           score  |  FIA    | PER        LAT        SAI        VET    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>
@@ -200,6 +200,7 @@ P   Player           score  |  FIA    | ALO        VET        LAT        TSU    
 1   Pylade             407  |  25     | TSU   17 | ZHO   30 | LAT   60 | RIC   60 | MSC   78 | STR  162 | 
 2   TLB                390  |  18     | LAT   18 | MSC   20 | ZHO   48 | ALB   76 | MAG   66 | STR  162 | 
 3   Karl               389  |  15     | LAT   18 | STR   28 | MSC   33 | MAG   40 | ZHO  108 | TSU  162 | 
+4   NL                 340  |  12     | LAT   18 | BOT   22 | RIC   42 | VET   72 | MSC   78 | MAG  108 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -209,7 +210,6 @@ P   Player           score  |  FIA    | ALO        VET        LAT        TSU    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>
@@ -223,7 +223,8 @@ P   Player           score  |  FIA    | VET        LAT        ZHO        STR    
 -----------------------------------------------------------------------------------------------------
 1   Pylade             413  |  25     | LAT   19 | STR   36 | ALB   39 | MSC   40 | ZHO  108 | RIC  171 | 
 2   Karl               397  |  18     | LAT   19 | STR   36 | MSC   27 | MAG   36 | ZHO  108 | TSU  171 | 
-3   TLB                373  |  15     | LAT   19 | MSC   16 | ZHO   60 | ALB   56 | MAG   60 | STR  162 | 
+3   NL                 383  |  15     | STR   17 | LAT   40 | TSU   48 | VET   68 | MSC   66 | ALB  144 | 
+4   TLB                373  |  12     | LAT   19 | MSC   16 | ZHO   60 | ALB   56 | MAG   60 | STR  162 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -233,7 +234,6 @@ P   Player           score  |  FIA    | VET        LAT        ZHO        STR    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>

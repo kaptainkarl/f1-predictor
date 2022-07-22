@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-Karl         191  
-TLB          163  
-Pylade       151  
-NL           135  
+Karl         188  
+NL           187  
+TLB          157  
+Pylade       144  
 F1Ung         70  
 GGP1          43  
 Bill          33  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         191   |   11 
-    TLB          163   |   11 
-    Pylade       151   |    9 
-    NL           135   |    8 
+    Karl         188   |   11 
+    NL           187   |   11 
+    TLB          157   |   11 
+    Pylade       144   |    9 
     F1Ung         70   |    5 
     GGP1          43   |    2 
     Bill          33   |    2 
@@ -70,12 +70,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          21.50|    2 
-    Karl          17.36|   11 
-    NL            16.88|    8 
-    Pylade        16.78|    9 
+    Karl          17.09|   11 
+    NL            17   |   11 
     Bill          16.50|    2 
+    Pylade        16   |    9 
     Arttu         15   |    2 
-    TLB           14.82|   11 
+    TLB           14.27|   11 
     F1Ung         14   |    5 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -95,9 +95,9 @@ Total Score table
 P   Player          Total   |Played
 ---------------------------------------
     Karl           15,217   |   11 
+    NL             15,132   |   11 
     TLB            14,981   |   11 
     Pylade         12,491   |    9 
-    NL             11,197   |    8 
     F1Ung           6,849   |    5 
     GGP1            3,142   |    2 
     Bill            3,026   |    2 
@@ -122,9 +122,9 @@ P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1            1,571   |    2 
     Bill            1,513   |    2 
-    NL              1,399.62|    8 
     Pylade          1,387.89|    9 
     Karl            1,383.36|   11 
+    NL              1,375.64|   11 
     F1Ung           1,369.80|    5 
     TLB             1,361.91|   11 
     Arttu           1,265   |    2 
@@ -145,13 +145,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl           15,217   |   11 |  3 |  3 |  2 |  1 |  2 |    |    |    |    |    
-    Pylade         12,491   |    9 |  3 |  1 |  2 |    |  2 |  1 |    |    |    |    
-    NL             11,197   |    8 |  3 |    |    |  5 |    |    |    |    |    |    
+    NL             15,132   |   11 |  4 |    |  1 |  6 |    |    |    |    |    |    
+    Karl           15,217   |   11 |  3 |  2 |  3 |  1 |  2 |    |    |    |    |    
+    Pylade         12,491   |    9 |  2 |  2 |  2 |    |  2 |  1 |    |    |    |    
     GGP1            3,142   |    2 |  1 |  1 |    |    |    |    |    |    |    |    
     Bill            3,026   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
     F1Ung           6,849   |    5 |    |  3 |    |    |  1 |    |  1 |    |    |    
-    TLB            14,981   |   11 |    |  2 |  7 |  1 |  1 |    |    |    |    |    
+    TLB            14,981   |   11 |    |  2 |  5 |  3 |  1 |    |    |    |    |    
     Arttu           2,530   |    2 |    |  1 |    |  1 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -175,7 +175,8 @@ P   Player           score  |  FIA    | PER        LAT        SAI        VET    
 -----------------------------------------------------------------------------------------------------
 1   Karl             1,311  |  25     | LAT  475 | STR  252 | MSC  120 | MAG  132 | ZHO  180 | TSU  152 | 
 2   Pylade           1,253  |  18     | BOT  275 | ZHO  270 | ALB  210 | LAT  216 | STR  170 | RIC  112 | 
-3   TLB              1,153  |  15     | MSC  150 | ZHO  270 | LAT  285 | STR  192 | MAG  120 | ALB  136 | 
+3   NL               1,168  |  15     | GAS  375 | MAG  162 | RIC  165 | LAT  216 | STR  170 | OCO   80 | 
+4   TLB              1,153  |  12     | MSC  150 | ZHO  270 | LAT  285 | STR  192 | MAG  120 | ALB  136 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -185,7 +186,6 @@ P   Player           score  |  FIA    | PER        LAT        SAI        VET    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>
@@ -200,6 +200,7 @@ P   Player           score  |  FIA    | ALO        VET        LAT        TSU    
 1   Pylade           1,449  |  25     | TSU  425 | ZHO  270 | LAT  300 | RIC  180 | MSC  130 | STR  144 | 
 2   TLB              1,352  |  18     | LAT  450 | MSC  180 | ZHO  240 | ALB  228 | MAG  110 | STR  144 | 
 3   Karl             1,311  |  15     | LAT  450 | STR  252 | MSC  165 | MAG  120 | ZHO  180 | TSU  144 | 
+4   NL               1,300  |  12     | LAT  450 | BOT  198 | RIC  210 | VET  216 | MSC  130 | MAG   96 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -209,7 +210,6 @@ P   Player           score  |  FIA    | ALO        VET        LAT        TSU    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>
@@ -221,9 +221,10 @@ Austria-bottom-6 Qual
 
 P   Player           score  |  FIA    | VET        LAT        ZHO        STR        RIC        NOR        
 -----------------------------------------------------------------------------------------------------
-1   Pylade           1,446  |  25     | LAT  475 | STR  324 | ALB  195 | MSC  120 | ZHO  180 | RIC  152 | 
-2   Karl             1,374  |  18     | LAT  475 | STR  324 | MSC  135 | MAG  108 | ZHO  180 | TSU  152 | 
-3   TLB              1,331  |  15     | LAT  475 | MSC  144 | ZHO  300 | ALB  168 | MAG  100 | STR  144 | 
+1   NL               1,467  |  25     | STR  425 | LAT  360 | TSU  240 | VET  204 | MSC  110 | ALB  128 | 
+2   Pylade           1,446  |  18     | LAT  475 | STR  324 | ALB  195 | MSC  120 | ZHO  180 | RIC  152 | 
+3   Karl             1,374  |  15     | LAT  475 | STR  324 | MSC  135 | MAG  108 | ZHO  180 | TSU  152 | 
+4   TLB              1,331  |  12     | LAT  475 | MSC  144 | ZHO  300 | ALB  168 | MAG  100 | STR  144 | 
     Arttu      DNS
     Bill       DNS
     BWare      DNS
@@ -233,7 +234,6 @@ P   Player           score  |  FIA    | VET        LAT        ZHO        STR    
     Iceman     DNS
     Joe        DNS
     Leo        DNS
-    NL         DNS
     Winston    DNS
 -----------------------------------------------------------------------------------------------------
 </pre></code>
