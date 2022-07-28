@@ -1,8 +1,14 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
 
 
 
 ----------------------
-Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -11,13 +17,14 @@ So until it is fixed it is not being displayed below
 Total FIA Score table
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           193   |   11 
-    Karl         190   |   11 
-    TLB          171   |   11 
+    Karl         223   |   13 
+    TLB          221   |   13 
+    NL           220   |   13 
     Pylade       131   |    9 
-    F1Ung         73   |    5 
+    F1Ung        103   |    7 
     Arttu         33   |    2 
     GGP1          31   |    2 
     Bill          30   |    2 
@@ -28,6 +35,7 @@ P   Player       FIA   |Played
     Hobbes         0   |    0 
     BWare          0   |    0 
 ----------------------------------
+</pre></code>
 ---------------------
 Method is 'closest-p1-20'
 
@@ -35,15 +43,16 @@ Average FIA Score
 For players who have not entered all rounds
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            17.55|   11 
-    Karl          17.27|   11 
+    Karl          17.15|   13 
+    TLB           17   |   13 
+    NL            16.92|   13 
     Arttu         16.50|    2 
-    TLB           15.55|   11 
     GGP1          15.50|    2 
     Bill          15   |    2 
-    F1Ung         14.60|    5 
+    F1Ung         14.71|    7 
     Pylade        14.56|    9 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -52,7 +61,9 @@ P   Player       FIA   |Played
     Hobbes         0   |    0 
     BWare          0   |    0 
 ----------------------------------
+</pre></code>
 
+<pre><code>
 ------------------------
 Method is 'closest-p1-20'
 
@@ -60,10 +71,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL              1,023   |   11 |  4 |  1 |  3 |  1 |  1 |  1 |    |    |    |    
-    Karl            1,041   |   11 |  4 |    |  2 |  5 |    |    |    |    |    |    
-    TLB             1,038   |   11 |  1 |  4 |  2 |  2 |  2 |    |    |    |    |    
-    F1Ung             469   |    5 |  1 |  1 |    |  1 |  1 |  1 |    |    |    |    
+    NL              1,220   |   13 |  4 |  1 |  4 |  2 |  1 |  1 |    |    |    |    
+    Karl            1,219   |   13 |  4 |  1 |  3 |  5 |    |    |    |    |    |    
+    TLB             1,248   |   13 |  3 |  4 |  2 |  2 |  2 |    |    |    |    |    
+    F1Ung             659   |    7 |  1 |  2 |    |  2 |  1 |  1 |    |    |    |    
     GGP1              212   |    2 |  1 |    |    |    |    |    |  1 |    |    |    
     Pylade            856   |    9 |    |  3 |  3 |  1 |  2 |    |    |    |    |    
     Arttu             170   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
@@ -75,11 +86,61 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
     Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
     BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
+</pre></code>
 
 -----------------
 Individual rounds
 -----------------
 
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France-bottom-6 Race
+
+P   Player      FIA    | TSU LEC MAG LAT ZHO MSC BOT ALB GAS VET STR RIC OCO NOR ALO SAI PER RUS HAM VER 
+-------------------------------------------------------------------------------------------------------
+1   TLB         25     |  17          17  17  19      18          12                                     
+2   F1Ung       18     |  15          19  20          16      12  10                                     
+3   Karl        15     |      16      17  19          15                               6               5 
+4   NL          12     |              17  17      16      17      13  13                                 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France-bottom-6 Qual
+
+P   Player      FIA    | LAT MSC ZHO STR GAS ALB VET BOT OCO RIC MAG SAI TSU ALO RUS NOR HAM PER VER LEC 
+-------------------------------------------------------------------------------------------------------
+1   TLB         25     |  20  19  19  20      19                          13                             
+2   Karl        18     |  20  17  17  18      17                          11                             
+3   NL          15     |  20      19  19      20      16                  10                             
+4   F1Ung       12     |  19  16      17      18  16                      12                             
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria-bottom-6 Race
@@ -101,7 +162,9 @@ P   Player      FIA    | PER LAT SAI VET TSU GAS ZHO STR ALB BOT ALO RIC MAG NOR
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria-bottom-6 Sprint
@@ -123,7 +186,9 @@ P   Player      FIA    | ALO VET LAT TSU ALB GAS ZHO STR RIC NOR BOT MSC HAM MAG
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria-bottom-6 Qual
@@ -145,7 +210,9 @@ P   Player      FIA    | VET LAT ZHO STR RIC NOR TSU PER BOT ALB GAS HAM ALO MSC
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Britain-bottom-6 Race
@@ -167,7 +234,9 @@ P   Player      FIA    | ALB ZHO RUS BOT GAS OCO TSU RIC LAT STR MAG VET MSC VER
     Pylade     DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Britain-bottom-6 Qual
@@ -189,7 +258,9 @@ P   Player      FIA    | STR MSC VET MAG ALB OCO RIC TSU BOT GAS LAT ZHO RUS ALO
     Pylade     DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Canada-bottom-6 Race
@@ -211,7 +282,9 @@ P   Player      FIA    | PER MSC TSU MAG LAT NOR GAS ALB VET RIC STR ALO ZHO BOT
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Canada-bottom-6 Qual
@@ -233,7 +306,9 @@ P   Player      FIA    | TSU LEC LAT STR VET GAS NOR PER ALB BOT ZHO RIC RUS OCO
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Baku-bottom-6 Race
@@ -255,7 +330,9 @@ P   Player      FIA    | SAI LEC ZHO MAG STR LAT MSC TSU ALB BOT OCO NOR RIC ALO
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Baku-bottom-6 Qual
@@ -277,7 +354,9 @@ P   Player      FIA    | MSC STR LAT ALB MAG BOT ZHO OCO RIC NOR ALO VET TSU HAM
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Monaco-bottom-6 Race
@@ -299,7 +378,9 @@ P   Player      FIA    | MAG MSC ALB TSU ZHO LAT STR RIC OCO GAS VET BOT HAM ALO
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Monaco-bottom-6 Qual
@@ -321,3 +402,4 @@ P   Player      FIA    | ZHO LAT STR GAS ALB MSC RIC MAG BOT TSU OCO VET HAM ALO
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>

@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,11 +20,11 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           193   |   11 
-    Karl         190   |   11 
-    TLB          171   |   11 
+    Karl         223   |   13 
+    TLB          221   |   13 
+    NL           220   |   13 
     Pylade       131   |    9 
-    F1Ung         73   |    5 
+    F1Ung        103   |    7 
     Arttu         33   |    2 
     GGP1          31   |    2 
     Bill          30   |    2 
@@ -46,13 +46,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            17.55|   11 
-    Karl          17.27|   11 
+    Karl          17.15|   13 
+    TLB           17   |   13 
+    NL            16.92|   13 
     Arttu         16.50|    2 
-    TLB           15.55|   11 
     GGP1          15.50|    2 
     Bill          15   |    2 
-    F1Ung         14.60|    5 
+    F1Ung         14.71|    7 
     Pylade        14.56|    9 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -66,6 +66,54 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France-bottom-6 Race
+
+P   Player      FIA    | TSU      LEC      MAG      LAT      ZHO      MSC      
+-----------------------------------------------------------------------------
+1   TLB         25     | LAT 17 | ZHO 17 | STR 12 | TSU 17 | MSC 19 | ALB 18 | 
+2   F1Ung       18     | STR 10 | VET 12 | LAT 19 | ALB 16 | ZHO 20 | TSU 15 | 
+3   Karl        15     | LAT 17 | SAI  6 | ALB 15 | ZHO 19 | VER  5 | LEC 16 | 
+4   NL          12     | LAT 17 | ZHO 17 | BOT 16 | STR 13 | RIC 13 | GAS 17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France-bottom-6 Qual
+
+P   Player      FIA    | LAT      MSC      ZHO      STR      GAS      ALB      
+-----------------------------------------------------------------------------
+1   TLB         25     | LAT 20 | ZHO 19 | MSC 19 | STR 20 | ALB 19 | TSU 13 | 
+2   Karl        18     | LAT 20 | STR 18 | ALB 17 | TSU 11 | MSC 17 | ZHO 17 | 
+3   NL          15     | LAT 20 | ZHO 19 | TSU 10 | BOT 16 | STR 19 | ALB 20 | 
+4   F1Ung       12     | STR 17 | LAT 19 | VET 16 | ALB 18 | TSU 12 | MSC 16 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

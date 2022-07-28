@@ -1,8 +1,14 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
 
 
 
 ----------------------
-Totals Tables run for austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -11,13 +17,14 @@ So until it is fixed it is not being displayed below
 Total FIA Score table
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         105   |    6 
-    TLB           99   |    6 
-    NL            78   |    6 
+    TLB          124   |    7 
+    Karl         120   |    7 
+    NL            90   |    7 
+    F1Ung         63   |    4 
     Pylade        54   |    5 
-    F1Ung         45   |    3 
     Bill          18   |    1 
     Arttu         15   |    1 
     GGP1           6   |    1 
@@ -28,6 +35,7 @@ P   Player       FIA   |Played
     Hobbes         0   |    0 
     BWare          0   |    0 
 ----------------------------------
+</pre></code>
 ---------------------
 Method is 'closest-p1-20'
 
@@ -35,14 +43,15 @@ Average FIA Score
 For players who have not entered all rounds
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
     Bill          18   |    1 
-    Karl          17.50|    6 
-    TLB           16.50|    6 
-    F1Ung         15   |    3 
+    TLB           17.71|    7 
+    Karl          17.14|    7 
+    F1Ung         15.75|    4 
     Arttu         15   |    1 
-    NL            13   |    6 
+    NL            12.86|    7 
     Pylade        10.80|    5 
     GGP1           6   |    1 
     Winston        0   |    0 
@@ -52,7 +61,9 @@ P   Player       FIA   |Played
     Hobbes         0   |    0 
     BWare          0   |    0 
 ----------------------------------
+</pre></code>
 
+<pre><code>
 ------------------------
 Method is 'closest-p1-20'
 
@@ -60,10 +71,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              560   |    6 |  3 |    |  1 |  2 |    |    |    |    |    |    
-    TLB               565   |    6 |  1 |  3 |  1 |  1 |    |    |    |    |    |    
-    NL                549   |    6 |  1 |  1 |  2 |  1 |  1 |    |    |    |    |    
-    F1Ung             273   |    3 |  1 |    |    |  1 |    |  1 |    |    |    |    
+    Karl              638   |    7 |  3 |    |  2 |  2 |    |    |    |    |    |    
+    TLB               665   |    7 |  2 |  3 |  1 |  1 |    |    |    |    |    |    
+    NL                642   |    7 |  1 |  1 |  2 |  2 |  1 |    |    |    |    |    
+    F1Ung             365   |    4 |  1 |  1 |    |  1 |    |  1 |    |    |    |    
     Pylade            473   |    5 |    |  1 |  1 |  1 |  2 |    |    |    |    |    
     Bill              108   |    1 |    |  1 |    |    |    |    |    |    |    |    
     Arttu              90   |    1 |    |    |  1 |    |    |    |    |    |    |    
@@ -75,11 +86,37 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
     Hobbes              0   |    0 |    |    |    |    |    |    |    |    |    |    
     BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
 -----------------------------------------------------------------------------------------
+</pre></code>
 
 -----------------
 Individual rounds
 -----------------
 
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France-bottom-6 Race
+
+P   Player      FIA    |  TSU  LEC  MAG  LAT  ZHO  MSC 
+-----------------------------------------------------
+1   TLB         25     |  LAT  ZHO  STR  TSU  MSC  ALB 
+2   F1Ung       18     |  STR  VET  LAT  ALB  ZHO  TSU 
+3   Karl        15     |  LAT  SAI  ALB  ZHO  VER  LEC 
+4   NL          12     |  LAT  ZHO  BOT  STR  RIC  GAS 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------
+</pre></code>
+
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria-bottom-6 Race
@@ -101,7 +138,9 @@ P   Player      FIA    |  PER  LAT  SAI  VET  TSU  GAS
     Leo        DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria-bottom-6 Sprint
@@ -123,7 +162,9 @@ P   Player      FIA    |  ALO  VET  LAT  TSU  ALB  GAS
     Leo        DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Britain-bottom-6 Race
@@ -145,7 +186,9 @@ P   Player      FIA    |  ALB  ZHO  RUS  BOT  GAS  OCO
     Pylade     DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Canada-bottom-6 Race
@@ -167,7 +210,9 @@ P   Player      FIA    |  PER  MSC  TSU  MAG  LAT  NOR
     Leo        DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Baku-bottom-6 Race
@@ -189,7 +234,9 @@ P   Player      FIA    |  SAI  LEC  ZHO  MAG  STR  LAT
     Leo        DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Monaco-bottom-6 Race
@@ -211,3 +258,4 @@ P   Player      FIA    |  MAG  MSC  ALB  TSU  ZHO  LAT
     Leo        DNS
     Winston    DNS
 -----------------------------------------------------
+</pre></code>

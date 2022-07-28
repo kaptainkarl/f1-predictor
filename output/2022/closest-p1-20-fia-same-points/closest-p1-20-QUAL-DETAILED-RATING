@@ -1,8 +1,14 @@
+The <code><pre> ... </pre></code> Tags wrapping the tables sections below are there for if you want to copy and paste to disqus comments.
+The Tags will format a lined up table
+
+Please note you will see some colour highlighting because disqus thinks it is computer code.
+See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
+
 
 
 
 ----------------------
-Totals Tables run for austria-qual, britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for france-qual, austria-qual, britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -11,23 +17,25 @@ So until it is fixed it is not being displayed below
 Total FIA Score table
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           136   |   10 
-    GGP1         133   |   10 
-    Karl          99   |   11 
-    TLB           97   |   10 
+    GGP1         158   |   11 
+    NL           154   |   11 
+    TLB          112   |   11 
+    Karl         105   |   12 
+    Hobbes        99   |   12 
     Iceman        97   |    9 
-    Hobbes        89   |   11 
+    BWare         88   |    9 
+    F1Ung         86   |    9 
     Joe           82   |    8 
-    F1Ung         78   |    8 
-    BWare         76   |    8 
     Pylade        74   |    7 
     Leo           52   |    6 
     Bill          44   |    7 
     Arttu         28   |    2 
     Winston       11   |    1 
 ----------------------------------
+</pre></code>
 ---------------------
 Method is 'closest-p1-20'
 
@@ -35,24 +43,27 @@ Average FIA Score
 For players who have not entered all rounds
 ---------------------
 
+<pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    GGP1          14.36|   11 
+    NL            14   |   11 
     Arttu         14   |    2 
-    NL            13.60|   10 
-    GGP1          13.30|   10 
     Winston       11   |    1 
     Iceman        10.78|    9 
     Pylade        10.57|    7 
     Joe           10.25|    8 
-    F1Ung          9.75|    8 
-    TLB            9.70|   10 
-    BWare          9.50|    8 
-    Karl           9   |   11 
+    TLB           10.18|   11 
+    BWare          9.78|    9 
+    F1Ung          9.56|    9 
+    Karl           8.75|   12 
     Leo            8.67|    6 
-    Hobbes         8.09|   11 
+    Hobbes         8.25|   12 
     Bill           6.29|    7 
 ----------------------------------
+</pre></code>
 
+<pre><code>
 ------------------------
 Method is 'closest-p1-20'
 
@@ -60,26 +71,52 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    GGP1            1,069   |   10 |  3 |    |  1 |  1 |    |  3 |  1 |    |    |  1 
-    NL              1,055   |   10 |  2 |  2 |  2 |    |    |  1 |  1 |  1 |  1 |    
+    GGP1            1,189   |   11 |  4 |    |  1 |  1 |    |  3 |  1 |    |    |  1 
+    NL              1,173   |   11 |  2 |  3 |  2 |    |    |  1 |  1 |  1 |  1 |    
     Iceman            935   |    9 |  2 |    |  1 |  1 |  1 |    |  1 |  1 |    |    
+    TLB             1,181   |   11 |  1 |  1 |  1 |  1 |  1 |  3 |    |  2 |  1 |    
     Joe               855   |    8 |  1 |  1 |  1 |    |  2 |    |    |    |  1 |  2 
-    TLB             1,071   |   10 |  1 |  1 |    |  1 |  1 |  3 |    |  2 |  1 |    
     Leo               632   |    6 |  1 |  1 |    |    |    |    |  1 |    |  1 |  1 
-    F1Ung             858   |    8 |  1 |    |  1 |  1 |  1 |  1 |  1 |    |  1 |    
-    Hobbes          1,164   |   11 |    |  2 |  1 |  1 |  1 |  1 |  1 |    |  1 |    
-    Karl            1,168   |   11 |    |  2 |  1 |  1 |  1 |    |  3 |  2 |  1 |    
-    BWare             813   |    8 |    |  1 |  1 |  2 |    |  1 |  1 |  1 |    |  1 
+    F1Ung             968   |    9 |  1 |    |  1 |  1 |  1 |  2 |  1 |    |  1 |    
+    Hobbes          1,274   |   12 |    |  2 |  1 |  1 |  2 |  1 |  1 |    |  1 |    
+    Karl            1,278   |   12 |    |  2 |  1 |  1 |  1 |    |  4 |  2 |  1 |    
+    BWare             922   |    9 |    |  1 |  1 |  3 |    |  1 |  1 |  1 |    |  1 
     Arttu             205   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
     Pylade            732   |    7 |    |    |  2 |  3 |    |    |    |  2 |    |    
     Winston           108   |    1 |    |    |    |  1 |    |    |    |    |    |    
     Bill              732   |    7 |    |    |    |    |  2 |  2 |    |  2 |    |  1 
 -----------------------------------------------------------------------------------------
+</pre></code>
 
 -----------------
 Individual rounds
 -----------------
 
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+France Qual
+
+P   Player      FIA    | LEC VER PER HAM NOR RUS ALO TSU SAI MAG RIC OCO BOT VET ALB GAS STR ZHO MSC LAT 
+-------------------------------------------------------------------------------------------------------
+1   GGP1        25     |  20  20  20  20  20  20                                                         
+2   NL          18     |  20  20  20  20      19  19                                                     
+3   TLB         15     |  20  20  19  18      19          14                                             
+4   BWare       12     |  20  20  19      20              14  16                                         
+5   Hobbes      10     |  20  20  17  20      17          16                                             
+6   F1Ung        8     |  20  19  19  19      20          13                                             
+7   Karl         6     |  19  19  20  18      19          15                                             
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Austria Qual
@@ -101,7 +138,9 @@ P   Player      FIA    | VER LEC SAI RUS OCO MAG MSC ALO HAM GAS ALB BOT PER TSU
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Britain Qual
@@ -123,7 +162,9 @@ P   Player      FIA    | SAI VER LEC PER HAM NOR ALO RUS ZHO LAT GAS BOT TSU RIC
     Pylade     DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Canada Qual
@@ -145,7 +186,9 @@ P   Player      FIA    | VER ALO SAI HAM MAG MSC OCO RUS RIC ZHO BOT ALB PER NOR
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Baku Qual
@@ -167,7 +210,9 @@ P   Player      FIA    | LEC PER VER SAI RUS GAS HAM TSU VET ALO NOR RIC OCO ZHO
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Monaco Qual
@@ -189,7 +234,9 @@ P   Player      FIA    | LEC SAI PER VER NOR RUS ALO HAM VET OCO TSU BOT MAG RIC
     Leo        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Spain Qual
@@ -211,7 +258,9 @@ P   Player      FIA    | LEC VER SAI RUS PER HAM BOT MAG RIC MSC NOR OCO TSU GAS
     BWare      DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Miami Qual
@@ -233,7 +282,9 @@ P   Player      FIA    | LEC SAI VER PER BOT HAM GAS NOR TSU STR ALO RUS VET RIC
     GGP1       DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Enzo Qual
@@ -255,7 +306,9 @@ P   Player      FIA    | VER LEC NOR MAG ALO RIC PER BOT VET SAI RUS MSC HAM ZHO
     TLB        DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Australia Qual
@@ -277,7 +330,9 @@ P   Player      FIA    | LEC VER PER NOR HAM RUS RIC OCO SAI ALO GAS BOT TSU ZHO
     Pylade     DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Jeddah Qual
@@ -299,7 +354,9 @@ P   Player      FIA    | PER LEC SAI VER OCO RUS ALO BOT GAS MAG NOR RIC ZHO MSC
     Arttu      DNS
     Winston    DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
 
+<pre><code>
 Method is 'closest-p1-20'
 ---------------
 Bahrain Qual
@@ -321,3 +378,4 @@ P   Player      FIA    | LEC VER SAI PER HAM BOT MAG ALO RUS GAS OCO MSC NOR ALB
     NL         DNS
     Pylade     DNS
 -------------------------------------------------------------------------------------------------------
+</pre></code>
