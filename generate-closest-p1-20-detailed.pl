@@ -12,10 +12,10 @@ my $o_method = " --closest-p1-20 ";
 # --html-out
 
 run_them( "closest-p1-20-fia-same-points",
-          " --fia --no-pre-code --show-p1-to-p10-totals ");
+          " --fia --show-p1-to-p10-totals ");
 
 run_them( "closest-p1-20-fia-diff-points",
-          " --fia --fia-sprint-qual-diff --no-pre-code --show-p1-to-p10-totals ");
+          " --fia --fia-sprint-qual-diff --show-p1-to-p10-totals ");
 
 sub run_them {
 
