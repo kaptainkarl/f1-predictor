@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for hungary-bottom-6-race, france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,11 +20,11 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          124   |    7 
-    Karl         120   |    7 
-    NL            90   |    7 
-    F1Ung         63   |    4 
-    Pylade        54   |    5 
+    TLB          139   |    8 
+    Karl         138   |    8 
+    NL           115   |    8 
+    F1Ung         75   |    5 
+    Pylade        64   |    6 
     Bill          18   |    1 
     Arttu         15   |    1 
     GGP1           6   |    1 
@@ -47,12 +47,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Bill          18   |    1 
-    TLB           17.71|    7 
-    Karl          17.14|    7 
-    F1Ung         15.75|    4 
+    TLB           17.38|    8 
+    Karl          17.25|    8 
+    F1Ung         15   |    5 
     Arttu         15   |    1 
-    NL            12.86|    7 
-    Pylade        10.80|    5 
+    NL            14.38|    8 
+    Pylade        10.67|    6 
     GGP1           6   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -71,11 +71,11 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              638   |    7 |  3 |    |  2 |  2 |    |    |    |    |    |    
-    TLB               665   |    7 |  2 |  3 |  1 |  1 |    |    |    |    |    |    
-    NL                642   |    7 |  1 |  1 |  2 |  2 |  1 |    |    |    |    |    
-    F1Ung             365   |    4 |  1 |  1 |    |  1 |    |  1 |    |    |    |    
-    Pylade            473   |    5 |    |  1 |  1 |  1 |  2 |    |    |    |    |    
+    Karl              739   |    8 |  3 |  1 |  2 |  2 |    |    |    |    |    |    
+    TLB               766   |    8 |  2 |  3 |  2 |  1 |    |    |    |    |    |    
+    NL                750   |    8 |  2 |  1 |  2 |  2 |  1 |    |    |    |    |    
+    F1Ung             460   |    5 |  1 |  1 |    |  2 |    |  1 |    |    |    |    
+    Pylade            547   |    6 |    |  1 |  1 |  1 |  3 |    |    |    |    |    
     Bill              108   |    1 |    |  1 |    |    |    |    |    |    |    |    
     Arttu              90   |    1 |    |    |  1 |    |    |    |    |    |    |    
     GGP1              102   |    1 |    |    |    |    |    |    |  1 |    |    |    
@@ -91,6 +91,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Hungary-bottom-6 Race
+
+P   Player      FIA    | BOT      TSU      LAT      ALB      MAG      RIC      
+-----------------------------------------------------------------------------
+1   NL          25     | MAG 16 | LAT 19 | TSU 19 | ALB 20 | BOT 16 | ZHO 18 | 
+2   Karl        18     | LAT 18 | STR 12 | TSU 19 | ZHO 16 | MSC 18 | ALB 18 | 
+3   TLB         15     | LAT 18 | MSC 15 | TSU 19 | ZHO 16 | STR 15 | ALB 18 | 
+4   F1Ung       12     | STR 11 | VET 11 | LAT 20 | ALB 20 | ZHO 17 | TSU 16 | 
+5   Pylade      10     | RIC 15 | VER  2 | RUS  5 | ZHO 16 | LAT 18 | ALB 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
