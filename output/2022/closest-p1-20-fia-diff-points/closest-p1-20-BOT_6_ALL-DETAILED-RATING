@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for spa-bottom-6-race, spa-bottom-6-qual, hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,10 +20,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          147   |   15 
-    Karl         147   |   15 
-    NL           126   |   15 
-    F1Ung         77   |    9 
+    Karl         164   |   17 
+    TLB          160   |   17 
+    NL           151   |   17 
+    F1Ung         98   |   11 
     Pylade        71   |   11 
     Bill          18   |    2 
     Arttu         17   |    2 
@@ -46,12 +46,12 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB            9.80|   15 
-    Karl           9.80|   15 
+    Karl           9.65|   17 
+    TLB            9.41|   17 
     Bill           9   |    2 
-    F1Ung          8.56|    9 
+    F1Ung          8.91|   11 
+    NL             8.88|   17 
     Arttu          8.50|    2 
-    NL             8.40|   15 
     Pylade         6.45|   11 
     GGP1           4.50|    2 
     Winston        0   |    0 
@@ -71,10 +71,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl            1,429   |   15 |  5 |  2 |  3 |  5 |    |    |    |    |    |    
-    NL              1,429   |   15 |  5 |  1 |  4 |  3 |  1 |  1 |    |    |    |    
-    TLB             1,456   |   15 |  3 |  5 |  3 |  2 |  2 |    |    |    |    |    
-    F1Ung             867   |    9 |  1 |  2 |    |  3 |  2 |  1 |    |    |    |    
+    NL              1,624   |   17 |  6 |  1 |  4 |  4 |  1 |  1 |    |    |    |    
+    Karl            1,602   |   17 |  5 |  3 |  4 |  5 |    |    |    |    |    |    
+    TLB             1,659   |   17 |  3 |  5 |  4 |  3 |  2 |    |    |    |    |    
+    F1Ung           1,048   |   11 |  2 |  3 |    |  3 |  2 |  1 |    |    |    |    
     GGP1              212   |    2 |  1 |    |    |    |    |    |  1 |    |    |    
     Pylade          1,037   |   11 |    |  3 |  4 |  1 |  3 |    |    |    |    |    
     Arttu             170   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
@@ -91,6 +91,54 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Spa-bottom-6 Race
+
+P   Player      FIA    | HAM BOT LAT MSC MAG RIC ZHO TSU NOR STR ALB GAS VET OCO LEC ALO RUS SAI PER VER 
+-------------------------------------------------------------------------------------------------------
+1   NL          25     |      16  20  18      18  14                      12                             
+2   F1Ung       18     |          18  19          18  14          13          12                         
+3   Karl        15     |          18  19          17  15      12  15                                     
+4   TLB         12     |          18  18          17  15      15  15                                     
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Spa-bottom-6 Qual
+
+P   Player      FIA    | MSC ZHO NOR OCO LEC VER BOT TSU MAG LAT VET STR GAS RIC ALB RUS HAM ALO PER SAI 
+-------------------------------------------------------------------------------------------------------
+1   F1Ung        3     |  18  17      18              14      11                   9                     
+2   Karl         2     |  16  16                      16      11      10           8                     
+3   TLB          1     |  15      20  18  20  15  17                                                     
+4   NL           0     |          19  19  20  20              11               8                         
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

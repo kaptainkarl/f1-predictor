@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for hungary-bottom-6-race, france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for spa-bottom-6-race, hungary-bottom-6-race, france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,10 +20,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          139   |    8 
-    Karl         138   |    8 
-    NL           115   |    8 
-    F1Ung         75   |    5 
+    Karl         153   |    9 
+    TLB          151   |    9 
+    NL           140   |    9 
+    F1Ung         93   |    6 
     Pylade        64   |    6 
     Bill          18   |    1 
     Arttu         15   |    1 
@@ -47,11 +47,11 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     Bill          18   |    1 
-    TLB           17.38|    8 
-    Karl          17.25|    8 
-    F1Ung         15   |    5 
+    Karl          17   |    9 
+    TLB           16.78|    9 
+    NL            15.56|    9 
+    F1Ung         15.50|    6 
     Arttu         15   |    1 
-    NL            14.38|    8 
     Pylade        10.67|    6 
     GGP1           6   |    1 
     Winston        0   |    0 
@@ -71,10 +71,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl              739   |    8 |  3 |  1 |  2 |  2 |    |    |    |    |    |    
-    TLB               766   |    8 |  2 |  3 |  2 |  1 |    |    |    |    |    |    
-    NL                750   |    8 |  2 |  1 |  2 |  2 |  1 |    |    |    |    |    
-    F1Ung             460   |    5 |  1 |  1 |    |  2 |    |  1 |    |    |    |    
+    Karl              835   |    9 |  3 |  1 |  3 |  2 |    |    |    |    |    |    
+    NL                848   |    9 |  3 |  1 |  2 |  2 |  1 |    |    |    |    |    
+    TLB               864   |    9 |  2 |  3 |  2 |  2 |    |    |    |    |    |    
+    F1Ung             554   |    6 |  1 |  2 |    |  2 |    |  1 |    |    |    |    
     Pylade            547   |    6 |    |  1 |  1 |  1 |  3 |    |    |    |    |    
     Bill              108   |    1 |    |  1 |    |    |    |    |    |    |    |    
     Arttu              90   |    1 |    |    |  1 |    |    |    |    |    |    |    
@@ -91,6 +91,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Spa-bottom-6 Race
+
+P   Player      FIA    | HAM BOT LAT MSC MAG RIC ZHO TSU NOR STR ALB GAS VET OCO LEC ALO RUS SAI PER VER 
+-------------------------------------------------------------------------------------------------------
+1   NL          25     |      16  20  18      18  14                      12                             
+2   F1Ung       18     |          18  19          18  14          13          12                         
+3   Karl        15     |          18  19          17  15      12  15                                     
+4   TLB         12     |          18  18          17  15      15  15                                     
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
