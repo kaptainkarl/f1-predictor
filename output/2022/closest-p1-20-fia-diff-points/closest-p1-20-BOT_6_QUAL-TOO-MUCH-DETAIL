@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,9 +20,9 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            11   |    8 
-    Karl          11   |    8 
-    TLB            9   |    8 
+    NL            13   |    9 
+    TLB           12   |    9 
+    Karl          12   |    9 
     Pylade         7   |    5 
     F1Ung          5   |    5 
     GGP1           3   |    1 
@@ -48,10 +48,10 @@ P   Player       FIA   |Played
 ----------------------------------
     GGP1           3   |    1 
     Arttu          2   |    1 
+    NL             1.44|    9 
     Pylade         1.40|    5 
-    NL             1.38|    8 
-    Karl           1.38|    8 
-    TLB            1.12|    8 
+    TLB            1.33|    9 
+    Karl           1.33|    9 
     F1Ung          1   |    5 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -71,9 +71,9 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL                776   |    8 |  3 |    |  2 |  2 |    |  1 |    |    |    |    
-    Karl              767   |    8 |  2 |  2 |  1 |  3 |    |    |    |    |    |    
-    TLB               795   |    8 |  1 |  2 |  2 |  1 |  2 |    |    |    |    |    
+    NL                875   |    9 |  3 |  1 |  2 |  2 |    |  1 |    |    |    |    
+    Karl              858   |    9 |  2 |  2 |  2 |  3 |    |    |    |    |    |    
+    TLB               888   |    9 |  2 |  2 |  2 |  1 |  2 |    |    |    |    |    
     F1Ung             494   |    5 |  1 |  1 |    |  1 |  2 |    |    |    |    |    
     GGP1              110   |    1 |  1 |    |    |    |    |    |    |    |    |    
     Pylade            490   |    5 |    |  2 |  3 |    |    |    |    |    |    |    
@@ -91,6 +91,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Dutch-bottom-6 Qual
+
+P   Player      FIA   |LAT    VET    MAG    RIC    BOT    ALB    LAT VET MAG RIC BOT ALB ZHO ALO OCO GAS STR TSU MSC NOR RUS PER HAM SAI LEC VER 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   TLB          3    |LAT 20|ZHO 15|TSU 11|MSC 11|ALB 19|MAG 17| 20      17          19  15                  11  11                             
+2   NL           2    |LAT 20|ZHO 15|ALB 17|BOT 19|TSU 13|STR 15| 20              19  17  15              15  13                                 
+3   Karl         1    |LAT 20|STR 11|ALB 17|TSU 12|MSC 12|ZHO 19| 20                  17  19              11  12  12                             
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    F1Ung      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

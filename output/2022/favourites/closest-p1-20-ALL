@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for spa-race, spa-qual, hungary-race, hungary-qual, france-race, france-qual, austria-race, austria-sprint, austria-qual, britain-race, britain-qual, canada-race, canada-qual, baku-race, baku-qual, monaco-race, monaco-qual, spain-race, spain-qual, miami-race, miami-qual, enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
+Totals Tables run for dutch-race, dutch-qual, spa-race, spa-qual, hungary-race, hungary-qual, france-race, france-qual, austria-race, austria-sprint, austria-qual, britain-race, britain-qual, canada-race, canada-qual, baku-race, baku-qual, monaco-race, monaco-qual, spain-race, spain-qual, miami-race, miami-qual, enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,14 +20,14 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           400   |   28 
-    GGP1         348.50|   28 
-    TLB          342.50|   29 
-    Karl         338   |   30 
-    Hobbes       294.50|   30 
-    F1Ung        253   |   23 
+    NL           423   |   30 
+    GGP1         385.50|   30 
+    TLB          382.50|   31 
+    Karl         354   |   32 
+    Hobbes       330.50|   32 
+    F1Ung        271   |   25 
     Iceman       223   |   21 
-    BWare        199   |   22 
+    BWare        217   |   24 
     Joe          173   |   16 
     Pylade       153   |   20 
     Leo          111   |   13 
@@ -46,17 +46,17 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            14.29|   28 
-    GGP1          12.45|   28 
-    TLB           11.81|   29 
-    Karl          11.27|   30 
+    NL            14.10|   30 
+    GGP1          12.85|   30 
+    TLB           12.34|   31 
+    Karl          11.06|   32 
     Winston       11   |    1 
-    F1Ung         11   |   23 
+    F1Ung         10.84|   25 
     Joe           10.81|   16 
     Iceman        10.62|   21 
-    Hobbes         9.82|   30 
+    Hobbes        10.33|   32 
     Arttu          9.50|    4 
-    BWare          9.05|   22 
+    BWare          9.04|   24 
     Leo            8.54|   13 
     Pylade         7.65|   20 
     Bill           5.70|   15 
@@ -66,6 +66,54 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Dutch Race
+
+P   Player      FIA    | VER      RUS      LEC      HAM      PER      ALO      
+-----------------------------------------------------------------------------
+1   GGP1        25     | VER 20 | LEC 19 | SAI 15 | HAM 20 | RUS 17 | PER 19 | 
+2   Hobbes      18     | VER 20 | PER 17 | LEC 20 | HAM 20 | SAI 17 | RUS 16 | 
+3   TLB         15     | VER 20 | LEC 19 | SAI 15 | HAM 20 | PER 20 | RUS 16 | 
+4   BWare       12     | VER 20 | ALO 16 | SAI 15 | PER 19 | LEC 18 | NOR 19 | 
+5   F1Ung       10     | LEC 18 | VER 19 | HAM 19 | RUS 18 | SAI 17 | PER 19 | 
+6   NL           8     | LEC 18 | VER 19 | HAM 19 | SAI 16 | RUS 17 | PER 19 | 
+7   Karl         6     | LEC 18 | VER 19 | PER 18 | SAI 16 | RUS 17 | ALO 20 | 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Dutch Qual
+
+P   Player      FIA    | VER      LEC      SAI      HAM      PER      RUS      
+-----------------------------------------------------------------------------
+1   TLB         25     | VER 20 | LEC 20 | SAI 20 | HAM 20 | RUS 19 | PER 19 | 
+2   Hobbes      18     | VER 20 | PER 17 | LEC 19 | SAI 19 | RUS 19 | ALO 13 | 
+3   NL          15     | LEC 19 | VER 19 | SAI 20 | HAM 20 | ALO 12 | RUS 20 | 
+4   GGP1        12     | LEC 19 | VER 19 | RUS 17 | SAI 19 | HAM 19 | NOR 19 | 
+5   Karl        10     | LEC 19 | VER 19 | PER 18 | SAI 19 | RUS 19 | ALO 13 | 
+6   F1Ung        8     | LEC 19 | SAI 19 | VER 18 | RUS 18 | HAM 19 | NOR 19 | 
+7   BWare        6     | LEC 19 | SAI 19 | VER 18 | NOR 17 | ALO 12 | PER 19 | 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
