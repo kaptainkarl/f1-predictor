@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,11 +18,11 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB          166.8
-Karl         153.4
-NL           142.4
-F1Ung         83.3
-Pylade        75.8
+TLB          195.6
+Karl         182.4
+NL           165.8
+F1Ung        124.8
+Pylade       113.1
 GGP1          16  
 Bill          16  
 Arttu         12.3
@@ -43,11 +43,11 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          166.75|    9 
-    Karl         153.42|    9 
-    NL           142.42|    9 
-    F1Ung         83.33|    5 
-    Pylade        75.75|    5 
+    TLB          195.58|   11 
+    Karl         182.42|   11 
+    NL           165.75|   11 
+    F1Ung        124.83|    7 
+    Pylade       113.08|    7 
     GGP1          16   |    1 
     Bill          16   |    1 
     Arttu         12.33|    1 
@@ -69,13 +69,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB           18.53|    9 
-    Karl          17.05|    9 
-    F1Ung         16.67|    5 
+    F1Ung         17.83|    7 
+    TLB           17.78|   11 
+    Karl          16.58|   11 
+    Pylade        16.15|    7 
     GGP1          16   |    1 
     Bill          16   |    1 
-    NL            15.82|    9 
-    Pylade        15.15|    5 
+    NL            15.07|   11 
     Arttu         12.33|    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -94,11 +94,11 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB                10   |    9 
-    NL                  7   |    9 
-    Karl                7   |    9 
-    F1Ung               5   |    5 
-    Pylade              3   |    5 
+    TLB                11   |   11 
+    Karl                8   |   11 
+    F1Ung               8   |    7 
+    NL                  7   |   11 
+    Pylade              6   |    7 
     GGP1                1   |    1 
     Bill                1   |    1 
     Winston             0   |    0 
@@ -120,13 +120,13 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player      Ave Score   |Played
 ---------------------------------------
-    TLB                 1.11|    9 
+    F1Ung               1.14|    7 
+    TLB                 1   |   11 
     GGP1                1   |    1 
-    F1Ung               1   |    5 
     Bill                1   |    1 
-    NL                  0.78|    9 
-    Karl                0.78|    9 
-    Pylade              0.60|    5 
+    Pylade              0.86|    7 
+    Karl                0.73|   11 
+    NL                  0.64|   11 
     Winston             0   |    0 
     Leo                 0   |    0 
     Joe                 0   |    0 
@@ -145,11 +145,11 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    TLB                10   |    9 |  7 |  1 |  1 |    |    |    |    |    |    |    
-    Karl                7   |    9 |  5 |  1 |  3 |    |    |    |    |    |    |    
-    NL                  7   |    9 |  4 |  1 |  2 |  1 |    |  1 |    |    |    |    
-    Pylade              3   |    5 |  2 |  1 |  1 |  1 |    |    |    |    |    |    
-    F1Ung               5   |    5 |  2 |    |  2 |  1 |    |    |    |    |    |    
+    TLB                11   |   11 |  7 |  2 |  2 |    |    |    |    |    |    |    
+    Karl                8   |   11 |  5 |  2 |  3 |  1 |    |    |    |    |    |    
+    NL                  7   |   11 |  4 |  1 |  3 |  2 |    |  1 |    |    |    |    
+    F1Ung               8   |    7 |  3 |  1 |  2 |  1 |    |    |    |    |    |    
+    Pylade              6   |    7 |  3 |  1 |  2 |  1 |    |    |    |    |    |    
     GGP1                1   |    1 |  1 |    |    |    |    |    |    |    |    |    
     Bill                1   |    1 |  1 |    |    |    |    |    |    |    |    |    
     Arttu               0   |    1 |    |    |  1 |    |    |    |    |    |    |    
@@ -165,6 +165,54 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'exact and no-multiplier'
+---------------
+monza-bottom-6-grid
+
+P   Player           score  |  FIA    | TSU        HAM        SAI        MSC        MAG        BOT        
+-----------------------------------------------------------------------------------------------------
+1   Pylade               3  |  25     | TSU    1 | HAM    1 | SAI    1 | DEV      | LAT      | ZHO      | 
+2   F1Ung                1  |  16.50  | LAT      | MSC      | STR      | VET      | MAG    1 | ZHO      | 
+2   TLB                  1  |  16.50  | TSU    1 | BOT      | LAT      | HAM      | SAI      | MSC      | 
+4   Karl                 0  |  11     | HAM      | SAI      | MAG      | BOT      | STR      | VET      | 
+4   NL                   0  |  11     | BOT      | MSC      | RIC      | MAG      | ZHO      | STR      | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'exact and no-multiplier'
+---------------
+Monza-bottom-6 Qual
+
+P   Player           score  |  FIA    | MSC        MAG        STR        VET        LAT        TSU        
+-----------------------------------------------------------------------------------------------------
+1   F1Ung                2  |  25     | LAT      | MSC      | STR    1 | VET    1 | MAG      | ZHO      | 
+2   Karl                 1  |  18     | STR      | MSC      | MAG      | VET    1 | BOT      | RIC      | 
+3   NL                   0  |  12.33  | BOT      | ZHO      | RIC      | MSC      | MAG      | LAT      | 
+3   Pylade               0  |  12.33  | DEV      | LAT      | ZHO      | MAG      | VET      | RIC      | 
+3   TLB                  0  |  12.33  | LAT      | TSU      | BOT      | MSC      | STR      | MAG      | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'exact and no-multiplier'

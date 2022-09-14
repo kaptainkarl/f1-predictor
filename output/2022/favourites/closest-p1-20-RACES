@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for monza-race, dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,16 +20,16 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           229   |   16 
-    TLB          215.50|   17 
-    Karl         202   |   17 
-    Hobbes       185.50|   17 
-    GGP1         184.50|   16 
-    F1Ung        154   |   13 
+    TLB          240.50|   18 
+    NL           237   |   17 
+    Karl         212   |   18 
+    Hobbes       203.50|   18 
+    GGP1         190.50|   17 
+    F1Ung        169   |   14 
+    BWare        127   |   14 
     Iceman       120   |   11 
-    BWare        115   |   13 
     Joe           91   |    8 
-    Pylade        75   |   12 
+    Pylade        79   |   13 
     Leo           59   |    7 
     Bill          41.50|    8 
     Arttu         10   |    2 
@@ -46,17 +46,17 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            14.31|   16 
-    TLB           12.68|   17 
-    Karl          11.88|   17 
-    F1Ung         11.85|   13 
-    GGP1          11.53|   16 
+    NL            13.94|   17 
+    TLB           13.36|   18 
+    F1Ung         12.07|   14 
+    Karl          11.78|   18 
     Joe           11.38|    8 
-    Hobbes        10.91|   17 
+    Hobbes        11.31|   18 
+    GGP1          11.21|   17 
     Iceman        10.91|   11 
-    BWare          8.85|   13 
+    BWare          9.07|   14 
     Leo            8.43|    7 
-    Pylade         6.25|   12 
+    Pylade         6.08|   13 
     Bill           5.19|    8 
     Arttu          5   |    2 
     Winston        0   |    0 
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Monza Race
+
+P   Player      FIA    | VER      LEC      RUS      SAI      HAM      PER      
+-----------------------------------------------------------------------------
+1   TLB         25     | VER 20 | LEC 20 | RUS 20 | PER 18 | SAI 19 | HAM 19 | 
+2   Hobbes      18     | VER 20 | LEC 20 | SAI 19 | RUS 19 | PER 19 | ALO  7 | 
+3   F1Ung       15     | VER 20 | LEC 20 | PER 17 | SAI 20 | ALO  6 | RUS 17 | 
+4   BWare       12     | VER 20 | LEC 20 | ALO  4 | NOR 17 | OCO 14 | SAI 18 | 
+5   Karl        10     | VER 20 | LEC 20 | NOR 16 | ALO  5 | OCO 14 | PER 20 | 
+6   NL           8     | VER 20 | ALO  3 | PER 17 | OCO 13 | HAM 20 | NOR 19 | 
+7   GGP1         6     | LEC 19 | VER 19 | RUS 20 | ALO  5 | PER 19 | SAI 18 | 
+8   Pylade       4     | LEC 19 | VER 19 | SAI 19 | PER 18 | RUS 18 | NOR 19 | 
+    Arttu      DNS
+    Bill       DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

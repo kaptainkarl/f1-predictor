@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,11 +20,11 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           155   |    9 
-    Karl         152   |    9 
-    TLB          148   |    9 
-    Pylade        81   |    5 
-    F1Ung         75   |    5 
+    Karl         192   |   11 
+    NL           180   |   11 
+    TLB          178   |   11 
+    Pylade       116   |    7 
+    F1Ung        105   |    7 
     GGP1          25   |    1 
     Arttu         18   |    1 
     Bill          12   |    1 
@@ -48,11 +48,11 @@ P   Player       FIA   |Played
 ----------------------------------
     GGP1          25   |    1 
     Arttu         18   |    1 
-    NL            17.22|    9 
-    Karl          16.89|    9 
-    TLB           16.44|    9 
-    Pylade        16.20|    5 
-    F1Ung         15   |    5 
+    Karl          17.45|   11 
+    Pylade        16.57|    7 
+    NL            16.36|   11 
+    TLB           16.18|   11 
+    F1Ung         15   |    7 
     Bill          12   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -71,12 +71,12 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL                875   |    9 |  3 |  1 |  2 |  2 |    |  1 |    |    |    |    
-    Karl              858   |    9 |  2 |  2 |  2 |  3 |    |    |    |    |    |    
-    TLB               888   |    9 |  2 |  2 |  2 |  1 |  2 |    |    |    |    |    
-    F1Ung             494   |    5 |  1 |  1 |    |  1 |  2 |    |    |    |    |    
+    Karl            1,069   |   11 |  3 |  2 |  3 |  3 |    |    |    |    |    |    
+    NL              1,053   |   11 |  3 |  1 |  3 |  2 |  1 |  1 |    |    |    |    
+    TLB             1,087   |   11 |  2 |  3 |  2 |  2 |  2 |    |    |    |    |    
+    Pylade            685   |    7 |  1 |  2 |  3 |    |  1 |    |    |    |    |    
+    F1Ung             695   |    7 |  1 |  2 |    |  2 |  2 |    |    |    |    |    
     GGP1              110   |    1 |  1 |    |    |    |    |    |    |    |    |    
-    Pylade            490   |    5 |    |  2 |  3 |    |    |    |    |    |    |    
     Arttu              80   |    1 |    |  1 |    |    |    |    |    |    |    |    
     Bill               98   |    1 |    |    |    |  1 |    |    |    |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -91,6 +91,54 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+monza-bottom-6-grid
+
+P   Player      FIA   |TSU    HAM    SAI    MSC    MAG    BOT    TSU HAM SAI MSC MAG BOT OCO PER STR VET LAT ZHO DEV VER ALO GAS RIC NOR RUS LEC 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   Pylade      25    |TSU 20|HAM 20|SAI 20|DEV 11|LAT 14|ZHO 14| 20  20  20                              14  14  11                             
+2   TLB         18    |TSU 20|BOT 16|LAT 12|HAM 18|SAI 18|MSC 18| 20  18  18  18      16                  12                                     
+3   Karl        15    |HAM 19|SAI 19|MAG 18|BOT 18|STR 16|VET 16|     19  19      18  18          16  16                                         
+4   F1Ung       12    |LAT 10|MSC 18|STR 14|VET 14|MAG 20|ZHO 14|             18  20              14  14  10  14                                 
+5   NL          10    |BOT 15|MSC 18|RIC  6|MAG 19|ZHO 13|STR 17|             18  19  15          17          13                   6             
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Monza-bottom-6 Qual
+
+P   Player      FIA   |MSC    MAG    STR    VET    LAT    TSU    MSC MAG STR VET LAT TSU ZHO DEV BOT OCO ALO GAS RIC NOR RUS HAM PER SAI VER LEC 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   Karl        25    |STR 18|MSC 19|MAG 19|VET 20|BOT 16|RIC 13| 19  19  18  20                  16              13                             
+2   F1Ung       18    |LAT 16|MSC 19|STR 20|VET 20|MAG 17|ZHO 19| 19  17  20  20  16      19                                                     
+3   NL          15    |BOT 12|ZHO 15|RIC 10|MSC 17|MAG 17|LAT 19| 17  17          19      15      12              10                             
+4   TLB         12    |LAT 16|TSU 16|BOT 14|MSC 17|STR 18|MAG 16| 17  16  18      16  16          14                                             
+5   Pylade      10    |DEV 13|LAT 17|ZHO 16|MAG 18|VET 19|RIC 13|     18      19  17      16  13                  13                             
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
