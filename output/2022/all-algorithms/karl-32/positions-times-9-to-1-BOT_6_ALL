@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for monza-bottom-6-race, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-race, dutch-bottom-6-qual, spa-bottom-6-race, spa-bottom-6-qual, hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for singapore-bottom-6-race, singapore-bottom-6-qual, monza-bottom-6-race, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-race, dutch-bottom-6-qual, spa-bottom-6-race, spa-bottom-6-qual, hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-TLB          394  
-Karl         369  
-NL           344.5
-F1Ung        245  
+TLB          427  
+Karl         396  
+NL           394.5
+F1Ung        275  
 Pylade       202.5
 GGP1          37  
 Arttu         35  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          394   |   22 
-    Karl         369   |   22 
-    NL           344.50|   22 
-    F1Ung        245   |   15 
+    TLB          427   |   24 
+    Karl         396   |   24 
+    NL           394.50|   24 
+    F1Ung        275   |   17 
     Pylade       202.50|   14 
     GGP1          37   |    2 
     Arttu         35   |    2 
@@ -70,12 +70,12 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          18.50|    2 
-    TLB           17.91|   22 
+    TLB           17.79|   24 
     Arttu         17.50|    2 
-    Karl          16.77|   22 
+    Karl          16.50|   24 
     Bill          16.50|    2 
-    F1Ung         16.33|   15 
-    NL            15.66|   22 
+    NL            16.44|   24 
+    F1Ung         16.18|   17 
     Pylade        14.46|   14 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -94,10 +94,10 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB             4,890   |   22 
-    Karl            4,770   |   22 
-    NL              4,098   |   22 
-    F1Ung           2,739   |   15 
+    TLB             5,406   |   24 
+    Karl            5,034   |   24 
+    NL              4,894   |   24 
+    F1Ung           3,230   |   17 
     Pylade          2,687   |   14 
     GGP1              558   |    2 
     Bill              554   |    2 
@@ -122,11 +122,11 @@ P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              279   |    2 
     Bill              277   |    2 
-    TLB               222.27|   22 
-    Karl              216.82|   22 
+    TLB               225.25|   24 
+    Karl              209.75|   24 
+    NL                203.92|   24 
     Pylade            191.93|   14 
-    NL                186.27|   22 
-    F1Ung             182.60|   15 
+    F1Ung             190   |   17 
     Arttu             136   |    2 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -145,10 +145,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl            4,770   |   22 |  5 |  3 |  9 |  4 |  1 |    |    |    |    |    
-    NL              4,098   |   22 |  5 |  3 |  3 |  6 |  5 |    |    |    |    |    
-    TLB             4,890   |   22 |  4 | 11 |  4 |  3 |    |    |    |    |    |    
-    F1Ung           2,739   |   15 |  3 |  4 |  3 |  3 |  1 |  1 |    |    |    |    
+    NL              4,894   |   24 |  7 |  3 |  3 |  6 |  5 |    |    |    |    |    
+    Karl            5,034   |   24 |  5 |  3 | 10 |  5 |  1 |    |    |    |    |    
+    TLB             5,406   |   24 |  4 | 12 |  5 |  3 |    |    |    |    |    |    
+    F1Ung           3,230   |   17 |  3 |  5 |  3 |  4 |  1 |  1 |    |    |    |    
     Pylade          2,687   |   14 |  2 |  1 |  5 |  2 |  3 |  1 |    |    |    |    
     GGP1              558   |    2 |  1 |    |    |  1 |    |    |    |    |    |    
     Arttu             272   |    2 |  1 |    |    |    |  1 |    |    |    |    |    
@@ -165,6 +165,54 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
+Singapore-bottom-6 Race
+
+P   Player           score  |  FIA    | ZHO        LAT        ALO        ALB        OCO        TSU        
+-----------------------------------------------------------------------------------------------------
+1   NL                 276  |  25     | LAT  144 | MAG      | BOT      | ALB   96 | ZHO    4 | TSU   32 | 
+2   TLB                204  |  18     | LAT  144 | MSC      | ZHO   32 | TSU   24 | MAG    4 | STR      | 
+3   Karl               180  |  15     | LAT  144 | STR      | TSU   16 | ZHO   12 | MSC    8 | RIC      | 
+4   F1Ung              152  |  12     | LAT  144 | MSC      | STR      | VET      | ZHO    4 | MAG    4 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
+Singapore-bottom-6 Qual
+
+P   Player           score  |  FIA    | LAT        ALB        OCO        RIC        BOT        ZHO        
+-----------------------------------------------------------------------------------------------------
+1   NL                 520  |  25     | LAT  288 | ALB  192 | MSC    4 | MAG      | ZHO   32 | STR    4 | 
+2   F1Ung              339  |  18     | LAT  288 | MSC      | ZHO   16 | STR    3 | VET   16 | BOT   16 | 
+3   TLB                312  |  15     | LAT  288 | MSC      | ZHO   16 | TSU      | ALB    8 | MAG      | 
+4   Karl                84  |  12     | STR      | MSC      | MAG      | VET   12 | BOT   64 | RIC    8 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-32 and positions-times-9-to-1'

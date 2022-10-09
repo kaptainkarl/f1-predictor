@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for monza-bottom-6-race, dutch-bottom-6-race, spa-bottom-6-race, hungary-bottom-6-race, france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
+Totals Tables run for singapore-bottom-6-race, monza-bottom-6-race, dutch-bottom-6-race, spa-bottom-6-race, hungary-bottom-6-race, france-bottom-6-race, austria-bottom-6-race, austria-bottom-6-sprint, britain-bottom-6-race, canada-bottom-6-race, baku-bottom-6-race, monaco-bottom-6-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,10 +20,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL           195   |   11 
-    TLB          186.50|   11 
-    Karl         169.50|   11 
-    F1Ung        109   |    8 
+    NL           213   |   12 
+    TLB          211.50|   12 
+    Karl         184.50|   12 
+    F1Ung        121   |    9 
     Pylade       106   |    7 
     Bill          25   |    1 
     Arttu         25   |    1 
@@ -49,11 +49,11 @@ P   Player       FIA   |Played
     Bill          25   |    1 
     Arttu         25   |    1 
     GGP1          18   |    1 
-    NL            17.73|   11 
-    TLB           16.95|   11 
-    Karl          15.41|   11 
+    NL            17.75|   12 
+    TLB           17.62|   12 
+    Karl          15.38|   12 
     Pylade        15.14|    7 
-    F1Ung         13.62|    8 
+    F1Ung         13.44|    9 
     Winston        0   |    0 
     Leo            0   |    0 
     Joe            0   |    0 
@@ -71,10 +71,10 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    NL              4,454   |   11 
-    TLB             4,350   |   11 
-    Karl            4,249   |   11 
-    F1Ung           3,037   |    8 
+    NL              4,867   |   12 
+    TLB             4,774   |   12 
+    Karl            4,625   |   12 
+    F1Ung           3,406   |    9 
     Pylade          2,534   |    7 
     Bill              451   |    1 
     GGP1              424   |    1 
@@ -100,10 +100,10 @@ P   Player      Ave Score   |Played
     Bill              451   |    1 
     GGP1              424   |    1 
     Arttu             422   |    1 
-    NL                404.91|   11 
-    TLB               395.45|   11 
-    Karl              386.27|   11 
-    F1Ung             379.62|    8 
+    NL                405.58|   12 
+    TLB               397.83|   12 
+    Karl              385.42|   12 
+    F1Ung             378.44|    9 
     Pylade            362   |    7 
     Winston             0   |    0 
     Leo                 0   |    0 
@@ -117,6 +117,30 @@ P   Player      Ave Score   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'diff and positions-times-9-to-1'
+---------------
+Singapore-bottom-6 Race
+
+P   Player           score  |  FIA    | ZHO        LAT        ALO        ALB        OCO        TSU        
+-----------------------------------------------------------------------------------------------------
+1   TLB                424  |  25     | LAT  171 | MSC   84 | ZHO   72 | TSU   54 | MAG   32 | STR   11 | 
+2   NL                 413  |  18     | LAT  171 | MAG   78 | BOT   52 | ALB   60 | ZHO   32 | TSU   20 | 
+3   Karl               376  |  15     | LAT  171 | STR   42 | TSU   68 | ZHO   51 | MSC   34 | RIC   10 | 
+4   F1Ung              369  |  12     | LAT  171 | MSC   84 | STR   32 | VET   33 | ZHO   32 | MAG   17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'diff and positions-times-9-to-1'

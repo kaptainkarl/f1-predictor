@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for monza-race, dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for singapore-race, monza-race, dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,12 +20,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          240.50|   18 
-    NL           237   |   17 
-    Karl         212   |   18 
-    Hobbes       203.50|   18 
-    GGP1         190.50|   17 
-    F1Ung        169   |   14 
+    TLB          258.50|   19 
+    NL           245   |   18 
+    Karl         222   |   19 
+    Hobbes       218.50|   19 
+    GGP1         215.50|   18 
+    F1Ung        181   |   15 
     BWare        127   |   14 
     Iceman       120   |   11 
     Joe           91   |    8 
@@ -46,13 +46,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            13.94|   17 
-    TLB           13.36|   18 
-    F1Ung         12.07|   14 
-    Karl          11.78|   18 
+    NL            13.61|   18 
+    TLB           13.61|   19 
+    F1Ung         12.07|   15 
+    GGP1          11.97|   18 
+    Karl          11.68|   19 
+    Hobbes        11.50|   19 
     Joe           11.38|    8 
-    Hobbes        11.31|   18 
-    GGP1          11.21|   17 
     Iceman        10.91|   11 
     BWare          9.07|   14 
     Leo            8.43|    7 
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Singapore Race
+
+P   Player      FIA    | PER      LEC      SAI      NOR      RIC      STR      
+-----------------------------------------------------------------------------
+1   GGP1        25     | VER 14 | LEC 20 | SAI 20 | PER 17 | HAM 16 | RUS 12 | 
+2   TLB         18     | VER 14 | LEC 20 | SAI 20 | HAM 15 | RUS 11 | PER 15 | 
+3   Hobbes      15     | VER 14 | LEC 20 | RUS  9 | HAM 15 | SAI 18 | PER 15 | 
+4   F1Ung       12     | VER 14 | LEC 20 | HAM 14 | RUS 10 | SAI 18 | PER 15 | 
+5   Karl        10     | VER 14 | RUS  8 | LEC 19 | HAM 15 | SAI 18 | PER 15 | 
+6   NL           8     | VER 14 | HAM 13 | LEC 19 | RUS 10 | SAI 18 | PER 15 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

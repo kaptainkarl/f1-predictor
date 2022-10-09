@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for singapore-bottom-6-qual, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,11 +20,11 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         192   |   11 
-    NL           180   |   11 
-    TLB          178   |   11 
+    NL           205   |   12 
+    Karl         204   |   12 
+    TLB          196   |   12 
+    F1Ung        120   |    8 
     Pylade       116   |    7 
-    F1Ung        105   |    7 
     GGP1          25   |    1 
     Arttu         18   |    1 
     Bill          12   |    1 
@@ -48,11 +48,11 @@ P   Player       FIA   |Played
 ----------------------------------
     GGP1          25   |    1 
     Arttu         18   |    1 
-    Karl          17.45|   11 
+    NL            17.08|   12 
+    Karl          17   |   12 
     Pylade        16.57|    7 
-    NL            16.36|   11 
-    TLB           16.18|   11 
-    F1Ung         15   |    7 
+    TLB           16.33|   12 
+    F1Ung         15   |    8 
     Bill          12   |    1 
     Winston        0   |    0 
     Leo            0   |    0 
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Singapore-bottom-6 Qual
+
+P   Player      FIA    | LAT      ALB      OCO      RIC      BOT      ZHO      
+-----------------------------------------------------------------------------
+1   NL          25     | LAT 20 | ALB 20 | MSC 15 | MAG 12 | ZHO 19 | STR 17 | 
+2   TLB         18     | LAT 20 | MSC 14 | ZHO 17 | TSU 13 | ALB 17 | MAG 14 | 
+3   F1Ung       15     | LAT 20 | MSC 14 | ZHO 17 | STR 15 | VET 18 | BOT 19 | 
+4   Karl        12     | STR 12 | MSC 14 | MAG 11 | VET 17 | BOT 20 | RIC 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
