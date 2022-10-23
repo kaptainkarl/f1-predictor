@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-qual, singapore-qual
+Totals Tables run for austin-qual, japan-qual, singapore-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,13 +20,13 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    F1Ung         37   |    2 
+    F1Ung         55   |    3 
+    GGP1          46.50|    3 
+    Hobbes        39   |    3 
+    TLB           35.50|    3 
     NL            35   |    2 
-    GGP1          33   |    2 
-    Karl          23   |    2 
-    TLB           22   |    2 
+    Karl          33   |    3 
     Iceman        18   |    1 
-    Hobbes        14   |    2 
     Winston        0   |    0 
     Pylade         0   |    0 
     Leo            0   |    0 
@@ -46,13 +46,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    F1Ung         18.50|    2 
+    F1Ung         18.33|    3 
     Iceman        18   |    1 
     NL            17.50|    2 
-    GGP1          16.50|    2 
-    Karl          11.50|    2 
-    TLB           11   |    2 
-    Hobbes         7   |    2 
+    GGP1          15.50|    3 
+    Hobbes        13   |    3 
+    TLB           11.83|    3 
+    Karl          11   |    3 
     Winston        0   |    0 
     Pylade         0   |    0 
     Leo            0   |    0 
@@ -71,12 +71,12 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    GGP1              937   |    2 
-    F1Ung             935   |    2 
+    F1Ung           1,409   |    3 
+    GGP1            1,406   |    3 
+    Karl            1,356   |    3 
+    TLB             1,351   |    3 
+    Hobbes          1,318   |    3 
     NL                892   |    2 
-    Karl              889   |    2 
-    TLB               882   |    2 
-    Hobbes            841   |    2 
     Iceman            491   |    1 
     Winston             0   |    0 
     Pylade              0   |    0 
@@ -98,12 +98,12 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     Iceman            491   |    1 
-    GGP1              468.50|    2 
-    F1Ung             467.50|    2 
+    F1Ung             469.67|    3 
+    GGP1              468.67|    3 
+    Karl              452   |    3 
+    TLB               450.33|    3 
     NL                446   |    2 
-    Karl              444.50|    2 
-    TLB               441   |    2 
-    Hobbes            420.50|    2 
+    Hobbes            439.33|    3 
     Winston             0   |    0 
     Pylade              0   |    0 
     Leo                 0   |    0 
@@ -117,6 +117,30 @@ P   Player      Ave Score   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'diff and positions-times-9-to-1'
+---------------
+Austin Qual
+
+P   Player           score  |  FIA    | SAI        LEC        VER        PER        HAM        RUS        
+-----------------------------------------------------------------------------------------------------
+1   Hobbes             477  |  25     | LEC  171 | VER  114 | SAI   72 | PER   60 | HAM   40 | RUS   20 | 
+2   F1Ung              474  |  18     | VER  162 | LEC  120 | SAI   72 | PER   60 | HAM   40 | RUS   20 | 
+3   GGP1               469  |  13.50  | VER  162 | LEC  120 | SAI   72 | HAM   57 | PER   38 | RUS   20 | 
+3   TLB                469  |  13.50  | VER  162 | LEC  120 | SAI   72 | HAM   57 | PER   38 | RUS   20 | 
+5   Karl               467  |  10     | LEC  171 | VER  114 | PER   76 | SAI   51 | RUS   38 | ALO   17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'diff and positions-times-9-to-1'

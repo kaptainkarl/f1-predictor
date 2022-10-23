@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-race, japan-qual, singapore-race, singapore-qual
+Totals Tables run for austin-race, austin-qual, japan-race, japan-qual, singapore-race, singapore-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,12 +20,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          83.50|    4 
+    GGP1         125   |    6 
+    F1Ung         91   |    6 
+    TLB           87.50|    6 
+    Karl          69   |    6 
+    Hobbes        65   |    6 
     NL            62.50|    4 
-    F1Ung         54   |    4 
-    TLB           53   |    4 
-    Karl          44   |    4 
-    Hobbes        43   |    4 
     Iceman        24   |    2 
     Winston        0   |    0 
     Pylade         0   |    0 
@@ -46,13 +46,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          20.88|    4 
+    GGP1          20.83|    6 
     NL            15.62|    4 
-    F1Ung         13.50|    4 
-    TLB           13.25|    4 
+    F1Ung         15.17|    6 
+    TLB           14.58|    6 
     Iceman        12   |    2 
-    Karl          11   |    4 
-    Hobbes        10.75|    4 
+    Karl          11.50|    6 
+    Hobbes        10.83|    6 
     Winston        0   |    0 
     Pylade         0   |    0 
     Leo            0   |    0 
@@ -71,13 +71,13 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    GGP1              423   |    4 |  3 |    |    |  1 |    |    |    |    |    |    
+    GGP1              635   |    6 |  4 |  1 |    |  1 |    |    |    |    |    |    
     NL                407   |    4 |  2 |    |    |    |    |  2 |    |    |    |    
-    TLB               409   |    4 |    |  1 |  1 |    |  2 |    |    |    |    |    
-    Karl              396   |    4 |    |  1 |    |    |  1 |  2 |    |    |    |    
+    F1Ung             619   |    6 |  1 |    |  2 |  3 |    |    |    |    |    |    
+    TLB               621   |    6 |    |  3 |  1 |    |  2 |    |    |    |    |    
+    Karl              617   |    6 |    |  1 |  1 |    |  2 |  2 |    |    |    |    
     Iceman            213   |    2 |    |  1 |    |    |    |    |  1 |    |    |    
-    F1Ung             405   |    4 |    |    |  2 |  2 |    |    |    |    |    |    
-    Hobbes            395   |    4 |    |    |  1 |  1 |  1 |    |  1 |    |    |    
+    Hobbes            606   |    6 |    |    |  1 |  2 |  2 |    |  1 |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Pylade              0   |    0 |    |    |    |    |    |    |    |    |    |    
     Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
@@ -91,6 +91,54 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin Race
+
+P   Player      FIA    | VER      HAM      LEC      PER      RUS      NOR      
+-----------------------------------------------------------------------------
+1   GGP1        25     | VER 20 | HAM 20 | SAI  3 | RUS 19 | PER 19 | LEC 17 | 
+2   TLB         18     | VER 20 | LEC 19 | SAI  3 | HAM 18 | RUS 20 | PER 18 | 
+3   Karl        15     | VER 20 | PER 18 | RUS 18 | HAM 18 | LEC 18 | ALO 19 | 
+4   F1Ung       12     | VER 20 | PER 18 | LEC 20 | SAI  4 | RUS 20 | HAM 16 | 
+5   Hobbes      10     | VER 20 | SAI  2 | RUS 18 | LEC 19 | ALO 18 | PER 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin Qual
+
+P   Player      FIA    | SAI      LEC      VER      PER      HAM      RUS      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | VER 18 | LEC 20 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+2   GGP1        16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+2   TLB         16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+4   Hobbes      12     | LEC 19 | VER 19 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+5   Karl        10     | LEC 19 | VER 19 | PER 19 | SAI 17 | RUS 19 | ALO 17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

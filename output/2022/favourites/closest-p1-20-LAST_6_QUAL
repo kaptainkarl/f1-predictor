@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-qual, singapore-qual
+Totals Tables run for austin-qual, japan-qual, singapore-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,13 +20,13 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          37   |    2 
+    F1Ung         55   |    3 
+    GGP1          53.50|    3 
+    TLB           36.50|    3 
+    Karl          36   |    3 
     NL            33   |    2 
-    F1Ung         30   |    2 
-    Karl          26   |    2 
-    TLB           20   |    2 
+    Hobbes        30   |    3 
     Iceman        18   |    1 
-    Hobbes        18   |    2 
     Winston        0   |    0 
     Pylade         0   |    0 
     Leo            0   |    0 
@@ -46,13 +46,13 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          18.50|    2 
+    F1Ung         18.33|    3 
     Iceman        18   |    1 
+    GGP1          17.83|    3 
     NL            16.50|    2 
-    F1Ung         15   |    2 
-    Karl          13   |    2 
-    TLB           10   |    2 
-    Hobbes         9   |    2 
+    TLB           12.17|    3 
+    Karl          12   |    3 
+    Hobbes        10   |    3 
     Winston        0   |    0 
     Pylade         0   |    0 
     Leo            0   |    0 
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin Qual
+
+P   Player      FIA    | SAI      LEC      VER      PER      HAM      RUS      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | VER 18 | LEC 20 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+2   GGP1        16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+2   TLB         16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+4   Hobbes      12     | LEC 19 | VER 19 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+5   Karl        10     | LEC 19 | VER 19 | PER 19 | SAI 17 | RUS 19 | ALO 17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

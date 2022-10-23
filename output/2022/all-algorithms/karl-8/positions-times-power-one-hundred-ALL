@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-race, japan-qual, singapore-race, singapore-qual, monza-race, monza-grid, monza-qual, dutch-race, dutch-qual, spa-race, spa-qual, hungary-race, hungary-qual, france-race, france-qual, austria-race, austria-sprint, austria-qual, britain-race, britain-qual, canada-race, canada-qual, baku-race, baku-qual, monaco-race, monaco-qual, spain-race, spain-qual, miami-race, miami-qual, enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
+Totals Tables run for austin-race, austin-qual, japan-race, japan-qual, singapore-race, singapore-qual, monza-race, monza-grid, monza-qual, dutch-race, dutch-qual, spa-race, spa-qual, hungary-race, hungary-qual, france-race, france-qual, austria-race, austria-sprint, austria-qual, britain-race, britain-qual, canada-race, canada-qual, baku-race, baku-qual, monaco-race, monaco-qual, spain-race, spain-qual, miami-race, miami-qual, enzo-race, enzo-sprint, enzo-qual, australia-race, australia-qual, jeddah-race, jeddah-qual, bahrain-race, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,12 +18,12 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
+GGP1         559.5
 NL           525.5
-GGP1         523.5
-TLB          466  
-Hobbes       422  
-Karl         377.5
-F1Ung        359.5
+TLB          495  
+Hobbes       450  
+Karl         414.5
+F1Ung        389.5
 BWare        273.5
 Iceman       255  
 Pylade       209  
@@ -43,12 +43,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    GGP1         559.50|   39 
     NL           525.50|   37 
-    GGP1         523.50|   37 
-    TLB          466   |   38 
-    Hobbes       422   |   39 
-    Karl         377.50|   39 
-    F1Ung        359.50|   32 
+    TLB          495   |   40 
+    Hobbes       450   |   41 
+    Karl         414.50|   41 
+    F1Ung        389.50|   34 
     BWare        273.50|   27 
     Iceman       255   |   23 
     Pylade       209   |   23 
@@ -69,16 +69,16 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    GGP1          14.35|   39 
     NL            14.20|   37 
-    GGP1          14.15|   37 
-    TLB           12.26|   38 
-    F1Ung         11.23|   32 
+    TLB           12.38|   40 
+    F1Ung         11.46|   34 
     Iceman        11.09|   23 
-    Hobbes        10.82|   39 
+    Hobbes        10.98|   41 
     Joe           10.62|   16 
     Leo           10.54|   13 
     BWare         10.13|   27 
-    Karl           9.68|   39 
+    Karl          10.11|   41 
     Pylade         9.09|   23 
     Winston        9   |    1 
     Arttu          8   |    4 
@@ -95,12 +95,12 @@ Total Score table
 P   Player                Total   |Played
 ---------------------------------------------
     NL        2,148,502,161,198   |   37 
-    Hobbes    1,874,807,398,670   |   39 
-    GGP1      1,826,553,229,676   |   37 
-    TLB       1,756,547,279,991   |   38 
-    Karl      1,585,550,918,907   |   39 
+    Hobbes    1,995,211,519,680   |   41 
+    GGP1      1,928,155,310,485   |   39 
+    TLB       1,857,749,341,201   |   40 
+    Karl      1,706,156,949,512   |   41 
+    F1Ung     1,525,615,946,581   |   34 
     BWare     1,459,859,726,442   |   27 
-    F1Ung     1,424,605,864,973   |   32 
     Iceman    1,140,578,547,135   |   23 
     Pylade      958,881,596,266   |   23 
     Joe         786,253,333,735   |   16 
@@ -125,13 +125,13 @@ P   Player            Ave Score   |Played
     Leo          54,202,873,994.46|   13 
     BWare        54,068,878,757.11|   27 
     Iceman       49,590,371,614.57|   23 
-    GGP1         49,366,303,504.76|   37 
+    GGP1         49,439,879,756.03|   39 
     Joe          49,140,833,358.44|   16 
-    Hobbes       48,071,984,581.28|   39 
-    TLB          46,224,928,420.82|   38 
-    F1Ung        44,518,933,280.41|   32 
+    Hobbes       48,663,695,601.95|   41 
+    TLB          46,443,733,530.03|   40 
+    F1Ung        44,871,057,252.38|   34 
     Pylade       41,690,504,185.48|   23 
-    Karl         40,655,151,766.85|   39 
+    Karl         41,613,584,134.44|   41 
     Winston      40,408,000,401   |    1 
     Bill         35,009,494,196.07|   15 
 ---------------------------------------------
@@ -145,17 +145,17 @@ P1 -> P10 then Total
 ------------------------
 P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------------
-    GGP1      1,826,553,229,676   |   37 | 11 |  4 |  4 |  3 |  2 |  4 |  4 |  3 |    |  1 
+    GGP1      1,928,155,310,485   |   39 | 12 |  4 |  4 |  4 |  2 |  4 |  4 |  3 |    |  1 
     NL        2,148,502,161,198   |   37 |  9 |  6 |  6 |  2 |  3 |  3 |  3 |  2 |  1 |  1 
-    TLB       1,756,547,279,991   |   38 |  5 |  5 |  3 |  9 |  5 |  2 |  6 |  1 |  1 |  1 
+    TLB       1,857,749,341,201   |   40 |  5 |  6 |  3 | 10 |  5 |  2 |  6 |  1 |  1 |  1 
+    Karl      1,706,156,949,512   |   41 |  3 |  3 |  3 |  7 |  8 |  3 |  9 |  1 |  1 |  3 
     BWare     1,459,859,726,442   |   27 |  3 |  1 |  1 |  6 |  3 |  3 |  4 |  3 |  2 |  1 
     Leo         704,637,361,928   |   13 |  3 |    |  1 |  1 |    |  1 |  2 |  3 |  1 |  1 
-    F1Ung     1,424,605,864,973   |   32 |  2 |  4 |  4 |  5 |  5 |  6 |  3 |  1 |  1 |    
+    F1Ung     1,525,615,946,581   |   34 |  2 |  4 |  6 |  5 |  5 |  6 |  3 |  1 |  1 |    
     Iceman    1,140,578,547,135   |   23 |  2 |  3 |  4 |  1 |  4 |  2 |  3 |    |  3 |    
-    Karl      1,585,550,918,907   |   39 |  2 |  3 |  3 |  6 |  8 |  3 |  9 |  1 |  1 |  3 
     Joe         786,253,333,735   |   16 |  2 |  2 |  1 |  2 |  1 |  2 |  2 |  1 |  1 |  2 
     Pylade      958,881,596,266   |   23 |  1 |  3 |  3 |  2 |  1 |  2 |  1 |  7 |  1 |    
-    Hobbes    1,874,807,398,670   |   39 |    |  9 |  8 |  2 |  4 |  7 |  2 |  2 |  1 |  1 
+    Hobbes    1,995,211,519,680   |   41 |    | 10 |  8 |  2 |  5 |  7 |  2 |  2 |  1 |  1 
     Bill        525,142,412,941   |   15 |    |  1 |    |    |  1 |  1 |  2 |  2 |  2 |  2 
     Arttu       261,008,100,709   |    4 |    |  1 |    |    |    |  1 |  1 |    |    |  1 
     Winston      40,408,000,401   |    1 |    |    |    |    |  1 |    |    |    |    |    
@@ -165,6 +165,54 @@ P   Player                Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'karl-8 and positions-times-power-one-hundred'
+---------------
+Austin Race
+
+P   Player                 score  |  FIA    | VER        HAM        LEC        PER        RUS        NOR        
+--------------------------------------------------------------------------------------------------------------
+1   GGP1        8,08,00,04,04,01  |  25     | VER    8 | HAM    8 | SAI      | RUS    4 | PER    4 | LEC    1 | 
+2   TLB         8,04,00,02,08,02  |  18     | VER    8 | LEC    4 | SAI      | HAM    2 | RUS    8 | PER    2 | 
+3   F1Ung       8,02,08,00,08,00  |  15     | VER    8 | PER    2 | LEC    8 | SAI      | RUS    8 | HAM      | 
+4   Karl        8,02,02,02,02,04  |  12     | VER    8 | PER    2 | RUS    2 | HAM    2 | LEC    2 | ALO    4 | 
+5   Hobbes      8,00,02,04,02,02  |  10     | VER    8 | SAI      | RUS    2 | LEC    4 | ALO    2 | PER    2 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+--------------------------------------------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'karl-8 and positions-times-power-one-hundred'
+---------------
+Austin Qual
+
+P   Player                 score  |  FIA    | SAI        LEC        VER        PER        HAM        RUS        
+--------------------------------------------------------------------------------------------------------------
+1   Karl        4,04,04,01,04,01  |  25     | LEC    4 | VER    4 | PER    4 | SAI    1 | RUS    4 | ALO    1 | 
+2   Hobbes      4,04,02,08,08,08  |  18     | LEC    4 | VER    4 | SAI    2 | PER    8 | HAM    8 | RUS    8 | 
+3   F1Ung       2,08,02,08,08,08  |  15     | VER    2 | LEC    8 | SAI    2 | PER    8 | HAM    8 | RUS    8 | 
+4   GGP1        2,08,02,04,04,08  |  11     | VER    2 | LEC    8 | SAI    2 | HAM    4 | PER    4 | RUS    8 | 
+4   TLB         2,08,02,04,04,08  |  11     | VER    2 | LEC    8 | SAI    2 | HAM    4 | PER    4 | RUS    8 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+--------------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-8 and positions-times-power-one-hundred'

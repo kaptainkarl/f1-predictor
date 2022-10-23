@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-bottom-6-qual, singapore-bottom-6-qual, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
+Totals Tables run for austin-bottom-6-qual, japan-bottom-6-qual, singapore-bottom-6-qual, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-qual, spa-bottom-6-qual, hungary-bottom-6-qual, france-bottom-6-qual, austria-bottom-6-qual, britain-bottom-6-qual, canada-bottom-6-qual, baku-bottom-6-qual, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,10 +18,10 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-Karl         243.5
-TLB          231  
+Karl         258.5
+TLB          249  
 NL           192  
-F1Ung        148  
+F1Ung        173  
 Pylade       108.5
 GGP1          25  
 Arttu         10  
@@ -43,10 +43,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         243.50|   13 
-    TLB          231   |   13 
+    Karl         258.50|   14 
+    TLB          249   |   14 
     NL           192   |   13 
-    F1Ung        148   |    9 
+    F1Ung        173   |   10 
     Pylade       108.50|    7 
     GGP1          25   |    1 
     Arttu         10   |    1 
@@ -70,9 +70,9 @@ For players who have not entered all rounds
 P   Player       FIA   |Played
 ----------------------------------
     GGP1          25   |    1 
-    Karl          18.73|   13 
-    TLB           17.77|   13 
-    F1Ung         16.44|    9 
+    Karl          18.46|   14 
+    TLB           17.79|   14 
+    F1Ung         17.30|   10 
     Pylade        15.50|    7 
     NL            14.77|   13 
     Arttu         10   |    1 
@@ -94,10 +94,10 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    TLB             3,869   |   13 
-    Karl            3,847   |   13 
+    TLB             4,211   |   14 
+    Karl            4,183   |   14 
     NL              3,065   |   13 
-    F1Ung           2,286   |    9 
+    F1Ung           2,778   |   10 
     Pylade          2,025   |    7 
     GGP1              448   |    1 
     Bill              254   |    1 
@@ -121,10 +121,10 @@ For players who have not entered all rounds
 P   Player      Ave Score   |Played
 ---------------------------------------
     GGP1              448   |    1 
-    TLB               297.62|   13 
-    Karl              295.92|   13 
+    TLB               300.79|   14 
+    Karl              298.79|   14 
     Pylade            289.29|    7 
-    F1Ung             254   |    9 
+    F1Ung             277.80|   10 
     Bill              254   |    1 
     NL                235.77|   13 
     Arttu              16   |    1 
@@ -145,10 +145,10 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    Karl            3,847   |   13 |  5 |  2 |  4 |  2 |    |    |    |    |    |    
-    TLB             3,869   |   13 |  3 |  4 |  4 |  2 |    |    |    |    |    |    
+    Karl            4,183   |   14 |  5 |  2 |  5 |  2 |    |    |    |    |    |    
+    TLB             4,211   |   14 |  3 |  5 |  4 |  2 |    |    |    |    |    |    
+    F1Ung           2,778   |   10 |  2 |  3 |  3 |  2 |    |    |    |    |    |    
     NL              3,065   |   13 |  2 |  3 |    |  4 |  4 |    |    |    |    |    
-    F1Ung           2,286   |    9 |  1 |  3 |  3 |  2 |    |    |    |    |    |    
     Pylade          2,025   |    7 |  1 |  1 |  3 |  1 |  1 |    |    |    |    |    
     GGP1              448   |    1 |  1 |    |    |    |    |    |    |    |    |    
     Arttu              16   |    1 |    |    |    |    |  1 |    |    |    |    |    
@@ -165,6 +165,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'karl-32 and positions-times-9-to-1'
+---------------
+Austin-bottom-6 Qual
+
+P   Player           score  |  FIA    | LAT        MSC        OCO        RIC        MAG        TSU        
+-----------------------------------------------------------------------------------------------------
+1   F1Ung              492  |  25     | LAT  288 | MSC  192 | ALB      | STR      | VET    4 | RIC    8 | 
+2   TLB                342  |  18     | LAT  288 | ZHO    6 | ALB      | TSU   24 | MSC    8 | MAG   16 | 
+3   Karl               336  |  15     | LAT  288 | ALB      | STR      | TSU   24 | ZHO   16 | RIC    8 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-32 and positions-times-9-to-1'

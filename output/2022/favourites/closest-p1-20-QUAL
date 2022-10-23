@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-qual, singapore-qual, monza-grid, monza-qual, dutch-qual, spa-qual, hungary-qual, france-qual, austria-qual, britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
+Totals Tables run for austin-qual, japan-qual, singapore-qual, monza-grid, monza-qual, dutch-qual, spa-qual, hungary-qual, france-qual, austria-qual, britain-qual, canada-qual, baku-qual, monaco-qual, spain-qual, miami-qual, enzo-qual, australia-qual, jeddah-qual, bahrain-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,12 +20,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    GGP1         269.50|   19 
     NL           253   |   18 
-    GGP1         253   |   18 
-    TLB          224   |   18 
-    Karl         195   |   19 
-    Hobbes       182   |   19 
-    F1Ung        172   |   16 
+    TLB          240.50|   19 
+    Karl         205   |   20 
+    F1Ung        197   |   17 
+    Hobbes       194   |   20 
     BWare        133   |   13 
     Iceman       121   |   11 
     Pylade       104   |   10 
@@ -46,18 +46,18 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
+    GGP1          14.18|   19 
     NL            14.06|   18 
-    GGP1          14.06|   18 
     Arttu         14   |    2 
-    TLB           12.44|   18 
+    TLB           12.66|   19 
+    F1Ung         11.59|   17 
     Winston       11   |    1 
     Iceman        11   |   11 
-    F1Ung         10.75|   16 
     Pylade        10.40|   10 
-    Karl          10.26|   19 
+    Karl          10.25|   20 
     Joe           10.25|    8 
     BWare         10.23|   13 
-    Hobbes         9.58|   19 
+    Hobbes         9.70|   20 
     Leo            8.67|    6 
     Bill           6.29|    7 
 ----------------------------------
@@ -66,6 +66,30 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin Qual
+
+P   Player      FIA    | SAI      LEC      VER      PER      HAM      RUS      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | VER 18 | LEC 20 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+2   GGP1        16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+2   TLB         16.50  | VER 18 | LEC 20 | SAI 18 | HAM 19 | PER 19 | RUS 20 | 
+4   Hobbes      12     | LEC 19 | VER 19 | SAI 18 | PER 20 | HAM 20 | RUS 20 | 
+5   Karl        10     | LEC 19 | VER 19 | PER 19 | SAI 17 | RUS 19 | ALO 17 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

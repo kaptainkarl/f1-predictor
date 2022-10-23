@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-race, singapore-race
+Totals Tables run for austin-race, japan-race, singapore-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -18,12 +18,12 @@ Total FIA Score table (simplified)
 ----------------------------------
 
 <pre><code>
-GGP1          46.5
-TLB           33  
+GGP1          68  
+TLB           48  
+F1Ung         43.5
+Hobbes        37  
+Karl          30  
 NL            29.5
-Hobbes        27  
-F1Ung         22  
-Karl          18  
 Iceman         6  
 Winston        0  
 Pylade         0  
@@ -43,12 +43,12 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          46.50|    2 
-    TLB           33   |    2 
+    GGP1          68   |    3 
+    TLB           48   |    3 
+    F1Ung         43.50|    3 
+    Hobbes        37   |    3 
+    Karl          30   |    3 
     NL            29.50|    2 
-    Hobbes        27   |    2 
-    F1Ung         22   |    2 
-    Karl          18   |    2 
     Iceman         6   |    1 
     Winston        0   |    0 
     Pylade         0   |    0 
@@ -69,12 +69,12 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    GGP1          23.25|    2 
-    TLB           16.50|    2 
+    GGP1          22.67|    3 
+    TLB           16   |    3 
     NL            14.75|    2 
-    Hobbes        13.50|    2 
-    F1Ung         11   |    2 
-    Karl           9   |    2 
+    F1Ung         14.50|    3 
+    Hobbes        12.33|    3 
+    Karl          10   |    3 
     Iceman         6   |    1 
     Winston        0   |    0 
     Pylade         0   |    0 
@@ -94,12 +94,12 @@ Total Score table
 -----------------
 P   Player          Total   |Played
 ---------------------------------------
-    GGP1            3,236   |    2 
-    TLB             2,660   |    2 
+    GGP1            4,996   |    3 
+    TLB             4,228   |    3 
+    F1Ung           3,920   |    3 
+    Hobbes          3,500   |    3 
+    Karl            3,035   |    3 
     NL              2,440   |    2 
-    Hobbes          2,244   |    2 
-    F1Ung           2,160   |    2 
-    Karl            1,667   |    2 
     Iceman          1,312   |    1 
     Winston             0   |    0 
     Pylade              0   |    0 
@@ -120,13 +120,13 @@ For players who have not entered all rounds
 -------------------------------------------
 P   Player      Ave Score   |Played
 ---------------------------------------
-    GGP1            1,618   |    2 
-    TLB             1,330   |    2 
+    GGP1            1,665.33|    3 
+    TLB             1,409.33|    3 
     Iceman          1,312   |    1 
+    F1Ung           1,306.67|    3 
     NL              1,220   |    2 
-    Hobbes          1,122   |    2 
-    F1Ung           1,080   |    2 
-    Karl              833.50|    2 
+    Hobbes          1,166.67|    3 
+    Karl            1,011.67|    3 
     Winston             0   |    0 
     Pylade              0   |    0 
     Leo                 0   |    0 
@@ -145,12 +145,12 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    GGP1            3,236   |    2 |  2 |    |    |    |    |    |    |    |    |    
+    GGP1            4,996   |    3 |  3 |    |    |    |    |    |    |    |    |    
+    F1Ung           3,920   |    3 |  1 |    |    |  1 |  1 |    |    |    |    |    
     NL              2,440   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
-    TLB             2,660   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
-    Hobbes          2,244   |    2 |    |    |  1 |  1 |    |    |    |    |    |    
-    F1Ung           2,160   |    2 |    |    |    |  1 |  1 |    |    |    |    |    
-    Karl            1,667   |    2 |    |    |    |    |  1 |  1 |    |    |    |    
+    TLB             4,228   |    3 |    |  1 |  2 |    |    |    |    |    |    |    
+    Hobbes          3,500   |    3 |    |    |  1 |  1 |  1 |    |    |    |    |    
+    Karl            3,035   |    3 |    |    |    |  1 |  1 |  1 |    |    |    |    
     Iceman          1,312   |    1 |    |    |    |    |    |    |  1 |    |    |    
     Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
     Pylade              0   |    0 |    |    |    |    |    |    |    |    |    |    

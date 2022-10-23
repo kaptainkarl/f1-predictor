@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for japan-bottom-6-race, japan-bottom-6-qual, singapore-bottom-6-race, singapore-bottom-6-qual, monza-bottom-6-race, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-race, dutch-bottom-6-qual, spa-bottom-6-race, spa-bottom-6-qual, hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
+Totals Tables run for austin-bottom-6-race, austin-bottom-6-qual, japan-bottom-6-race, japan-bottom-6-qual, singapore-bottom-6-race, singapore-bottom-6-qual, monza-bottom-6-race, monza-bottom-6-grid, monza-bottom-6-qual, dutch-bottom-6-race, dutch-bottom-6-qual, spa-bottom-6-race, spa-bottom-6-qual, hungary-bottom-6-race, hungary-bottom-6-qual, france-bottom-6-race, france-bottom-6-qual, austria-bottom-6-race, austria-bottom-6-sprint, austria-bottom-6-qual, britain-bottom-6-race, britain-bottom-6-qual, canada-bottom-6-race, canada-bottom-6-qual, baku-bottom-6-race, baku-bottom-6-qual, monaco-bottom-6-race, monaco-bottom-6-qual
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,10 +20,10 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl         463   |   26 
-    TLB          439   |   26 
+    Karl         496   |   28 
+    TLB          472   |   28 
     NL           439   |   26 
-    F1Ung        302   |   19 
+    F1Ung        352   |   21 
     Pylade       203   |   14 
     Arttu         33   |    2 
     GGP1          31   |    2 
@@ -46,11 +46,11 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    Karl          17.81|   26 
-    TLB           16.88|   26 
+    Karl          17.71|   28 
     NL            16.88|   26 
+    TLB           16.86|   28 
+    F1Ung         16.76|   21 
     Arttu         16.50|    2 
-    F1Ung         15.89|   19 
     GGP1          15.50|    2 
     Bill          15   |    2 
     Pylade        14.50|   14 
@@ -66,6 +66,54 @@ P   Player       FIA   |Played
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin-bottom-6 Race
+
+P   Player      FIA    | SAI      BOT      STR      LAT      RIC      MSC      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | LAT 17 | MSC 16 | STR 20 | RIC 19 | VET 12 | ALB 17 | 
+2   Karl        18     | LAT 17 | ALB 13 | STR 20 | TSU 13 | ZHO 17 | RIC 19 | 
+3   TLB         15     | LAT 17 | ZHO 14 | ALB 14 | TSU 13 | MSC 19 | MAG 14 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Austin-bottom-6 Qual
+
+P   Player      FIA    | LAT      MSC      OCO      RIC      MAG      TSU      
+-----------------------------------------------------------------------------
+1   F1Ung       25     | LAT 20 | MSC 20 | ALB 13 | STR 10 | VET 16 | RIC 18 | 
+2   TLB         18     | LAT 20 | ZHO 15 | ALB 13 | TSU 18 | MSC 17 | MAG 19 | 
+3   Karl        15     | LAT 20 | ALB 12 | STR  9 | TSU 18 | ZHO 18 | RIC 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    GGP1       DNS
+    Hobbes     DNS
+    Iceman     DNS
+    Joe        DNS
+    Leo        DNS
+    NL         DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
