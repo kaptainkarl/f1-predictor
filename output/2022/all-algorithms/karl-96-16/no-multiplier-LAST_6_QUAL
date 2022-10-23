@@ -5,7 +5,190 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for japan-qual, singapore-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+GGP1          37  
+NL            33  
+F1Ung         33  
+Hobbes        23.5
+Karl          19.5
+TLB           18  
+Iceman        18  
+Winston        0  
+Pylade         0  
+Leo            0  
+Joe            0  
+BWare          0  
+Bill           0  
+Arttu          0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          37   |    2 
+    NL            33   |    2 
+    F1Ung         33   |    2 
+    Hobbes        23.50|    2 
+    Karl          19.50|    2 
+    TLB           18   |    2 
+    Iceman        18   |    1 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'karl-96-16 and no-multiplier'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          18.50|    2 
+    Iceman        18   |    1 
+    NL            16.50|    2 
+    F1Ung         16.50|    2 
+    Hobbes        11.75|    2 
+    Karl           9.75|    2 
+    TLB            9   |    2 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-----------------
+Method is 'karl-96-16 and no-multiplier'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    NL                450   |    2 
+    F1Ung             431   |    2 
+    GGP1              384   |    2 
+    Iceman            328   |    1 
+    Hobbes            264   |    2 
+    Karl              201   |    2 
+    TLB               138   |    2 
+    Winston             0   |    0 
+    Pylade              0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    BWare               0   |    0 
+    Bill                0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Method is 'karl-96-16 and no-multiplier'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    Iceman            328   |    1 
+    NL                225   |    2 
+    F1Ung             215.50|    2 
+    GGP1              192   |    2 
+    Hobbes            132   |    2 
+    Karl              100.50|    2 
+    TLB                69   |    2 
+    Winston             0   |    0 
+    Pylade              0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    BWare               0   |    0 
+    Bill                0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Method is 'karl-96-16 and no-multiplier'
+
+P1 -> P10 then Total 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
+-----------------------------------------------------------------------------------------
+    GGP1              384   |    2 |  1 |    |    |  1 |    |    |    |    |    |    
+    NL                450   |    2 |  1 |    |    |    |    |  1 |    |    |    |    
+    F1Ung             431   |    2 |    |  1 |  1 |    |    |    |    |    |    |    
+    Iceman            328   |    1 |    |  1 |    |    |    |    |    |    |    |    
+    Hobbes            264   |    2 |    |    |  1 |    |  1 |    |    |    |    |    
+    Karl              201   |    2 |    |    |  1 |    |    |    |  1 |    |    |    
+    TLB               138   |    2 |    |    |    |    |  1 |  1 |    |    |    |    
+    Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Pylade              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Joe                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Bill                0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
+-----------------------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Method is 'karl-96-16 and no-multiplier'
+---------------
+Japan Qual
+
+P   Player           score  |  FIA    | VER        LEC        SAI        PER        OCO        HAM        
+-----------------------------------------------------------------------------------------------------
+1   NL                 408  |  25     | VER   96 | LEC   96 | SAI   96 | PER   96 | HAM   16 | RUS    8 | 
+2   Iceman             328  |  18     | VER   96 | LEC   96 | SAI   96 | HAM    8 | PER   16 | ALO   16 | 
+3   F1Ung              308  |  15     | VER   96 | LEC   96 | SAI   96 | HAM    8 | RUS    4 | PER    8 | 
+4   GGP1               248  |  12     | VER   96 | LEC   96 | PER   16 | SAI   16 | HAM   16 | RUS    8 | 
+5   Hobbes             144  |  10     | LEC   16 | VER   16 | NOR      | PER   96 | SAI    8 | RUS    8 | 
+6   TLB                 88  |   8     | LEC   16 | VER   16 | PER   16 | SAI   16 | HAM   16 | RUS    8 | 
+7   Karl                81  |   6     | LEC   16 | VER   16 | RUS    1 | SAI   16 | PER   16 | ALO   16 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'karl-96-16 and no-multiplier'

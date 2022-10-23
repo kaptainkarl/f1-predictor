@@ -5,7 +5,91 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for japan-qual, singapore-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          37   |    2 
+    NL            33   |    2 
+    F1Ung         30   |    2 
+    Karl          26   |    2 
+    TLB           20   |    2 
+    Iceman        18   |    1 
+    Hobbes        18   |    2 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'closest-p1-20'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    GGP1          18.50|    2 
+    Iceman        18   |    1 
+    NL            16.50|    2 
+    F1Ung         15   |    2 
+    Karl          13   |    2 
+    TLB           10   |    2 
+    Hobbes         9   |    2 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Japan Qual
+
+P   Player      FIA    | VER      LEC      SAI      PER      OCO      HAM      
+-----------------------------------------------------------------------------
+1   NL          25     | VER 20 | LEC 20 | SAI 20 | PER 20 | HAM 19 | RUS 18 | 
+2   Iceman      18     | VER 20 | LEC 20 | SAI 20 | HAM 18 | PER 19 | ALO 19 | 
+3   F1Ung       15     | VER 20 | LEC 20 | SAI 20 | HAM 18 | RUS 17 | PER 18 | 
+4   GGP1        12     | VER 20 | LEC 20 | PER 19 | SAI 19 | HAM 19 | RUS 18 | 
+5   TLB         10     | LEC 19 | VER 19 | PER 19 | SAI 19 | HAM 19 | RUS 18 | 
+6   Karl         8     | LEC 19 | VER 19 | RUS 15 | SAI 19 | PER 19 | ALO 19 | 
+7   Hobbes       6     | LEC 19 | VER 19 | NOR 13 | PER 20 | SAI 18 | RUS 18 | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'

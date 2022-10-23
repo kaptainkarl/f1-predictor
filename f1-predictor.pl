@@ -2447,6 +2447,9 @@ sub get_fia_scoring_round_type {
     if ( $round =~ /-qual$/ ){
         return $real_f1_pos_qual_scores ;
     }
+    if ( $round =~ /-grid$/ ){
+        return $real_f1_pos_qual_scores ;
+    }
     else {
         dierr (" unknown round type in [$round]");
     }

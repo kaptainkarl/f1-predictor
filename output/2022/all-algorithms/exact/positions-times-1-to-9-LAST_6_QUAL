@@ -5,7 +5,190 @@ Please note you will see some colour highlighting because disqus thinks it is co
 See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better explanation
 
 
-Only run for one round, not showing totals
+
+
+----------------------
+Totals Tables run for japan-qual, singapore-qual
+
+The P column currently doesn't work out shared places
+So until it is fixed it is not being displayed below
+
+----------------------------------
+Total FIA Score table (simplified)
+----------------------------------
+
+<pre><code>
+Hobbes        37  
+NL            34  
+F1Ung         31.5
+GGP1          25  
+Karl          22  
+Iceman        16.5
+TLB           16  
+Winston        0  
+Pylade         0  
+Leo            0  
+Joe            0  
+BWare          0  
+Bill           0  
+Arttu          0  
+------------------------------------
+
+
+</pre></code>
+---------------------
+Total FIA Score table
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Hobbes        37   |    2 
+    NL            34   |    2 
+    F1Ung         31.50|    2 
+    GGP1          25   |    2 
+    Karl          22   |    2 
+    Iceman        16.50|    1 
+    TLB           16   |    2 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+---------------------
+Method is 'exact and positions-times-1-to-9'
+
+Average FIA Score
+For players who have not entered all rounds
+---------------------
+
+<pre><code>
+P   Player       FIA   |Played
+----------------------------------
+    Hobbes        18.50|    2 
+    NL            17   |    2 
+    Iceman        16.50|    1 
+    F1Ung         15.75|    2 
+    GGP1          12.50|    2 
+    Karl          11   |    2 
+    TLB            8   |    2 
+    Winston        0   |    0 
+    Pylade         0   |    0 
+    Leo            0   |    0 
+    Joe            0   |    0 
+    BWare          0   |    0 
+    Bill           0   |    0 
+    Arttu          0   |    0 
+----------------------------------
+</pre></code>
+
+<pre><code>
+-----------------
+Method is 'exact and positions-times-1-to-9'
+
+Total Score table
+-----------------
+P   Player          Total   |Played
+---------------------------------------
+    NL                 10   |    2 
+    Hobbes              8   |    2 
+    F1Ung               7   |    2 
+    Iceman              6   |    1 
+    GGP1                4   |    2 
+    Karl                1   |    2 
+    Winston             0   |    0 
+    TLB                 0   |    2 
+    Pylade              0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    BWare               0   |    0 
+    Bill                0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+-------------------------------------------
+Method is 'exact and positions-times-1-to-9'
+
+Average score
+For players who have not entered all rounds
+-------------------------------------------
+P   Player      Ave Score   |Played
+---------------------------------------
+    Iceman              6   |    1 
+    NL                  5   |    2 
+    Hobbes              4   |    2 
+    F1Ung               3.50|    2 
+    GGP1                2   |    2 
+    Karl                0.50|    2 
+    Winston             0   |    0 
+    TLB                 0   |    2 
+    Pylade              0   |    0 
+    Leo                 0   |    0 
+    Joe                 0   |    0 
+    BWare               0   |    0 
+    Bill                0   |    0 
+    Arttu               0   |    0 
+---------------------------------------
+</pre></code>
+
+<pre><code>
+------------------------
+Method is 'exact and positions-times-1-to-9'
+
+P1 -> P10 then Total 
+------------------------
+P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
+-----------------------------------------------------------------------------------------
+    Hobbes              8   |    2 |  1 |    |    |  1 |    |    |    |    |    |    
+    NL                 10   |    2 |  1 |    |    |    |  1 |    |    |    |    |    
+    F1Ung               7   |    2 |    |  2 |    |    |    |    |    |    |    |    
+    GGP1                4   |    2 |    |  1 |    |    |  1 |    |    |    |    |    
+    Karl                1   |    2 |    |  1 |    |    |    |  1 |    |    |    |    
+    Iceman              6   |    1 |    |  1 |    |    |    |    |    |    |    |    
+    TLB                 0   |    2 |    |    |    |    |  1 |  1 |    |    |    |    
+    Winston             0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Pylade              0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Leo                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Joe                 0   |    0 |    |    |    |    |    |    |    |    |    |    
+    BWare               0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Bill                0   |    0 |    |    |    |    |    |    |    |    |    |    
+    Arttu               0   |    0 |    |    |    |    |    |    |    |    |    |    
+-----------------------------------------------------------------------------------------
+</pre></code>
+
+-----------------
+Individual rounds
+-----------------
+
+<pre><code>
+Method is 'exact and positions-times-1-to-9'
+---------------
+Japan Qual
+
+P   Player           score  |  FIA    | VER        LEC        SAI        PER        OCO        HAM        
+-----------------------------------------------------------------------------------------------------
+1   NL                  10  |  25     | VER    1 | LEC    2 | SAI    3 | PER    4 | HAM      | RUS      | 
+2   F1Ung                6  |  16.50  | VER    1 | LEC    2 | SAI    3 | HAM      | RUS      | PER      | 
+2   Iceman               6  |  16.50  | VER    1 | LEC    2 | SAI    3 | HAM      | PER      | ALO      | 
+4   Hobbes               4  |  12     | LEC      | VER      | NOR      | PER    4 | SAI      | RUS      | 
+5   GGP1                 3  |  10     | VER    1 | LEC    2 | PER      | SAI      | HAM      | RUS      | 
+6   Karl                 0  |   7     | LEC      | VER      | RUS      | SAI      | PER      | ALO      | 
+6   TLB                  0  |   7     | LEC      | VER      | PER      | SAI      | HAM      | RUS      | 
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-----------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'exact and positions-times-1-to-9'

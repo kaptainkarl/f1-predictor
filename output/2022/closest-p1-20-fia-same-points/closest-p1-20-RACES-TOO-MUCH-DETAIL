@@ -8,7 +8,7 @@ See https://help.disqus.com/en/articles/1717236-syntax-highlighting for a better
 
 
 ----------------------
-Totals Tables run for singapore-race, monza-race, dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
+Totals Tables run for japan-race, singapore-race, monza-race, dutch-race, spa-race, hungary-race, france-race, austria-race, austria-sprint, britain-race, canada-race, baku-race, monaco-race, spain-race, miami-race, enzo-race, enzo-sprint, australia-race, jeddah-race, bahrain-race
 
 The P column currently doesn't work out shared places
 So until it is fixed it is not being displayed below
@@ -20,14 +20,14 @@ Total FIA Score table
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    TLB          258.50|   19 
-    NL           245   |   18 
-    Karl         222   |   19 
-    Hobbes       218.50|   19 
-    GGP1         215.50|   18 
-    F1Ung        181   |   15 
+    TLB          273.50|   20 
+    NL           266.50|   19 
+    GGP1         237   |   19 
+    Karl         230   |   20 
+    Hobbes       228.50|   20 
+    F1Ung        193   |   16 
     BWare        127   |   14 
-    Iceman       120   |   11 
+    Iceman       126   |   12 
     Joe           91   |    8 
     Pylade        79   |   13 
     Leo           59   |    7 
@@ -46,14 +46,14 @@ For players who have not entered all rounds
 <pre><code>
 P   Player       FIA   |Played
 ----------------------------------
-    NL            13.61|   18 
-    TLB           13.61|   19 
-    F1Ung         12.07|   15 
-    GGP1          11.97|   18 
-    Karl          11.68|   19 
-    Hobbes        11.50|   19 
+    NL            14.03|   19 
+    TLB           13.68|   20 
+    GGP1          12.47|   19 
+    F1Ung         12.06|   16 
+    Karl          11.50|   20 
+    Hobbes        11.43|   20 
     Joe           11.38|    8 
-    Iceman        10.91|   11 
+    Iceman        10.50|   12 
     BWare          9.07|   14 
     Leo            8.43|    7 
     Pylade         6.08|   13 
@@ -71,15 +71,15 @@ P1 -> P10 then Total
 ------------------------
 P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10
 -----------------------------------------------------------------------------------------
-    NL              1,748   |   18 |  5 |  1 |  2 |    |  1 |  6 |  2 |    |  1 |    
-    TLB             1,861   |   19 |  3 |  4 |  4 |  2 |    |  3 |    |  2 |    |  1 
-    GGP1            1,703   |   18 |  3 |  2 |  2 |  2 |  1 |  1 |  5 |  1 |    |  1 
-    Karl            1,847   |   19 |  2 |  3 |  1 |  3 |  4 |    |  3 |  3 |    |    
-    F1Ung           1,434   |   15 |  2 |  1 |  1 |  5 |  1 |  1 |  3 |    |  1 |    
+    NL              1,851   |   19 |  6 |  1 |  2 |    |  1 |  6 |  2 |    |  1 |    
+    GGP1            1,806   |   19 |  4 |  2 |  2 |  2 |  1 |  1 |  5 |  1 |    |  1 
+    TLB             1,962   |   20 |  3 |  4 |  5 |  2 |    |  3 |    |  2 |    |  1 
+    Karl            1,944   |   20 |  2 |  3 |  1 |  3 |  4 |  1 |  3 |  3 |    |    
+    F1Ung           1,533   |   16 |  2 |  1 |  1 |  6 |  1 |  1 |  3 |    |  1 |    
     Joe               707   |    8 |  2 |  1 |    |    |  1 |    |  1 |  1 |  1 |  1 
-    Iceman          1,037   |   11 |  1 |  2 |  1 |  1 |  1 |  1 |  2 |    |  1 |    
+    Iceman          1,134   |   12 |  1 |  2 |  1 |  1 |  1 |  1 |  3 |    |  1 |    
     BWare           1,353   |   14 |  1 |    |  1 |  3 |  2 |  3 |    |  1 |  1 |  1 
-    Hobbes          1,789   |   19 |    |  6 |  2 |  2 |  4 |  1 |    |  2 |  1 |    
+    Hobbes          1,888   |   20 |    |  6 |  2 |  2 |  5 |  1 |    |  2 |  1 |    
     Pylade          1,254   |   13 |    |  1 |  1 |    |  1 |  2 |  1 |  3 |  1 |  1 
     Bill              739   |    8 |    |  1 |    |  1 |    |    |  1 |  1 |  1 |  2 
     Leo               632   |    7 |    |  1 |    |    |  3 |  1 |    |    |  1 |  1 
@@ -91,6 +91,30 @@ P   Player          Total   |Played| P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 
 -----------------
 Individual rounds
 -----------------
+
+<pre><code>
+Method is 'closest-p1-20'
+---------------
+Japan Race
+
+P   Player      FIA   |VER    PER    LEC    OCO    HAM    VET    VER PER LEC OCO HAM VET ALO RUS LAT NOR RIC STR TSU MAG BOT ZHO GAS MSC SAI ALB 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+1   GGP1        21.50 |VER 20|PER 20|LEC 20|HAM 19|SAI  6|RUS 18| 20  20  20      19          18                                           6     
+1   NL          21.50 |VER 20|PER 20|LEC 20|HAM 19|SAI  6|RUS 18| 20  20  20      19          18                                           6     
+3   TLB         15    |VER 20|LEC 19|PER 19|HAM 19|SAI  6|RUS 18| 20  19  19      19          18                                           6     
+4   F1Ung       12    |VER 20|LEC 19|PER 19|SAI  5|RUS 17|HAM 19| 20  19  19      19          17                                           5     
+5   Hobbes      10    |VER 20|LEC 19|SAI  4|PER 18|HAM 20|RUS 18| 20  18  19      20          18                                           4     
+6   Karl         8    |VER 20|LEC 19|RUS 15|PER 18|SAI  6|HAM 19| 20  18  19      19          15                                           6     
+7   Iceman       6    |VER 20|LEC 19|HAM 18|SAI  5|PER 17|RUS 18| 20  17  19      18          18                                           5     
+    Arttu      DNS
+    Bill       DNS
+    BWare      DNS
+    Joe        DNS
+    Leo        DNS
+    Pylade     DNS
+    Winston    DNS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+</pre></code>
 
 <pre><code>
 Method is 'closest-p1-20'
